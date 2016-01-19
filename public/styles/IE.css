@@ -1,0 +1,45 @@
+div.positionHelper div.fg-menu-container {
+    top: 28px !important;
+}
+
+div#main-navbar div.centralizer li a.submenu-link {
+    position:relative;
+    padding-right:20px;
+}
+
+div#main-navbar div.centralizer li a.submenu-link:hover {
+    padding-top:5px;
+    padding-right:20px;
+}
+
+div#main-navbar div.centralizer li a.submenu-link:hover span.right {
+    margin: -9px 0 0 0;
+}
+
+div#main-navbar div.centralizer li a.submenu-link span.right {
+    position:absolute;
+    top:50%;
+    right:0px;
+    margin:-8px 0 0 0;
+}
+
+.ui-jqgrid .ui-pg-button {
+    display:block;
+    *height:35px !important;
+    *padding:0 0 5px 0;
+}
+
+.ui-jqgrid .ui-pg-button div {
+    display:block;
+    *width:80px;
+}
+
+.ui-jqgrid .ui-pg-button span.ui-icon {
+    display:block;
+    float:left;
+}
+
+.ui-jqgrid .ui-pg-button span.label-text {
+    display:block;
+    float:left;
+}

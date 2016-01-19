@@ -1,0 +1,83 @@
+<?php
+
+?>
+<style>
+    #mappers, #columnsMapper, #columnsViews { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
+    #mappers li, #columnsMapper li, #columnsViews li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+</style>
+<div>
+    <div id="panelMappers" class="connectedSortable">
+        <ul id="mappers">
+            <?php
+                while($row = $this->rows->getRow()):
+            ?>
+                    <li class="ui-state-default">
+                        <a href="javascript:getConfigMapper(<?php echo $row['id']; ?>);" title="Carregar configurações da visão">
+                            <?php echo $row['nome']; ?>
+                        </a>
+                    </li>
+            <?php
+                endwhile;
+            ?>
+        </ul>        
+    </div>    
+    
+    <div id="panelColumnsMapper">
+        <ul id="columnsMapper" class="connectedSortable">
+        <li class="ui-state-default">Item 1</li>
+        <li class="ui-state-default">Item 2</li>
+        <li class="ui-state-default">Item 3</li>
+        <li class="ui-state-default">Item 4</li>
+        <li class="ui-state-default">Item 5</li>
+        </ul>        
+    </div>
+    
+    <div id="panelColumnsViews">
+        <ul id="columnsViews" class="connectedSortable">
+        <li class="ui-state-highlight">Item 1</li>
+        <li class="ui-state-highlight">Item 2</li>
+        <li class="ui-state-highlight">Item 3</li>
+        <li class="ui-state-highlight">Item 4</li>
+        <li class="ui-state-highlight">Item 5</li>
+        </ul>        
+    </div>
+    
+    <div id="columnsConfig">
+        
+    </div>
+</div>
+
+<script>
+    var gConfig = [];
+    
+    $(function() {
+        $( "#columnsMapper, #columnsViews" ).sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+    });
+    
+    function getConfigMapper(idProfile){
+        gConfig['id'] = idProfile;
+        
+        var result = ajaxJson({
+            url: '/Mais/index.php/profile/user/config',
+            data: 'id=' + idProfile
+        });
+        if (result){
+            gConfig['columns'] = result;
+            $columnsMapper = jQuery('#columnsMapper');
+            $columnsMapper.html('');
+            for(var column in gConfig['columns']){
+                $columnsMapper.append('<li class="ui-state-default">'+ gConfig['columns'][column]['label'] +'</li>');                
+            }
+        }
+    }
+    
+    function saveConfig(){
+        
+    }
+    
+    function changeColumn(name,key,value){
+        gConfig['columns'][name][key] = value;
+    }
+</script>

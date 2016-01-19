@@ -1,0 +1,29 @@
+<?php
+   //echo "<input type='text' id='teste'/>";
+   //echo "<script>$(document).ready(function(){ $('#teste').TAutoComplete({sourceData:['Opção 1','Opção 2','Opção 3','Opção 4','Opção 5','Opção 6','Opção 7','Opção 8','Opção 9','Opção 10'], multiple:true}); });</script>";
+
+   $id_tab = 'tab_conteudo';
+   if ($this->typeModal != 'AJAX' && Zend_Layout::getMvcInstance()->getLayout() != 'window') {
+       $idGrid = $this->grid->getID();
+
+       $_tab = new ZendT_View_Layout_Tabs($id_tab);
+       $_tab->addTab('Conteúdo', $this->grid);
+       $_tab->addTabUrl('Envolvidos'
+             , new ZendT_JS_Command("function(){ "
+             . "  var url = '" . ZendT_Url::getBaseUrl() . "/cms/priv-conteudo/grid?'; "
+             . "  url = url + '&id_conteudo=' + $('#grid_conteudo').jqGrid('getGridParam','selrow'); "
+             . "  url = url + '&typeModal=AJAX'; "
+             . "  return url; "
+             . "}"));
+       echo $_tab->render();
+       ?>
+       <script>
+       <?php
+       $this->headScript()->appendFile('/Mais/application/modules/cms/views/scripts/conteudo/comum.js');
+       ?>
+       </script>
+       <?php
+   } else {
+       echo $this->grid;
+   }
+?>

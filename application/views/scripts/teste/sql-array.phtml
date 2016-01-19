@@ -1,0 +1,85 @@
+<?php
+
+   function _renderTree($itens) {
+       /* print_r($itens);
+         exit; */
+       foreach ($itens as $item) {
+           if (isset($item['commands'])) {
+               foreach ($item['commands'] as $i => $command) {
+                   if (!$command['condition']) {
+                       echo '<li>';
+                       echo '  <div>';
+                       echo '     <span>';
+                       echo '        <input type="text" value="' . $command['field'] . '" /> ';
+                       echo '     </span>';
+                       echo '     <span>';
+                       echo '        <input type="text" value="' . $command['operator'] . '" /> ';
+                       echo '     </span>';
+                       echo '     <span>';
+                       echo '        <input type="text" value="' . $command['value'] . '" /> ';
+                       echo '     </span>';
+                       
+                       $condition = $item['commands'][$i+1]['condition'];
+                       
+                       $and = (strpos(strtoupper($condition), 'AND') !== false) ? 'checked' : '';
+                       $or = (strpos(strtoupper($condition), 'OR') !== false) ? 'checked' : '';
+                       echo '     <span  id="radioset" class="ui-buttonset"> ';
+                       echo '         <input type="radio" name="radio" id="radio1" value="AND" class="ui-helper-hidden-accessible" ' . $and . '><label for="radio1" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" role="button"><span class="ui-button-text">E</span></label> ';
+                       echo '         <input type="radio" name="radio" id="radio3" value="OR" class="ui-helper-hidden-accessible" ' . $or . '><label for="radio3" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" role="button"><span class="ui-button-text">Or</span></label> ';
+                       echo '     </span>';
+                       echo '  </div>';
+                       echo '</li>';
+                   }
+               }
+           }
+
+
+           if (isset($item['rules'])) {
+               echo '<li>';
+               echo '  <span>';
+               echo '     <span>';
+               $not = (strpos($condition, 'NOT') !== false) ? 'checked' : '';
+               echo '        <input type="checkbox" value="1" ' . $not . '/> Negar';
+               echo '     </span>';
+               echo '</span> ';
+               echo '  <ul>';
+               echo '   <span style="float:right">';
+               echo '       <input type="button" value="Adicionar Regra"/>';
+               echo '       <input type="button" value="Adicionar Grupo"/>';
+               echo '   </span>';
+               _renderTree($item['rules']);
+               echo '  </ul>';
+               echo '</li>';
+           }
+       }
+   }
+?>
+<pre>
+    <?php /* print_r($this->itens); */ ?>
+</pre>
+</pre>
+<link rel="stylesheet" href="/libext/css/jquery.treeview.css" type="text/css">
+<script language="javascript" type="text/javascript" src="/libext/js/jquery/jquery.treeview.js"></script>
+
+<?php
+  echo ZendT_JS_Json::encode($this->itens); 
+?>
+
+<ul id="browser" class="filetree">
+    <span><input type="checkbox" value="1" /> Negar</span>
+    <span style="float:right">
+        <input type="button" value="Adicionar Regra"/>
+        <input type="button" value="Adicionar Grupo"/>
+    </span>
+    <?php 
+       _renderTree($this->itens);
+    ?>
+</ul>
+
+<script>
+    $(document).ready(function () {
+        $("#browser").treeview({
+            animated: "fast"
+        });
+    });
+</script>

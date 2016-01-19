@@ -1,0 +1,323 @@
+<?php
+
+?>
+<style>
+    #panelGrids, #panelcolumnsGrid, #panelcolumnsViewsDefault{
+        width: 300px;
+        overflow: auto;
+        float:left;
+        padding-left: 5px;
+    }
+    
+    #panelcolumnsViewsDefault{
+        width: 700px;
+    }
+
+    #panelcolumnsViewsDefault li{
+        width: 200px;
+        float: left;
+    }
+    
+    #panelcolumnsViewsDefault li ul li{
+        width: 150px;
+        float: left;
+    }
+    
+    
+    #panelGrids ul, #panelcolumnsGrid ul, #panelcolumnsViewsDefault ul{
+        list-style-type: none;
+        margin: 0px;
+        padding: 5px;
+    }
+    
+    #panelGrids li, #panelcolumnsGrid li, #panelcolumnsViewsDefault li{        
+        margin: 0 5px 5px 5px; padding: 5px; 
+    }
+    
+    .panelHeader, .panelHeaderGroup{
+        text-align: center;
+        padding: 5px;
+        border-bottom: 0px;
+    }
+    
+    .panelContent{
+        padding: 0px !important;
+    }
+    
+    .connectedSortable, .connectedSortableGroup{
+        height: 160px;
+        overflow: auto;
+        background-color: #ffffcc;
+        border: 1px thick #cecece;
+    }
+    
+    .connectedSortableGroup, #panelGrids{
+        height: 450px;
+        overflow: auto;
+        background-color: #FCFCFC;
+    }
+    
+    .panelContent{
+        min-height: 210px;
+    }
+    
+    #panelGrids{
+        height: 500px;
+        background-color: #fff;
+    }
+    
+    #Grids, #columnsGrid{
+        height: 200px;
+        overflow: auto;
+    }
+    
+    .cursorSortable{
+        cursor: move;
+    }
+</style>
+<div>
+    <div id="panelGrids">
+        <div style="margin-bottom: 5px;">
+            <div class="panelHeader ui-state-default">
+                Gridulários
+            </div>
+            <div class="panelContent ui-widget-content">
+                <ul id="Grids">
+                    <?php
+                        while($row = $this->rows->getRow()):
+                    ?>
+                            <li style="cursor: pointer;" class="ui-state-default" onClick="getConfigGrid(this);" idGrid="<?php echo $row['id']; ?>">
+                                <?php echo $row['nome']; ?>
+                            </li>
+                    <?php
+                        endwhile;
+                    ?>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <div class="panelHeader ui-state-default">
+                Colunas disponíveis na Visão
+            </div>
+            <div class="panelContent ui-widget-content">
+                <ul id="columnsGrid" class="connectedSortable">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelcolumnsViewsDefault">
+        <div class="panelHeader ui-state-default">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0">
+                <tr>
+                    <td align="left">
+                        Nome da Visão:<br/>
+                        <input text="text" name="GridName" id="GridName" value="" />
+                    </td>
+                    <td align="right">
+                        <?php                            
+                            $attribs = array();
+                            $attribs['icon'] = 'ui-icon-disk';
+                            $attribs['onClick'] = 'saveConfig();';
+                            echo $this->button('btSave', 'Salvar', $attribs);
+                        ?>                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ui-state-default">
+            <ul id="panelPalco" class="connectedSortableGroup">
+            </ul>
+        </div>
+    </div>
+
+    <div id="columnsConfig">
+        
+    </div>
+</div>
+
+<script>
+    var gConfig = [];
+    
+    function enableSortable(){
+        $( ".connectedSortable" ).sortable({
+            connectWith: ".connectedSortable",
+            update: function(event, ui){
+                var itens = ui.item.parent().find('li');
+                var groupName = ui.item.parent().parent().parent().attr('name');
+                var name = '';
+                for(var index=0; index<itens.length; index++){
+                    name = itens.eq(index).attr('name');
+                    changeColumn(name,'order',index);
+                    changeColumn(name,'group',groupName);
+                }
+            }
+        }).disableSelection();
+        
+        $( ".connectedSortableGroup" ).sortable({
+            connectWith: ".connectedSortableGroup",
+            update: function(event, ui){
+                var itens = ui.item.parent().find('li');
+                var name = '';
+                for(var index=0; index<itens.length; index++){
+                    name = itens.eq(index).attr('name');
+                    gConfig['groups'][name]['order'] = index;
+                }
+            }
+        }).disableSelection();
+    }
+    
+    function appendGroup(name,label){
+        if (gConfig['groups'][name]){
+            return;
+        }
+        if (!gConfig['numGroups']){
+            gConfig['numGroups'] = 1;
+        }else{
+            gConfig['numGroups'] = gConfig['numGroups'] + 1;
+        }
+        var cmdHtml = '';
+        cmdHtml = cmdHtml + '<li id="group'+ name +'" name="'+ name +'">';
+        cmdHtml = cmdHtml + '     <div class="ui-widget-content">';
+        cmdHtml = cmdHtml + '         <ul id="ul-group'+ name +'" class="connectedSortable">';
+        cmdHtml = cmdHtml + '         </ul>';
+        cmdHtml = cmdHtml + '     </div>';
+        cmdHtml = cmdHtml + '</li>';
+        if (!gConfig['groups'][name]){
+            gConfig['groups'][name] = [];
+        }
+        gConfig['groups'][name]['name'] = name;
+        gConfig['groups'][name]['label'] = label;
+        gConfig['groups'][name]['order'] = gConfig['numGroups'];
+        $('#panelPalco').append(cmdHtml);
+        
+        var listLi = $('.connectedSortableGroup').find('li');
+        var fWidth  = 200;
+        var fHeight = 395;
+        var iLi    = 0;
+        if (gConfig['numGroups'] == 1){
+            fWidth  = 660;            
+        }else if (gConfig['numGroups'] == 2){
+            fWidth  = 300;
+        }else if (gConfig['numGroups'] == 3){
+
+        }else{
+            fHeight = 160;            
+        }
+        for(iLi=0; iLi<listLi.length; iLi++){            
+            if (listLi.eq(iLi).attr('id').substr(0,6) != 'column'){
+                listLi.eq(iLi).width(fWidth);
+            }
+        }
+        
+        var listLi = $('.connectedSortable');
+        for(iLi=0; iLi<listLi.length; iLi++){
+            if (listLi.eq(iLi).attr('id') != 'columnsGrid'){
+                listLi.eq(iLi).height(fHeight);
+            }
+        }
+    }
+    
+    function addGroup(){
+        var options = {
+            id: 'dialog-add-group',
+            title: 'Inclusão de Grupo',
+            buttons: {
+                'OK': function(){
+                    var label = $('#labelGroup').val();
+                    var name  = strtolower(str_replace(' ','-',label));
+                    appendGroup(name,label);
+                    enableSortable();
+                    $('#labelGroup').val('');
+                    $('#dialog-add-group').dialog("close");
+                }
+            }
+        };
+        
+        var cmdGrid = 'Nome do Agrupamento: <br />';
+        cmdGrid = cmdGrid + '<input type="text" id="labelGroup" value="" />';
+        $.DialogT.open(cmdGrid,'InGridation',options);
+    }
+    
+    function getConfigGrid(obj){
+        var li = $(obj);
+        var idProfile = li.attr('idGrid');
+        
+        li.parent().find('li').removeClass('ui-state-active');
+        li.addClass('ui-state-active');
+        
+        $('#GridName').val(trim(li.html()));
+        gConfig['id'] = idProfile;
+        
+        $.BlockT.open();
+        var result = ajaxJson({
+            url: '/Mais/index.php/profile/user/config',
+            data: 'id=' + idProfile
+        });
+        if (result){
+            var iGroup = null;
+            var iColumn = null;
+            var columnsGrid = jQuery('#columnsGrid');
+            var className = '';
+            
+            gConfig['id']        = idProfile;
+            gConfig['numGroups'] = 0;
+            gConfig['columns']    = [];
+            gConfig['groups']    = [];
+            
+            jQuery('#panelPalco').html('');            
+            columnsGrid.html('');            
+
+            for(iGroup in result['groups']){
+                appendGroup(result['groups'][iGroup]['name'],result['groups'][iGroup]['label']);
+            }
+            appendGroup('padrao','Agrupamento Padrão');
+            
+            for(iColumn in result['columns']){
+                gConfig['columns'][iColumn] = result['columns'][iColumn];
+                if (result['columns'][iColumn]['required'] == 'true'){
+                    className = 'ui-state-highlight';
+                }else{
+                    className = 'ui-state-default';
+                }
+                $('#ul-group'+ result['columns'][iColumn]['group']).append('<li id="column-'+ iColumn +'" name="'+ iColumn +'" class="'+ className +' cursorSortable">'+ result['columns'][iColumn]['label'] +'</li>');
+            }
+            
+            for(iColumn in result['columnsAvailable']){
+                gConfig['columns'][iColumn] = result['columnsAvailable'][iColumn];
+                if (result['columnsAvailable'][iColumn]['required'] == 'true'){
+                    className = 'ui-state-highlight';
+                }else{
+                    className = 'ui-state-default';
+                }
+                columnsGrid.append('<li id="column-'+ iColumn +'" name="'+ iColumn +'" class="'+ className +' cursorSortable">'+ result['columnsAvailable'][iColumn]['label'] +'</li>');
+            }
+            enableSortable();
+        }
+        $.BlockT.close();
+    }
+    
+    function saveConfig(){
+        $.BlockT.open();
+        var columns = '';
+        for(var icolumns in gConfig['columns']){
+            for(var iKey in gConfig['columns'][icolumns]){
+                columns = columns + '&columns['+icolumns+']['+iKey+']=' + gConfig['columns'][icolumns][iKey];
+            }
+        }
+        ajaxJson({
+            url: '/Mais/index.php/profile/user/save',
+            data: 'id=' + gConfig['id'] + '&nome=' + $('#GridName').val() + '&tipo=Grid' + columns + groups
+        });
+        $.BlockT.close();
+    }
+    
+    function changeColumn(name,key,value){
+        gConfig['columns'][name][key] = value;
+    }
+    
+    
+    $(function() {
+        enableSortable();
+    });
+</script>

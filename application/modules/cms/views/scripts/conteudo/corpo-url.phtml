@@ -1,0 +1,19 @@
+<?php
+
+    if ($this->conteudos || $this->erros) {
+        if ($this->conteudos) {
+            echo "<br/><b>» Conteúdos atualizados:</b><br/><br/>";
+            foreach ($this->conteudos as $conteudo) {
+                echo $conteudo . "<br/>";
+            }
+        }
+        if ($this->erros) {
+            echo "<br/><b>» Erro na atualização dos conteúdos:</b><br/><br/>";
+            foreach ($this->erros as $conteudo) {
+                echo $conteudo . "<br/>";
+            }
+        }
+    } else {
+        echo "Nenhum conteúdo atualizado!";
+    }
+?>

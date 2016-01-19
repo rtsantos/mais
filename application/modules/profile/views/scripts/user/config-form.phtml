@@ -1,0 +1,73 @@
+<?php
+
+?>
+<style>
+    #forms, #fieldsForm, #fieldsViews { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
+    #forms li, #fieldsForm li, #fieldsViews li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+</style>
+<div>
+    <div id="panelforms" class="connectedSortable">
+        <ul id="forms">
+            <?php
+                while($row = $this->rows->getRow()):
+            ?>
+                    <li class="ui-state-default">
+                        <a href="javascript:getConfigForm(<?php echo $row['id']; ?>);" title="Carregar configurações do Formulário">
+                            <?php echo $row['nome']; ?>
+                        </a>
+                    </li>
+            <?php
+                endwhile;
+            ?>
+        </ul>        
+    </div>    
+    
+    <div id="panelfieldsForm">
+        <ul id="fieldsForm" class="connectedSortable">
+        </ul>        
+    </div>
+    
+    <div id="panelfieldsViews">
+        <ul id="fieldsViewsDefault" class="connectedSortable">
+        </ul>        
+    </div>
+    
+    <div id="fieldsConfig">
+        
+    </div>
+</div>
+
+<script>
+    var gConfig = [];
+    
+    $(function() {
+        $( "#fieldsForm, #fieldsViewsDefault" ).sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+    });
+    
+    function getConfigForm(idProfile){
+        gConfig['id'] = idProfile;
+        
+        var result = ajaxJson({
+            url: '/Mais/index.php/profile/user/config',
+            data: 'id=' + idProfile
+        });
+        if (result){
+            gConfig['fields'] = result;
+            $fieldsForm = jQuery('#fieldsForm');
+            $fieldsForm.html('');
+            for(var column in gConfig['fields']){
+                $fieldsForm.append('<li class="ui-state-default">'+ gConfig['fields'][column]['label'] +'</li>');                
+            }
+        }
+    }
+    
+    function saveConfig(){
+        
+    }
+    
+    function changeColumn(name,key,value){
+        gConfig['fields'][name][key] = value;
+    }
+</script>

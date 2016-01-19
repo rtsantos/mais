@@ -1,0 +1,18 @@
+<?php
+
+    if ($this->typeModal != 'AJAX' && Zend_Layout::getMvcInstance()->getLayout() != 'window') {
+        $idGrid = $this->grid->getID();
+        $_tab = new ZendT_View_Layout_Tabs('tab_usuario');
+        $_tab->addTab('Usuário', $this->grid);
+        $_tab->addTabUrl('Papéis'
+                , new ZendT_JS_Command("function(){ "
+                . "  var url = '" . ZendT_Url::getBaseUrl() . "/auth/usuario-papel/grid?'; "
+                . "  url = url + '&id_usuario=' + $('#grid_usuario').jqGrid('getGridParam','selrow'); "
+                . "  url = url + '&typeModal=AJAX'; "
+                . "  return url; "
+                . "}"));
+        echo $_tab->render();
+    } else {
+        echo $this->grid;
+    }
+?>

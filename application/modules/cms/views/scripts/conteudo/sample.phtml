@@ -1,0 +1,42 @@
+<input type='text' class="ui-input-auto" id='teste' style="width: 210px;"/>
+
+
+<input type='text' class="ui-input-auto" id='teste2' style="width: 210px;"/>
+
+<input type='text' class="ui-input-auto" id='teste3' style="width: 210px;"/>
+
+<input type='text' class="ui-input-auto" id='teste4' style="width: 210px;"/>
+
+<script>
+    $(document).ready(function () {
+        $('#teste2').TAutoSelect({
+            sourceData: 
+                    ['TLG - CAJ', 
+                     'TLG - CAU', 
+                     'TLG - CPQ', 
+                     'TLG - HOR', 
+                     'TLG - REC'], 
+            multiple: false});
+        
+        $('#teste3').TAutoSelect({
+            sourceData: 
+                    [{'A':'Ativo'}, 
+                     {'I':'Inativo'}],
+            multiple: false});
+        
+        $('#teste4').TAutoSelect({
+            sourceData: 
+                    [{'A':'Ativo'}, 
+                     {'I':'Inativo'}],
+            multiple: true});
+        
+        $('#teste').TAutoSelect({
+            sourceData: 
+                    ['TLG - CAJ', 
+                     'TLG - CAU', 
+                     'TLG - CPQ', 
+                     'TLG - HOR', 
+                     'TLG - REC'], 
+            multiple: true});
+    });
+</script>

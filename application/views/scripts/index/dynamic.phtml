@@ -1,0 +1,42 @@
+<style>    
+    #toolChart{
+        margin-bottom: 7px;
+    }
+    .config-profile button, .config-profile select{
+        margin-top: 5px !important;
+        height: 26px !important;
+    }
+
+    .config-profile select{
+        margin-right: 0px !important;
+    }
+
+    .config-profile button{
+        margin-left: 0px !important;
+        height: 26px !important;
+        border-left: 0px !important;
+    }
+
+    #spn_filter{
+        cursor: pointer;
+    }
+
+
+</style>
+<?php
+   echo $this->content;
+?>
+<script>
+    function toogleFitler() {
+        jQuery('#spn_filter').click(function () {
+            if (jQuery('#spn_filter').hasClass('ui-icon-pin-w')){
+                jQuery('#spn_filter').removeClass('ui-icon-pin-w').addClass('ui-icon-pin-s');
+                jQuery('.graph_filter').show();
+            }else{
+                jQuery('#spn_filter').removeClass('ui-icon-pin-s').addClass('ui-icon-pin-w');
+                jQuery('.graph_filter').hide();
+            }
+        });
+    }
+    toogleFitler();
+</script>

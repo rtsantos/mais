@@ -1,0 +1,19 @@
+<?php
+   echo $this->form;
+?>
+<script>
+    function saveProfile() {
+        var form = jQuery('#zendt_form');
+        form.attr('action','<?php echo ZendT_Url::getUri(true); ?>/update');
+        jQuery.AjaxT.submitJson({
+            selector: '#zendt_form',
+            success: function() {
+                try {
+                    parent.jQuery.DialogT.close('myProfile');
+                } catch (err) {
+
+                }
+            }
+        });
+    }
+</script>

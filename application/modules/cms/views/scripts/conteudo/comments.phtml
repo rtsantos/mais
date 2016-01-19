@@ -1,0 +1,55 @@
+<style>
+    #group-corpo, #group-salvar-dynamic{
+        width: 100%;
+        float: none;
+    }
+</style>
+<div class="content ui-comment">
+    <?php
+        if ($this->frame):
+            ?>
+            <ul id="comments-messages-<?php echo $this->id; ?>">
+                <?php
+                echo $this->commentsForm;
+                ?>
+                <ul id = "comments-messages-<?php echo $this->id; ?>" >
+                    <?php
+                    echo $this->comments;
+                    ?>
+                </ul>
+            </ul>
+
+            <?php
+        else:
+            ?>
+
+            <ul id="comments-messages-<?php echo $this->id; ?>" class="facescroll" style="overflow: auto; height: 300px; width: 400px;">
+                <?php
+                echo $this->comments;
+                ?>
+            </ul>
+            <div style="border-top: 1px solid #e7e7e7; padding-top: 5px; padding-left: 5px; padding-right: 5px; width:400px;">
+                <?php
+                if (Auth_Session_User::getInstance()->authenticated()):
+                    ?>    
+                    <div class="input-group">
+                        <input id="comment-<?php echo $this->id; ?>-body" type="text" name="message" placeholder="Faça seu comentário" class="form-control shadow" size="38px;" onkeypress="if (event.which == 13) {
+                                                jQuery.Cms_ConteudoController.comment(<?php echo $this->id; ?>, false);
+                                            }">
+                        <div class="input-group-btn">
+                            <button type="button" onfocus="jQuery.Cms_ConteudoController.comment(<?php echo $this->id; ?>, false);" id="comentar-8-btn" class="btn btn-primary">
+                                OK                            
+                            </button>
+                        </div>
+                    </div>
+                    <?php
+                endif;
+                ?>
+            </div>
+            <script>
+                jQuery('#comments-messages-<?php echo $this->id; ?>').alternateScroll();
+            </script>
+
+    <?php
+        endif;
+    ?>

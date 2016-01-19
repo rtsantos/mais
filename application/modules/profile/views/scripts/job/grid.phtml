@@ -1,0 +1,13 @@
+<?php
+        $idGrid = $this->grid->getID();
+        
+        $tabs = new ZendT_View_Tabs('divTabsTarefa');
+        $tabs->disableAll(false);
+        $tabs->addTab('Tarefa', $this->grid);
+        $tabs->addTabWhereGrid('Destinatários da Tarefa'
+                              ,ZendT_Url::getBaseUrl().'/profile/job-dest/grid'
+                              ,'profile_job.id'
+                              ,$idGrid);
+        
+        echo $tabs->render();
+?>

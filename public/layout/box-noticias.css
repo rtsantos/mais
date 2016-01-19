@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/07/2015, 13:45:37
+    Author     : rsantos
+*/
+.box-noticias{
+    font-size: 12px;
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    height: 190px; 
+    overflow: auto;
+}
+
+.box-noticias .itens{
+    margin-bottom: 15px;    
+    //border: 1px solid #ff6600;
+    width: 100%;
+    min-height: 90px;
+}
+
+.box-noticias .itens .thumbnail{
+    width: 110px;
+    float: left;
+    padding-right: 5px;
+    transition-duration: 0.25s;
+    transition-property: opacity;
+}
+
+.box-noticias .itens .thumbnail:hover{
+    opacity: 0.8;
+}
+
+.box-noticias .itens .thumbnail img{
+    border-radius: 10%;
+    border: 2px solid #e7e7e7;
+    height: 70px;
+    width: 90px;
+    padding: 3px;
+}
+
+.box-noticias .itens .text{
+    min-width: 300px;
+    width: 300px;
+    float: left;
+}
+
+.box-noticias .itens .text .title{
+    padding-bottom: 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.box-noticias .itens .text .title a{
+    color: #f26801;
+}
+
+.box-noticias .itens .text .actions .icon-like,
+.box-noticias .itens .text .actions .icon-comment,
+.box-noticias .itens .text .actions .icon-go{
+    margin-top: 5px;
+    float: left;
+    min-width: 10px;
+    padding-right: 3px;
+    margin-right: 3px;
+}
+
+.box-noticias .itens .text .actions .icon-go{
+    text-align: right;
+    float: right;    
+}
+
+.box-noticias .itens .text .actions .icon{
+    cursor: pointer;
+}
+
+/**
+.layout-noticia-conteudo{
+}
+
+.layout-noticia-conteudo-img{
+    width: 77px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.layout-noticia-conteudo-titulo{
+    color: #F26801;
+    float: right;
+    width: 355px;
+}
+
+.layout-noticia-conteudo-subtitulo{
+    color: black;
+    width: 300px;
+    font-size:11px;
+}
+
+.layout-noticia-conteudo-link{
+    font-size:11px;
+    float: right;
+}
+*/

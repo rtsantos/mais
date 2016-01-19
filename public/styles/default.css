@@ -1,0 +1,852 @@
+form-group-content/* -----------------------------------*/
+/* ---------->>> GLOBAL <<<-----------*/
+/* -----------------------------------*/
+
+/* GLOBAL > LAYOUT
+//////////////////////////////////////*/
+
+/**
+ * Estilos Globais
+ *
+ * @section global layout
+*/		
+html, body {
+    height: 100%;
+}
+
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    background: url(/Mais/public/images/bg.jpg) no-repeat;    
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:11px;
+}
+/**
+ * @section inputs layout
+*/	
+.inputStyle {
+    background: url("/Mais/public/images/inputs.png") no-repeat scroll left top transparent;    
+}
+
+input, textarea, select, button{
+    padding: 1px;
+}
+
+#frmLogin input, #frmLogin button{
+    width: 116px;
+    background-color: #fff;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+    border:1px solid #CCC;
+    font-size:10px;    
+}
+
+#frmLogin input{
+    margin-right: 3px;
+	}
+
+#frmLogin button, #frmLogin button:active, #frmLogin button:hover{
+    background-color: #ff6600;
+    width: 30px;
+    color: #fff;
+    border: 2px solid #ff6600;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#frmLogin .frmLoginResposta{
+    display: none;
+        }
+
+#frmLogin .label{
+    font-size:10px;
+    text-align: left;
+	}
+
+.cpPesquisar {
+    background-position: 0 -160px;
+    border: medium none;
+    color: #666666;
+    font-size: 11px;
+    height: 13px;
+    padding: 6px 10px 7px;
+    width: 186px;
+	}
+
+.btOk {
+    background-position: -203px -38px;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 30px;
+    text-transform: uppercase;
+    width: 35px;
+	}
+
+.btVoltar {
+    background-position: -248px -156px;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 30px;
+    width: 61px;
+	}
+
+.btX {
+    background-position: -211px -160px;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 18px;
+    text-transform: uppercase;
+    width: 18px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+/**
+ * @section toolBarTopo layout
+*/
+#toolBarTopo {
+    width:100%;
+    height:29px; 
+    background: url(/Mais/public/images/bg-menu-top.jpg) repeat-x;
+    position:fixed;
+    /*border-bottom:1px solid #ccc;*/
+    z-index:10000;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:11px;
+    color:#fff;
+    text-align:right;
+    vertical-align:middle;
+            }
+
+#toolBarTopoItens td{
+    border-left:1px solid #294128;
+    border-right:1px solid #3d673c;
+    vertical-align:middle;
+    height:27px; 
+    cursor:pointer;
+    color:#fff;
+    border-top:2px solid #3d673c;
+            }
+#toolBarTopoItens td:hover{
+    border-top:2px solid #ff6600;
+}
+
+#toolBarTopoItens .menuSelected{
+    border-top:2px solid #ff6600;
+            }
+body#bodyWindow #toolBarTopo {
+    position:absolute;
+    background:#f9f9f9;
+    height:26px;
+    border-bottom:1px solid #dddddd;
+}
+#toolBarTopo table {
+    text-align:left;
+    height:26px;
+}
+#toolBarTopo table td {
+    padding-left:6px;
+    padding-right:6px;
+}
+#toolBarTopo a:link {
+    color:#FFF;
+    text-decoration:none;
+}
+#toolBarTopo a:visited {
+    text-decoration:none;
+    color:#FFF;
+}
+#toolBarTopo a:hover {
+    text-decoration:none;
+    color:#CCC;
+}
+#toolBarTopo a:active {
+    text-decoration:none;
+    color: #FFF;
+}
+
+body#bodyWindow #toolBarTopo a:link {
+    color:#333;
+    text-decoration:none;
+            }
+body#bodyWindow #toolBarTopo a:visited {
+    text-decoration:none;
+    color:#333;
+}
+body#bodyWindow #toolBarTopo a:hover {
+    text-decoration:none;
+    color:#999;
+}
+body#bodyWindow #toolBarTopo a:active {
+    text-decoration:none;
+    color: #333;
+}
+            
+/**
+ * @section estrutura layout
+*/	
+table#tbEstrutura {
+    width:100%;
+    height:100%;
+    padding:0px;
+    margin:0px;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    border:0px;
+    vertical-align:bottom;
+            }
+table#tbEstrutura td#lnTopo {
+    height:114px;
+}
+table#tbEstrutura td#lnMenu {
+    height:40px;
+    vertical-align:top;
+}
+table#tbEstrutura td#lnConteudo {
+    vertical-align:top;
+    background: url("/Mais/public/images/bg-content.png") repeat-x scroll left bottom transparent;
+}
+body#bodyWindow table#tbEstrutura td#lnConteudo {
+    padding-top:10px; 
+    padding-bottom:30px;
+    background: url("");
+}
+
+/**
+ * @section topo layout
+*/	
+table#tbTopo {
+    width:97%;
+            }
+td#tbTopoEsquerda {
+    width:206px;
+}
+td#tbTopoEsquerda img {
+    /*margin-left:-9px;*/
+    margin-top:20px;
+}
+td#tbTopoDireita {
+    text-align:right;
+}
+td#tbTopoDireita img {
+    margin-right:36px;
+    margin-top:6px;
+}
+table#tbTitAplicacao {
+    margin-top:25px;
+    text-align:right;
+}
+
+table#tbTitAplicacao img#logoAplicacao {
+    margin: 0px;
+}
+        
+
+/**
+ * @section menu layout
+*/	
+table#tbMenu {
+    width:97%;
+    height:40px;
+}
+table#tbMenu td#menuEsquerda {
+    width:6px;
+    background: url(/Mais/public/images/menu-bg-esquerda.png) no-repeat;
+}
+table#tbMenu td#menuCentro {
+    background:#fff;
+    padding:5px 5px 5px 5px;
+    text-align:left;
+    border:1px solid #CCC;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+table#tbMenu td#menuSeparador {
+    width:2px;
+    background: url(/Mais/public/images/menu-bg-separador.png) no-repeat;
+    font-size: 2px;
+}
+table#tbMenu td#menuDireita {
+    width:6px;
+    background: url(/Mais/public/images/menu-bg-direita.png) no-repeat;
+}
+table#tbMenu td#menuCentroDestaque {
+    width:260px;
+    text-align:left;
+    vertical-align:middle;
+    background: url(/Mais/public/images/menu-bg-centro-destaque.png) repeat-x;
+}
+table#tbMenu td#menuDireitaDestaque {
+    width:6px;
+    background: url(/Mais/public/images/menu-bg-direita-destaque.png) no-repeat;
+}
+
+/**
+ * @section rodape layout
+*/	
+table#tbEstrutura td#lnRodape {
+    border:0px;
+    background: url("/Mais/public/images/bg-bottom.png") repeat-x scroll left top transparent;
+    height:60px;
+}
+#windowBody table#tbEstrutura td#lnRodape {
+    height:10px;
+}
+table#tbRodape {
+    width:97%;
+    border:0px;
+    color:#fff;
+    text-align:left;
+    padding-left:25px;
+}
+body#bodyWindow table#tbRodape {
+    width:100%;
+}
+table#tbRodape a:link {
+    color:#FFF;
+    text-decoration:none;
+}
+table#tbRodape a:visited {
+    text-decoration:none;
+    color:#FFF;
+}
+table#tbRodape a:hover {
+    text-decoration:none;
+    color:#CCC;
+}
+table#tbRodape a:active {
+    text-decoration:none;
+    color: #FFF;
+}
+
+/**
+ * @section conteudo layout
+*/	
+table#tbConteudo {
+    width:97%;
+    border:0px;
+    height:100%;
+}
+table#tbConteudo td {
+    vertical-align:top;
+}
+
+/**
+ * @section retagulo-azul layout
+*/	
+table#tbAz {
+    border:0px;
+}
+table#tbAz td#tbAzTopoEsquerda {
+    width:5px; 
+    height:15px; 
+    background:url(/Mais/public/images/bg-az-topo-esquerda.png) no-repeat; 
+    font-size:12px;
+}
+table#tbAz td#tbAzTopo {
+    height:15px; 
+    background:url(/Mais/public/images/bg-az-topo.png) repeat-x; 
+    font-size:12px;
+}
+table#tbAz td#tbAzTopoDireita {
+    width:5px; 
+    height:15px; 
+    background:url(/Mais/public/images/bg-az-topo-direita.png) no-repeat; 
+    font-size:12px;
+}
+table#tbAz td#tbAzEsquerda {
+    width:5px; 
+    background:url(/Mais/public/images/bg-az-esquerda.png) repeat-y;
+}
+table#tbAz td#tbAzCentro {
+    background:#f3f4f5;
+    height:100%;
+    padding:0 10px 0 10px;
+    text-align:left;
+}
+table#tbAz td#tbAzDireita {
+    width:5px; 
+    background:url(/Mais/public/images/bg-az-direita.png) repeat-y;
+}
+table#tbAz td#tbAzRodapeEsquerda {
+    width:5px; 
+    height:6px; 
+    background:url(/Mais/public/images/bg-az-rodape-esquerda.png) no-repeat; 
+    font-size:5px;
+}
+table#tbAz td#tbAzRodape {
+    height:6px; 
+    background:url(/Mais/public/images/bg-az-rodape.png) repeat-x; 
+    font-size:5px;
+}
+table#tbAz td#tbAzRodapeDireita {
+    width:5px; 
+    height:6px; 
+    background:url(/Mais/public/images/bg-az-rodape-direita.png) no-repeat; 
+    font-size:5px;
+}
+
+/**
+ * @section retagulo-branco layout
+*/	
+table#tbBr {
+    border:0px;
+}
+table#tbBr td#tbBrTopoEsquerda {
+    width:5px; 
+    height:15px; 
+    background:url(/Mais/public/images/bg-br-topo-esquerda.png) no-repeat; 
+    font-size:12px;
+}
+table#tbBr td#tbBrTopo {
+    height:15px; 
+    background:url(/Mais/public/images/bg-br-topo.png) repeat-x; 
+    font-size:12px;
+}
+table#tbBr td#tbBrTopoDireita {
+    width:5px; 
+    height:15px; 
+    background:url(/Mais/public/images/bg-br-topo-direita.png) no-repeat; 
+    font-size:12px;
+}
+table#tbBr td#tbBrEsquerda {
+    width:5px; 
+    background:url(/Mais/public/images/bg-br-esquerda.png) repeat-y;
+}
+table#tbBr td#tbBrCentro {
+    background:#fff;
+    height:100%;
+    padding:0 10px 0 10px;
+    text-align:left;
+    min-height:300px;
+}
+table#tbBr td#tbBrDireita {
+    width:5px; 
+    background:url(/Mais/public/images/bg-br-direita.png) repeat-y;
+}
+table#tbBr td#tbBrRodapeEsquerda {
+    width:5px; 
+    height:6px; 
+    background:url(/Mais/public/images/bg-br-rodape-esquerda.png) no-repeat; 
+    font-size:5px;
+}
+table#tbBr td#tbBrRodape {
+    height:6px; 
+    background:url(/Mais/public/images/bg-br-rodape.png) repeat-x; 
+    font-size:5px;
+}
+table#tbBr td#tbBrRodapeDireita {
+    width:5px; 
+    height:6px; 
+    background:url(/Mais/public/images/bg-br-rodape-direita.png) no-repeat; 
+    font-size:5px;
+}
+
+/**
+ * @section retagulo-branco-conteudo layout
+*/	
+table#tbBrConteudo {
+    border:0px;
+    height:100%;
+}
+table#tbBrConteudo td#tbBrConteudoTopoEsquerda {
+    width:5px; 
+    height:5px; 
+    background:url(/Mais/public/images/bg-br-topo-esquerda-conteudo.png) no-repeat; 
+    font-size:12px;
+}
+table#tbBrConteudo td#tbBrConteudoTopo {
+    height:5px; 
+    background:url(/Mais/public/images/bg-br-topo-conteudo.png) repeat-x; 
+    font-size:5px;
+}
+table#tbBrConteudo td#tbBrConteudoTopoDireita {
+    width:5px; 
+    height:5px; 
+    background:url(/Mais/public/images/bg-br-topo-direita-conteudo.png) no-repeat; 
+    font-size:12px;
+}
+table#tbBrConteudo td#tbBrConteudoEsquerda {
+    width:5px; 
+    background:url(/Mais/public/images/bg-br-esquerda.png) repeat-y;
+}
+table#tbBrConteudo td#tbBrConteudoCentro {
+    background:#fff;
+    padding:5px 5px 5px 5px;
+    text-align:left;
+    border:1px solid #CCC;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+table#tbBrConteudo td#tbBrConteudoDireita {
+    width:5px; 
+    background:url(/Mais/public/images/bg-br-direita.png) repeat-y;
+}
+table#tbBrConteudo td#tbBrConteudoRodapeEsquerda {
+    width:5px; 
+    height:6px; 
+    background:url(/Mais/public/images/bg-br-rodape-esquerda.png) no-repeat; 
+    font-size:5px;
+}
+table#tbBrConteudo td#tbBrConteudoRodape {
+    height:6px; 
+    background:url(/Mais/public/images/bg-br-rodape.png) repeat-x; 
+    font-size:5px;
+}
+table#tbBrConteudo td#tbBrConteudoRodapeDireita {
+    width:5px; 
+    height:6px; 
+    background:url(/Mais/public/images/bg-br-rodape-direita.png) no-repeat; 
+    font-size:5px;
+}
+
+/**
+ * @section linha-coluna-espa�o layout
+*/	
+.ln11 { 
+    height:11px; 
+    font-size:11px; 
+}
+.col13 {
+    width:13px;
+}
+
+
+/**
+ * @section menu layout
+*/	
+.menu { 
+    list-style:none; 
+    margin-left:-45px; 
+    font-family:Arial, Helvetica, sans-serif;
+    text-decoration:none;
+    text-transform:uppercase;
+    text-align:left;
+    color:#4E5050;
+}
+.menu li {
+    float: left; 
+    height: 40px; 
+    border-right: 1px solid #e2dad7; 
+    margin: -12px 0 0 15px; 
+    padding: 0 15px 0 0;
+    text-align:center;
+    position:relative;
+}
+.menu li a {
+    text-decoration:none;
+    color:#4E5050;
+    font-size:12.5px;
+}
+.menuitem {
+    font-size:14.5px;
+    display:block;
+}
+
+/**
+ * @section textos layout
+*/	
+.titulopagina {
+    font-size:16px;
+    color:#105239;
+}
+.tituloaplicacao {
+    font-size:32px;
+    color:#00493b;
+}
+.subtituloaplicacao {
+    font-size:20px;
+    color:#000;
+}
+.tituloaplicacaowindow {
+    font-size:14px;
+    color:#fff;
+    font-weight:bold;
+}
+.subtituloaplicacaowindow {
+    font-size:14px;
+    color:#034A31;
+    font-weight:bold;
+}
+.notTitulo {
+    font-size:12px;
+    font-weight:bold;
+    color:#C15910;
+    line-height:24px;
+}
+.notTexto {
+    font-size:11px;
+    color:#666;
+    line-height:16px;
+}
+.notSaiba {
+    font-size:11px;
+    font-weight:bold;
+    text-decoration:underline;
+    color:#55867c;
+    line-height:24px;
+}
+.notImg {
+    padding:5px;
+}
+.notImg img {
+    border:1px solid #cccccc;
+    padding:4px;
+    background:#fff;
+}
+.notImg img:hover {
+    border:1px solid #cccccc;
+    padding:4px;
+    background:#C15910;
+    cursor:pointer;
+}
+
+.zend_form .form-group{
+    float:left;
+    min-width: 340px;
+    min-height: 55px;
+    margin-bottom: 5px;
+}
+
+.config-profile button, .config-profile select{
+    height: 22px !important;
+    margin: 1px 2px 2px 2px;
+    padding: 1px 4px 1px 4px;
+    border-radius: 0px 0px 0px 0px !important;
+}
+
+.ui-pager-control button.t-ui-button, .ui-pager-control button.t-ui-button:hover {
+    height: 22px;
+    margin: 1px 2px 2px 2px;
+    padding: 1px 4px 1px 4px;
+}
+
+#group-profile-selProfile button.t-ui-button, #group-profile-selProfile button.t-ui-button:hover {
+    height: 22px;
+    margin: 1px 2px 2px 2px;
+    padding: 1px 4px 1px 4px;
+}
+
+.form-group-field{
+    margin-bottom: 10px;
+    clear:both;
+    border:1px solid #CCCCCC;    
+}
+
+.form-group-content{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.form-group-title{
+    background-color: #F9F9F9;
+    font-weight: bold;
+    padding:5px;
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 5px;
+}
+
+.zend_form .form-group dt, .zend_form .form-group dd{
+    margin: 0px
+}
+
+#iconsApp {
+    background-color: #294128;
+    padding: 15px;
+    padding-top: 30px;
+    display: none;
+    margin-top: 33px;
+}
+
+#iconsAppContent {
+    background-color: #fff;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+    border: 1px solid #fff;
+    padding: 5px;
+}
+
+/**
+ * Ícones
+*/
+#grupo_icones, #aplicativos_icones
+{	
+    list-style-type:none;
+    padding:0;
+    margin:0;
+}	
+#grupo_icones li, #aplicativos_icones li
+{
+    float: left;
+    margin:4px 4px;		
+    background-color:#f8f8f8;
+    float:left;
+}
+#grupo_icones li a, #aplicativos_icones li a
+{
+    width:100px;
+    height:100px;
+    border:1px solid #e6e6e6;
+    padding:0 2px;
+    text-align:center;
+    text-decoration:none;
+    display:block;
+    /*
+    line-height:20px;
+    _line-height:20px;
+    */
+}
+#grupo_icones li a:hover, #aplicativos_icones li a:hover
+{
+    border-right: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+}
+#grupo_icones li a:hover span, #aplicativos_icones li a:hover span
+{
+    color:#ef6c00;
+}
+#grupo_icones li a span, #aplicativos_icones li a span
+{
+    position:relative;
+    top:70px;
+    font-family:arial;
+    font-size:11px;
+    font-weight:bold;
+    color: #8d8d8d;
+    /*
+    line-height:12px;
+    _line-height:1px;
+    */
+}
+
+/**
+ * @section window layout
+*/
+#windowTopo {
+    height:29px;
+    background: url(/Mais/public/images/bg-menu-top.jpg) repeat-x; 
+    border-bottom:1px solid #ccc;
+    font-family:Verdana, Geneva, sans-serif;
+    text-align:left;
+    vertical-align:middle;	
+}
+
+#windowBodyContent{
+    text-align:left;
+    vertical-align:top;
+    padding: 5px;
+}
+
+#windowBodyBorder, #windowContent{
+    vertical-align:top;
+}
+
+#windowBodyBorder{
+    background-color: #fff;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+    border:1px solid #CCC;
+    padding: 5px;
+}
+
+#windowApplicationName {
+    font-size:20px;
+    color:#fff;
+    padding-left:10px;
+    padding-right:10px;
+}
+#windowScreenName {
+    font-size:16px;
+    color:#fff;
+}
+#windowClose {
+    height:29px;
+    font-size:12px;
+    color:#fff;
+    padding-left:10px;
+    padding-right:10px;
+    font-weight:bold;
+    vertical-align:middle;	
+    border-top: 2px solid #FF6600;
+}
+#windowClose a:link {
+    color:#FFF;
+    text-decoration:none;
+}
+#windowClose a:visited {
+    text-decoration:none;
+    color:#FFF;
+}
+#windowClose a:hover {
+    text-decoration:none;
+    color:#CCC;
+}
+#windowClose a:active {
+    text-decoration:none;
+    color: #FFF;
+}
+#windowContent {
+    padding:5px;
+}
+
+#windowFooterBottons button.actions{
+    float: right;
+    margin: 5px;
+    padding: 5px;
+}
+
+#iframeContent{
+    text-align: left;
+    background-color: #fff;
+}
+
+#logo70anos {
+    padding-top:30px;	
+}
+
+.divPainel {
+	width:95%; 
+	height:446px; 
+	overflow:auto; 
+	margin:10px;
+}
+
+.t-ui-border-trbl{
+    
+}
+
+.t-ui-border-trb{
+    border-left: 0px !important;
+}
+
+.t-ui-border-rb{
+    border-left: 0px !important;
+    border-top: 0px !important;
+}
+
+.t-ui-border-rbl{
+    border-top: 0px !important;
+}
+
+.ui-icon-like-16{
+	background-image: url("/Mais/public/images/ui-like-16.png") !important;
+	margin-left: 3px;
+	cursor: pointer;
+}
+.ui-icon-comment-16{
+	background-image: url("/Mais/public/images/ui-comment-16.png") !important;
+	margin-left: 3px;
+	cursor: pointer;
+}

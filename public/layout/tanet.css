@@ -1,0 +1,232 @@
+.gridTA{
+    border:0px;
+    cellspacing: 0px;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.gridTA th{
+    background-color: #F7F7F7;
+    border:0px;
+    border-bottom:1px solid #034A31;
+    color:#034A31;
+}
+
+.gridTA td{
+    background-color: #fff;
+}
+
+.gridTA td.hDefault{
+    height:30px;
+}
+
+.t-grid th, .t-grid td{
+    border: 0px;
+    border-right: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
+    padding:5px;
+}
+
+.t-grid .t-column{
+    border-top: 1px solid #cecece;
+}
+
+.t-grid .t-line{
+    border-left: 1px solid #cecece;
+}
+
+.t-grid .t-line-column{
+    border-top: 1px solid #cecece;
+    border-left: 1px solid #cecece;
+}
+
+.t-grid .ui-widget-header{
+    background-color: #f7f7f7;
+	font-weight: normal;
+}
+
+.required{
+    /*border: 1px solid #d3d3d3;
+    background-color: #FFFFEA;*/
+}
+
+.error{
+    color:#ff0000;
+}
+
+.required:focus{
+    //border: 1px solid #FF6600;    
+}
+
+fieldset{
+    border: 1px solid #cccccc;
+}
+fieldset legend{
+    font-weight: bold;
+}
+
+.selected{
+    border-bottom: 2px solid #ff6600;
+}
+/**
+ * fim CSS formul�rio
+ */ 
+.formTable th{
+    text-align: right;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.formTable td, .formTable th{
+    padding: 3px;
+}
+
+.gridList{
+    padding: 5px;
+}
+
+.gridList th{
+    background-color:#F7F7F7;
+    text-align: left;
+    border-bottom: 1px solid #8FBF00;
+    font-weight: normal;
+}
+
+.gridList td{
+    border-bottom: 1px dashed #dddddd;	
+}
+
+.gridList a{
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.gridList .odd{
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+fieldset{
+    padding: 8px;
+}
+
+.Titulo, 
+.TituloL, 
+.TituloR, 
+.TituloWrap, 
+.TituloWrapL, 
+.TituloWrapR, 
+.TituloDet, 
+.TituloDetL, 
+.TituloDetR,
+.linha_titulo{
+    color: #333;
+    background-color:#F7F7F7;
+    font-weight:bold;
+    border: 0px;
+    border-bottom: 1px solid #666;
+    font-size: 13px;
+}
+
+.TituloL, .TituloWrapL, .TituloDetL, .CaixaL, .ResultadoL, .PerguntaL, .top_left, .TotalL{
+    text-align: left;
+}
+
+.top_left, .top_rigth{
+    vertical-align: top;
+}
+
+.TituloR, .TituloWrapR, .TituloDetR, .CaixaR, .ResultadoR, .PerguntaR, .top_rigth, .TotalR{
+    text-align: right;
+}
+
+.TituloDet, .TituloDetL, .TituloDetR{
+    border-bottom: 1px solid #dddddd;
+}
+
+.Caixa, .CaixaL, .CaixaR, .Resultado, .ResultadoL, .ResultadoR, .ClienteContrato, .ClienteBloqueio{
+    border:0px;
+    border-bottom: 1px solid #dddddd;
+    font-size: 13px;
+}
+
+.Resultado, .Caixa, .Total, .Titulo, .TituloDet  {
+    text-align: center;
+}
+
+.TituloR, .CaixaR, .TotalR  {
+    text-align: right !important;
+}
+
+.TituloL, .CaixaL, .TotalL {
+    text-align: left !important;
+}
+
+.ClienteContrato{
+    color: #339933;
+}
+
+.ClienteBloqueio{
+    color: #FF6600;
+}
+
+.PergPesquisa{
+    color: #333333;
+    background-color:#F7F7F7;
+    border-bottom: 1px solid #dddddd;
+    font-weight: 600;
+    font-size: 13px;    
+}
+
+.PerguntaR, .PerguntaL, .Pergunta, .top_rigth{
+    color: #333333;
+    font-weight:normal;
+    vertical-align: top;
+}
+
+.Total, .TotalL, .TotalR{
+    /* color: #339933; */
+    color: #222222;
+    /*text-align: left;*/
+    font-weight:bold;
+}
+
+.PerguntaR, .top_rigth, .TotalR{
+    text-align: right;
+}
+
+.divLegenda{
+    height:38px;
+    border:1px solid #DDDDDD;
+    background-color: #FCFCFC;
+}
+
+.divLegenda table{
+    margin:3px;
+}
+
+.divLegenda td, .divLegenda th{
+    font-size:11px;
+}
+
+.SubPerg{
+    border:0px !important;
+}
+
+.PergPesquisa {
+    padding: 3px;
+}
+
+.loadingIcon{ 
+    background: url(/Mais/public/images/indicator.gif) no-repeat 0 0;
+    background-position: 0px 0px;
+    width:16px;
+    height:16px;
+}
+
+.border-shadow{
+    border: 1px solid #cecece;
+    -webkit-box-shadow: 1px 1px 2px 2px #cecece;
+    -moz-box-shadow: 1px 1px 2px 2px #cecece;
+    box-shadow: 1px 1px 2px 2px #cecece;
+}

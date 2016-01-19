@@ -1,0 +1,50 @@
+<?php
+    foreach ($this->data as $data):
+?>
+        <table class="tabela" width="100%">
+            <thead>
+                <tr>
+                    <td colspan="2">
+                        <?php echo $data['sigla_filial']; ?> - <?php echo $data['nome_cidade']; ?>
+                    </td>
+                </tr>
+            </thead>    
+            <tbody>
+                <tr>
+                    <td width="35%"><strong>Arroz / Feijão</strong></td>
+                    <td width="65%"><?php echo $data['arroz_feijao']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Prato Principal</strong></td>
+                    <td><?php echo $data['pt_principal']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Prato Light</strong></td>
+                    <td><?php echo $data['pt_light']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Guarnição</strong></td>
+                    <td><?php echo $data['guarnicao']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Saladas</strong></td>
+                    <td><?php echo $data['salada']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Opção</strong></td>
+                    <td><?php echo $data['opcao']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Sobremesa</strong></td>
+                    <td><?php echo $data['sobremesa']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Suco</strong></td>
+                    <td><?php echo $data['suco']; ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+<?php
+    endforeach;
+?>

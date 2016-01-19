@@ -1,0 +1,58 @@
+<script>
+    var configKey = 'config';
+    var height = 'height';
+    var width = 'width';
+    var resize_ratio = 'resize_ratio';
+    var maxSize = 'maxSize';
+    var maxSizeUnit = 'maxSizeUnit';
+    var updateFade = false;
+
+    function _updateElement(element, show) {
+        var target = '';
+        if (show != undefined && show) {
+            target = 'show';
+            if (updateFade) {
+                target = 'fadeIn';
+            }
+        } else {
+            target = 'hide';
+            if (updateFade) {
+                target = 'fadeOut';
+            }
+        }
+        $(element)[target]();
+    }
+
+    function existsHeightOrWidth() {
+        var exists = false;
+        $("#" + configKey + "-" + height + ", #" + configKey + "-" + width).each(function () {
+            if ($(this).val()) {
+                exists = true;
+                return;
+            }
+        });
+        return exists;
+    }
+
+    $("#" + configKey + "-" + height + ", #" + configKey + "-" + width).bind('change keyup', function () {
+        var show = existsHeightOrWidth();
+        var element = $("#group-" + configKey + "-" + resize_ratio);
+        _updateElement(element, show);
+        if (!show) {
+            $(element).find("input").prop('checked', false);
+        }
+    });
+
+    $("#" + configKey + "-" + maxSize).bind('change keyup', function () {
+        var element = $("#group-" + configKey + "-" + maxSizeUnit);
+        _updateElement(element, $(this).val());
+    });
+
+    $(document).ready(function () {
+        setTimeout(function () {
+            $("#" + configKey + "-" + height + ", #" + configKey + "-" + width).change();
+            $("#" + configKey + "-" + maxSize).change();
+            updateFade = true;
+        }, 1);
+    });
+</script>

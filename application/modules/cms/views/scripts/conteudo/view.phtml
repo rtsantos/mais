@@ -1,0 +1,181 @@
+<?php
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/modules/cms/conteudo/controller.js');
+    $this->headScript()->appendFile('/Mais/application/modules/cms/views/scripts/conteudo/comum.js');
+
+    $baseUrl = ZendT_Url::getBaseUrl();
+    $idConteudo = $this->id;
+
+    $panelDentroWidth = 30;
+    $panelDentroWidth2 = 0;
+    if ($this->painelEsquerda) {
+        $panelDentroWidth = 280;
+        $panelDentroWidth2 = 10;
+    }
+
+    $panelCentroWidth = 100;
+    if ($this->painelDireita) {
+        $panelCentroWidth = 350;
+    }
+?>
+
+<link rel="stylesheet" href="/Mais/public/layout/box-noticias.css" type="text/css" />
+
+<div>
+    <div id="content-center" class="ui-column ui-box colleft" calc-width="-<?php echo $panelCentroWidth; ?>">
+        <?php echo $this->painelEsquerda; ?>
+        <div id="content-body" class="ui-column colleft-content content" calc-width-parent="" calc-width="-<?php echo $panelDentroWidth; ?>">
+            <?php if ($this->img) : ?>
+                    <div class="ui-column thumbnail">
+                        <img src="<?php echo $this->img; ?>">
+                    </div>
+                <?php endif; ?>
+
+            <?php
+                if ($this->corpo || $this->titulo || $this->msg):
+                    ?>
+                    <?php
+                    $edit = Zend_Controller_Front::getInstance()->getRequest()->getParam('edit');
+                    if (!$this->msg) {
+                        ?>
+                        <div class="header">
+                            <div class="ui-box-action">
+                                <span class="ui-button-icon" title="Editar">
+                                    <?php
+                                    $url = $_SERVER['REQUEST_URI'];
+                                    $urlEdit = "/edit/1";
+                                    if (!$edit) {
+                                        $url .= $urlEdit;
+                                    } else {
+                                        $url = str_replace($urlEdit, "", $url);
+                                    }
+                                    $styleButton = '';
+                                    if (!$this->editPermissao) {
+                                        $styleButton = 'display:none';
+                                    }
+                                    ?>
+                                    <a id="content-button-edit" style="<?php echo $styleButton; ?>" href="<?php echo $url; ?>" class="ui-icon-20 icon-check">&nbsp;</a>
+                                </span>
+                            </div>
+                            <div class="ui-box-action">
+                                <?php echo $this->likes; ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+                    <div class="ui-column title">
+                        <?php echo ($this->titulo ? $this->titulo : $this->msg); ?>
+                    </div>
+                    <div class="ui-helper-clearboth subtitle">
+                        <?php echo $this->subtitulo; ?>
+                    </div>
+
+                    <?php if ($this->banner): ?>
+                        <div class="ui-column ui-banner" style="background-image: url(<?php echo $this->banner; ?>)">
+
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="ui-helper-clearboth body" calc-width-parent="" calc-width="-<?php echo $panelDentroWidth2; ?>">
+                        <br>
+                        <?php echo $this->corpo; ?>
+
+                        <?php
+                        if ($this->viewPdf) {
+                            echo $this->pdf('content-' . $idConteudo, $baseUrl . '/cms/conteudo/pdf/id/' . $idConteudo);
+                        } else if ($this->urlDownload) {
+                            echo '<iframe src="' . $this->urlDownload . '" style="display:none"></iframe>';
+                        }
+                        ?>
+
+                        <br>
+
+                        <?php
+                        if (!$this->corpoUrl && !$edit && !$this->msg):
+                            ?>
+                            <div class = "content ui-comment">
+                                <?php
+                                if ($this->comments || Auth_Session_User::getInstance()->authenticated()) {
+                                    ?>
+                                    <div class="ui-title ui-bold">
+                                        <span class="ui-icon-20 icon-comment"></span>
+                                        <span class="ui-text">Comentários</span>
+                                    </div>
+                                    <?php
+                                }
+                                echo $this->commentsForm;
+                                ?>
+                                <ul id = "comments-messages-<?php echo $this->id; ?>" >
+                                    <?php
+                                    echo $this->comments;
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php
+                        endif;
+                        ?>
+                    </div>            
+                <?php elseif ($this->grid):
+                    ?>
+                    <?php
+                    echo $this->grid;
+                    ?>
+                    <?php
+                endif;
+            ?>            
+
+
+
+        </div>
+    </div>
+    <?php
+        if (count($this->painelDireita) > 0) {
+            ?>
+            <div id="content-right" class="ui-column ui-box" style="width:240px;">
+                <div class="header">
+                    Veja também
+                </div>
+                <div class="content facescroll" style="overflow:auto;" calc-height-parent="content-center" calc-height="-46">
+                    <?php
+                    /* echo '<pre>';
+                      print_r($this->painelDireita);
+                      echo '</pre>'; */
+                    foreach ($this->painelDireita as $noticia => $value):
+                        if ($value['id'] != $idConteudo) :
+                            ?>
+                            <div class="ui-column subtitle">
+                                <a href ="<?php echo $value['url'] . '/categoria/' . $this->categoria; ?>">
+                                    <?php echo $value['titulo']; ?>
+                                </a>
+                            </div>
+                            <div class="ui-helper-clearboth body">
+                                <?php echo $value['sub_titulo']; ?>
+                            </div>
+                            <br>
+                            <?php
+                        endif;
+                    endforeach;
+                    ?>
+                </div>
+            </div>
+            <?php
+        }
+    ?>
+</div>
+<script>
+    function calcWidthGrid() {
+        var contentWidth = jQuery(window).width() - <?php echo $panelDentroWidth ?> - 100;
+        return (contentWidth);
+    }
+
+    function calcHeightGrid() {
+        var contentHeight = jQuery(window).height() - 400;
+        return (contentHeight);
+    }
+
+    jQuery(document).ready(function () {
+        jQuery.Cms_ConteudoController.count();
+    });
+
+</script>

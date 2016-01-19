@@ -1,0 +1,164 @@
+<?php
+    $baseUrl = ZendT_Url::getBaseUrl();
+?>
+
+<ul class="ui-box-ul">
+    <li>
+        <div class="ui-box" style="margin-right: 20px; height: 234px; width: 48%;">
+            <div class="full">
+                <?php echo $this->banner['corpo']; ?>
+            </div>
+        </div>
+
+
+        <div class="ui-box"  style="height: 234px; padding-right: 0px; width: 48%;">
+            <div class="header">
+                <?php echo $this->paraVoce['titulo']; ?>
+            </div>
+            <div id="box-para-voce" class="content facescroll" style="height: 170px; overflow: auto;">
+                <?php echo $this->paraVoce['corpo']; ?>
+            </div>
+        </div>
+        <div class="ui-box" style="margin-right: 20px; height: 238px; width: 48%;">
+            <div class="header">
+                <?php echo $this->noticia['titulo']; ?>
+
+                <?php
+                    if (ZendT_Acl::getInstance()->isAllowed('grid', 'cms.conteudo')):
+                        ?>
+                        <span popover-title="Aprovação de notícias" class="ui-button-icon ui-right" onClick="document.location.href = '<?php echo $baseUrl; ?>/cms/conteudo/grid?profile_key=noticias_aprov';">
+                            <span class="ui-icon-20 icon-check">&nbsp;</span>                    
+                        </span>
+                        <?php
+                    endif;
+                ?>
+
+                <?php
+                    if (Auth_Session_User::getInstance()->authenticated()):
+                        ?>
+                        <span popover-title="Criar nova notícia" class="ui-button-icon ui-right" onClick="document.location.href = '<?php echo $baseUrl; ?>/cms/conteudo/form?profile_key=noticias&profile=1072';">
+                            <span class="ui-icon-20 icon-create">&nbsp;</span>
+                        </span>
+                        <?php
+                    endif;
+                ?>
+            </div>
+            <div id="box-noticias" class="content box-noticias">
+                <?php echo $this->noticia['corpo']; ?>
+            </div>
+        </div>
+
+        <div id="box-qualidade" class="ui-box" style="min-height: 238px; width: 48%;">
+            <div class="header">
+                <?php echo $this->qualidade['titulo']; ?>
+            </div>
+            <div class="content">
+                <?php echo $this->qualidade['corpo']; ?>
+            </div>
+        </div>                    
+    </li>
+</ul>
+<script language="javascript">
+    jQuery(document).ready(function () {
+        jQuery(".popover").TPopover({updateScroll: '.box-noticias'});
+        jQuery('.facescroll').alternateScroll();
+    });
+
+    function getMsgLoadData() {
+        return 'Aguarde, carregando...';
+    }
+
+    function contentLike(id, onlyLoad) {
+        var type = 'like';
+        var params = formatLoadData(id, onlyLoad, type);
+        if (params) {
+            setTimeout(function () {
+                var result = ajaxLoadData('<?php echo $baseUrl; ?>/cms/conteudo/' + type, false, params);
+                populateLoadData(id, type, result);
+            }, 50);
+        }
+    }
+
+    function contentComment(id, onlyLoad) {
+        var type = 'comment';
+        var params = formatLoadData(id, onlyLoad, type);
+        if (params) {
+            $("#" + type + "-" + id + "-corpo").attr('disabled', 'disabled');
+            $("#" + type + "-" + id + "-btn").attr('disabled', 'disabled');
+            setTimeout(function () {
+                var result = ajaxLoadData('<?php echo $baseUrl; ?>/cms/conteudo/' + type, false, params);
+                populateLoadData(id, type, result);
+                $("#" + type + "-" + id + "-corpo").removeAttr('disabled');
+                $("#" + type + "-" + id + "-btn").removeAttr('disabled');
+            }, 50);
+        }
+    }
+
+    function formatLoadData(id, onlyLoad, type) {
+        var params = 'id=' + id;
+        if (type == 'comentar') {
+            var corpo = $("#" + type + "-" + id + "-corpo").val();
+            params = params + '&corpo=' + corpo;
+        }
+        if (onlyLoad == true) {
+            var html = $("#" + type + "-" + id + "-html").html().trim();
+            if (html && html != getMsgLoadData()) {
+                return false;
+            }
+            params = params + '&onlyLoad=1';
+            beforeLoadData(id, type);
+        }
+        return params;
+    }
+
+    function ajaxLoadData(url, async, data) {
+        var result = '';
+        if (data) {
+            jQuery(".popover").click();
+            result = jQuery.AjaxT.json({
+                url: url,
+                async: async,
+                data: data
+            });
+            if (result.exception) {
+                $.DialogT.exception(result.exception);
+            }
+        }
+        return result;
+    }
+
+    function beforeLoadData(id, type) {
+        $("#" + type + "-" + id + "-html").html(getMsgLoadData());
+        $("#" + type + "-" + id).css("cursor", "wait");
+    }
+
+    function afterLoadData(id, type) {
+        $("#" + type + "-" + id).css("cursor", "");
+    }
+
+    function populateLoadData(id, type, data) {
+        if (data) {
+            $("#" + type + "-" + id + "-qtd").html(data.qtd);
+            $("#" + type + "-" + id + "-html").html(data.html);
+            jQuery(".popover").click();
+        }
+        afterLoadData(id, type);
+    }
+
+    function commentLikeShow(id) {
+        $("#curtir-" + id + "-popover").find("label").css("display", "block");
+        $("#curtir-" + id + "-popover").find("#curtir-" + id + "-mais").remove();
+    }
+
+    function comentar_show(id) {
+        $("#comentar-" + id + "-popover").find("label").css("display", "block");
+        $("#comentar-" + id + "-popover").find("#comentar-" + id + "-mais").remove();
+    }
+
+    function ql() {
+        window.open('/sistemas/webiso/?window=1&not_validate=1');
+    }
+
+    jQuery('#aql').attr('target', '_new').attr('href', '/sistemas/webiso/?window=1&not_validate=1');
+
+</script>

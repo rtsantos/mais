@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/08/2015, 10:35:19
+    Author     : rsantos
+*/
+
+.tabela{
+    border-collapse: collapse;
+}
+
+.tabela td{
+    padding: 5px;
+    border-bottom: 1px solid #dddddd;
+    font-size: 12px;
+}
+
+.tabela.titulo, .tabela.th, .tabela thead tr td{
+    background-color: #fff;
+    font-weight: bold;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #dddddd;
+    border-top: 2px solid #dddddd;
+    font-size: 13px;
+    background-color: #f6f6f6;
+}
+
+.zebra{
+    background-color: #f6f6f6;
+}
+
+.tabela_imagem_com_texto{
+    padding: 0px;
+    margin: 0px;
+}
+
+.tabela_imagem_com_texto td p, .tabela_imagem_com_texto td strong{
+    padding: 0px;
+    margin: 0px;
+}
+
+.tabela_imagem_com_texto td{
+    padding: 5px;
+    vertical-align: top;
+}

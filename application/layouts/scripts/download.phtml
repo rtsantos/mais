@@ -1,0 +1,14 @@
+<?php    
+    $fileName = $this->placeholder('name')->__toString();
+    $contentType = $this->placeholder('contentType')->__toString();
+    if (!$contentType){
+        $contentType = 'application/x-download';
+    }
+    
+    $response = Zend_Controller_Front::getInstance()->getResponse();
+    $response->setHeader('Content-Type', $contentType, true);
+    $response->setHeader('Content-Disposition', 'inline; filename="'.$fileName.'"', true);
+    $response->setHeader('Cache-Control', 'private, max-age=0, must-revalidate', true);
+    $response->setHeader('Pragma', 'public', true);    
+    echo $this->layout()->content;
+?>

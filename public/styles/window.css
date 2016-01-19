@@ -1,0 +1,104 @@
+/* 
+    Document   : window
+    Created on : 18/05/2012, 10:24:31
+    Author     : jcarlos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+div#window {
+    display:block;
+}
+
+/* TITLE */
+div#window div#main-top h1#main-title {
+    font-size:14px;
+    padding:2px 0 5px 0;
+    margin:0 0 2px 0;
+    clear:both;
+    color: #034A31;
+}
+
+div#window div#main-top h1#main-title span {
+    padding:3px 5px 5px 5px;
+    background:#8FBF00;
+    margin:0 5px 0 0;
+    color:#fff;
+}
+
+/* MAIN CONTENT  */
+div#window div#main-content {
+    display:block;
+    padding:10px;    
+}
+
+    /* FORM */    
+    div#window div#main-content dl.zend_form > li:first-child {
+        display:block;
+        float:none;
+        min-width: 0;
+    }
+
+    div#window div#main-content dl.zend_form > li:first-child div label {
+        padding:5px 0 0 0;
+        height:25px;
+    }
+
+    div#window div#main-content dl.zend_form > li:first-child div label dt {
+        float:left;
+        display:block !important;
+        height:25px;
+    }
+
+    div#window div#main-content dl.zend_form > li:first-child div label dd {
+        float:left !important;
+        height:25px !important;
+    }
+    
+    /*div#window div#main-content dl.zend_form > dt {
+        display:none;
+    }*/
+
+    div#window div#main-content dl.zend_form dd {
+        float:left;
+        width:48.5%;
+        margin:0 10px 10px 0;
+    }
+
+    div#window div#main-content dl.zend_form dd fieldset {
+        min-height:120px;
+    }
+    
+    div#window div#main-content dl.zend_form dd fieldset dl li {
+        min-width: 200px;
+    }
+
+    div#window div#main-content dl.zend_form li div input[type="text"] {
+        display:block;
+        float:left;
+    }
+
+    div#window div#main-content dl.zend_form li div button {
+        display:block;
+        float:left;
+    }
+    
+div#window div#main-footer {
+    display:block;
+    width:97%;
+    padding:1.5%;
+    border-top:1px solid #DDDDDD;
+}
+
+div#window div#main-footer button {
+    display:block;
+    float:right;
+    padding:10px;
+    cursor:pointer;
+    margin:0 0 0 10px;
+}
+
+div#window div#main-footer button:hover {
+    color:#F06C00;
+}
+

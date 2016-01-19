@@ -1,0 +1,23 @@
+<?php
+   foreach ($this->categorias as $categoria):
+       ?>
+       <a class="ui-box-widget ui-radius-5" href="<?php echo $categoria['url'] ?>">
+           <div class="header">
+               <div class="text">
+                   <div class="title">
+                       <?php echo $categoria['descricao'] ?>                                        </div>
+                   <div class="comment">
+                       <?php echo $categoria['observacao'] ?>
+                   </div>
+               </div>
+               <div style="background-image: url(<?php echo $categoria['thumbnail'] ?>);" class="icon ui-icon">
+                   &nbsp;
+               </div>
+           </div>
+           <div class="footer">
+               Saiba mais
+           </div>
+       </a>
+       <?php
+   endforeach;
+?>

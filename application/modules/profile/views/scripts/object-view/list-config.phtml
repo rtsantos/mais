@@ -1,0 +1,1508 @@
+<form name="profile-user" id="profile-user" action="/Mais/index.php/profile/object-view/list-config">
+    <input type="hidden" name="objeto_profile" id="objeto_profile" value="<?php echo $this->objeto; ?>" />
+    <input type="hidden" name="uri_profile" id="uri_profile" value="<?php echo $this->uri; ?>" />
+    <input type="hidden" name="id_profile" id="id_profile" value="<?php echo $this->id; ?>" />
+    <input type="hidden" name="tipo_profile" id="tipo_profile" value="<?php echo $this->tipo; ?>" />
+    <input type="hidden" name="chave_profile" id="chave_profile" value="<?php echo $this->chave; ?>" />
+</form>
+<style>
+    #panelForms, #panelfieldsForm, #panelfieldsViewsDefault, #fieldsConfig{
+        width: 250px;
+        overflow: auto;
+        float:left;
+        padding-left: 5px;
+    }
+
+    #panelfieldsViewsDefault{
+        width: 600px;
+    } 
+
+    #panelfieldsViewsDefault li{
+        width: 200px;
+        float: left;
+    }
+
+    #panelfieldsViewsDefault li ul li{
+        width: 200px;
+        float: left;
+        /*min-height: 40px;*/
+    }
+
+
+    #panelForms ul, #panelfieldsForm ul, #panelfieldsViewsDefault ul{
+        list-style-type: none;
+        margin: 0px;
+        padding: 5px;
+    }
+
+    #panelForms li, #panelfieldsForm li, #panelfieldsViewsDefault li{        
+        margin: 0 5px 5px 5px; padding: 5px; 
+    }
+
+    .panelHeader, .panelHeaderGroup{
+        text-align: center;
+        padding: 5px;
+        border-bottom: 0px;
+        min-height: 20px;
+    }
+
+    .panelContent{
+        padding: 0px !important;
+    }
+
+    .connectedSortable, .connectedDraggable, .connectedSortableGroup{
+        height: 160px;
+        overflow: auto;
+        background-color: #ffffcc;
+        border: 1px thick #cecece;
+    }
+
+    .connectedSortableGroup, #panelForms{
+        height: 476px;
+        overflow: auto;
+        background-color: #FCFCFC;
+    }
+
+    .panelContent{
+        min-height: 210px;
+    }
+
+    #panelForms{
+        height: 500px;
+        background-color: #fff;
+    }
+
+    #forms, #fieldsForm, #config{
+        height: 200px;
+        overflow: auto;
+    }
+
+    #forms{
+        height: 227px;
+    }
+
+    #formObservacao {
+        height: 60px;
+        width: 100%;
+    }
+
+    #containerConfigGeral {
+        display: none;
+    }
+
+    #config, #configGeral{
+        height: 226px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    #config{
+        height: 222px;
+    }
+
+    #configGeral div{
+        float: left;
+        padding-right: 2px;
+        padding-bottom: 2px;
+    }
+
+    #panelForms{
+        height: 520px;
+    }
+
+    .cursorSortable{
+        cursor: move;
+    }
+
+    .liSelected{
+        border: 1px solid blue !important;
+    }
+
+    .liSelectedGroup{
+        border: 1px solid red !important;
+    }
+
+    #tipoVisao{
+        /*height:20px;
+        font-size:12px;*/
+    }
+
+    #configColumn .form-group, #formadvanced .form-group{
+        min-width: 180px;
+    }
+
+    #configColumn .form-group input[type=text]{
+        min-width: 180px !important;
+    }
+</style>
+<div>
+    <div id="calculated-column-dialog" title="Coluna Calculada:" style="display: none; margin-bottom: 20px; padding: 10px;">
+        Nome da Coluna:<br />
+        <input type="text" id="calculated-column-name" name="calculated-column-name" value="" style="width: 50%" />
+        <select name="calculated-column-type" id="calculated-column-type" onChange="changeCalcColumnType();">
+            <option value="calculation">Cálculo</option>
+            <option value="percentage-total">Percentual Sobre o Total</option>
+            <option value="percentage-columns">Percentual Sobre Coluna</option>
+            <option value="replace">Troca de Valor</option>
+        </select>
+        <br/>
+        <div>
+            <div style="float:left;width: 400px;">
+                Expressão:<br/>
+                <input type="text" id="calculated-column-expression" name="calculated-column-expression" value="" style="width: 99%" />
+            </div>
+            <div style="margin-left:5px; float:left;width: 110px;">
+                Nome da Expressão: <br />
+                <input type="text" id="calculated-column-name-expression" name="calculated-column-name-expression" value="" style="width: 100%" />
+            </div>
+        </div>
+        <br style="clear: both;"/>
+        <div id ="expression">
+            <div id="div-expression-type" style="float:left;width: 110px;">
+                Dado de Retorno:<br/>
+                <select name="expression-type" id="expression-type" onChange="changeExpressionType();">
+                    <option value="date">Data</option>
+                    <option value="numeric" selected="true">Número</option>
+                    <option value="string">Texto</option>
+                    <option value="time">Tempo</option>
+                </select>
+            </div>
+            <div id="expression-type-date" style="float:left;">
+                Formatação de Saída: <br />
+                <input type="checkbox" id="expression-type-date-day" value="day">Dia
+                <input type="checkbox" id="expression-type-date-month" value="month">Mês
+                <input type="checkbox" id="expression-type-date-year" value="year">Ano
+                <input type="checkbox" id="expression-type-date-hour" value="hour">Hora
+                <input type="checkbox" id="expression-type-date-minute" value="minute">Minuto
+                <input type="checkbox" id="expression-type-date-second" value="second">Segundo
+                <input type="checkbox" id="expression-type-date-day-week" value="day-week">Dia da Semana
+            </div>
+            <div id="expression-type-numeric" style="float:left;">
+                Número de casas decimais:  <br />
+                <input type="text" id="expression-type-numeric-qtd" style="width:15%" maxlength="1">
+            </div>
+            <div id="expression-type-string" style="float:left;">
+                Formatação de Saída: <br />
+                <input type="text" id ="expression-type-string-format"style="width:30%"> Exemplo: 1921080000 / Máscara (99) 9999-9999
+            </div>
+            <br style="clear: both;"/>
+        </div>
+        <fieldset style="height:120px;padding: 0px;">
+            <legend>Colunas Disponíveis</legend>
+            <div id="calculated-column-itens" style="height:100px; overflow:auto"></div>
+        </fieldset>
+        <br />
+        <fieldset>
+            <legend>Lista de Valores para Troca</legend>
+            </i>Exemplo:<br />
+            N=Não<br />
+            Nao=Não<br />
+            </i>
+            <textarea id="calculated-column-replace" name="calculated-column-replace" cols="70" rows="5"></textarea>
+        </fieldset>
+    </div>
+    <div id="panelForms">
+        <div style="margin-bottom: 5px;">
+            <div class="panelHeader ui-state-default">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="left">
+                            <?php echo $this->tipos; ?>
+                        </td>
+                        <td align="right">
+                            <a href="javascript:addForm();" class="ui-icon ui-icon-plus" title="Novo" style="float:right;"></a>
+                            <span id="saveOrDelete" style="display: none; float: right">
+                                <a href="javascript:copyForm();" class="ui-icon ui-icon-copy" title="Copiar" style="float:right;"></a>
+                                <a href="javascript:delForm();" class="ui-icon ui-icon-trash" title="Excluir" style="float:right;"></a>
+                                <a href="javascript:updForm();" class="ui-icon ui-icon-disk" title="Salvar" style="float:right;"></a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panelContent ui-widget-content">
+                <ul id="forms">
+                    <?php
+                       while ($row = $this->rows->getRow()):
+                           ?>
+                           <?php
+                           if ($row['id'] instanceof ZendT_Type) {
+                               $row['id'] = $row['id']->get();
+                           }
+                           ?>
+                           <li style="cursor: pointer;" class="ui-state-default" onClick="getConfigForm(this);" id="form-<?php echo $row['id']; ?>" idForm="<?php echo $row['id']; ?>">
+                               <?php echo $row['nome']; ?>
+                               <input type="hidden" value="<?php echo $row['id']; ?>" name="profile[<?php echo $row['id']; ?>][id]" id="profile-<?php echo $row['id']; ?>-id" />
+                               <input type="hidden" value="<?php echo $row['nome']; ?>" name="profile[<?php echo $row['id']; ?>][nome]" id="profile-<?php echo $row['id']; ?>-nome" />
+                               <input type="hidden" value="<?php echo $row['chave']; ?>" name="profile[<?php echo $row['id']; ?>][chave]" id="profile-<?php echo $row['id']; ?>-chave" />
+                               <input type="hidden" value="<?php echo $row['padrao']; ?>" name="profile[<?php echo $row['id']; ?>][padrao]" id="profile-<?php echo $row['id']; ?>-padrao" />
+                               <input type="hidden" value="<?php echo $row['observacao']; ?>" name="profile[<?php echo $row['id']; ?>][observacao]" id="profile-<?php echo $row['id']; ?>-observacao" />
+                               <input type="hidden" value="<?php echo $row['login']; ?>" name="profile[<?php echo $row['id']; ?>][login]" id="profile-<?php echo $row['id']; ?>-login" />
+                               <input type="hidden" value="<?php echo $row['publico']; ?>" name="profile[<?php echo $row['id']; ?>][publico]" id="profile-<?php echo $row['id']; ?>-publico" />
+                               <input type="hidden" value="<?php echo $row['responsavel']; ?>" name="profile[<?php echo $row['id']; ?>][responsavel]" id="profile-<?php echo $row['id']; ?>-responsavel" />
+                           </li>
+                           <?php
+                       endwhile;
+                    ?>
+                </ul>                
+            </div>
+        </div>
+        <div>
+            <div class="panelHeader ui-state-default">
+                <div style="float:left">
+                    Recursos <?php echo $this->arrTipos[$this->tipo]; ?>
+                </div>
+                <div id="calculated-column-button">
+                    <a href="javascript:addCalcColumn();" class="ui-icon ui-icon-calculator" title="Adicionar Coluna Calculada" style="float:right;"></a>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div class="panelContent ui-widget-content">
+                <ul id="fieldsForm" class="<?php echo (in_array($this->tipo, array('F'))) ? 'connectedSortable' : 'connectedDraggable'; ?>">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="panelfieldsViewsDefault">
+        <div class="panelHeader ui-state-default">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td align="left">
+                        Layout do <?php echo $this->arrTipos[$this->tipo]; ?>
+                    </td>
+                    <td align="right">
+                        <div id="divGroup">
+                            <a id="btn-add-group" href="javascript:addGroup();" class="ui-icon ui-icon-plus" title="Novo Grupo" style="float:right;"></a>
+                            <a id="btn-del-group" href="javascript:delGroup();" class="ui-icon ui-icon-trash" title="Excluir Grupo" style="float:right;"></a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ui-state-default">
+            <ul id="panelPalco" class="connectedSortableGroup" style="border: 0px;">
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="fieldsConfig">
+        <div>
+            <div class="panelHeader ui-state-default">
+                Configurações das Colunas
+            </div>
+            <div id="config" class="ui-widget-content">
+
+            </div>
+        </div>
+        <div style="padding-top: 5px;">
+            <div class="panelHeader ui-state-default">
+                Configurações da Visão
+            </div>
+            <div id="configGeral" class="ui-widget-content">
+                <div id="containerConfigGeral">
+                    <div>
+                        Nome:<br/>
+                        <input text="text" size="30" name="formNome" id="formNome" value="" onBlur="setConfigForm('nome', this.value);" />
+                    </div>
+                    <div>
+                        Padrão:<br/>
+                        <select id="formPadrao" name="formPadrao" onBlur="setConfigForm('padrao', this.value);">
+                            <option value="S">Sim</option>
+                            <option value="N">Não</option>
+                        </select>
+                    </div>
+                    <div style="float: left;">
+                        Chave:<br/>
+                        <input text="text" size="20" name="formChave" id="formChave" value="" onBlur="setConfigForm('chave', this.value);" />                        
+                    </div>
+                    <div>
+                        Observação:<br/>
+                        <textarea cols="23" name="formObservacao" id="formObservacao" onBlur="setConfigForm('observacao', this.value);"></textarea>
+                    </div>
+                    <div style="float:left;">
+                        <?php
+                           echo $this->button('Salvar', 'Salvar', array('icon' => 'ui-icon-disk', 'label' => 'Salvar', 'onClick' => 'updForm();'));
+                           echo $this->button('Opções Avançadas', 'Opções Avançadas', array('icon' => 'ui-icon-gear', 'label' => 'Salvar', 'onClick' => 'showAdvanced();'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div-advanced" style="display: none;" title="Opções Avançadas">
+        <?php
+           $tabs = new ZendT_View_Tabs('divTabs');
+           $tabs->disableAll(false);
+
+           $tabs->addTab('Geral', $this->formAdvanced->render());
+
+           $uri = new ZendT_JS_Command("function(){
+                var where = new TWhere('AND')
+                where.addFilter({
+                    field: 'profile_object_view_priv.id_profile_object_view',
+                    value: gConfig['id']
+                });
+                where.addFilter({
+                    field: 'profile_object_view_priv.tipo',
+                    value: 'O'
+                });
+                return '" . ZendT_Url::getBaseUrl() . "/profile/object-view-priv/grid?name=responsavel&typeModal=AJAX&filter_json=' + encodeURIComponent(where.toJson());
+            }");
+
+           $tabs->addTabUrl('Administração da Visão', $uri);
+
+           $uri = new ZendT_JS_Command("function(){
+                var where = new TWhere('AND')
+                where.addFilter({
+                    field: 'profile_object_view_priv.id_profile_object_view',
+                    value: gConfig['id']
+                });
+                where.addFilter({
+                    field: 'profile_object_view_priv.tipo',
+                    value: 'S'
+                });
+                return '" . ZendT_Url::getBaseUrl() . "/profile/object-view-priv/grid?name=compartilhamento&typeModal=AJAX&filter_json=' + encodeURIComponent(where.toJson());
+            }");
+           $tabs->addTabUrl('Visualização da Visão', $uri);
+
+           $uri = new ZendT_JS_Command("function(){
+                var where = new TWhere('AND')
+                where.addFilter({
+                    field: 'profile_job.id_profile_object_view',
+                    value: gConfig['id']
+                });
+                return '" . ZendT_Url::getBaseUrl() . "/profile/job/grid?name=job&typeModal=AJAX&filter_json=' + encodeURIComponent(where.toJson());
+            }");
+           $tabs->addTabUrl('Agendamento de Tarefa', $uri);
+
+           /* $_whereResp = new ZendT_Db_Where();
+             $_whereResp->addFilter('profile_job.id_profile_object_view', $this->id);
+             $uri = ZendT_Url::getBaseUrl().'/profile/job/grid?typeModal=AJAX&filter_json=' . $_whereResp->toJson();
+             $tabs->addTabUrl('Agendamento de Tarefa',$uri); */
+           echo $tabs->render();
+        ?>
+    </div>
+</div>
+
+<script>
+
+    var gConfig = [];
+    var gAjaxCacheForms = {};
+
+    $(document).keypress(function (e) {
+
+        var key = (e.keyCode ? e.keyCode : e.which);
+
+        if (key === 99946) {
+
+            var sTipo = $('#tipo_profile').val();
+            var groupName = $('li.liSelected').parent().parent().parent().attr('name');
+
+            if (groupName == 'cols-break') {
+
+                if (!confirm('Atenção:\n Tem certeza que deseja apagar o Cabeçalho e a Medida da Quebra para a coluna "' + $('li.liSelected').html() + '"?')) {
+                    return false;
+                }
+
+                var name = $('li.liSelected').attr('name');
+                deleteColBreak(name);
+            } else {
+                if ($('li.liSelected').length > 0) {
+                    if (sTipo == 'F' && $('li.liSelected').hasClass('cursorSortable')) {
+                        $('li.liSelected').appendTo($('#fieldsForm'));
+                        $('li.liSelected').removeClass('liSelected');
+                    } else {
+                        $('li.liSelected > div.ui-widget-content > ul.connectedSortable').children('.cursorSortable').appendTo($('#fieldsForm'));
+                        $('li.liSelected').remove();
+                    }
+                    $('#config').html('');
+                }
+            }
+        } else if (key == 13) { //Enter
+            var nome = $("#novo-form-nome").val();
+            if (nome) {
+                $("[role=dialog] .ui-dialog-buttonset button").click();
+            }
+        } else if (e.ctrlKey == true) {
+            if (key == 115) {//Ctrl + S
+                if (gConfig['id']) {
+                    $("#Salvar").click();
+                }
+                e.preventDefault();
+            } else if (key == 110) {
+                addForm();
+                e.preventDefault();
+            }
+        }
+    });
+
+    function loadOrderColumn() {
+        var itens = jQuery('#ul-groupcols-values').find('li');
+        var orderColumn = jQuery('#order_column');
+        var valueColumn = orderColumn.val();
+        orderColumn.html('');
+        orderColumn.append('<option value="">Não se aplica</option>');
+        for (var index = 0; index < itens.length; index++) {
+            orderColumn.append('<option value="' + itens.eq(index).attr('name') + '">' + itens.eq(index).html() + '</option>');
+        }
+        orderColumn.val(valueColumn);
+    }
+
+    function showAdvanced() {
+        loadOrderColumn();
+
+        $('#div-advanced').dialog({
+            buttons: {
+                'Salvar': function () {
+                    $(this).dialog('close');
+                    updForm();
+                }
+            },
+            width: 850,
+            height: 600,
+            modal: true
+        });
+    }
+
+    function deleteColBreak() {
+
+        var sTipo = $('#tipo_profile').val();
+        var groupName = $('li.liSelected').parent().parent().parent().attr('name');
+
+        if (groupName == 'cols-break') {
+
+            if (!confirm('Atenção:\n Tem certeza que deseja apagar o Cabeçalho e a Medida da Quebra para a coluna "' + $('li.liSelected').html() + '"?')) {
+                return false;
+            }
+
+            var name = $('li.liSelected').attr('name');
+
+            if (name.length > 0) {
+                $('#groupbreak-header-' + name).remove();
+                $('#groupbreak-measure-' + name).remove();
+                $('#cols-break-' + name).remove();
+                $('#config').html('');
+            }
+
+        } else {
+            if ($('li.liSelected').length > 0) {
+                if (sTipo == 'F' && $('li.liSelected').hasClass('cursorSortable')) {
+                    $('li.liSelected').appendTo($('#fieldsForm'));
+                    $('li.liSelected').removeClass('liSelected');
+                } else {
+                    $('li.liSelected > div.ui-widget-content > ul.connectedSortable').children('.cursorSortable').appendTo($('#fieldsForm'));
+                    $('li.liSelected').remove();
+                }
+                $('#config').html('');
+            }
+        }
+    }
+
+    function enableDraggable() {
+        $(".connectedSortable li").draggable({
+            connectToSortable: ".connectedSortable",
+            helper: "clone",
+            revert: "invalid"
+        });
+    }
+
+    function enableSortable() {
+        $(".connectedSortable").sortable({
+            connectWith: ".connectedSortable",
+            update: function (event, ui) {
+
+                var itens = ui.item.parent().find('li');
+                var groupName = ui.item.parent().parent().parent().attr('name');
+                var ulName = ui.item.parent().attr('id');
+                var name = '';
+                var aItens = [];
+
+                for (var index = 0; index < itens.length; index++) {
+
+                    name = itens.eq(index).attr('name');
+
+                    if (aItens[name]) {
+                        itens.eq(index).remove();
+                        continue;
+                    }
+
+                    changeField(groupName + name, 'order', index);
+                    changeField(groupName + name, 'group', groupName);
+                    changeField(groupName + name, 'hidden', 0);
+                    /*if (ulName == 'fieldsForm'){
+                     changeField(groupName+name,'hidden',1);
+                     }else{
+                     changeField(groupName+name,'hidden',0);
+                     }*/
+
+                    aItens[name] = true;
+
+                    if (groupName == 'cols-break') {
+
+                        $(itens.eq(index)).draggable({containment: '#' + ulName, axis: "y"});
+
+                        appendGroup('break-header-' + name, 'Cabeçalho da Quebra ' + itens.eq(index).html(), 1, '');
+                        appendGroup('break-measure-' + name, 'Medidas da Quebra ' + itens.eq(index).html(), 1, '');
+                        enableSortable();
+                    }
+                }
+
+                var required = 0;
+                if (ui.item.hasClass('ui-state-highlight')) {
+                    required = 1;
+                }
+
+                if (ui.item.attr('expression')) {
+                    ui.item.removeAttr('expression');
+                }
+
+                var content = ui.item.html();
+                content = content.replace(' {' + ui.item.attr('name') + '}', '');
+
+                if (ui.item.data('config') == null) {
+                    ui.item.data('config', {
+                        'label': content,
+                        'required': required
+                    });
+                }
+
+                ui.item.click(function (e) {
+                    loadFormConfig($(this));
+                    e.stopPropagation();
+                });
+
+                ui.item.attr('id', groupName + '-' + ui.item.attr('name'));
+
+                loadFormConfig(ui.item);
+
+            }
+
+        }).disableSelection();
+
+        $(".connectedSortableGroup").sortable({
+            connectWith: ".connectedSortableGroup",
+            update: function (event, ui) {
+                var itens = ui.item.parent().find('li');
+                var name = '';
+                for (var index = 0; index < itens.length; index++) {
+                    if (itens.eq(index).attr('isColumn') != '1') {
+                        name = itens.eq(index).attr('name');
+                        gConfig['groups'][name]['order'] = index;
+                    }
+                }
+            }
+        }).disableSelection();
+
+        $(".connectedDraggable li").draggable({
+            connectToSortable: ".connectedSortable",
+            helper: "clone",
+            revert: "invalid"
+        });
+    }
+
+    function loadExpressionConfig(obj) {
+
+        $('.liSelectedGroup').removeClass('liSelectedGroup');
+        $('.liSelected').removeClass('liSelected');
+        $(obj).addClass('liSelected');
+
+        if ($(obj).attr('expression')) {
+            var dataExp = $(obj).data();
+            $('#calculated-column-name').val($(obj).html());
+            $('#calculated-column-type').val(dataExp.config.expr_type);
+            changeCalcColumnType();
+            addCalcColumn(obj);
+            $('#calculated-column-expression').val(dataExp.config.expression);
+            $('#calculated-column-replace').val(dataExp.config.expr_replace_value);
+
+            $('#expression-type').val(dataExp.config.expression_type);
+            changeExpressionType();
+            $('#expression-type-date-day').prop('checked', (dataExp.config.expression_type_date_day));
+            $('#expression-type-date-month').prop('checked', (dataExp.config.expression_type_date_month));
+            $('#expression-type-date-year').prop('checked', (dataExp.config.expression_type_date_year));
+            $('#expression-type-date-hour').prop('checked', (dataExp.config.expression_type_date_hour));
+            $('#expression-type-date-minute').prop('checked', (dataExp.config.expression_type_date_minute));
+            $('#expression-type-date-second').prop('checked', (dataExp.config.expression_type_date_second));
+            $('#expression-type-date-day-week').prop('checked', (dataExp.config.expression_type_date_day_week));
+            $('#expression-type-numeric-qtd').val(dataExp.config.expression_type_numeric_qtd);
+            $('#expression-type-string-format').val(dataExp.config.expression_type_string_format);
+        }
+    }
+
+    function loadFormConfig(obj) {
+
+        var sTypeGroup = $(obj).attr('id');
+        $('.liSelectedGroup').removeClass('liSelectedGroup');
+        $('.liSelected').removeClass('liSelected');
+        $(obj).addClass('liSelected');
+
+        if (sTypeGroup) {
+            if (gAjaxCacheForms[$('#tipo_profile').val()] && gAjaxCacheForms[$('#tipo_profile').val()][sTypeGroup.toString()]) {
+                result = gAjaxCacheForms[$('#tipo_profile').val()][sTypeGroup.toString()];
+            } else {
+                var result = $.ajax({
+                    type: 'POST',
+                    url: '/Mais/index.php/profile/object-view/form-config',
+                    data: 'type_object_view=' + $('#tipo_profile').val() + '&type_group=' + sTypeGroup + '&column_name=' + $(obj).attr('name') + '&object_name=<?php echo $this->objeto; ?>',
+                    async: false
+                }).responseText;
+
+                if (!gAjaxCacheForms[$('#tipo_profile').val()]) {
+                    gAjaxCacheForms[$('#tipo_profile').val()] = {};
+                }
+                gAjaxCacheForms[$('#tipo_profile').val()][sTypeGroup.toString()] = result;
+            }
+            $('#config').html(result);
+            loadFormValues(obj);
+        }
+    }
+
+    function loadFormValues(obj) {
+
+        var aConfig = $(obj).data().config;
+        var thisConfig;
+        if (aConfig != null) {
+            for (thisConfig in aConfig) {
+                $('#' + thisConfig).val(aConfig[thisConfig]);
+                try {
+                    $('#' + thisConfig).setColor(aConfig[thisConfig]);
+                } catch (err) {
+
+                }
+            }
+        }
+        $.each($('input, select, textarea', '#configColumn'), function () {
+            setConfig(null, $(this));
+        });
+    }
+
+    function changeCalcColumnType() {
+        $('#calculated-column-expression').val('');
+        $('#calculated-column-replace').val('');
+        if ($('#calculated-column-type').val() == '' || $('#calculated-column-type').val() == 'calculation') {
+            $('#calculated-column-expression').removeAttr('readonly');
+            $('#expression').show();
+        } else {
+            $('#calculated-column-expression').attr('readonly', true);
+            $('#expression').hide();
+        }
+        if ($('#calculated-column-type').val() == 'replace') {
+            $('#calculated-column-replace').removeAttr('readonly');
+        } else {
+            $('#calculated-column-replace').attr('readonly', true);
+        }
+    }
+
+    function changeExpressionType() {
+        $('#expression-type-date').hide();
+        $('#expression-type-numeric').hide();
+        $('#expression-type-string').hide();
+
+        if ($('#expression-type').val() == 'date') {
+            $('#expression-type-date').show();
+        } else if ($('#expression-type').val() == 'numeric') {
+            $('#expression-type-numeric').show();
+            if (!$('#expression-type-numeric-qtd').val()) {
+                $('#expression-type-numeric-qtd').val('2');
+            }
+        } else if ($('#expression-type').val() == 'string') {
+            $('#expression-type-string').show();
+        }
+    }
+
+    function resetExpressionValues() {
+        $('#expression-type-date-day').prop('checked', false);
+        $('#expression-type-date-month').prop('checked', false);
+        $('#expression-type-date-year').prop('checked', false);
+        $('#expression-type-date-hour').prop('checked', false);
+        $('#expression-type-date-minute').prop('checked', false);
+        $('#expression-type-date-second').prop('checked', false);
+        $('#expression-type-date-day-week').prop('checked', false);
+        $('#expression-type-numeric-qtd').val('');
+        $('#expression-type-string-format').val('');
+    }
+
+    function addCalcColumn(obj) {
+        resetExpressionValues();
+        $('#expression-type').val('numeric');
+        changeExpressionType();
+
+        if (!gConfig['id']) {
+            return;
+        }
+
+        var open_separator = '{';
+        var close_separator = '}';
+
+        /**
+         * Adiciona as colunas à modal de Configuração
+         */
+        $('#calculated-column-itens').html('');
+        $('#calculated-column-name-expression').val(getNextUid(obj));
+
+        var link = null;
+        $('.field-form').each(function () {
+            link = '<a class="calculated-column-item" id="' + $(this).attr('name') + '" href="javascript:void(0);">';
+            link += $(this).html();
+            link += '</a>';
+            $('#calculated-column-itens').html($('#calculated-column-itens').html() + link + '<br />');
+        });
+
+        /**
+         * Ao clicar na coluna ela será adicionada ao campo de Expressão
+         */
+        $('.calculated-column-item').each(function () {
+            $(this).click(function () {
+                if ($('#calculated-column-type').val() == '' || $('#calculated-column-type').val() == 'calculation') {
+                    $('#calculated-column-expression').val($('#calculated-column-expression').val() + open_separator + $(this).attr('id') + close_separator + ' ');
+                    $('#calculated-column-expression').removeAttr('readonly');
+                } else if ($('#calculated-column-type').val() == 'percentage-columns') {
+                    if ($('#calculated-column-expression').val().indexOf('/') > 0) {
+                        $('#calculated-column-expression').val('');
+                    }
+                    if ($('#calculated-column-expression').val() != '') {
+                        $('#calculated-column-expression').val($('#calculated-column-expression').val() + '/' + open_separator + $(this).attr('id') + close_separator);
+                    } else {
+                        $('#calculated-column-expression').val(open_separator + $(this).attr('id') + close_separator);
+                    }
+                    $('#calculated-column-expression').attr('readonly', true);
+                } else {
+                    $('#calculated-column-expression').val(open_separator + $(this).attr('id') + close_separator);
+                    $('#calculated-column-expression').attr('readonly', true);
+                }
+                $('#calculated-column-expression').focus();
+            });
+        });
+
+        /**
+         * Exibe a modal de Configuração
+         */
+        $("#calculated-column-dialog").dialog({
+            height: 550,
+            width: 750,
+            modal: true,
+            buttons: {
+                "Salvar": function () {
+
+                    if ($('#calculated-column-name').val() == '') {
+                        alert('Informe o nome de sua Coluna Calculada!');
+                        $('#calculated-column-name').focus();
+                        return false;
+                    }
+
+                    if ($('#calculated-column-expression').val() == '') {
+                        alert('Monte a Expressão de sua Coluna Calculada!');
+                        $('#calculated-column-expression').focus();
+                        return false;
+                    }
+
+                    var item = '';
+                    var uidOld = '';
+                    var uid = getCurrentUid(obj);
+                    var exists = existsProfileField(uid);
+
+                    if (obj) {
+                        uidOld = $(obj).attr('name');
+                    }
+
+                    if (uid != uidOld && exists) {
+                        alert('Nome da expressão já existente nessa visão!');
+                        $('#calculated-column-name-expression').focus();
+                        return false;
+                    }
+
+                    if (obj) {
+                        $(obj).html($('#calculated-column-name').val());
+                        if (uid != uidOld) {
+                            $(obj).attr('id', 'ini-' + uid);
+                            $(obj).attr('name', uid);
+                            $(obj).html($('#calculated-column-name').val() + ' {' + uid + '}');
+                        }
+                    } else {
+                        $('<li></li>').attr('id', 'ini-' + uid)
+                                .attr('name', uid)
+                                .attr('expression', 'true')
+                                .attr('expr_user', 1)
+                                .attr('expr_type', $('#calculated-column-type').val())
+                                .addClass('field-form ui-state-default cursorSortable ui-draggable')
+                                .html($('#calculated-column-name').val() + ' {' + uid + '}')
+                                .click(function () {
+                                    loadFormConfig($(this));
+                                })
+                                .dblclick(function () {
+                                    loadExpressionConfig($(this));
+                                })
+                                .appendTo($('#fieldsForm'));
+
+                        enableSortable();
+                    }
+
+                    $('#ini-' + uid).data('config', {
+                        'label': $('#calculated-column-name').val(),
+                        'expression': $('#calculated-column-expression').val(),
+                        'expr_user': 1,
+                        'expr_type': $('#calculated-column-type').val(),
+                        'expr_replace_value': $('#calculated-column-replace').val(),
+                        'expression_type': $('#expression-type').val(),
+                        'expression_type_date_day': $('#expression-type-date-day').is(':checked') ? 1 : 0,
+                        'expression_type_date_month': $('#expression-type-date-month').is(':checked') ? 1 : 0,
+                        'expression_type_date_year': $('#expression-type-date-year').is(':checked') ? 1 : 0,
+                        'expression_type_date_hour': $('#expression-type-date-hour').is(':checked') ? 1 : 0,
+                        'expression_type_date_minute': $('#expression-type-date-minute').is(':checked') ? 1 : 0,
+                        'expression_type_date_second': $('#expression-type-date-second').is(':checked') ? 1 : 0,
+                        'expression_type_date_day_week': $('#expression-type-date-day-week').is(':checked') ? 1 : 0,
+                        'expression_type_numeric_qtd': $('#expression-type-numeric-qtd').val(),
+                        'expression_type_string_format': $('#expression-type-string-format').val()
+                    });
+
+                    $(this).dialog("close");
+                },
+                "Cancelar": function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                $('#calculated-column-name').val('');
+                $('#calculated-column-expression').val('');
+            }
+        });
+    }
+
+    function getNextUid(obj) {
+        var uid = '';
+        if (obj) {
+            uid = $(obj).attr('name').replace('exp_', '');
+        } else {
+            uid = $("li[expression='true']").length + 1;
+            while ($("li[name='exp_" + uid + "']").length > 0) {
+                uid += 1;
+            }
+        }
+        return 'exp_' + uid;
+    }
+
+    function getCurrentUid(obj) {
+        var exp = $('#calculated-column-name-expression').val();
+        if (exp) {
+            if (exp.substr(0, 4) != 'exp_') {
+                exp = 'exp_' + exp;
+            }
+            return exp;
+        }
+        return getNextUid(obj);
+    }
+
+    function existsProfileField(fieldName) {
+        var result = false;
+        $("#fieldsForm li").each(function () {
+            if ($(this).attr('name') == fieldName) {
+                result = true;
+            }
+        });
+        return result;
+        /*if(result){
+         return result;
+         }
+         result = ajaxJson({
+         url: '/Mais/index.php/profile/object-view/config',
+         data: 'id=' + gConfig['id'] + '&field=' + fieldName
+         });
+         return result['exists'];*/
+    }
+
+    function addToExpression(column) {
+        $('#racional').val($('#racional').val() + ' ' + column + ' ');
+        $('#racional').focus();
+    }
+    ;
+
+    function configGroup(name, createdByUser) {
+
+        $('.liSelectedGroup').removeClass('liSelectedGroup');
+        $('.liSelected').removeClass('liSelected');
+
+        if (createdByUser) {
+            $('#group' + name).addClass('liSelected');
+        } else {
+            $('#group' + name).addClass('liSelectedGroup');
+        }
+
+        var sHtml = 'Descrição: <br />';
+        sHtml = sHtml + '<input type="text" id="field_name" name="field_name" onBlur="changeGroup(\'' + name + '\',\'label\',this.value);"/> <br /><br/>';
+
+        sHtml = sHtml + 'Múltiplo: <br />';
+        sHtml = sHtml + '<select id="group_repeat" name="group_repeat" onBlur="changeGroup(\'' + name + '\',\'group_repeat\',this.value);">';
+        sHtml = sHtml + '<option value = "">Não</option>';
+        sHtml = sHtml + '<option value = "S">Sim</option>';
+        sHtml = sHtml + '</select>';
+
+        $('#config').html(sHtml);
+        var vconfig = $('#group' + name).data('config');
+        $('#field_name').val(vconfig['label']);
+        $('#group_repeat').val(vconfig['group_repeat']);
+    }
+
+    function appendGroup(name, label, draggable, createdByUser, group_repeat) {
+
+        if (!createdByUser) {
+            createdByUser = 0;
+        }
+
+        /**
+         * Impede que adicione mais de um grupo com o mesmo nome.
+         */
+        if ($('#group' + name).length > 0) {
+            return;
+        }
+
+        if (!gConfig['numGroups']) {
+            gConfig['numGroups'] = 1;
+        } else {
+            gConfig['numGroups'] = gConfig['numGroups'] + 1;
+        }
+
+        var cmdHtml = '';
+        cmdHtml = cmdHtml + '<li id="group' + name + '" name="' + name + '" ondblclick="configGroup(\'' + name + '\',' + createdByUser + ')">';
+        cmdHtml = cmdHtml + '     <div class="panelHeaderGroup ui-state-default cursorSortable">';
+        cmdHtml = cmdHtml + label;
+        cmdHtml = cmdHtml + '     </div>';
+        cmdHtml = cmdHtml + '     <div class="ui-widget-content">';
+        cmdHtml = cmdHtml + '         <ul id="ul-group' + name + '" class="connectedSortable" pdraggable="' + draggable + '" style="border: 0px;">';
+        cmdHtml = cmdHtml + '         </ul>';
+        cmdHtml = cmdHtml + '     </div>';
+        cmdHtml = cmdHtml + '</li>';
+
+        $('#panelPalco').append(cmdHtml);
+        $('#group' + name).data('config', {'name': name, 'label': label, 'order': gConfig['numGroups'], 'created-by-user': createdByUser, 'group_repeat': group_repeat});
+
+        resizeGroup();
+    }
+
+    function addGroup() {
+        var options = {
+            id: 'dialog-add-group',
+            title: 'Inclusão de Grupo',
+            buttons: {
+                'OK': function () {
+                    var label = $('#labelGroup').val();
+                    if (label.length > 0) {
+                        var name = strtolower(str_replace(' ', '-', label));
+                        appendGroup(name, label, 0, 1, '');
+                        enableSortable();
+                    }
+                    $.DialogT.close('dialog-add-group');
+                }
+            }
+        };
+
+        var cmdForm = 'Nome: <br />';
+        cmdForm = cmdForm + '<input type="text" id="labelGroup" value="" style="width:350px"/>';
+        $.DialogT.open(cmdForm, 'Information', options);
+    }
+
+    function addForm() {
+        var options = {
+            id: 'dialog-add-form',
+            title: 'Inclusão de <?php echo $this->arrTipos[$this->tipo]; ?>',
+            buttons: {
+                'OK': function () {
+                    var sParam = 'objeto=' + $('#objeto_profile').val();
+                    sParam = sParam + '&uri=' + $('#uri_profile').val();
+                    sParam = sParam + '&nome=' + $('#novo-form-nome').val();
+                    sParam = sParam + '&id_usuario=<?php echo $this->idUsuario; ?>';
+                    sParam = sParam + '&tipo=' + $('#tipoVisao').val();
+                    sParam = sParam + '&padrao=N';
+                    sParam = sParam + '&config=';
+                    sParam = sParam + '&observacao=';
+
+                    $.BlockT.open();
+                    var result = ajaxJson({
+                        url: '/Mais/index.php/profile/object-view/insert',
+                        data: sParam
+                    });
+                    if (result) {
+                        $('#id_profile').val(result);
+                        $('#tipo_profile').val($('#tipoVisao').val());
+                        $('#profile-user').submit();
+                    }
+                    $.BlockT.close();
+                }
+            }
+        };
+
+        var cmdForm = 'Nome: <br />';
+        cmdForm = cmdForm + '<input type="text" id="novo-form-nome" value="" style="width:350px"/><br /><br />';
+        $.DialogT.open(cmdForm, 'Information', options);
+    }
+
+    function setConfigForm(key, value) {
+        $('#profile-' + gConfig['id'] + '-' + key).val(value);
+    }
+
+    function setConfig(event, obj) {
+        var aConfig = {};
+        var item = $('.liSelected');
+        aConfig = item.data('config');
+        aConfig[$(obj).attr('id')] = $(obj).val();
+        item.data('config', aConfig);
+        if ($(obj).attr('id') == 'label') {
+            item.html($(obj).val());
+        }
+    }
+
+    function getConfigForm(obj) {
+
+        //jQuery('div#divTabs').tabs('select', 0);
+
+        $('#config').html('');
+        $('#saveOrDelete').show();
+        $('#containerConfigGeral').show();
+
+        var li = $(obj);
+        var idProfile = li.attr('idForm');
+
+        li.parent().find('li').removeClass('ui-state-active');
+        li.addClass('ui-state-active');
+
+        $('#formNome').val($('#profile-' + idProfile + '-nome').val());
+        $('#formChave').val($('#profile-' + idProfile + '-chave').val());
+        $('#formPadrao').val($('#profile-' + idProfile + '-padrao').val());
+        $('#formLogin').val($('#profile-' + idProfile + '-login').val());
+        $('#formObservacao').html($('#profile-' + idProfile + '-observacao').val());
+        $('#formPublico').val($('#profile-' + idProfile + '-publico').val());
+        $('#formResponsavel').val($('#profile-' + idProfile + '-responsavel').val());
+
+        gConfig['id'] = idProfile;
+
+        $.BlockT.open();
+        var result = ajaxJson({
+            url: '/Mais/index.php/profile/object-view/config',
+            data: 'id=' + idProfile
+        });
+        if (result) {
+            var iGroup = null;
+            var iField = null;
+            var fieldsForm = jQuery('#fieldsForm');
+            var sClassName = '';
+            var sLi = '';
+            var sLabel = '';
+            var sGroupName = '';
+
+            gConfig['id'] = idProfile;
+            gConfig['numGroups'] = 0;
+
+            jQuery('#panelPalco').html('');
+            fieldsForm.html('');
+            
+            
+            jQuery('#formNome').val(result['row']['nome']);
+            jQuery('#formPadrao').val(result['row']['padrao']);
+            jQuery('#formChave').val(result['row']['chave']);
+            jQuery('#formObservacao').val(result['row']['observacao']);
+            delete result['row'];
+
+
+            var advanced = result['advanced'];
+            delete result['advanced'];
+            /**
+             * Controla a renderização dos grupos
+             */
+            for (iGroup in result) {
+                if (iGroup == 'ini') {
+                    continue;
+                }
+
+                appendGroup(result[iGroup]['name'], result[iGroup]['label'], result[iGroup]['draggable'], result[iGroup]['created-by-user'], result[iGroup]['group_repeat']);
+
+                for (iField in result[iGroup]['fields']) {
+                    sLabel = result[iGroup]['fields'][iField]['label'];
+                    if (sLabel == '') {
+                        sLabel = '&lt;&lt;SEM NOME&gt&gt';
+                    }
+                    sGroupName = result[iGroup]['name'];
+
+                    if (result[iGroup]['fields'][iField]['required']) {
+                        sClassName = 'ui-state-highlight';
+                    } else {
+                        sClassName = 'ui-state-default';
+                    }
+
+                    sLi = $('<li></li>')
+                            .attr('id', sGroupName + '-' + iField)
+                            .attr('name', iField)
+                            .addClass(sClassName)
+                            .addClass('cursorSortable')
+                            .html(sLabel)
+                            .click(function () {
+                                loadFormConfig($(this));
+                            });
+
+                    sLi.appendTo($('#ul-group' + iGroup));
+
+                    $('#' + sGroupName + '-' + iField).data('config', result[iGroup]['fields'][iField]);
+
+                    if (sGroupName == 'cols-break') {
+                        $('#' + sGroupName + '-' + iField).draggable({containment: '#group' + sGroupName, axis: "y"});
+                    }
+                }
+            }
+
+            loadOrderColumn();
+            for (iGroup in advanced) {
+                var obj = jQuery('#' + iGroup);
+                if (obj.Tdata('TAutocomplete')) {
+                    obj.Tdata('TAutocomplete').setValue(advanced[iGroup]);
+                } else {
+                    obj.val(advanced[iGroup]);
+                }
+            }
+
+            var sTipo = $('#tipo_profile').val();
+            var bAddLi = false;
+
+            /**
+             * Controla a renderização das colunas/campos
+             */
+            var item = null;
+            for (iField in result['ini']['fields']) {
+                if ((sTipo == 'F' || sTipo == 'G') && $('[name="' + iField + '"]').length > 0) {
+                    bAddLi = false;
+                } else {
+                    bAddLi = true;
+                }
+                if (bAddLi) {
+                    if (result['ini']['fields'][iField]['required']) {
+                        sClassName = 'ui-state-highlight';
+                    } else {
+                        sClassName = 'ui-state-default';
+                    }
+
+                    item = $('<li></li>')
+                            .attr('name', iField)
+                            .attr('isColumn', 1)
+                            .addClass('field-form ' + sClassName + ' cursorSortable')
+                            .html(result['ini']['fields'][iField]['label'])
+                            .attr('title', iField)
+                            .click(function () {
+                                $('#config').html('');
+                                loadFormConfig($(this));
+                            })
+                            .appendTo(fieldsForm);
+
+                    if (result['ini']['fields'][iField]['expression']) {
+                        item.attr('id', 'ini-' + iField)
+                                .attr('expression', 'true')
+                                /*.html(item.html() + ' {' + iField + '}')*/
+                                .dblclick(function (e) {
+                                    loadExpressionConfig($(this));
+                                    e.stopPropagation();
+                                });
+
+                        $('#ini-' + iField).data('config', result['ini']['fields'][iField]);
+
+                    } else {
+                        $('#' + iField).data('config', result['ini']['fields'][iField]);
+                    }
+                }
+                if (result['ini']['fields'][iField]['align']) {
+                    changeField(iField, 'align', result['ini']['fields'][iField]['align']);
+                }
+
+            }
+            enableSortable();
+        }
+        $.BlockT.close();
+    }
+
+    function updForm() {
+
+        var sTipo = $('#tipo_profile').val();
+
+        /**
+         * Formulários não podem ser salvos sem configurar as colunas obrigatórias
+         */
+        if (sTipo == 'F') {
+            var requireds = $('#fieldsForm').children('.ui-state-highlight');
+            if (requireds.length > 0) {
+                if (!confirm('Atenção!\nHá colunas obrigatórias que não foram configuradas! Deseja continuar?')) {
+                    return false;
+                }
+            }
+        } else {
+            /**
+             * Para as demais configurações, as colunas obrigatórias 
+             * devem ser exigidas na configuração de filtros
+             */
+            /*var requireds = $('#ul-groupcols-filter').children('.ui-state-highlight');
+             if (requireds.length == 0) {
+             alert('Atenção!\nHá filtros obrigatórios que não foram configurados!');
+             return false;
+             }*/
+        }
+
+        $.BlockT.open();
+        var arrGroups = $('.connectedSortable');
+        var groupName = '';
+        var fieldName = '';
+        var arrFields = {};
+        var objData = {};
+        var dataGroup = {};
+        var arrGroups = $('.connectedSortable');
+        var arrIni = $("li[expression='true']");
+
+        objData['groups'] = {};
+
+        for (var iGroups in arrGroups) {
+            groupName = str_replace('ul-group', '', arrGroups[iGroups].id);
+            arrFields = $('#' + arrGroups[iGroups].id + ' li');
+            if (arrGroups[iGroups].id) {
+                dataGroup = $('#group' + groupName).data('config');
+                if (typeof dataGroup !== "undefined" && dataGroup !== null) {
+                    dataGroup['fields'] = {};
+                    objData['groups'][groupName] = dataGroup;
+                    for (var iFields in arrFields) {
+                        if (!isNaN(iFields)) {
+                            fieldName = str_replace(groupName + '-', '', arrFields[iFields].id);
+                            objData['groups'][groupName]['fields'][fieldName] = $.data(arrFields[iFields], 'config');
+                        }
+                    }
+                }
+            }
+        }
+        /*var groupName = '';
+         var fieldName= '';
+         var arrFields={};
+         var objData={};
+         var dataGroup={};
+         var arrGroups = $('#panelPalco').find('.connectedSortable');
+         var arrIni = $("li[expression='true']");
+         var idGroup = '';
+         var configCol = {};
+         
+         objData['groups'] = {};
+         
+         for(var iGroups=0; iGroups<arrGroups.length; iGroups++){
+         idGroup = arrGroups.eq(iGroups).attr('id');
+         groupName = str_replace('ul-group','',idGroup);
+         arrFields = arrGroups.eq(iGroups).find('li');
+         if(arrFields.length > 0){
+         dataGroup = $('#group'+groupName).data('config');
+         if (typeof dataGroup !== "undefined") {
+         dataGroup['fields'] = {};
+         objData['groups'][groupName] = dataGroup;
+         
+         for(var iFields=0; iFields<arrFields.length; iFields++){                        
+         fieldName = str_replace(groupName+'-','',arrFields.eq(iFields).attr('id'));
+         
+         configCol = arrFields.eq(iFields).data('config');
+         objData['groups'][groupName]['fields'][fieldName] = configCol;
+         }
+         }
+         }
+         }*/
+
+        if (arrIni.length > 0) {
+            objData['groups']['ini'] = {};
+            objData['groups']['ini']['fields'] = {};
+        }
+        arrIni.each(function () {
+            objData['groups']['ini']['fields'][$(this).attr('name')] = $(this).data().config;
+        });
+
+        objData['id'] = gConfig['id'];
+        objData['nome'] = $('#formNome').val();
+        objData['chave'] = $('#formChave').val();
+        objData['padrao'] = $('#formPadrao').val();
+        objData['login'] = $('#formLogin').val();
+        objData['observacao'] = $('#formObservacao').val();
+        objData['publico'] = $('#formPublico').val();
+        objData['responsavel'] = $('#formResponsavel').val();
+        objData['tipo'] = $('#tipoVisao').val();
+
+        objData['groups']['advanced'] = {};
+        var formAdvanced = jQuery('#formadvanced').serializeArray();
+        for (var index in formAdvanced) {
+            objData['groups']['advanced'][formAdvanced[index].name] = formAdvanced[index].value;
+        }
+
+        ajaxJson({
+            url: '/Mais/index.php/profile/object-view/save',
+            data: objData
+        });
+
+        $.BlockT.close();
+    }
+
+    function changeField(name, key, value) {
+        if ($('#' + name).length > 0) {
+            try {
+                var vconfig = $('#' + name).data('config');
+                vconfig[key] = value;
+                $('#' + name).data('config', vconfig);
+                if (key == 'label') {
+                    $('#column-' + name).html(value);
+                } else if (key == 'align') {
+                    $('#column-' + name).css('text-align', value);
+                }
+            } catch (err) {
+
+            }
+        }
+    }
+
+    function changeGroup(name, key, value) {
+        if (key == 'label') {
+            var label = value;
+            if (label == '') {
+                label = '{' + name + '} << SEM LABEL >>';
+            }
+            $('#group' + name).find('.panelHeaderGroup').html(label);
+        }
+        var config = $('#group' + name).data('config');
+        config[key] = value;
+        $('#group' + name).data('config', config);
+    }
+
+    function delGroup() {
+
+        var oGrupo = $('.liSelected');
+        var oGrupoDefault = $('.liSelectedGroup');
+
+        if (oGrupoDefault.length > 0) {
+            alert('Grupos padrões não podem ser exluídos!');
+            return;
+        }
+
+        if (oGrupo.length == 0) {
+            alert('Favor selecionar um elemento. Usar duplo clique sobre Grupos.');
+            return;
+        }
+
+        if (confirm('Tem certeza que deseja apagar o Elemento selecionado?')) {
+            $('#config').html('');
+            deleteColBreak();
+            resizeGroup();
+        }
+    }
+
+    function resizeGroup() {
+        var listLi = $('.connectedSortableGroup').find('li');
+        var fWidth = 260;
+        var fHeight = 182;
+        var iLi = 0;
+        if (gConfig['numGroups'] == 1 || gConfig['numGroups'] == 2) {
+            fHeight = 425;
+        }
+
+        for (iLi = 0; iLi < listLi.length; iLi++) {
+            if (listLi.eq(iLi).attr('id').substr(0, 5) == 'group') {
+                listLi.eq(iLi).width(fWidth);
+            }
+        }
+
+        var listLi = $('.connectedSortable');
+        for (iLi = 0; iLi < listLi.length; iLi++) {
+            if (listLi.eq(iLi).attr('id') != 'fieldsForm') {
+                listLi.eq(iLi).height(fHeight);
+            }
+        }
+    }
+
+    function copyForm() {
+        if (confirm('Você deseja criar uma cópia da visão "' + $('#formNome').val() + '"?')) {
+            var options = {
+                id: 'dialog-copy-form',
+                title: 'Cópia de Visão',
+                height: 220,
+                buttons: {
+                    'OK': function () {
+                        var sParam = 'id=' + gConfig['id'];
+                        sParam = sParam + '&nome=' + $('#novo-form-nome').val();
+                        if ($('#novo-form-privileges').is(':checked')) {
+                            sParam = sParam + '&privileges=' + $('#novo-form-privileges').val();
+                        }
+                        $.BlockT.open();
+                        var result = ajaxJson({
+                            url: '/Mais/index.php/profile/object-view/copy',
+                            data: sParam
+                        });
+                        if (result) {
+                            $('#id_profile').val(result);
+                            $('#tipo_profile').val($('#tipoVisao').val());
+                            $('#profile-user').submit();
+                        } else {
+                            $.BlockT.close();
+                        }
+                    }
+                }
+            };
+            var cmdForm = 'Digite o nome da nova visão: <br /><br/>';
+            cmdForm = cmdForm + '<input type="text" id="novo-form-nome" value="" maxlength="60" style="width: 300px" /><br /><br />';
+            cmdForm = cmdForm + '<input type="checkbox" id="novo-form-privileges" value="1" checked> Incluir privilégios da visão atual';
+            $.DialogT.open(cmdForm, 'Information', options);
+        }
+    }
+
+    function delForm() {
+        if (!gConfig['id']) {
+            alert('Favor selecionar uma visão!');
+            return;
+        }
+
+        $.BlockT.open();
+        var result = ajaxJson({
+            url: '/Mais/index.php/profile/object-view/count-privileges',
+            data: 'id=' + gConfig['id']
+        });
+        var count = result['count'];
+        $.BlockT.close();
+
+        if (confirm('Tem certeza que deseja apagar o Formulário "' + $('#formNome').val() + '"?')) {
+            if (!count || (count && confirm('Todos os privilégios (' + count + ') serão apagados também. Continuar?'))) {
+                $.BlockT.open();
+                var result = ajaxJson({
+                    url: '/Mais/index.php/profile/object-view/delete',
+                    data: 'id=' + gConfig['id']
+                });
+                if (result) {
+                    $('#id_profile').val('');
+                    $('#profile-user').submit();
+                }
+                $.BlockT.close();
+            }
+        }
+    }
+
+    function changeType(type) {
+        $.BlockT.open();
+        window.location.href = "list-config?id=" + $('#id_profile').val() + "&objeto=" + $('#objeto_profile').val() + "&tipo=" + type;
+    }
+
+    function checkColumnEdit() {
+        if ($('#tipoVisao').val() == 'F') {
+            $('#btn-add-group').show();
+        } else {
+            $('#btn-add-group').hide();
+        }
+    }
+
+    $(document).ready(function () {
+        changeExpressionType();
+    });
+
+    $(function () {
+        enableSortable();
+        checkColumnEdit();
+<?php
+   if ($this->id) {
+       echo "\n$('#form-" . $this->id . "').click();\n";
+   }
+?>
+        $('#tipoVisao').change(function () {
+            changeType(this.value);
+        });
+    });
+</script>

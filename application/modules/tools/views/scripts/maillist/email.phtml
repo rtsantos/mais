@@ -1,0 +1,6 @@
+<?php
+    $tabs = new ZendT_View_Tabs('divTabs');
+    $tabs->addTab('E-Mail',$this->body);
+    $tabs->addTabWhere('Histórico de Envio', ZendT_Url::getBaseUrl().'/tools/maillisthist/grid', 'maillisthist.id_maillist', $this->id);
+    echo $tabs->render();
+?>

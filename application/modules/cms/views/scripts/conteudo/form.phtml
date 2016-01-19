@@ -1,0 +1,27 @@
+<?php
+
+    $tabs = $_GET['tabs'];
+    if ($tabs == '' || $tabs == '1') {
+        $uri = ZendT_Url::getUri(true);
+        $_tab = new ZendT_View_Layout_Tabs('tab_conteudo');
+        $_tab->addTab('Conteúdo', $this->form);
+        $_tab->addTabUrl('Envolvidos'
+                , new ZendT_JS_Command("function(){ "
+                . "  var url = '" . ZendT_Url::getBaseUrl() . "/cms/priv-conteudo/grid?'; "
+                . "  url = url + '&id_conteudo=' + jQuery('#id').val(); "
+                . "  url = url + '&typeModal=AJAX'; "
+                . "  return url; "
+                . "}"));
+        $_tab->addTabParamIframe('Comentários'
+                                ,ZendT_Url::getBaseUrl() . "/cms/conteudo/comments"
+                                ,'id'
+                                ,new ZendT_JS_Command("function(){ return jQuery('#id').val(); }"));
+        echo $_tab->render();
+    } else {
+        echo $this->form;
+    }
+?>
+<?php
+
+    $this->headScript()->appendFile('/Mais/application/modules/cms/views/scripts/conteudo/comum.js');
+?>

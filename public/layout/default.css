@@ -1,0 +1,470 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+body {
+    //overflow-y:scroll;
+}
+
+/* 
+    Created on : 03/07/2015, 10:26:57
+    Author     : rsantos
+*/
+#layout-header-top, #layout-content, #layout-footer{    
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#layout-header {
+    padding-left: 20px;
+    padding-right: 20px;    
+}
+
+/**
+ * Header Primario
+ */
+#layout-header-top{
+    background: #4AC31B;
+    color: #fff;
+    height: 40px;
+}
+
+#layout-header-top.primary a{
+    color: #fff;
+    padding-right: 5px;
+}
+
+#layout-header-top.hover, #layout-header-top.hover a{
+    background-color: #006a5a !important;
+}
+
+#layout-header-search input[type="text"]{
+    line-height: 20px;
+}
+
+
+#layout-header-top .ui-button-icon{
+    margin-left: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#layout-header-top .ui-button-icon .ui-icon-20{
+    background-image: url(icons/20x20-fff.png);
+}
+
+#layout-header-top .ui-button-icon.hover,
+#layout-header-top .ui-button-icon:hover{
+    background-color: #fff;
+    color: #666;
+}
+
+#layout-header-top .ui-button-icon.hover .ui-icon-20,
+#layout-header-top .ui-button-icon:hover .ui-icon-20{
+    background-image: url(icons/20x20-active.png);
+}
+
+
+#layout-header-apps{
+    /*width: 70%;*/
+    float: left;
+}
+
+#layout-header-apps div{
+    float: left;
+    line-height: 29px;
+    font-size: 14pt;
+    margin: 0px !important;
+}
+
+#layout-header-apps div span.ui-icon{
+    margin-top: 6px;
+    background-image: url("images/ui-icons_fff_256x240.png");
+}
+
+#layout-header-apps .ui-button-icon.hover .ui-icon,
+#layout-header-apps .ui-button-icon:hover .ui-icon{
+    background-image: url("images/ui-icons_222222_256x240.png");
+}
+
+#layout-header-user{
+    text-align: right;
+    /*width: 30%;*/
+    float: right;
+}
+
+#layout-header-user div{
+    float: right;
+}
+
+
+
+#layout-header-profile, #layout-header-phone, #layout-header-message{
+    margin-left: 20px;
+}
+
+#layout-header-profile img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+#layout-header-message{    
+
+}
+
+#layout-header-phone{
+
+}
+/**
+* Header Default
+*/
+#layout-header{
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #E7E7E7; 
+    height: 90px;
+}
+
+
+#layout-header-logo{
+    padding-top: 35px;
+    padding-left: 20px;
+}
+
+#layout-header-logo img{
+    width: 116px;
+    height: 55px;
+}
+
+@media (min-width: 1025px) {
+    #layout-header-logo{
+        padding-top: 17px;
+    }
+
+    #layout-header-logo img{
+
+    }
+}
+
+#layout-header-logo, #layout-header-app-name{
+    display: table;
+    float: left;
+}
+
+
+#layout-header-app-name, #layout-header-screen-name, #layout-header-profile-menu, #layout-header-company{
+    font-size: 14pt;
+    color: #34ade1;
+    margin-top: 35px;
+    margin-left: 30px;
+    float: left;
+    line-height: 29px;
+}
+
+#layout-header-company{
+    float: right;
+    margin-right: 20px;
+    margin-top: 30px;
+    color: #666;
+}
+
+#layout-header-company .ui-icon{
+    margin-top: 5px;
+}
+
+#layout-header-company:hover,
+#layout-header-company.hover{
+    color: #fff;
+}
+
+#layout-header-profile-menu{
+    padding-left: 5px;
+}
+
+#layout-header-profile-menu .ui-icon {
+    background-image: url("images/ui-icons_34ade1_256x240.png");
+}
+
+#layout-header-profile-menu .ui-button-icon:hover, 
+#layout-header-profile-menu .ui-button-icon.hover, 
+#layout-header-profile-menu .ui-button:hover, 
+#layout-header-profile-menu .ui-button.hover{
+    background-color: #34ade1;
+    border: 1px solid #34ade1;    
+}
+
+#layout-header-profile-menu .dropdown-menu li:hover, 
+#layout-header-profile-menu .dropdown-menu li.hover{
+    background-color: #34ade1;
+}
+
+#layout-header-profile-menu .dropdown-menu li:focus, 
+#layout-header-profile-menu .dropdown-menu li.focus{
+    background-color: #82CCEC;
+}
+
+#layout-header-profile-menu .ui-button:hover .ui-icon,
+#layout-header-profile-menu .ui-button.hover .ui-icon{
+    background-image: url("images/ui-icons_fff_256x240.png");
+}
+
+#layout-header-app-name.no-screen{
+    padding-top: 30px;
+}
+
+#layout-header-app-menu{
+    padding-top: 30px; 
+    padding-right: 20px;
+    display: table; 
+    float: right;    
+}
+
+#app-name-first{
+    margin: 0 0 0 0 !important;
+    font-size: 16px;
+    color: #054931;
+}
+
+#layout-header-app-menu{
+    text-align: right;
+}
+
+#layout-header-app-menu li.default{
+    list-style: outside none none;
+    float: left;
+    padding: 5px;
+    border-radius: 4px;
+    margin-left: 10px;    
+}
+
+#layout-header-app-menu li.default .ui-icon{
+    float: right;
+}
+
+#layout-header-app-menu li.hover, 
+#layout-header-app-menu li:hover, 
+#layout-header-app-menu li a:hover,
+#layout-header-app-menu li a:focus{
+    background-color: #4ac31b;
+    color: #fff;
+    text-decoration: none;
+}
+/**
+ * Main
+ */
+#layout-main{
+    min-height:100%;
+    position:relative;
+    width:100%;
+}
+
+/**
+ * Content
+ */
+#layout-content{
+    padding-top: 20px;
+    padding-bottom: 55px !important;
+    height: 100%;
+    //border: 3px solid #ff6600;
+}
+/**
+ * Footer
+ */
+
+#layout-footer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+
+    border-top: 1px solid #e7e7e7;
+    background-color: #f7f7f7;
+    text-align: right;
+    color: #666;
+    font-size: 11px;
+    width: 100%;
+    min-height: 30px;
+    vertical-align: middle;
+}
+
+#layout-input-search{
+    border: 1px solid #fff;    
+    padding: 4px;
+    margin-left: 20px;
+    min-width: 150px;
+    background: white url(/Mais/public/layout/images/search-grey.png) right center no-repeat;
+}
+
+#layout-input-search:focus, #layout-input-search:hover{
+    box-shadow: 0 1px 1px #fff inset, 0 0 8px #fff;
+}
+
+
+#box-qualidade, #box-qualidade a{
+    font-size: 12px;
+}
+#box-qualidade a{
+    color: #058357;
+}
+
+
+
+
+.layout-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+}
+
+.layout-dots ul{
+    margin: 0;
+    float: right;
+    padding: 5px;
+}
+
+.layout-dots li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+
+    text-indent: -999em;
+
+    border: 2px solid #fff;
+    border-radius: 6px;
+
+    cursor: pointer;
+    opacity: .4;
+
+    -webkit-transition: background .5s, opacity .5s;
+    -moz-transition: background .5s, opacity .5s;
+    transition: background .5s, opacity .5s;
+}
+
+.layout-dots li.active {
+    background: #fff;
+    opacity: 1;
+}
+
+.layout-auth button{
+    float: right;
+}
+
+.layout-auth li, #layout-auth, #layout-auth-adic{
+    width: 200px;
+}
+
+.layout-auth input{
+    width: 100%;
+}
+
+#layout-auth-error{
+    color: #fff;
+    padding: 5px !important;
+}
+
+.layout-auth button{
+    margin-top: 8px;
+}
+
+.layout-auth label{
+    color: #444 !important;
+}
+
+.layout-apps, .layout-apps ul li, .layout-apps input{    
+    text-align: left;
+    width:230px;
+}
+
+.layout-apps ul{
+    width:230px;
+}
+
+/*.layout-apps ul li{
+    width:200px;
+}*/
+
+.layout-apps > ul{
+    overflow:auto;
+    height:400px;
+}
+
+.layout-apps li{    
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.zend_form .form-group {
+    float: left;
+    margin-bottom: 5px;
+    min-height: 55px;
+    min-width: 340px;
+}
+
+.form-group-title{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px #dddddd solid;//dotted;
+    margin-bottom: 10px;
+    //font-weight: bold;
+    //font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    //color: #c15910;
+    //color: #576373;//#699183;//#4ac31b;
+    //border-bottom: 1px #699183 solid;//dotted;
+}
+
+.form-group-content{
+    margin-bottom: 10px;
+}
+
+.window#layout-content,
+.window#layout-header,
+.window#layout-footer{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.window#layout-header{    
+    height: 47px;
+}
+
+.window #layout-header-screen-name, 
+.window #layout-header-profile-menu,
+.window #layout-close{
+    padding-top: 9px;
+    padding-left: 5px;
+}
+
+
+.window#layout-footer{
+    border-top: 1px solid #e7e7e7;    
+    background-color: #f7f7f7;
+}
+
+.window#layout-footer button{
+    float: right;
+    margin-left: 5px;
+}
+
+#feeds-messages li{
+    width: 340px;
+}
+
+.mce_uiImage img{
+    height: 18px !important;
+    width: 18px !important;
+    padding-bottom: 1px !important;
+    padding-left: 1px !important;
+    padding-top: 2px !important;
+}
+
+#div-content-modal{
+    padding: 10px;
+}

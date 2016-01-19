@@ -1,0 +1,93 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11/03/2015, 09:37:58
+    Author     : preis
+*/
+
+.tree ul, .tree li, .tree{
+    float: none !important;
+    min-height: 10px !important;
+}
+
+.tree div{
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+    padding: 5px !important;
+}
+
+.tree select{    
+    vertical-align: top !important;
+}
+
+.tree .condition{
+    font-style: italic;
+}
+
+.tree .ui-button{
+    margin-left: 1px !important;
+    padding: 3px !important;
+    float: right;
+}
+
+.tree .ui-button:hover{
+    color: #ff6600 !important;
+}
+
+.tree,
+.tree ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.tree ul {
+    margin-left:1em !important; /* indentation */
+    position:relative;
+}
+
+.tree ul span{
+    margin-left: 2px;
+}
+
+.tree ul ul {margin-left:.5em} /* (indentation/2) */
+
+.tree ul:before {
+    content:"";
+    display:block;
+    width:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    border-left:1px dotted;
+}
+
+.tree li {
+    margin:0;
+    padding:0 1.5em; /* indentation + .5em */
+    line-height:2em; /* default list item's `line-height` */
+    position:relative;
+}
+
+.tree ul li:before {
+    content:"";
+    display:block;
+    width:10px; /* same with indentation */
+    height:0;
+    border-top:1px dotted;
+    margin-top:-1px; /* border top width */
+    position:absolute;
+    top:1em; /* (line-height/2) */
+    left:0px;
+}
+
+.tree ul li:last-child:before {
+    background:white; /* same with body background */
+    height:auto;
+    top:1em; /* (line-height/2) */
+    bottom:0;
+}

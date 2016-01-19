@@ -1,0 +1,21 @@
+<style>
+    #form_upload_imagem .zend_form .form-group{
+        float: none; 
+    }
+</style>
+<?php
+    echo $this->form;
+?>
+<div id = 'message'>
+</div>
+<script>
+    if (<?php echo $_GET['remove-header']; ?>) {
+        var element = $("#dialog-image-upload #layout-header");
+        if (!element.size()) {
+            element = $("#layout-header");
+        }
+        if (element.size()) {
+            element.remove();
+        }
+    }
+</script>

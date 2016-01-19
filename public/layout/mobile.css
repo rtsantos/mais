@@ -1,0 +1,89 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03/07/2015, 10:26:57
+    Author     : rsantos
+*/
+@media (max-width: 360px) {
+    #layout-header-top, #layout-header, #layout-content, #layout-footer div{    
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #layout-header-apps div:not(#menu-apps-plus){
+        display: none;
+    }
+
+    #layout-header-apps{
+        width: 30%;
+    }
+
+    #layout-header-user{
+        width: 70%;
+    }
+
+    #layout-header-phone{
+        display: none;
+    }
+
+    #layout-header-app-name{
+        width: 100px;
+    }
+
+    #app-name-last{
+        font-size: 15px;
+    }
+
+    #layout-header{
+        height: 60px;
+    }    
+
+    #layout-header-logo{
+        width: 130px;
+    }
+
+    #layout-header-logo img{
+        width: 100px;
+        height: 27px;
+    }
+
+    #layout-footer{
+        position: relative;    
+    }
+
+    .ui-tabs-item{
+        padding: 5px;
+    }
+
+
+    /**
+     * TinnyMCE
+     **/
+    .mceEditor table {
+        max-width:none; /* Bug in computation of fullscreen */
+    }
+
+    .mceEditor table.mceLayout {
+        width:100% !important;
+    }
+
+    table.mceToolbar { float:left; }
+    body .mceToolbar div {
+        white-space:normal;
+    }
+    
+    .mceToolbarRow2, .mceToolbarRow3{
+        display: none;
+    }
+    
+    .mceIframeContainer > iframe{
+        width: 330px !important;
+    }
+}
+
+.mceToolbarRow4{
+    //display: none;
+}

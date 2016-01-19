@@ -1,0 +1,32 @@
+<?php
+   $id_tab = 'tab_categoria';
+   if ($this->typeModal != 'AJAX' && Zend_Layout::getMvcInstance()->getLayout() != 'window') {
+       $idGrid = $this->grid->getID();
+
+       $_tab = new ZendT_View_Tabs($id_tab);
+       $_tab->addTab('Categoria', $this->grid);
+       /*$_tab->addTabUrl('Conteúdos'
+             , new ZendT_JS_Command("function(){ "
+             . "  var url = '" . ZendT_Url::getBaseUrl() . "/cms/conteudo/grid?'; "
+             . "  url = url + '&profile_parent_id=' + jQuery('#selProfile').val(); "
+             . "  url = url + '&id_categoria=' + $('#grid_categoria').jqGrid('getGridParam','selrow'); "
+             . "  url = url + '&typeModal=AJAX'; "
+             . "  return url; "
+             . "}"));*/
+       $_tab->addTabUrl('Envolvidos'
+             , new ZendT_JS_Command("function(){ "
+             . "  var url = '" . ZendT_Url::getBaseUrl() . "/cms/priv-categ/grid?'; "
+             . "  url = url + '&id_categoria=' + $('#grid_categoria').jqGrid('getGridParam','selrow'); "
+             . "  url = url + '&typeModal=AJAX'; "
+             . "  return url; "
+             . "}"));
+       echo $_tab->render();
+   } else {
+       echo $this->grid;
+   }
+?>
+<script>
+<?php
+   $this->headScript()->appendFile('/Mais/application/modules/cms/views/scripts/categoria/comum.js');
+?>
+</script>

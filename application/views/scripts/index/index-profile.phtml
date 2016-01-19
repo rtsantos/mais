@@ -1,0 +1,137 @@
+<style>
+    .profile-item{
+        text-align: center;
+    }
+</style>
+<?php
+    if ($this->content){
+        echo $this->content;
+    }
+    
+    $url = ZendT_Url::getUri(true);
+    
+
+                
+?>
+<div>
+    <div class="ui-corner-all ui-state-default" style="padding:5px">
+        <div style="float:left">
+            Pesquisar:
+            <br />
+            <input type="text" id="input-search-profile" onkeyup="searchProfile(this);" />
+        </div>
+        <div style="float:right">
+            <?php 
+                if (ZendT_Acl::getInstance()->isAllowed('object-view', 'profile')) {
+                    $onClick = "$.WindowT.open({id:'win-{$this->objectName}', type: 'WINDOW', url: '/Mais/index.php/profile/object-view/list-config', param: 'objeto={$this->objectName}&tipo=D', method: 'GET', title: 'Configuração da Visão', height: 580, width: 1370, modal: false });";
+                    $button = new ZendT_View_Button('bt-'.$this->objectName, '', $onClick);
+                    $button->setIcon('ui-icon-gear');
+                    $button->setTitle('Configurar Visão');
+                    $button->setCaption('Configurar Visão');
+                    $button->addStyle('float', 'right');
+                    echo $button->render(); 
+                }
+                
+                if (ZendT_Acl::getInstance()->isAllowed('relatorio', 'log')) {
+                    $buttonLog = new ZendT_View_Button('btLogViews', 'Log de Acesso', new ZendT_JS_Command("function(){
+                        document.location.href = '" . ZendT_Url::getBaseUrl() . "/log/relatorio?arquivo=".$this->objectName."&profile_key=".$this->profileKey."';
+                    }"));
+                    $buttonLog->setIcon('ui-icon-comment');
+                    echo $buttonLog->render();
+                }
+            ?>
+        </div>
+        <br style="clear: both" />
+    </div>
+    <div class="ui-corner-all ui-widget-content profiles" style="padding:5px;margin-top: 5px;">
+        <?php
+            if (!$this->listProfile){
+                $this->listProfile = array();
+            }
+            foreach($this->listProfile as $id => $reg):
+        ?>
+                <div class="ui-corner-all ui-state-default profile-item" style="float:left;padding:7px;margin:3px;">
+                    <div style="margin:5px; min-height: 40px; min-width: 200px" class="profile-name" title="<?php echo $reg['observacao'] ?>">
+                        <?php
+                            $urlDynamic = $url . '/dynamic?profile=' . $id;
+                            $img = '';
+                            
+                            if ($reg['tipo'] == 'P') {
+                                $img = 'pdf.jpg';
+                            } else if ($reg['tipo'] == 'X') {
+                                $img = 'excel.jpg';
+                            } else if ($reg['tipo'] == 'C') {
+                                $img = 'chart.jpg';
+                            } else if ($reg['tipo'] == 'D') {
+                                $config = unserialize($reg['config']);
+                                if (strtoupper($config['advanced']['output']) == 'PDF') {
+                                    $img = 'pdf.jpg';
+                                } else {
+                                    $img = 'excel.jpg';
+                                }
+                            } else {
+                                $img = 'none.jpg';
+                            }
+                            
+                            $config = unserialize($reg['config']);
+                            if($config['advanced']['output'] == 'HTML'){
+                                $img = 'html.jpg';
+                            }
+                            
+                            echo '<div style="float:left">';
+                            if ($img) {    
+                                $obs = strtoupper(current(explode(".", $img)));
+                                if($reg['observacao']){
+                                    $obs = $reg['observacao'];
+                                }
+                                echo '<img src="/Mais/public/images/profile/' . $img . '" title="' . $obs . '" border="0" /><br />';
+                            }
+                            echo '</div>';
+                            echo '<div style="float:left;padding-left:10px;width: 150px;text-align:left;">';
+                            echo '<a href="' . $urlDynamic . '">';
+                            echo $reg['nome'];
+                            echo '</a>';
+                            echo '</div>';
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                            $urlDynamic = $url . '/dynamic?profile=' . $id . '&arquivo=' . $this->arquivo . '&profile_key=' . $this->profileKey;
+                            $onClick = new ZendT_JS_Command("function(){document.location.href='".$urlDynamic."';}");
+                            $button = new ZendT_View_Button('bt-dynamic-'.$id, 'Executar', $onClick);
+                            $button->setIcon('ui-icon-play');
+                            $button->setTitle('Processar Relatório');
+                            $button->addStyle('float', 'right');
+                            echo $button->render(); 
+                            
+                            $urlFilter  = $url . '/filter?profile=' . $id . '&arquivo=' . $this->arquivo . '&profile_key=' . $this->profileKey;
+                            $onClick = new ZendT_JS_Command("function(){document.location.href='".$urlFilter."';}");
+                            $button = new ZendT_View_Button('bt-filter-'.$id, 'Filtrar', $onClick);
+                            $button->setIcon('ui-icon-search');
+                            $button->setTitle('Filtrar Relatório');
+                            $button->addStyle('float', 'right');
+                            echo $button->render();
+                        ?>
+                    </div>                    
+                </div>
+        <?php
+            endforeach;
+        ?>
+        <br style="clear: both" />
+    </div>        
+</div>
+<script>
+    function searchProfile(obj){
+        var profiles = jQuery('.profiles').find('.profile-item');
+        var name = '';
+        var search = obj.value.toLowerCase();
+        for(var index in profiles){
+            name = profiles.eq(index).find('.profile-name').html().toLowerCase().trim();
+            if (name.indexOf(search) > 0 || search == ''){
+                profiles.eq(index).show();
+            }else{
+                profiles.eq(index).hide();
+            }
+        }
+    }
+</script>

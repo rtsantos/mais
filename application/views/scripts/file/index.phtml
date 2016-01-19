@@ -1,0 +1,65 @@
+<?php
+    $this->headTitle('Portal TA - Upload de Arquivo');
+    $this->placeholder('application')->set('Portal TA'); 
+    $this->placeholder('title')->set('Upload de Arquivo');
+
+    $this->form->setName('frmUploadFile');
+    echo $this->form;
+?>
+<table width="100%">
+    <tr>
+        <td height="200">
+            <?php
+                $this->form->setName('frmUploadFile');
+            ?>            
+        </td>        
+    </tr>
+    <tr>
+        <td>
+            <?php
+                $_toolbar = new ZendT_View_Toolbar('toolbar-botoes');
+                $_toolbar->setFloat('right');
+
+                $_button = new ZendT_View_Button('btOk', 'OK', "jQuery('#frmUploadFile').submit();");
+                $_button->setIcon('ui-icon-check');
+                $_toolbar->addButton($_button);
+
+                echo $_toolbar;
+            ?>            
+        </td>
+    </tr>
+</table>
+<script>
+    /**
+     *
+     */
+    var vForm = jQuery('#frmUploadFile');
+    var validadeFormSave = {
+        submitHandler: function(form) {
+            jQuery(form).ajaxSubmit({
+                beforeSend: function ( xhr ) {
+                    $.TLoadOpen();
+                },
+                success: function (result){                                    
+                    var vJson = decodeJson(result);
+                    if (!vJson){
+                        $.TDialog('error', {}, 'Erro', result);
+                        $.TLoadClose();
+                    }else{
+                        if (vJson.error){
+                            $.TDialog('error', {}, 'Erro', vJson.exception.message);
+                            $.TLoadClose();
+                        }else{
+                            top.opener.jQuery('#' + jQuery('#id').val()).TFile('loadFile',vJson);
+                            //
+                            // Implementar carregamento do arquivo
+                            //                            
+                            window.close();
+                        }
+                    }
+                }
+            });
+        }
+    };
+    vForm.validate(validadeFormSave);
+</script>

@@ -1,0 +1,42 @@
+<script type="text/javascript" src="/Mais/public/scripts/modules/cms/conteudo/controller.js"></script>
+<?php
+   $baseUrl = ZendT_Url::getBaseUrl();
+   $popover = '';
+
+   foreach ($this->noticias as $noticia => $value) {
+       ?>
+       <div class="itens">
+           <div class="thumbnail">
+               <a href ="<?php echo $value['url']; ?>">
+                   <img class="layout-noticia-conteudo-img" src ="<?php echo $value['thumbnail']; ?>"/>
+               </a>
+           </div>
+           <div class="text" calc-width="-135" calc-width-parent="box-noticias">
+               <div class="title">
+                   <a href ="<?php echo $value['url']; ?>">
+                       <?php echo $value['titulo']; ?>
+                   </a>
+               </div>
+               <div class="comment">
+                   <?php echo $value['sub_titulo']; ?>
+               </div>
+
+               <div class="ui-box-action left">                                                           
+                    <?php echo $value['html_comment']; ?>
+                    <?php echo $value['html_like']; ?>
+               </div>
+
+               <div class="right">
+                   <a href="<?php echo $value['url']; ?>">Saiba Mais</a>
+               </div>
+           </div>
+           <div style="clear:both"></div>
+       </div>
+       <?php
+   }
+?>
+<script>
+    jQuery(document).ready(function () {
+        jQuery.Cms_ConteudoController.count();
+    });
+</script>

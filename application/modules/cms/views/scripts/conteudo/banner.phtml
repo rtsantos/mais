@@ -1,0 +1,39 @@
+<div id="layout-banner" class="ui-banner" style="min-height: 230px;">
+</div>
+<script>
+    var banners = [<?php
+    $size = 0;
+    foreach ($this->banners as $banner => $value) {
+        if (++$size > 1) {
+            echo ",";
+        }
+        echo "'" . $value['banner'] . "'";
+    }
+?>];
+    var urls = [<?php
+    $size = 0;
+    foreach ($this->banners as $banner => $value) {
+        if (++$size > 1) {
+            echo ",";
+        }
+        echo "'" . $value['url'] . "'";
+    }
+?>];
+    var titles = [<?php
+    $size = 0;
+    foreach ($this->banners as $banner => $value) {
+        if (++$size > 1) {
+            echo ",";
+        }
+        echo "'" . $value['titulo'] . "',";
+    }
+?>];
+
+    jQuery('#layout-banner').TBanner({
+        banners: banners,
+        urls: urls,
+        titles: titles,
+        dots: true,
+        timer: 5000
+    });
+</script>

@@ -1,0 +1,49 @@
+<?php
+   echo $this->toolbar;
+   echo $this->form;
+
+   $urlParam = '';
+   if (count($this->params) > 0){
+       foreach($this->params as $name=>$value){
+           $urlParam.= '&' . $name . '=' . $value;
+       }
+   }
+?>
+<style>
+    #panels {
+        float: left;
+    }
+</style>
+<table width="100%" border="0" cellpading="0" cellspacing="0">
+    <tr>
+        <td>
+<?php
+    //var_dump($this->panels);
+    foreach($this->panels as $name=>$panel){
+        list($view,$id,$desc) = explode('-',$name);
+        $panel['width'] = new ZendT_Type_Number($panel['width']);
+        $panel['width'] = $panel['width']->toPhp();
+        $panel['height'] = new ZendT_Type_Number($panel['height']);
+        $panel['height'] = $panel['height']->toPhp();
+        //echo '<div id="panels" style="margin:3px;width:'.($panel['width']+5).'px;height:'.($panel['height']+5).'px">';
+        echo '<div id="panels" style="padding-top:5px;">';
+        echo ' <iframe scrolling="no" frameborder="0" width="'.$panel['width'].'" height="'.$panel['height'].'" src="'.ZendT_Url::getUri(true).'/dynamic?profile='.$id.'&typeModal=IFRAME&toolbar=simple&width='.$panel['width'].'&height='.$panel['height'].$urlParam.'&disable_sidebar=1"></iframe>';
+        echo '</div>';
+    }
+?>            
+        </td>
+    </tr>
+</table>
+<?php
+    if ($this->refresh > 0):
+?>
+    <script>
+        jQuery(document).ready(function () {
+            setTimeout(function(){
+                jQuery('#btRefresh').trigger('click');
+            }, <?php echo $this->refresh * 1000; ?>);
+        });
+    </script>
+<?php
+    endif;
+?>

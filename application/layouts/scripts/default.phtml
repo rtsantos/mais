@@ -1,0 +1,164 @@
+<?php
+
+    $_urlBase = Zend_Controller_Front::getInstance()->getBaseUrl();
+    if (is_numeric(strpos($_urlBase, 'index.php'))) {
+        $_urlPublic = substr($_urlBase, 0, strpos($_urlBase, 'index.php'));
+        $_urlPublic.= 'public/';
+    } else {
+        $_urlPublic = $_urlBase . '/public/';
+    }
+    $_urlBase.= '/';
+    $Auth_RowObject = Zend_Auth::getInstance()->getStorage()->read();
+    $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+
+    $this->jQuery()->setLocalPath(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/jquery-1.10.2.js');
+    $this->jQuery()->setUiLocalPath(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/jquery-ui-1.10.4.custom.min.js');
+    $this->jQuery()->enable();
+    $this->jQuery()->uienable();
+
+    $onLoad = $this->placeholder('onLoad')->getValue();
+    if (is_array($onLoad)) {
+        foreach ($onLoad as &$load) {
+            $this->jQuery()->addOnLoad($load);
+        }
+    }
+
+    $appendScript = $this->placeholder('headScriptFile')->getValue();
+    if (is_array($appendScript)) {
+        foreach ($appendScript as &$script) {
+            $this->headScript()->appendFile($script);
+        }
+    }
+
+    $scripts = $this->placeholder('headScriptCommand')->getValue();
+    $strCommandScript = '';
+    if (count($scripts) > 0) {
+        $strCommandScript = '<script>';
+        foreach ($scripts as &$command) {
+            $strCommandScript.= $command . "\n";
+        }
+        $strCommandScript.= '</script>';
+    }
+
+    $strCommandScript.= $this->hotkeys()->render();
+
+    /**
+     * Arquivos js para os principais menus
+     * da intranet 
+     */
+    $hoje = date('dmY');
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/jquery.browser.min.js');
+    //$this->headScript()->appendFile( ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/menu/core.js?date='.$hoje );
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/i18n/pt-br.js');
+    //$this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/widget/TTabs.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/plugin/WindowT.js?date=' . $hoje);
+    //$this->headScript()->appendFile( ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/plugin/MenuT.js' );
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/plugin/DialogT.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/plugin/BlockT.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/plugin/AjaxT.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/form/form.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/base64.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/form/validate.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/form/validate/additional.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/generic.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/authenticate.js');
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/form/validate/i18n/pt-br.js');
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/core.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/plugins/grid.postext.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/plugin/esc_enter.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/common.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/formedit.js');
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/php.default.min.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/add.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/search.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/edit.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/xls.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/pdf.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/default.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/button/delete.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/cookie.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/i18n/jquery.ui.datepicker-pt-BR.js');
+
+    //$this->headLink()->appendStylesheet( ZendT_Url::getBaseDiretoryPublic() . '/styles/default.css?date='.$hoje );
+    //$this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/styles/ui/tanet/core.css');
+    //$this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/css/jquery-ui-1.10.4.custom.css');
+
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/grid/core.css');
+    //$this->headLink()->appendStylesheet( ZendT_Url::getBaseDiretoryPublic() . '/styles/tanet.css' );
+    //$this->headLink()->appendStylesheet( ZendT_Url::getBaseDiretoryPublic() . '/styles/menu/core.css' );
+    //$this->headLink()->appendStylesheet( ZendT_Url::getBaseDiretoryPublic() . '/styles/menu/tanet.css' );    
+    //$this->headLink()->appendStylesheet( ZendT_Url::getBaseDiretoryPublic() . '/styles/menu/tanetie6.css' );
+
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/THref.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TDropdown.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TPopover.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TPopoverTitle.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TBanner.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TTabs.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TAutoSelect.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TJQuery.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TCalcWidth.js?date=' . $hoje);
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/widget/TSidebarMenu.js?date=' . $hoje);
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/grid/tanet.js?date=' . $hoje);
+
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/ta-bootstrap.css');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/ui.css');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/default.css');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/mobile.css');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/box-para-voce.css');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/box-noticias.css');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/editor.css');
+
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/facescroll.js');
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/jquery.ui.touch-punch.min.js');
+    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/facescroll.css');
+
+    require_once('../layout/Layout/User.php');
+    require_once('../layout/Layout.php');
+    $filters = array();
+    $filters[] = 'utf8_encode';
+    $layout = new Layout('intranet', false, $filters);
+
+    
+    $layout->addParam('profileMenu', $this->profileMenu);
+    $layout->addParam('baseUrl', $this->baseUrl);
+    $layout->addParam('apps', Auth_Session_User::getInstance()->getApps());
+
+    //$layout->getContent()->setDoctype($this->doctype()->__toString());
+    $layout->getContent()->setCharset('utf-8');
+
+    $header = $this->headLink()->__toString();
+    $header.= $this->jQuery()->__toString();
+    $header.= $this->headScript()->__toString();
+    $header.= $strCommandScript;
+
+
+    $layout->getContent()->setUser(Auth_Session_User::getInstance()->toArray());
+    $layout->getContent()->setHeader($header);
+    $layout->getContent()->setTitle($this->headTitle()->__toString());
+    $layout->getContent()->setScreenName($this->placeholder('title')->__toString());
+    $layout->getContent()->setApplicationName($this->placeholder('application')->__toString());
+    $layout->getContent()->setModuleName($moduleName);
+
+    $menuAppLegacy = strtoupper(str_replace('-', '_', $moduleName));
+    if (isset($_SESSION['menu'][$menuAppLegacy])) {
+        $filters = array();
+        $filters[] = 'utf8_encode';
+        $_menu = new Layout_Menu($_SESSION['menu'][$menuAppLegacy], '', true, $filters);
+        $layout->getContent()->setMenu($_menu->render('intranet'));
+    } else if (isset($Auth_RowObject->dataMenu[$moduleName])) {
+        $filters = array();
+        if ($Auth_RowObject->dataMenuEncode[$moduleName] == 'ISO') {
+            $filters[] = 'utf8_encode';
+        }
+        $_menu = new Layout_Menu($Auth_RowObject->dataMenu[$moduleName], $_urlBase, false, $filters);
+        $layout->getContent()->setMenu($_menu->render('intranet'));
+    }
+    $layout->render($this->layout()->content);
+?>

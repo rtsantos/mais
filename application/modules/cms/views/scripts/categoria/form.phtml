@@ -1,0 +1,35 @@
+<?php
+    $id_tab = 'tab_categoria';
+    $uri = ZendT_Url::getUri(true);
+    $_tab = new ZendT_View_Layout_Tabs($id_tab);
+    $_tab->addTab('Categoria', $this->form);
+    /*$_tab->addTabUrl('Conteúdos'
+            , new ZendT_JS_Command("function(){ "
+            . "  var url = '" . ZendT_Url::getBaseUrl() . "/cms/conteudo/grid?'; "
+            . "  url = url + '&profile_parent_id=' + jQuery('#selProfile').val(); "
+            . "  url = url + '&id_categoria=' + jQuery('#id').val(); "
+            . "  url = url + '&typeModal=AJAX'; "
+            . "  return url; "
+            . "}"));*/
+    $_tab->addTabUrl('Envolvidos'
+            , new ZendT_JS_Command("function(){ "
+            . "  var url = '" . ZendT_Url::getBaseUrl() . "/cms/priv-categ/grid?'; "
+            . "  url = url + '&id_categoria=' + jQuery('#id').val(); "
+            . "  url = url + '&typeModal=AJAX'; "
+            . "  return url; "
+            . "}"));
+    echo $_tab->render();
+?>
+<?php
+    $this->headScript()->appendFile('/Mais/application/modules/cms/views/scripts/categoria/comum.js');
+?>
+<script>
+    $(document).ready(function () {
+        jQuery('#id').change(function () {
+            if (jQuery('#id').val() != '') {
+                jQuery('#<?php echo $this->form->getId(); ?>').attr('action', 'update');
+                selectedRowCategoria();
+            }
+        }).trigger('change');
+    });
+</script>

@@ -1,0 +1,121 @@
+<style>    
+    .zend_form .form-group{
+        float: none; 
+    }
+
+    #toolChart{
+        margin-bottom: 7px;
+    }
+    .config-profile button, .config-profile select{
+        margin-top: 5px !important;
+        height: 26px !important;
+    }
+
+    .config-profile select{
+        margin-right: 0px !important;
+    }
+
+    .config-profile button{
+        margin-left: 0px !important;
+        height: 26px !important;
+        border-left: 0px !important;
+    }
+
+    .tree-title{
+        margin: 0px;
+        padding: 5px;
+        height: 24px;
+        vertical-align: middle;
+    }
+
+    .tree a{
+        color: #000;
+        font-weight: normal !important;
+    }
+
+    .tree a:hover{
+        color: #ff6600;
+        font-weight: normal !important;
+    }
+
+    .active{
+        color: #ff6600 !important;
+        font-style: italic;
+    }
+</style>
+<?php
+   $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/widget/TQueryBuilder/TQueryBuilder.css');
+   $profileId = $this->profileId;
+   $profileKey = $this->profileKey;
+   $listViews = array();
+   foreach ($this->profiles as $id => $profile) {
+       $config = unserialize($profile['config']);
+       $groupName = $config['advanced']['group_name'];
+       $groupTitle = $config['advanced']['group_title'];
+       $groupOrder = $config['advanced']['group_order'];
+
+       if (!$groupName) {
+           $groupName = 'Visões';
+       }
+
+       if (!$groupTitle) {
+           $groupTitle = $profile['nome'];
+       }
+
+       if (!$groupOrder) {
+           $groupOrder = 1;
+       }
+
+       $listViews[$groupName][] = array('title' => $groupTitle
+          , 'order' => (int) $groupOrder
+          , 'id' => $id);
+   }
+
+   foreach ($listViews as $name => $list) {
+       $listViews[$name] = ZendT_Sort::sortArray($list, 'order');
+   }
+?>
+<table width="100%" border="0" cellpadding="0" cellspaccing="0">
+    <tr>
+        <?php
+           if (1 == 1)://if (ZendT_Acl::getInstance()->restriction('date-dynamic', 'portal')):
+        ?>
+        <td with="20%" style="background: #fafafa;border: 1px solid #dddddd;border-radius: 2px;">
+            <div class="tree-title ui-userdata ui-state-default" style="border-top: 0px; border-left: 0px; border-right: 0px; font-size: 14px; font-weight: bold; padding-top: 10px;">
+                Visões Relacionadas
+            </div>
+            <div class="tree">
+                <ul>        
+                    <?php
+                       foreach ($listViews as $name => $list):
+                           ?>
+                           <li style="font-weight: bold;" class="tree_root">
+                               <?php echo $name; ?>
+                               <ul>
+                                   <?php
+                                   foreach ($list as $item):
+                                       ?>        
+                                       <li>
+                                           <a href="<?php echo ZendT_Url::getUri() . '?profile=' . $item['id'] . '&profile_key=' . $profileKey; ?>" class="<?php echo ($item['id'] == $profileId) ? 'active' : ''; ?>">
+                                               <?php echo $item['title']; ?>
+                                           </a>
+                                       </li>        
+                                       <?php
+                                   endforeach;
+                                   ?>
+                               </ul>
+                           </li>
+                           <?php
+                       endforeach;
+                    ?>
+                </ul>
+            </div>
+        </td>
+        <?php
+            endif;
+        ?>
+        <td width="80%" style="padding-left: 10px;">
+            <?php echo $this->content; ?>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,15 @@
+<?php    
+    $fileName = $this->placeholder('name')->__toString();
+    if (!$fileName){
+        $fileName = 'document.pdf';
+    }
+    if (strpos(strtolower($fileName),'.pdf') === false){
+        $fileName.= '.pdf';
+    }
+    $response = Zend_Controller_Front::getInstance()->getResponse();
+    $response->setHeader('Content-Type', 'application/pdf', true);
+    $response->setHeader('Content-Disposition', 'inline; filename="'.$fileName.'"', true);
+    $response->setHeader('Cache-Control', 'private, max-age=0, must-revalidate', true);
+    $response->setHeader('Pragma', 'public', true);    
+    echo $this->layout()->content;
+?>

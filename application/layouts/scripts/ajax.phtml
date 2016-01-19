@@ -1,0 +1,53 @@
+<?php
+    /**
+    * Layout - Para solicitações AJAX
+    *  
+    * @author rsantos
+    * @version 1.0
+    */
+    //$this->jQuery()->disable();
+    $this->jQuery()->setLocalPath( ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/core/jquery_blank.js' );
+    $this->jQuery()->uiDisable();
+    
+    $onLoad = $this->placeholder('onLoad')->getValue();
+    if (is_array($onLoad)){
+        foreach ($onLoad as &$load){
+            $this->jQuery()->addOnLoad($load);
+        }
+    }
+    
+    $appendScript = $this->placeholder('headScriptFile')->getValue();
+    if (count($appendScript) > 0){
+        foreach ($appendScript as &$script){
+            $this->headScript()->appendFile( $script );
+        }
+    }
+    
+    $scripts = $this->placeholder('headScriptCommand')->getValue();
+    $strCommandScript = '';
+    if (count($scripts) > 0){
+        $strCommandScript = '<script type="text/javascript">';
+        foreach ($scripts as &$command){
+            $strCommandScript.= $command."\n";
+        }
+        $strCommandScript.= '</script>';
+    }
+    
+    
+    require_once('../layout/Layout.php');
+    $layout = new Layout('ajax',false);
+    $layout->getContent()->setDoctype($this->doctype()->__toString());
+    $layout->getContent()->setCharset('utf-8');    
+    
+    $header = $this->headScript()->__toString();
+    $header.= $this->headLink()->__toString();
+    $header.= $this->jQuery()->__toString();    
+    $header.= $strCommandScript;
+    
+    $layout->getContent()->setHeader($header);
+    $layout->getContent()->setTitle($this->headTitle()->__toString());
+    $layout->getContent()->setScreenName($this->placeholder('title')->__toString());
+    $layout->getContent()->setApplicationName($this->placeholder('application')->__toString());    
+    
+    $layout->render($this->layout()->content);
+?>

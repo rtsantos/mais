@@ -1,0 +1,187 @@
+<?php
+    if ($this->typeModal == 'PDF') {
+        echo $this->content;
+    } else {
+        ?>
+        <style>    
+            .zend_form .form-group{
+                float: none; 
+            }
+        </style>
+        <?php
+        $profileId = $this->profileId;
+        $profileKey = $this->profileKey;
+        $listViews = array();
+
+        $order = 0;
+        foreach ($this->profiles as $id => $profile) {
+            $config = unserialize($profile['config']);
+            $groupName = $config['advanced']['group_name'];
+            $groupTitle = $config['advanced']['group_title'];
+            $groupOrder = $config['advanced']['group_order'];
+
+            if (!$groupName) {
+                $groupName = 'Visões';
+            }
+
+            if (!$groupTitle) {
+                $groupTitle = $profile['nome'];
+            }
+
+            if (!$groupOrder) {
+                $groupOrder = 1;
+            }
+
+            $idGroup = 'menu-' . replace(trim(clearAccent($groupName)), ' ', '_');
+
+            if (!isset($listViews['menu-root'][$idGroup])) {
+                $order++;
+                $listViews['menu-root'][$idGroup] = array(
+                    'desc' => $groupName,
+                    'id' => $idGroup,
+                    'order' => $order
+                );
+            }
+
+            $listViews[$idGroup][] = array(
+                'desc' => $groupTitle,
+                'order' => (int) $groupOrder,
+                'id' => $id,
+                'url' => ZendT_Url::getUri(true) . '/filter?profile=' . $id . '&profile_key=' . $profileKey
+            );
+        }
+
+        foreach ($listViews as $name => $list) {
+            $listViews[$name] = ZendT_Sort::sortArray($list, 'order');
+        }
+        ?>
+
+        <div calc-width="-100" class="ui-column ui-box colleft">
+            <?php
+            if (!$this->disableSidebar):
+                echo $this->sidebar($listViews, $profileId);
+                ?>
+                <div id="div-palco-report" calc-width="-280" calc-width-parent="" class="ui-column colleft-content content" id="content-body">
+                    <div class="header">
+                        <div class="ui-column title">
+                            <?php echo $this->title; ?>
+                        </div>
+
+                        <div class="ui-box-action">
+                            <ul>
+                                <?php
+                                if (ZendT_Acl::getInstance()->isAllowed('object-view', 'profile')):
+                                    ?>
+                                    <li id="config-profile" class="ui-button">
+                                        <span class="ui-icon ui-icon-gear"></span>
+                                        <ul class="dropdown-menu position" role="config-profile" align="right">
+                                            <li><a target="new" href="<?php echo ZendT_Url::getBaseUrl() ?>/profile/object-view/list-config?objeto=<?php echo $this->objectName; ?>&tipo=<?php echo $this->profileType; ?>&id=<?php echo $this->profileId; ?>">Configurar Visão</a></li>
+                                            <li><a target="new" href="<?php echo ZendT_Url::getBaseUrl() ?>/log/relatorio/filter?profile=312&arquivo=<?php echo $this->objectName; ?>">Log de Acesso</a></li>
+                                            <li><a target="new" href="<?php echo ZendT_Url::getBaseUrl() ?>/profile/object-view-users/dynamic?profile=813&id_visao=<?php echo $this->profileId; ?>">Usuários com Acesso</a></li>
+                                        </ul>
+                                    </li>
+                                    <?php
+                                endif;
+                                ?>
+
+                                <?php
+                                if ($this->dynamic):
+                                    ?>
+                                    <li id="profile-export" class="ui-button">
+                                        <span class="ui-icon ui-icon-arrowstop-1-s"></span>
+                                        <ul class="dropdown-menu position" role="profile-export" align="right">
+                                            <li class="link" onclick="reportDownloadXls();">Download em Excel</li>
+                                            <li class="link" onclick="reportDownloadPdf();">Download em PDF</li>
+                                        </ul>
+                                    </li>
+
+                                    <li onClick="jQuery('#formChart').attr('action', '<?php echo ZendT_Url::getUri(); ?>').submit();" id="profile-refresh" class="ui-button" popover-title="Atualizar">
+                                        <span class="ui-icon ui-icon-refresh"></span>
+                                    </li>
+
+                                    <li onClick="jQuery('#formChart').attr('action', '<?php echo ZendT_Url::getUri(true); ?>/filter').submit();" id="profile-filter" class="ui-button" popover-title="Filtrar">
+                                        <span class="ui-icon ui-icon-search"></span>
+                                    </li>
+
+                                    <li onClick="fullWindow(jQuery(this), jQuery('#div-palco-report'));" id="profile-expand" class="ui-button" popover-title="Expandir">
+                                        <span class="ui-icon ui-icon-arrow-4-diag"></span>
+                                    </li>
+
+                                    <?php
+                                endif;
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="ui-helper-clearboth body">
+                        <?php echo $this->content; ?>            
+                        <div id="pAguarde" class="Total" style="width:200px;text-align:left;padding:4px;display:none;">Aguarde...</div>
+                    </div>  
+                </div>
+                <?php
+            else:
+                ?>
+                <div id="div-palco-report" calc-width="-280" calc-width-parent="" class="ui-column colleft-content content" id="content-body">
+                    <div class="header">
+                        <div class="ui-column title">
+                            <?php echo $this->title; ?>
+                        </div>
+
+                        <div class="ui-box-action">
+                            <ul>
+                                <?php
+                                if ($this->dynamic):
+                                    ?>
+                                    <li id="profile-export" class="ui-button">
+                                        <span class="ui-icon ui-icon-arrowthick-1-s"></span>
+                                        <ul class="dropdown-menu position" role="profile-export" align="right">
+                                            <li class="link" onClick="jQuery('#formChart').attr('action', '<?php echo ZendT_Url::getUri(true); ?>/filter').submit();">Filtrar</li>
+                                            <li class="link" onClick="jQuery('#formChart').attr('action', '<?php echo ZendT_Url::getUri(); ?>').submit();">Atualizar</li>
+                                            <li class="divider" role="separator"></li>                                    
+                                            <li class="link" onclick="reportDownloadXls();">Download em Excel</li>
+                                            <li class="link" onclick="reportDownloadPdf();">Download em PDF</li>
+                                            <?php
+                                            if (ZendT_Acl::getInstance()->isAllowed('object-view', 'profile')):
+                                                ?>
+                                                <li class="divider" role="separator"></li>
+                                                <li><a target="new" href="<?php echo ZendT_Url::getBaseUrl() ?>/profile/object-view/list-config?objeto=<?php echo $this->objectName; ?>&tipo=<?php echo $this->profileType; ?>&id=<?php echo $this->profileId; ?>">Configurar Visão</a></li>
+                                                <li><a target="new" href="<?php echo ZendT_Url::getBaseUrl() ?>/log/relatorio/filter?profile=312&arquivo=<?php echo $this->objectName; ?>">Log de Acesso</a></li>
+                                                <li><a target="new" href="<?php echo ZendT_Url::getBaseUrl() ?>/profile/object-view-users/dynamic?profile=813&id_visao=<?php echo $this->profileId; ?>">Usuários com Acesso</a></li>
+                                                <?php
+                                            endif;
+                                            ?>
+                                        </ul>
+                                    </li>
+                                    <?php
+                                endif;
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="ui-helper-clearboth body">
+                        <?php echo $this->content; ?>            
+                        <div id="pAguarde" class="Total" style="width:200px;text-align:left;padding:4px;display:none;">Aguarde...</div>
+                    </div>  
+                </div>
+            <?php
+            endif;
+            ?>
+        </div>
+        <script>
+            function reportDownloadPdf() {
+                jQuery('#driver').val('PDF');
+                jQuery('#download').val(1);
+                jQuery('#formChart').attr('action', '<?php echo ZendT_Url::getUri(); ?>').submit();
+            }
+
+            function reportDownloadXls() {
+                jQuery('#driver').val('XLS');
+                jQuery('#download').val(1);
+                jQuery('#formChart').attr('action', '<?php echo ZendT_Url::getUri(); ?>').submit();
+            }
+        </script>
+        <?php
+    }
+?>
