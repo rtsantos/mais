@@ -75,9 +75,9 @@ class Cms_Form_PrivCateg_Crud_Elements
         $element->setSearchAttribs(array('size'=>'40px'));
         $element->modal()->setWidth(800);
         $element->modal()->setHeight(400);
-        $element->url()->setGrid('/auth/papel/grid');
-        $element->url()->setSearch('/auth/papel/seeker-search');
-        $element->url()->setRetrieve('/auth/papel/retrive');
+        $element->url()->setGrid('/auth/conta/grid');
+        $element->url()->setSearch('/auth/conta/seeker-search');
+        $element->url()->setRetrieve('/auth/conta/retrive');
         $element->setMapperView('Auth_DataView_Papel_MapperView');
         $element->addValidators(array());
                 

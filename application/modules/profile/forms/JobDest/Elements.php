@@ -7,7 +7,7 @@ class Profile_Form_JobDest_Elements extends Profile_Form_JobDest_Crud_Elements
     public function getIdPapel() {
         /* @var ZendT_Form_Element_Seeker */
         $element = parent::getIdPapel();
-        $element->enableAutoComplete('/auth/papel/auto-complete');
+        $element->enableAutoComplete('/auth/conta/auto-complete');
         return $element;
     }
 }

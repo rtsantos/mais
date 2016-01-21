@@ -24,7 +24,7 @@
        }
 
        public function getIdPapelInformatica() {
-           $_papel = new Auth_Model_Papel_Mapper();
+           $_papel = new Auth_Model_Conta_Mapper();
            $_papel->newRow()->setNome("TA.INFORMATICA")->retrieve();
            return $_papel->getId();
        }

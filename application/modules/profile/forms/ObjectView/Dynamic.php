@@ -11,7 +11,7 @@
 
            /* $element = new ZendT_Form_Element_AutoComplete('owner');
              $element->setLabel('Responsáveis pela visão:');
-             $url = ZendT_Url::getBaseUrl().'/auth/papel/auto-complete/suggest/1/column/nome';
+             $url = ZendT_Url::getBaseUrl().'/auth/conta/auto-complete/suggest/1/column/nome';
              $element->setDataSource($url);
              $element->setJQueryParam('limit', 100);
              $element->setJQueryParam('showButtonSearch', true);
@@ -24,7 +24,7 @@
 
              $element = new ZendT_Form_Element_AutoComplete('share');
              $element->setLabel('Compartilhar com:');
-             $url = ZendT_Url::getBaseUrl().'/auth/papel/auto-complete/suggest/1/column/nome';
+             $url = ZendT_Url::getBaseUrl().'/auth/conta/auto-complete/suggest/1/column/nome';
              $element->setDataSource($url);
              $element->setJQueryParam('limit', 100);
              $element->setJQueryParam('showButtonSearch', true);

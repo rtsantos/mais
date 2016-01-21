@@ -248,7 +248,9 @@ class Auth_Model_Conta_Crud_Mapper extends ZendT_Db_Mapper
      * @return Auth_Model_Conta_Crud_Mapper
      */
     public function setTipo($value,$options=array('required'=>true)){        
-        $this->_data['tipo'] = new ZendT_Type_String($value);
+        
+        $options['listOptions']=array('U'=>'Usuário','G'=>'Grupo');
+        $this->_data['tipo'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['tipo']->setValueFromDb($value);
                 

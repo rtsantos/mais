@@ -17,7 +17,7 @@
 
         public function addPrivCateg($idCategoria, $idPapel = '', $tipo) {
             if (!$idPapel) {
-                $_papel = new Auth_Model_Papel_Mapper();
+                $_papel = new Auth_Model_Conta_Mapper();
                 $idPapel = $_papel->getIdPapelInformatica();
             }
             $this->setIdCategoria($idCategoria);
@@ -31,7 +31,7 @@
 
         private function _isValidPrivCateg() {
             /*if ($this->_action == 'delete' || $this->_action == 'update') {
-                $_papel = new Auth_Model_Papel_Mapper();
+                $_papel = new Auth_Model_Conta_Mapper();
                 $idPapel = $_papel->getIdPapelInformatica();
                 $_privCateg = new Cms_Model_PrivCateg_Mapper();
                 if ($_privCateg->setId($this->getId())->retrieve()->getIdPapel()->toPhp() == $idPapel) {

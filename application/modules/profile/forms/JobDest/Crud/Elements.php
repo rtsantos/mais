@@ -63,9 +63,9 @@ class Profile_Form_JobDest_Crud_Elements
         $element->setSearchAttribs(array('css-width'=>'400px'));
         $element->modal()->setWidth(800);
         $element->modal()->setHeight(400);
-        $element->url()->setGrid('/auth/papel/grid');
-        $element->url()->setSearch('/auth/papel/seeker-search');
-        $element->url()->setRetrive('/auth/papel/retrive');
+        $element->url()->setGrid('/auth/conta/grid');
+        $element->url()->setSearch('/auth/conta/seeker-search');
+        $element->url()->setRetrive('/auth/conta/retrive');
         $element->addValidators(array());
                 
         return $element;

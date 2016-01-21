@@ -178,9 +178,9 @@ return array (
             ),
             'url' => 
             array (
-              'grid' => '/auth/papel/grid',
-              'search' => '/auth/papel/seeker-search',
-              'retrive' => '/auth/papel/retrive',
+              'grid' => '/auth/conta/grid',
+              'search' => '/auth/conta/seeker-search',
+              'retrive' => '/auth/conta/retrive',
             ),
             'modal' => 
             array (

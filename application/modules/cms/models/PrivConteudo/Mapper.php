@@ -17,7 +17,7 @@
 
         public function addPrivConteudo($idConteudo, $idPapel = '', $tipo) {
             if (!$idPapel) {
-                $_papel = new Auth_Model_Papel_Mapper();
+                $_papel = new Auth_Model_Conta_Mapper();
                 $idPapel = $_papel->getIdPapelInformatica();
             }
             $this->setIdConteudo($idConteudo);
@@ -32,7 +32,7 @@
         private function _isValidPrivConteudo() {
             if (!$this->_ignoreValidation) {
                 /*if ($this->_action == 'delete' || $this->_action == 'update') {
-                    $_papel = new Auth_Model_Papel_Mapper();
+                    $_papel = new Auth_Model_Conta_Mapper();
                     $idPapel = $_papel->getIdPapelInformatica();
                     $_privConteudo = new Cms_Model_PrivConteudo_Mapper();
                     if ($_privConteudo->setId($this->getId())->retrieve()->getIdPapel()->toPhp() == $idPapel) {

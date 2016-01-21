@@ -154,13 +154,24 @@ body {
 }
 
 
-#layout-header-app-name, #layout-header-screen-name, #layout-header-profile-menu, #layout-header-company{
+#layout-header-app-name, 
+#layout-header-screen-name, 
+#layout-header-profile-menu, 
+#layout-header-company{
     font-size: 14pt;
     color: #34ade1;
     margin-top: 35px;
     margin-left: 30px;
     float: left;
     line-height: 29px;
+}
+
+.window #layout-header-app-name, 
+.window #layout-header-screen-name, 
+.window #layout-header-profile-menu, 
+.window #layout-header-company{
+    margin-top: 0px;
+    margin-left: 0px;
 }
 
 #layout-header-company{

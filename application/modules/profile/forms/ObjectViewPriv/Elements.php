@@ -7,7 +7,7 @@
 
         public function getIdPapel(){
             $element = parent::getIdPapel();
-            $element->enableAutoComplete('/auth/papel/auto-complete');
+            $element->enableAutoComplete('/auth/conta/auto-complete');
             return $element;
         }
     }

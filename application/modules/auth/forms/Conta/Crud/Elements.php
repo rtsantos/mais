@@ -104,24 +104,14 @@ class Auth_Form_Conta_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Seeker
+     * @return \ZendT_Form_Element_Select
      */
     public function getTipo(){
 
-        $element = new ZendT_Form_Element_Seeker('id_papel_pai');
-        $element->setSuffix('papel_pai');
-        $element->setLabel($this->_translate->_('papel.id_papel_pai') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/auth/conta/grid');
-        $element->url()->setSearch('/auth/conta/seeker-search');
-        $element->url()->setRetrieve('/auth/conta/retrieve');
-        $element->setMapperView('Auth_DataView_Conta_MapperView');
-        $element->addValidators(array());
+        $element = new ZendT_Form_Element_Select('tipo');
+        $element->setLabel($this->_translate->_('papel.tipo') . ':');
+        $element->addMultiOption('U', 'Usuário');
+        $element->addMultiOption('G', 'Grupo');        
                 
         return $element;
     }

@@ -51,9 +51,9 @@ class Auth_Form_PapelRecurso_Crud_Elements
         $element->setSearchAttribs(array('css-width'=>'200px'));
         $element->modal()->setWidth(800);
         $element->modal()->setHeight(450);
-        $element->url()->setGrid('/auth/papel/grid');
-        $element->url()->setSearch('/auth/papel/seeker-search');
-        $element->url()->setRetrieve('/auth/papel/retrieve');
+        $element->url()->setGrid('/auth/conta/grid');
+        $element->url()->setSearch('/auth/conta/seeker-search');
+        $element->url()->setRetrieve('/auth/conta/retrieve');
         $element->setMapperView('Auth_DataView_Papel_MapperView');
         $element->addValidators(array());
                 

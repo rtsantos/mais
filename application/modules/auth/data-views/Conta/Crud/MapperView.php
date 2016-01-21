@@ -54,11 +54,11 @@
         protected function _getSettingsDefault(){
            $profile = array();
            $profile['order'] = array('id','nome','descricao','hierarquia','id_papel_pai','nome_papel_pai','tipo','status','senha','avatar','email','id_empresa','nome_empresa');
-           $profile['width'] = array('id'=>100,'nome'=>200,'descricao'=>200,'hierarquia'=>200,'id_papel_pai'=>120,'nome_papel_pai'=>200,'tipo'=>100,'status'=>150,'senha'=>175,'avatar'=>200,'email'=>200,'id_empresa'=>120,'nome_empresa'=>200);
-           $profile['align'] = array('id'=>'left','nome'=>'left','descricao'=>'left','hierarquia'=>'left','id_papel_pai'=>'left','nome_papel_pai'=>'left','tipo'=>'left','status'=>'center','senha'=>'left','avatar'=>'left','email'=>'left','id_empresa'=>'left','nome_empresa'=>'left');
+           $profile['width'] = array('id'=>100,'nome'=>200,'descricao'=>200,'hierarquia'=>200,'id_papel_pai'=>120,'nome_papel_pai'=>200,'tipo'=>150,'status'=>150,'senha'=>175,'avatar'=>200,'email'=>200,'id_empresa'=>120,'nome_empresa'=>200);
+           $profile['align'] = array('id'=>'left','nome'=>'left','descricao'=>'left','hierarquia'=>'left','id_papel_pai'=>'left','nome_papel_pai'=>'left','tipo'=>'center','status'=>'center','senha'=>'left','avatar'=>'left','email'=>'left','id_empresa'=>'left','nome_empresa'=>'left');
            $profile['hidden'] = array('id_papel_pai','id_empresa');
            $profile['remove'] = array();
-           $profile['listOptions'] = array('status'=>$this->getModel()->getListOptions('status'));
+           $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'status'=>$this->getModel()->getListOptions('status'));
            return $profile;
         }
         /**
@@ -73,7 +73,7 @@
             $this->_columns->add('hierarquia', 'papel', 'hierarquia', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.hierarquia'),'String','%?%');
             $this->_columns->add('id_papel_pai', 'papel', 'id_papel_pai', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.id_papel_pai'), null, '=');
             $this->_columns->add('nome_papel_pai', 'papel_pai', 'nome', $this->_getConta()->getModel()->getMapperName(), ZendT_Lib::translate('papel.id_papel_pai.papel.nome'),null,'?%');
-            $this->_columns->add('tipo', 'papel', 'tipo', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.tipo'),'String','%?%');
+            $this->_columns->add('tipo', 'papel', 'tipo', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.tipo'),'String','=');
             $this->_columns->add('status', 'papel', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.status'),'String','=');
             $this->_columns->add('senha', 'papel', 'senha', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.senha'),'String','%?%');
             $this->_columns->add('avatar', 'papel', 'avatar', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel.avatar'),'String','%?%');

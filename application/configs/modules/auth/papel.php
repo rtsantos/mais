@@ -302,7 +302,7 @@ return array (
             'U' => 'Usuário',
             'G' => 'Grupo',
           ),
-          'type' => 'Selec',
+          'type' => 'Select',
           'text' => 
           array (
             'maxlength' => '1',

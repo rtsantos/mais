@@ -80,7 +80,7 @@
                 $where->addFilter('papel.descricao'
                         , $value
                         , '?%'
-                        , 'Auth_Model_Papel_Mapper');
+                        , 'Auth_Model_Conta_Mapper');
                 $data = $_usuario->getDataGrid($where, array())
 
                 ;

@@ -18,7 +18,7 @@
 
        protected function _loadColumns() {
            $_view = new Profile_Model_ObjectView_Mapper();
-           $_papel = new Auth_Model_Papel_Mapper();
+           $_papel = new Auth_Model_Conta_Mapper();
            $_privilegio = new Profile_Model_ObjectViewPriv_Mapper();
            $_usuario = new Auth_Model_Usuario_Mapper();
            $_empresa = new Ca_Model_Empresa_Mapper();

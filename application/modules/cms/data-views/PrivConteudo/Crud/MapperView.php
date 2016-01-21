@@ -15,7 +15,7 @@
         /**
          * Objeto de Mapeamento da Tabela
          *
-         * @return Auth_Model_Papel_Mapper
+         * @return Auth_Model_Conta_Mapper
          */
         protected $_papel;
                 
@@ -44,11 +44,11 @@
         /**
          * Objeto de Mapeamento da Tabela
          *
-         * @return Auth_Model_Papel_Mapper
+         * @return Auth_Model_Conta_Mapper
          */
         protected function _getPapel(){
             if (!is_object($this->_papel)){
-                $this->_papel = new Auth_Model_Papel_Mapper();
+                $this->_papel = new Auth_Model_Conta_Mapper();
             }
             return $this->_papel;
         }
