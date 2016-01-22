@@ -2,26 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/profile/data-views/ObjectView/MapperView.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/layouts/scripts/default.phtml</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/sessions/User.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/controllers/ContaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/profile/controllers/ObjectViewController.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/configs/modules/auth/papel.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/configs/modules/config.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/models/Recurso/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/public/layout/ui.css</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/ca/models/Pessoa/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/public/layout/default.css</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/models/Recurso/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/models/Papel/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/models/Conta/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/models/User/Logon.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/profile/data-views/ObjectView/Crud/MapperView.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/models/Papel/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/public/scripts/jquery/plugin/WindowT.js</file>
-            <file>file:/C:/AppWeb/htdocs/Mais/application/modules/auth/controllers/UserController.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

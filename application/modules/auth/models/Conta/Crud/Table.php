@@ -5,7 +5,6 @@
 class Auth_Model_Conta_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'PAPEL';
-    /*protected $_alias = 'CONTA';*/
     protected $_sequence = 'SID_PAPEL';
     protected $_required = array('ID','NOME','DESCRICAO','HIERARQUIA','TIPO','STATUS');
     protected $_primary = array('ID');

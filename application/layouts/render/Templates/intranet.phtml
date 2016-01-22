@@ -1,0 +1,281 @@
+<?php
+    if (!($content instanceof Layout_Content)) {
+        $content = $this->_content;
+    }
+
+    $this->profileMenu = $this->getParam('profileMenu');
+    $this->baseUrl = $this->getParam('baseUrl');
+    $this->apps = $this->getParam('apps');
+
+    $this->baseUrlPublic = str_replace('/index.php', '/public', $this->baseUrl);
+
+    function _browser() {
+        $useragent = $_SERVER['HTTP_USER_AGENT'];
+
+        if (preg_match('|MSIE ([0-9].[0-9]{1,2})|', $useragent, $matched)) {
+            $browser_version = $matched[1];
+            $browser = 'IE';
+        } elseif (preg_match('|Opera/([0-9].[0-9]{1,2})|', $useragent, $matched)) {
+            $browser_version = $matched[1];
+            $browser = 'Opera';
+        } elseif (preg_match('|Firefox/([0-9\.]+)|', $useragent, $matched)) {
+            $browser_version = $matched[1];
+            $browser = 'Firefox';
+        } elseif (preg_match('|Chrome/([0-9\.]+)|', $useragent, $matched)) {
+            $browser_version = $matched[1];
+            $browser = 'Chrome';
+        } elseif (preg_match('|Safari/([0-9\.]+)|', $useragent, $matched)) {
+            $browser_version = $matched[1];
+            $browser = 'Safari';
+        } else {
+            $browser_version = 0;
+            $browser = 'other';
+        }
+        return $browser . $browser_version;
+    }
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $content->getCharset(); ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link rel="icon" type="image/ico" href="<?php echo $this->baseUrlPublic; ?>/images/favicon.ico" />
+        <?php
+            echo $content->getHeader();
+        ?>
+        <title>
+            <?php
+                echo $content->getTitle();
+            ?>
+        </title>
+    </head>
+    <body style="overflow-y:scroll;"> 
+        <div id="layout-main">
+            <?php
+                if (!$content->getNoHeaderApp()):
+                    ?>
+                    <div id="layout-header-top">
+                        <div id="layout-header-apps">
+                            <?php
+                            //echo $content->getApplicationName();
+                            ?>
+
+                            <?php
+                            echo $content->getMenu();
+                            ?>
+
+                        </div>
+
+                        <div id="layout-header-user">
+
+                            <div id="layout-header-user-avatar" class="ui-button-icon">
+                                <span class="ui-icon-20 icon-avatar">
+                                    &nbsp;
+                                </span>
+
+                                <span class="ui-text">
+                                    <?php
+                                    $name = 'Entrar';
+                                    if ($_SESSION['logon']['usuario'] != '' && $_SESSION['logon']['usuario'] != 'GUEST') {
+                                        $data = explode(' ', $_SESSION['logon']['nome']);
+                                        $name = ucwords(strtolower($data[0] . ' ' . end($data)));
+
+                                        if (count($data) > 1) {
+                                            $name = ucwords(strtolower($data[0] . ' ' . end($data)));
+                                        } else {
+                                            $name = ucwords(strtolower($data[0]));
+                                        }
+                                    }
+                                    echo $name;
+                                    ?>
+                                </span>
+
+                                <ul class="dropdown-menu position ui-helper-clearfix" align="right" role="layout-header-user-avatar">
+                                    <?php if ($name != 'Entrar') {
+                                        ?>
+                                        <li class="link" onclick="jQuery.WindowT.open({id: 'winChangePass', url: '<?php echo $this->baseUrl; ?>/auth/user/change-password', modal: true});">Troca de Senha</li>
+                                        <li class="link" onClick="jQuery.WindowT.open({type: 'IFRAME', title: 'Meu Perfil', id: 'myProfile', url: '/AppTA/index.php/auth/usuario/form/profile_key/my-profile/id/<?php echo $_SESSION['logon']['id_usuario']; ?>', height: 300, width: 600, modal: true, scrolling: 'NO'});">Meu Perfil</li>
+                                        <li class="divider" role="separator"></li>
+                                        <li class="link" onclick="document.location = '<?php echo $this->baseUrl; ?>/auth/user/logout';">Sair</li>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <li class="dropdown-menu-group">
+                                            <span>Op&ccedil;&otilde;es</span>
+                                            <ul>
+                                                <li class="dropdown-align left link" onclick="jQuery.WindowT.open({type: 'IFRAME', title: 'Criação de Conta de Acesso', id: 'createAccount', url: '<?php echo $this->baseUrl; ?>/auth/user/create-account', height: 300, width: 600, modal: true, scrolling: 'NO'});">Cadastro</li>
+                                                <li class="dropdown-align left link" onclick="jQuery.WindowT.open({id: 'winChangePass', url: '<?php echo $this->baseUrl; ?>/auth/user/change-password', modal: true});">Troca de Senha</li>
+                                                <li class="dropdown-align left link" onclick="jQuery.WindowT.open({id: 'forgetPassword', title: 'Esqueci minha senha', url: '<?php echo $this->baseUrl; ?>/auth/user/forget-password', height: 200, modal: true, param: 'email=' + jQuery('#usuario').val()});">Esqueci minha senha</li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown-menu-group">
+                                            <span>Autentica&ccedil;&atilde;o de Usu&aacute;rio</span>
+                                            <ul class="layout-auth">
+                                                <li id="layout-auth-error" style="display: none;" class="ui-state-highlight ui-radius-5">
+
+                                                </li>
+
+                                                <li class="ui-no-hover">
+
+                                                    <span id="layout-auth" >
+                                                        <form name="frm_auth" id="frm_auth" method="POST" action="<?php echo $this->getParam('baseUrl') . '/auth/user/authenticate'; ?>">
+                                                            <label for="user">Usu&aacute;rio:</label><br/>
+                                                            <input type="text" class="ui-radius-5" name="user" id="user" onkeydown="controlKeyDownLogin(event, this);"/><br/>
+                                                            <label for="pass">Senha:</label><br/>
+                                                            <input type="password" class="ui-radius-5" name="pass" id="pass" onkeydown="controlKeyDownLogin(event, this);"/><br/>
+                                                            <button type="button" id="btn_auth" class="btn btn-primary" onclick="authenticate();">
+                                                                <span class="ui-icon ui-icon-check">
+                                                                    &nbsp;
+                                                                </span>
+                                                                <span class="ui-text">
+                                                                    Autenticar
+                                                                </span>
+                                                            </button>
+                                                        </form>
+                                                    </span>
+
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
+
+                            </div>
+
+                            <div id="layout-header-user-apps" class="ui-button-icon">
+                                <span class="ui-icon-20 icon-apps" onclick="$('#search-app').focus();">
+                                    &nbsp;
+                                </span>
+
+                                <ul class="dropdown-menu position ui-helper-clearfix" align="right" role="layout-header-user-apps">
+                                    <li>
+                                        <input id="search-app" placeholder="Procurar" type="text" class="ui-radius-5 shadow" />
+                                    </li>
+                                    <li class="divider" role="separator"></li>
+                                    <?php
+                                    foreach ($this->apps as $app => $values) {
+                                        ?>
+                                        <li class="link" onclick="document.location.href = '<?php echo $values['obsvervacao']; ?>';"><?php echo $values['descricao']; ?></li>
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+
+                            <div id="layout-header-fast-row" class="ui-button-icon">
+                                <span class="ui-icon-20 icon-add-doc">
+                                    &nbsp;
+                                </span>
+
+                                <ul class="dropdown-menu position ui-helper-clearfix" align="right" role="layout-header-fast-row">
+                                    <li class="link">Cadastro</li>
+                                    <li class="link">Vendas</li>
+                                    <li class="link">Compras</li>
+                                    <li class="link">Financeiro</li>
+                                    <li class="link">Contrato</li>
+                                    <li class="link">Acesso</li>
+                                </ul>
+                            </div>
+
+
+                            <?php
+                            if ($content->getUser()->authenticated()) {
+                                
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+                    <?php
+                endif;
+            ?>
+            <div id="layout-header">
+                &nbsp;
+                <div id="layout-header-logo">
+                    <img src="<?php echo $this->baseUrlPublic; ?>/images/mais-venda.gif" />
+                </div>
+
+                <!--<div id="layout-header-app-name">
+
+                </div>-->
+
+                <div id="layout-header-screen-name">
+                    <?php
+                        echo $content->getScreenName();
+                    ?>
+                </div>
+
+                <div id="layout-header-profile-menu">
+                    <?php
+                        echo $this->profileMenu;
+                    ?>
+                </div>
+
+                <div id="layout-header-company" class="ui-button-icon">
+                    <span class="ui-text">Mais Vendas</span>
+                    <span class="ui-icon ui-icon-triangle-1-s"></span>
+
+
+                    <ul class="dropdown-menu position ui-helper-clearfix" align="right" role="layout-header-company">
+                        <li class="link">Mais Venda</li>
+                        <li class="link">Mais Vistoria</li>
+                        <li class="link">4Hand</li>
+                    </ul>
+                </div>
+            </div>        
+
+            <div id="layout-content" class="ui-helper-clearfix">
+                <?php
+                    echo $content->getBody();
+                ?>
+            </div>
+            <?php
+                $styleFooter = '';
+                if (substr(_browser(), 0, 3) == 'IE8') {
+                    $styleFooter = 'position:fixed;';
+                }
+            ?>
+            <div id="layout-footer" style="<?php echo $styleFooter; ?>">
+                2.015 - Todos os diretiros reservados para Mais Venda :: Versao 1.0
+            </div>
+        </div>
+
+        <div id="div-windows" style="display:none"></div>
+        <div id="div-debug" style="display:none"></div>
+        <div id="winModal" style="display:none"></div>
+        <iframe id="ifrDownloadGen" style="display:none"></iframe>
+
+        <script language="javascript">
+
+            jQuery(document).ready(function () {
+                jQuery().ajaxStart(function () {
+                    document.body.style.cursor = "wait";
+                }).ajaxStop(function () {
+                    document.body.style.cursor = "default";
+                }).ajaxError(function (event, request, settings) {
+                    document.body.style.cursor = "default";
+                    alert("Error requesting page " + settings.url);
+                });
+                configTabIndex();
+                jQuery("input").taEscEnter();
+                jQuery("select").taEscEnter();
+                jQuery("button").taEsc();
+
+
+                jQuery(".ui-tabs").TTabs();
+                jQuery("[t-href]").THref();
+                jQuery("[calc-width],[calc-width-parent],[calc-height],[calc-height-parent]").TCalcWidth();
+                jQuery("[popover-title]").TPopoverTitle();
+
+                jQuery(".dropdown-menu").TDropdown();
+                jQuery('.facescroll').alternateScroll();
+                jQuery(".sidebar-menu").TSidebarMenu();
+                jQuery('#search-app').TAutoSelect({sourceSelector: '.layout-apps ul .link', fieldValue: jQuery('#search-app')});
+            });
+
+        </script>
+    </body>
+</html>

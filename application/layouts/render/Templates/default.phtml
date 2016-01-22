@@ -1,0 +1,228 @@
+<?php
+    if (!($content instanceof Layout_Content)){
+        $content = $this->_content;
+    }
+    //echo $content->getDoctype();
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $content->getCharset(); ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <?php
+            echo $content->getHeader();
+        ?>
+        <link href="/AppTA/public/scripts/jquery/extra/jquery.autocomplete.css" media="screen" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/AppTA/public/scripts/jquery/extra/jquery.autocomplete.js?date=23092013"></script>
+        <script type="text/javascript" src="/AppTA/public/scripts/jquery/widget/TAutocomplete.js?130923"></script>
+        <script language="javascript" type="text/javascript" src="/AppTA/public/scripts/jquery/extra/jquery.ballon.min.js"></script>
+        <script type="text/javascript" src="/AppTA/public/scripts/jquery/widget/TTextarea.js"></script>
+        <title>
+            <?php
+                echo $content->getTitle();
+            ?>
+        </title>
+    </head>
+    <body>
+       <?php
+	   $topApplication = $content->getMenuTopApplication();
+	   $topUser = $content->getMenuTopUser();
+       if ($content->getDisplayTopMenu() && ($topApplication || $topUser)) {
+            ?>
+		<table id="toolBarTopo" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="left">
+					<?php
+						echo $topApplication;
+					?>
+				</td>                    
+				<td align="right">
+					<?php
+						echo $topUser;
+					?>
+				</td>
+			</tr>
+		</table>
+            <?php
+        }
+        ?>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tr>
+                <td id="iconsApp">
+                    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                        <tr>
+                            <td id="iconsAppContent">
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>            
+        </table>
+        <table id="tbEstrutura" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td id="lnTopo" align="center">
+                    <table id="tbTopo" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td id="tbTopoEsquerda">
+                                <img src="<?php echo $content->getLogo(); ?>" /></td>
+                            <td>&nbsp;</td>
+                            <td id="tbTopoDireita">
+							    <?php if (isset($_SESSION['logon'])) { ?>
+									<table id="tbTitAplicacao" border="0" cellspacing="0" cellpadding="0" align="right">
+										<tr>
+                                                                                        <td>
+												<span class="tituloaplicacao">
+													<?php
+														$enviroment = $content->getEnviroment();
+														if ($enviroment){
+															echo $enviroment.' :: ';
+														}
+														echo $content->getApplicationName();
+													?>
+												</span>
+											</td>
+                                                                                        <?php
+                                                                                            $moduleName = strtolower($content->getModuleName());
+
+                                                                                            $dirBase = dirname(__FILE__).'/../..';																							
+                                                                                            $logoApplication = '/AppTA/public/images/logos/'.$moduleName.'.gif';
+                                                                                            
+                                                                                            if (file_exists($dirBase.$logoApplication)) {
+                                                                                                ?>
+                                                                                                <td rowspan="2" style="width:20px;">&nbsp;</td>
+                                                                                                <td rowspan="2">
+                                                                                                    <img id="logoAplicacao" src="<?php echo $logoApplication; ?>" />
+                                                                                                </td>
+                                                                                            <?php } ?>
+										</tr>
+										<tr>
+											<td>
+												<span class="subtituloaplicacao">
+													<?php
+														echo $content->getScreenName();
+													?>
+												</span>
+											</td>
+										</tr>
+									</table>
+								<?php } else { ?>
+									<img id="logo70anos" src="/AppTA/public/images/logo-ta-70-anos.gif" /></td>
+								<?php } ?>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+			<?php
+			    $contentMenu = $content->getMenu();
+				if ($contentMenu):
+			?>
+            <tr>
+                <td id="lnMenu" align="center">
+                    <table id="tbMenu" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td id="menuCentro">
+                                <table width="100%" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="middle" id="td_menu">
+                                            <?php
+                                                echo $contentMenu;
+                                            ?>
+                                        </td>
+                                        <td align="right" valign="middle">
+											<?php 
+												if ($content->getFormMenu()) {
+													echo $content->getFormMenu();
+												} else {
+													echo '<input type="button" id="btVoltar" name="btVoltar" class="inputStyle btVoltar" value="Voltar" title="Voltar" onClick="history.go(-1)">';
+												}
+											?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+			<?php
+			    endif;
+			?>			
+            <tr>
+                <td id="lnConteudo" align="center">
+                    <table id="tbConteudo" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td colspan="3" class="ln11"></td>
+                        </tr>                                
+                        <tr>
+                            <td>
+                                <table id="tbBrConteudo" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td id="tbBrConteudoCentro" height="500">
+                                            <?php
+                                                echo $content->getBody();
+                                            ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td id="lnRodape" align="center">
+                    <table id="tbRodape" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td>
+                                Av. Com. Thomaz Fortunato, 3466 - Via Anhanguera, Km 124, Americana/SP - CEP 13475-010 Fone (19) 2108.9000 Fax (19) 2108.9001 <br />
+                                C 2012 Transportadora Americana. Todos os direitos reservados.
+                            </td>
+                            <td align="right" valign="middle"> 
+                                <a href="javascript:AbreJanela('http://www.tanet.com.br/libext/versao.php?id_controle_versao=<?php echo $content->getVersionId(); ?>&action=detalhe',400,750)"><?php echo ($content->getVersionNum()) ? "vers&atilde;o " . $content->getVersionNum() : ""; ?></a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div id="div-windows" style="display:none"></div>
+        <div id="div-debug" style="display:none"></div>
+        <div id="winModal" style="display:none"></div>
+		<iframe id="ifrDownloadGen" style="display:none"></iframe>
+        <script language="javascript"> 
+            jQuery(document).ready(function() {
+                jQuery().ajaxStart(function (){
+                    document.body.style.cursor = "wait";
+                }).ajaxStop(function (){
+                    document.body.style.cursor = "default";
+                }).ajaxError(function (event, request, settings){
+                    document.body.style.cursor = "default";
+                    alert("Error requesting page " + settings.url);
+                });         	
+                loadButtons();
+                configTabIndex();
+                jQuery("input").taEscEnter();
+                jQuery("select").taEscEnter();
+                //jQuery("textarea").taEscEnter();
+                jQuery("button").taEsc();
+                jQuery.MenuT();
+                /*setInterval(function(){
+                    ajaxJson({url:'/AppTA/index.php/index/session',data:'id=1'})
+                },1000*60*4);*/
+                <?php
+                    $onLoad = $content->getOnLoad();
+                    if (count($onLoad) > 0){
+                        foreach($onLoad as $value){
+                            if (substr($value,0,7) == 'base64:'){
+                                $value = base64_decode(substr($value,7));                                
+                            }
+                            echo '                '.$value."\n";
+                        }
+                    }
+                ?>
+            });
+        </script>
+    </body>
+</html>

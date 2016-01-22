@@ -119,8 +119,8 @@
     $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/jquery.ui.touch-punch.min.js');
     $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/facescroll.css');
 
-    require_once('../layout/Layout/User.php');
-    require_once('../layout/Layout.php');
+    require_once(APPLICATION_PATH . '/layouts/render/Layout/User.php');
+    require_once(APPLICATION_PATH . '/layouts/render/Layout.php');
     $filters = array();
     $filters[] = 'utf8_encode';
     $layout = new Layout('intranet', false, $filters);

@@ -168,7 +168,7 @@ class Auth_Form_Conta_Crud_Elements
         $element->setLabel($this->_translate->_('papel.email') . ':');
         $element->setAttribs(array('maxlength'=>'60','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=strtolower(this.value);this.value=removeAccent(this.value);this.value=trim(this.value);");
         return $element;
     }
             

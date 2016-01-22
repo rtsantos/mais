@@ -443,8 +443,9 @@ return array (
           'charMask' => '@',
           'filter' => 
           array (
-            0 => 'strtoupper',
+            0 => 'strtolower',
             1 => 'removeAccent',
+            2 => 'trim',
           ),
           'filterDb' => 
           array (

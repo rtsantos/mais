@@ -106,7 +106,7 @@
     $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/jquery.ui.touch-punch.min.js');
     $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/extra/scroll/facescroll/facescroll.css');
 
-    require_once('../layout/Layout.php');
+    require_once(APPLICATION_PATH . '/layouts/render/Layout.php');
     $layout = new Layout('ajax', false);
     //$layout->getContent()->setDoctype($this->doctype()->__toString());
     $layout->getContent()->setCharset('utf-8');

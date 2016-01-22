@@ -1,0 +1,121 @@
+<?php
+if (!($content instanceof Layout_Content)) {
+    $content = $this->_content;
+}
+//echo $content->getDoctype();
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $content->getCharset(); ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=8" />
+        <?php
+        echo $content->getHeader();
+        ?>
+        <?php
+            $serverName = Layout_Lib::getServerNameShort();
+            if (in_array($serverName, array('windexpress'))){                
+                echo '<link href="/AppTA/public/styles/'.$serverName.'.css" media="screen" rel="stylesheet" type="text/css" />';
+            }
+        ?>
+        <title>
+            <?php
+            echo $content->getTitle();
+            ?>
+        </title>
+        <style>
+            @media print{
+                #toolbar{
+                    display: none;
+                }
+            }
+        </style>
+        <script>
+            function printIt(){
+                window.print();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="toolbar">
+            <button id="buttonPrintToolbar" class="t-ui-button ui-button ui-corner-all ui-button-text-icon-primary ui-state-default" style="height:30px;width:80px;" aria-disabled="false" onclick="window.print();">
+                <span class="ui-button-icon-primary ui-icon ui-icon-print" style="float:left;margin-bottom:-20px;"></span>
+                <span class="ui-button-text" style="margin-left:20px;margin-right:5px;">Imprimir</span>
+            </button>            
+        </div>
+        <table id="tbEstrutura" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td id="lnTopo" align="center">
+                    <table id="tbTopo" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td id="tbTopoEsquerda">
+                                <img src="<?php echo $content->getLogo(); ?>" /></td>
+                            <td>&nbsp;</td>
+                            <td id="tbTopoDireita">
+                                <table id="tbTitAplicacao" border="0" cellspacing="0" cellpadding="0" align="right">
+                                    <tr>
+                                        <td>
+                                            <span class="tituloaplicacao">
+                                                <?php
+                                                $enviroment = $content->getEnviroment();
+                                                if ($enviroment) {
+                                                    echo '<span>' . $enviroment . '</span><br />';
+                                                }
+                                                echo $content->getApplicationName();
+                                                ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="subtituloaplicacao">
+                                                <?php
+                                                echo $content->getScreenName();
+                                                ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="lnConteudo" align="center">
+                    <table id="tbConteudo" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td colspan="3" class="ln11"></td>
+                        </tr>                                
+                        <tr>
+                            <td>
+                                <table id="tbBrConteudo" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td id="tbBrConteudoCentro" height="500">
+                                            <?php
+                                            echo $content->getBody();
+                                            ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td id="lnRodape" align="center">
+                    <table id="tbRodape" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td>
+                                Av. Com. Thomaz Fortunato, 3466 - Via Anhanguera, Km 124, Americana/SP - CEP 13475-010 Fone (19) 2108.9000 Fax (19) 2108.9001 <br />
+                                C 2012 Transportadora Americana. Todos os direitos reservados.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

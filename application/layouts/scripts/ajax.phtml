@@ -34,7 +34,7 @@
     }
     
     
-    require_once('../layout/Layout.php');
+    require_once(APPLICATION_PATH . '/layouts/render/Layout.php');
     $layout = new Layout('ajax',false);
     $layout->getContent()->setDoctype($this->doctype()->__toString());
     $layout->getContent()->setCharset('utf-8');    

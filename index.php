@@ -7,7 +7,7 @@ define('APPLICATION_PATH', realpath('.') . '/application');
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
 // Ensure library/ is on include_path
-set_include_path('.' . PATH_SEPARATOR . '../framework/library');
+set_include_path('.' . PATH_SEPARATOR . 'library');
 
 /** Zend_Application */
 require_once 'Zend/Application.php';

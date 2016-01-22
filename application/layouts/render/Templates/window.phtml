@@ -1,0 +1,105 @@
+<?php
+    if (!($content instanceof Layout_Content)) {
+        $content = $this->_content;
+    }
+    
+    $this->profileMenu = $this->getParam('profileMenu');
+    $this->baseUrl = $this->getParam('baseUrl');
+    $this->baseUrlPublic = str_replace('/index.php', '/public', $this->baseUrl);
+//echo $content->getDoctype();
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $content->getCharset(); ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <?php
+            echo $content->getHeader();
+        ?>
+        <title>
+            <?php
+                echo $content->getTitle();
+            ?>
+        </title>
+    </head>
+    <body> 
+        <div id="layout-main">
+            <div id="layout-header" class="window">
+                <div id="layout-header-screen-name">
+                    <?php
+                        echo $content->getScreenName();
+                    ?>
+                </div>
+
+                <div id="layout-header-profile-menu">
+                    <?php
+                        echo $this->profileMenu;
+                    ?>
+                </div>
+
+                <div id="layout-close" style="float: right;">
+                    <button onClick="window.close();" id="btn-close" type="button" class="ui-button ui-state-default">
+                        <span class="ui-icon ui-icon-closethick"></span>
+                    </button>
+                </div>
+            </div>
+            <div id="layout-content" class="window ui-helper-clearfix">
+                <?php
+                    echo $content->getBody();
+                ?>
+            </div>
+
+            <?php
+                $buttons = $content->getButtons();
+                if ($buttons):
+                    ?>
+
+                    <div id="layout-footer" class="window">
+                        <?php
+                        echo $buttons;
+                        ?>    
+                    </div>
+
+                    <?php
+                endif;
+            ?>
+        </div> 
+
+
+        <script language="javascript">
+            jQuery(document).ready(function () {
+                jQuery().ajaxStart(function () {
+                    document.body.style.cursor = "wait";
+                }).ajaxStop(function () {
+                    document.body.style.cursor = "default";
+                }).ajaxError(function (event, request, settings) {
+                    document.body.style.cursor = "default";
+                    alert("Error requesting page " + settings.url);
+                });
+                configTabIndex();
+                jQuery("input").taEscEnter();
+                jQuery("select").taEscEnter();
+                jQuery("button").taEsc();
+			
+			
+                jQuery("[popover-title]").TPopoverTitle();
+                jQuery("[calc-width],[calc-width-parent],[calc-height],[calc-height-parent]").TCalcWidth();
+                jQuery(".dropdown-menu").TDropdown();
+                jQuery(".popover").TPopover({updateScroll: '.box-noticias'});
+                jQuery(".ui-tabs").TTabs();
+                jQuery('.facescroll').alternateScroll();
+<?php
+    $onLoad = $content->getOnLoad();
+    if (count($onLoad) > 0) {
+        foreach ($onLoad as $value) {
+            if (substr($value, 0, 7) == 'base64:') {
+                $value = base64_decode(substr($value, 7));
+            }
+            echo '                ' . $value . "\n";
+        }
+    }
+?>
+            });
+        </script>
+    </body>
+</html>

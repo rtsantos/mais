@@ -1,0 +1,36 @@
+<?php
+if (!($content instanceof Layout_Content)) {
+    $content = $this->_content;
+}
+?>
+<?php
+echo $content->getHeader();
+?>
+<div class="title-ajax-modal" style="display: none;">
+    <?php
+    echo $content->getScreenName();
+    ?>
+</div>
+<div id="div-content-modal">
+    <?php
+    echo $content->getBody();
+    ?>
+    <script language="javascript"> 
+        jQuery(document).ready(function() {
+            jQuery("[popover-title]").TPopoverTitle();
+            jQuery("[calc-width],[calc-width-parent],[calc-height],[calc-height-parent]").TCalcWidth();
+            loadButtons();
+            configTabIndex();
+            jQuery("input").taEscEnter();
+            jQuery("select").taEscEnter();
+            //jQuery("textarea").taEscEnter();
+            jQuery("button").taEsc();
+<?php
+$onLoad = $content->getOnLoad();
+if (count($onLoad) > 0) {
+    echo implode(chr(10), $onLoad);
+}
+?>
+    });
+    </script>
+</div>

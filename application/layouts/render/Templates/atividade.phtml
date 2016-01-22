@@ -1,0 +1,92 @@
+<?php
+   if (!($content instanceof Layout_Content)) {
+       $content = $this->_content;
+   }
+
+   $this->topApps = $this->getApps(false);
+   $this->allApps = $this->getApps(true);
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $content->getCharset(); ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <?php
+           echo $content->getHeader();
+        ?>
+        <title>
+            <?php
+               echo $content->getTitle();
+            ?>
+        </title>
+    </head>
+    <body> 
+        <div id="layout-main">
+            <div id="layout-header">
+                &nbsp;
+                <div id="layout-header-logo">
+                    <img src="/AppTA/public/images/logo-tanet.gif" />
+                </div>
+
+                <div id="layout-header-app-name" class="<?php echo (!$content->getScreenName()) ? 'no-screen' : ''; ?>">
+                    <p id="app-name-last">
+                        <?php
+                           echo $content->getApplicationName();
+                        ?>
+                    </p>
+                    <p id="app-name-first">
+                        <?php
+                           echo $content->getScreenName();
+                        ?>
+                    </p>
+                </div>
+
+                <div id="layout-header-app-menu">
+                    <ul>
+                        <?php echo $content->getMenu(); ?>
+                    </ul>
+                </div>
+            </div>        
+
+            <div id="layout-content" class="ui-helper-clearfix">
+                <?php
+                   echo $content->getBody();
+                ?>
+            </div>
+
+
+        </div>
+
+        <div id="div-windows" style="display:none"></div>
+        <div id="div-debug" style="display:none"></div>
+        <div id="winModal" style="display:none"></div>
+        <iframe id="ifrDownloadGen" style="display:none"></iframe>
+
+        <script language="javascript">
+
+            var urlNotificacaoList = '/AppTA/index.php/cms/notificacao/list';
+
+            jQuery(document).ready(function () {
+                jQuery().ajaxStart(function () {
+                    document.body.style.cursor = "wait";
+                }).ajaxStop(function () {
+                    document.body.style.cursor = "default";
+                }).ajaxError(function (event, request, settings) {
+                    document.body.style.cursor = "default";
+                    alert("Error requesting page " + settings.url);
+                });
+                configTabIndex();
+                jQuery("input").taEscEnter();
+                jQuery("select").taEscEnter();
+                jQuery("button").taEsc();
+
+                jQuery("[t-href]").THref();
+                jQuery("[calc-width],[calc-width-parent],[calc-height],[calc-height-parent]").TCalcWidth();
+                jQuery("[popover-title]").TPopoverTitle();
+                jQuery(".dropdown-menu").TDropdown();
+                jQuery('.facescroll').alternateScroll();
+                jQuery(".sidebar-menu").TSidebarMenu();
+            });
+        </script>
+    </body>
+</html>

@@ -397,7 +397,7 @@ class Auth_Model_Conta_Crud_Mapper extends ZendT_Db_Mapper
                                                                    ,'filterDb'=>array (
   0 => '',
 )
-                                                                   ,'filter'=>array('strtoupper', 'removeAccent', )));
+                                                                   ,'filter'=>array('strtolower', 'removeAccent', 'trim', )));
         if ($options['db'])
             $this->_data['email']->setValueFromDb($value);
                 
