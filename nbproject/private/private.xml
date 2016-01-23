@@ -3,14 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/models/Pessoa/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/configs/application.ini</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/configs/modules/ca/ca_pessoa.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Crud/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/ContaRel/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Acl.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Table.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/ContaController.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/sessions/User.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/UserController.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/render/Templates/intranet.phtml</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/PapelRecurso/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Table.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/PapelRecurso/Table.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Acl.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/User/Logon.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/render/Layout/User.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/data-views/Pessoa/MapperView.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/PessoaController.php</file>
         </group>
     </open-files>
 </project-private>

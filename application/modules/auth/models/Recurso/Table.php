@@ -66,14 +66,14 @@
         public function getMenu($moduleName) {
             $moduleName = strtoupper($moduleName);
 
-            $sql = "SELECT rsu.nome AS recurso, rsu.descricao, rsuPai.Nome AS recurso_pai,rsu.nivel
+            $sql = "SELECT rsu.hierarquia AS recurso, rsu.descricao, rsuPai.hierarquia AS recurso_pai,rsu.nivel
                       FROM recurso rsu
                       JOIN tipo_recurso tpRsu ON (rsu.id_tipo_recurso = tpRsu.Id)
                       LEFT JOIN recurso rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
                      WHERE tpRsu.Nome = 'MENU'
                        AND rsu.status = 'A'
                        AND rsuPai.hierarquia LIKE '" . $moduleName . "%'
-                     ORDER BY rsuPai.hierarquia, rsu.ordem, rsu.nome, rsu.descricao";
+                     ORDER BY rsuPai.hierarquia, rsu.ordem, rsu.hierarquia, rsu.descricao";
 
             $rows = $this->getAdapter()->fetchAll($sql);
 

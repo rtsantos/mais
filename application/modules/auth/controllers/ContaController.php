@@ -2,7 +2,7 @@
     class Auth_ContaController extends ZendT_Controller_ActionCrud {
         public function init() {
             $this->_init();
-            $this->_startupAcl();
+            #$this->_startupAcl();
             $this->_serviceName = 'Auth_Service_Conta';            
             $this->_formName = 'Auth_Form_Conta_Edit';
             $this->_formSearchName = 'Auth_Form_Conta_Search';            

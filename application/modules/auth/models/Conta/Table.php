@@ -11,9 +11,9 @@
         * @return \ZendT_Acl_Role_Row[]
         */
        public function getRoles() {
-           $sql = "SELECT ppl.nome as papel, pplSup.nome AS papel_pai
-                      FROM papel ppl
-                      LEFT JOIN Papel pplSup ON (ppl.id_papel_pai = pplSup.Id)
+           $sql = "SELECT ppl.hierarquia as papel, pplSup.hierarquia AS papel_pai
+                      FROM ".Auth_Model_Conta_Mapper::$table." ppl
+                      LEFT JOIN ".Auth_Model_Conta_Mapper::$table." pplSup ON (ppl.id_papel_pai = pplSup.Id)
                      ORDER BY ppl.hierarquia";
 
            $result = $this->getAdapter()->fetchAll($sql);
@@ -25,8 +25,6 @@
                      ->setParent($item['papel_pai']);
                $roles[] = $role;
            }
-
-
            return $roles;
        }
 
@@ -142,7 +140,7 @@
                        usr.nome as login, 
                        usr.descricao as nome, 
                        usr.email, 
-                       ppl.nome as papel, 
+                       ppl.hierarquia as papel, 
                        usr.id as chapa,
                        usr.avatar,
                        usr.id_empresa,
