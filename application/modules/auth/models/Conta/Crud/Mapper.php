@@ -6,6 +6,7 @@ class Auth_Model_Conta_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','nome','descricao','hierarquia','tipo','status');
     protected $_model = 'Auth_Model_Conta_Table';
+    public static $table = 'prouser.papel';
     /**
      *
      * @var Auth_Model_Conta_Mapper

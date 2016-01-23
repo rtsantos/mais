@@ -23,6 +23,7 @@
 
             
             $element = $model->getElement('nome');
+            $element->setRequired(true);
             $this->addElement($element);
 
             
@@ -110,27 +111,19 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('cliente');
+            $element = $model->getElement('papel_cliente');
             $this->addElement($element);
 
             
-            $element = $model->getElement('cont_cli_resp');
+            $element = $model->getElement('papel_funcionario');
             $this->addElement($element);
 
             
-            $element = $model->getElement('cont_cli_vend');
+            $element = $model->getElement('papel_usuario');
             $this->addElement($element);
 
             
-            $element = $model->getElement('funcionario');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('usuario');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('empresa');
+            $element = $model->getElement('papel_empresa');
             $this->addElement($element);
 
             
@@ -147,6 +140,18 @@
 
             
             $element = $model->getElement('hierarquia');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('papel_contato');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_cargo');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('papel_fornecedor');
             $this->addElement($element);
 
             

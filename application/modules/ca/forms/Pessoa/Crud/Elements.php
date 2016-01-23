@@ -93,7 +93,7 @@ class Ca_Form_Pessoa_Crud_Elements
         $element->setLabel($this->_translate->_('ca_pessoa.email') . ':');
         $element->setAttribs(array('maxlength'=>'70','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=strtolower(this.value);this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=strtolower(this.value);this.value=removeAccent(this.value);this.value=trim(this.value);");
         return $element;
     }
             
@@ -384,10 +384,10 @@ class Ca_Form_Pessoa_Crud_Elements
      *
      * @return \ZendT_Form_Element_Select
      */
-    public function getCliente(){
+    public function getPapelCliente(){
 
-        $element = new ZendT_Form_Element_Select('cliente');
-        $element->setLabel($this->_translate->_('ca_pessoa.cliente') . ':');
+        $element = new ZendT_Form_Element_Select('papel_cliente');
+        $element->setLabel($this->_translate->_('ca_pessoa.papel_cliente') . ':');
         $element->addMultiOption('1', 'Sim');
         $element->addMultiOption('0', 'Não');        
                 
@@ -398,10 +398,10 @@ class Ca_Form_Pessoa_Crud_Elements
      *
      * @return \ZendT_Form_Element_Select
      */
-    public function getContCliResp(){
+    public function getPapelFuncionario(){
 
-        $element = new ZendT_Form_Element_Select('cont_cli_resp');
-        $element->setLabel($this->_translate->_('ca_pessoa.cont_cli_resp') . ':');
+        $element = new ZendT_Form_Element_Select('papel_funcionario');
+        $element->setLabel($this->_translate->_('ca_pessoa.papel_funcionario') . ':');
         $element->addMultiOption('1', 'Sim');
         $element->addMultiOption('0', 'Não');        
                 
@@ -412,10 +412,10 @@ class Ca_Form_Pessoa_Crud_Elements
      *
      * @return \ZendT_Form_Element_Select
      */
-    public function getContCliVend(){
+    public function getPapelUsuario(){
 
-        $element = new ZendT_Form_Element_Select('cont_cli_vend');
-        $element->setLabel($this->_translate->_('ca_pessoa.cont_cli_vend') . ':');
+        $element = new ZendT_Form_Element_Select('papel_usuario');
+        $element->setLabel($this->_translate->_('ca_pessoa.papel_usuario') . ':');
         $element->addMultiOption('1', 'Sim');
         $element->addMultiOption('0', 'Não');        
                 
@@ -426,38 +426,10 @@ class Ca_Form_Pessoa_Crud_Elements
      *
      * @return \ZendT_Form_Element_Select
      */
-    public function getFuncionario(){
+    public function getPapelEmpresa(){
 
-        $element = new ZendT_Form_Element_Select('funcionario');
-        $element->setLabel($this->_translate->_('ca_pessoa.funcionario') . ':');
-        $element->addMultiOption('1', 'Sim');
-        $element->addMultiOption('0', 'Não');        
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Select
-     */
-    public function getUsuario(){
-
-        $element = new ZendT_Form_Element_Select('usuario');
-        $element->setLabel($this->_translate->_('ca_pessoa.usuario') . ':');
-        $element->addMultiOption('1', 'Sim');
-        $element->addMultiOption('0', 'Não');        
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Select
-     */
-    public function getEmpresa(){
-
-        $element = new ZendT_Form_Element_Select('empresa');
-        $element->setLabel($this->_translate->_('ca_pessoa.empresa') . ':');
+        $element = new ZendT_Form_Element_Select('papel_empresa');
+        $element->setLabel($this->_translate->_('ca_pessoa.papel_empresa') . ':');
         $element->addMultiOption('1', 'Sim');
         $element->addMultiOption('0', 'Não');        
                 
@@ -527,6 +499,58 @@ class Ca_Form_Pessoa_Crud_Elements
         $element->setAttribs(array('maxlength'=>'150','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Select
+     */
+    public function getPapelContato(){
+
+        $element = new ZendT_Form_Element_Select('papel_contato');
+        $element->setLabel($this->_translate->_('ca_pessoa.papel_contato') . ':');
+        $element->addMultiOption('1', 'Sim');
+        $element->addMultiOption('0', 'Não');        
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdCargo(){
+
+        $element = new ZendT_Form_Element_Seeker('id_cargo');
+        $element->setSuffix('cargo');
+        $element->setLabel($this->_translate->_('ca_pessoa.id_cargo') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('descricao');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/ca/cargo/grid');
+        $element->url()->setSearch('/ca/cargo/seeker-search');
+        $element->url()->setRetrieve('/ca/cargo/retrieve');
+        $element->setMapperView('Ca_DataView_Cargo_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Select
+     */
+    public function getPapelFornecedor(){
+
+        $element = new ZendT_Form_Element_Select('papel_fornecedor');
+        $element->setLabel($this->_translate->_('ca_pessoa.papel_fornecedor') . ':');
+        $element->addMultiOption('1', 'Sim');
+        $element->addMultiOption('0', 'Não');        
+                
         return $element;
     }
             

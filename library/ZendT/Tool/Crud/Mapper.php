@@ -240,6 +240,7 @@ class {$ucModuleName}_Model_{$modelName}_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected \$_required = array({$strRequired});
     protected \$_model = '{$ucModuleName}_Model_{$modelName}_Table';
+    public static \$table = '{$config['table']['schema']}.{$config['table']['name']}';
     /**
      *
      * @var {$ucModuleName}_Model_{$modelName}_Mapper

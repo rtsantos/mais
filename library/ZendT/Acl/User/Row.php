@@ -57,6 +57,11 @@
          * @var string
          */
         private $_avatar;
+        /**
+         *
+         * @var array
+         */
+        private $_empresa;
 
         /**
          *
@@ -227,6 +232,24 @@
          */
         public function setApps($value) {
             $this->_apps = $value;
+            return $this;
+        }
+        
+        /**
+         * 
+         * @return array
+         */
+        public function getEmpresa() {
+            return $this->_empresa;
+        }
+
+        /**
+         * 
+         * @param array $value
+         * @return \ZendT_Acl_User_Row
+         */
+        public function setEmpresa($value) {
+            $this->_empresa = $value;
             return $this;
         }
 

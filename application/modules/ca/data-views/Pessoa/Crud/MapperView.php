@@ -12,6 +12,13 @@
          */
         protected $_pessoa;
                 
+        /**
+         * Objeto de Mapeamento da Tabela
+         *
+         * @return Ca_Model_Cargo_Mapper
+         */
+        protected $_cargo;
+                
         
                 
         /**
@@ -26,6 +33,19 @@
             return $this->_pessoa;
         }
                 
+                
+        /**
+         * Objeto de Mapeamento da Tabela
+         *
+         * @return Ca_Model_Cargo_Mapper
+         */
+        protected function _getCargo(){
+            if (!is_object($this->_cargo)){
+                $this->_cargo = new Ca_Model_Cargo_Mapper();
+            }
+            return $this->_cargo;
+        }
+                
         /**
          * Retorna as configurações padrão da visualização
          *
@@ -33,12 +53,12 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','nome','apelido','codigo','email','id_pessoa_resp','nome_pessoa_resp','telefone','celular','fax','ed_logr','ed_numero','ed_compl','ed_bairro','ed_cidade','ed_estado','ed_cep','ed_cob_logr','ed_cob_numero','ed_cob_compl','ed_cob_bairro','ed_cob_cidade','ed_cob_estado','ed_cob_cep','cliente','cont_cli_resp','cont_cli_vend','funcionario','usuario','empresa','registro','id_empresa','nome_empresa','email_cob','hierarquia');
-           $profile['width'] = array('id'=>100,'nome'=>200,'apelido'=>200,'codigo'=>175,'email'=>200,'id_pessoa_resp'=>120,'nome_pessoa_resp'=>200,'telefone'=>200,'celular'=>200,'fax'=>200,'ed_logr'=>200,'ed_numero'=>200,'ed_compl'=>200,'ed_bairro'=>200,'ed_cidade'=>200,'ed_estado'=>100,'ed_cep'=>100,'ed_cob_logr'=>200,'ed_cob_numero'=>200,'ed_cob_compl'=>200,'ed_cob_bairro'=>200,'ed_cob_cidade'=>200,'ed_cob_estado'=>100,'ed_cob_cep'=>100,'cliente'=>150,'cont_cli_resp'=>150,'cont_cli_vend'=>150,'funcionario'=>150,'usuario'=>150,'empresa'=>150,'registro'=>200,'id_empresa'=>120,'nome_empresa'=>200,'email_cob'=>200,'hierarquia'=>200);
-           $profile['align'] = array('id'=>'left','nome'=>'left','apelido'=>'left','codigo'=>'left','email'=>'left','id_pessoa_resp'=>'left','nome_pessoa_resp'=>'left','telefone'=>'left','celular'=>'left','fax'=>'left','ed_logr'=>'left','ed_numero'=>'left','ed_compl'=>'left','ed_bairro'=>'left','ed_cidade'=>'left','ed_estado'=>'left','ed_cep'=>'left','ed_cob_logr'=>'left','ed_cob_numero'=>'left','ed_cob_compl'=>'left','ed_cob_bairro'=>'left','ed_cob_cidade'=>'left','ed_cob_estado'=>'left','ed_cob_cep'=>'left','cliente'=>'center','cont_cli_resp'=>'center','cont_cli_vend'=>'center','funcionario'=>'center','usuario'=>'center','empresa'=>'center','registro'=>'left','id_empresa'=>'left','nome_empresa'=>'left','email_cob'=>'left','hierarquia'=>'left');
-           $profile['hidden'] = array('id_pessoa_resp','id_empresa');
+           $profile['order'] = array('id','nome','apelido','codigo','email','id_pessoa_resp','nome_pessoa_resp','telefone','celular','fax','ed_logr','ed_numero','ed_compl','ed_bairro','ed_cidade','ed_estado','ed_cep','ed_cob_logr','ed_cob_numero','ed_cob_compl','ed_cob_bairro','ed_cob_cidade','ed_cob_estado','ed_cob_cep','papel_cliente','papel_funcionario','papel_usuario','papel_empresa','registro','id_empresa','nome_empresa','email_cob','hierarquia','papel_contato','id_cargo','descricao_cargo','papel_fornecedor');
+           $profile['width'] = array('id'=>100,'nome'=>200,'apelido'=>200,'codigo'=>175,'email'=>200,'id_pessoa_resp'=>120,'nome_pessoa_resp'=>200,'telefone'=>200,'celular'=>200,'fax'=>200,'ed_logr'=>200,'ed_numero'=>200,'ed_compl'=>200,'ed_bairro'=>200,'ed_cidade'=>200,'ed_estado'=>100,'ed_cep'=>100,'ed_cob_logr'=>200,'ed_cob_numero'=>200,'ed_cob_compl'=>200,'ed_cob_bairro'=>200,'ed_cob_cidade'=>200,'ed_cob_estado'=>100,'ed_cob_cep'=>100,'papel_cliente'=>150,'papel_funcionario'=>150,'papel_usuario'=>150,'papel_empresa'=>150,'registro'=>200,'id_empresa'=>120,'nome_empresa'=>200,'email_cob'=>200,'hierarquia'=>200,'papel_contato'=>150,'id_cargo'=>120,'descricao_cargo'=>200,'papel_fornecedor'=>150);
+           $profile['align'] = array('id'=>'left','nome'=>'left','apelido'=>'left','codigo'=>'left','email'=>'left','id_pessoa_resp'=>'left','nome_pessoa_resp'=>'left','telefone'=>'left','celular'=>'left','fax'=>'left','ed_logr'=>'left','ed_numero'=>'left','ed_compl'=>'left','ed_bairro'=>'left','ed_cidade'=>'left','ed_estado'=>'left','ed_cep'=>'left','ed_cob_logr'=>'left','ed_cob_numero'=>'left','ed_cob_compl'=>'left','ed_cob_bairro'=>'left','ed_cob_cidade'=>'left','ed_cob_estado'=>'left','ed_cob_cep'=>'left','papel_cliente'=>'center','papel_funcionario'=>'center','papel_usuario'=>'center','papel_empresa'=>'center','registro'=>'left','id_empresa'=>'left','nome_empresa'=>'left','email_cob'=>'left','hierarquia'=>'left','papel_contato'=>'center','id_cargo'=>'left','descricao_cargo'=>'left','papel_fornecedor'=>'center');
+           $profile['hidden'] = array('id_pessoa_resp','id_empresa','id_cargo');
            $profile['remove'] = array();
-           $profile['listOptions'] = array('cliente'=>$this->getModel()->getListOptions('cliente'),'cont_cli_resp'=>$this->getModel()->getListOptions('cont_cli_resp'),'cont_cli_vend'=>$this->getModel()->getListOptions('cont_cli_vend'),'funcionario'=>$this->getModel()->getListOptions('funcionario'),'usuario'=>$this->getModel()->getListOptions('usuario'),'empresa'=>$this->getModel()->getListOptions('empresa'));
+           $profile['listOptions'] = array('papel_cliente'=>$this->getModel()->getListOptions('papel_cliente'),'papel_funcionario'=>$this->getModel()->getListOptions('papel_funcionario'),'papel_usuario'=>$this->getModel()->getListOptions('papel_usuario'),'papel_empresa'=>$this->getModel()->getListOptions('papel_empresa'),'papel_contato'=>$this->getModel()->getListOptions('papel_contato'),'papel_fornecedor'=>$this->getModel()->getListOptions('papel_fornecedor'));
            return $profile;
         }
         /**
@@ -71,17 +91,19 @@
             $this->_columns->add('ed_cob_cidade', 'ca_pessoa', 'ed_cob_cidade', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.ed_cob_cidade'),'String','%?%');
             $this->_columns->add('ed_cob_estado', 'ca_pessoa', 'ed_cob_estado', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.ed_cob_estado'),'String','%?%');
             $this->_columns->add('ed_cob_cep', 'ca_pessoa', 'ed_cob_cep', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.ed_cob_cep'),'String','%?%');
-            $this->_columns->add('cliente', 'ca_pessoa', 'cliente', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.cliente'),'String','=');
-            $this->_columns->add('cont_cli_resp', 'ca_pessoa', 'cont_cli_resp', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.cont_cli_resp'),'String','=');
-            $this->_columns->add('cont_cli_vend', 'ca_pessoa', 'cont_cli_vend', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.cont_cli_vend'),'String','=');
-            $this->_columns->add('funcionario', 'ca_pessoa', 'funcionario', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.funcionario'),'String','=');
-            $this->_columns->add('usuario', 'ca_pessoa', 'usuario', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.usuario'),'String','=');
-            $this->_columns->add('empresa', 'ca_pessoa', 'empresa', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.empresa'),'String','=');
+            $this->_columns->add('papel_cliente', 'ca_pessoa', 'papel_cliente', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.papel_cliente'),'String','=');
+            $this->_columns->add('papel_funcionario', 'ca_pessoa', 'papel_funcionario', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.papel_funcionario'),'String','=');
+            $this->_columns->add('papel_usuario', 'ca_pessoa', 'papel_usuario', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.papel_usuario'),'String','=');
+            $this->_columns->add('papel_empresa', 'ca_pessoa', 'papel_empresa', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.papel_empresa'),'String','=');
             $this->_columns->add('registro', 'ca_pessoa', 'registro', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.registro'),'String','%?%');
             $this->_columns->add('id_empresa', 'ca_pessoa', 'id_empresa', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.id_empresa'), null, '=');
             $this->_columns->add('nome_empresa', 'empresa', 'nome', $this->_getPessoa()->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.id_empresa.ca_pessoa.nome'),null,'?%');
             $this->_columns->add('email_cob', 'ca_pessoa', 'email_cob', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.email_cob'),'String','%?%');
             $this->_columns->add('hierarquia', 'ca_pessoa', 'hierarquia', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.hierarquia'),'String','%?%');
+            $this->_columns->add('papel_contato', 'ca_pessoa', 'papel_contato', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.papel_contato'),'String','=');
+            $this->_columns->add('id_cargo', 'ca_pessoa', 'id_cargo', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.id_cargo'), null, '=');
+            $this->_columns->add('descricao_cargo', 'cargo', 'descricao', $this->_getCargo()->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.id_cargo.ca_cargo.descricao'),null,'?%');
+            $this->_columns->add('papel_fornecedor', 'ca_pessoa', 'papel_fornecedor', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_pessoa.papel_fornecedor'),'String','=');
 
         }
         /**
@@ -90,7 +112,8 @@
         protected function _getSqlBase() {
             $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
                     LEFT  JOIN ".$this->_getPessoa()->getModel()->getTableName()." pessoa_resp ON ( ca_pessoa.id_pessoa_resp = pessoa_resp.id ) 
-                    LEFT  JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( ca_pessoa.id_empresa = empresa.id )  "; 
+                    LEFT  JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( ca_pessoa.id_empresa = empresa.id ) 
+                    LEFT  JOIN ".$this->_getCargo()->getModel()->getTableName()." cargo ON ( ca_pessoa.id_cargo = cargo.id )  "; 
             return $sql;
         }
     }

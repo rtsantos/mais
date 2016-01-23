@@ -1,43 +1,50 @@
 <?php
 
-    /**
-     * Classe de mapeamento do registro da tabela ca_pessoa
-     */
-    class Ca_Model_Pessoa_Mapper extends Ca_Model_Pessoa_Crud_Mapper {
+   /**
+    * Classe de mapeamento do registro da tabela ca_pessoa
+    */
+   class Ca_Model_Pessoa_Mapper extends Ca_Model_Pessoa_Crud_Mapper {
 
-        protected function _afterSave() {
-            parent::_afterSave();
+       protected function _afterSave() {
+           parent::_afterSave();
 
-            $oldHierarquia = $this->getHierarquia();
+           $oldHierarquia = $this->getHierarquia(true)->toPhp();
 
-            $idResp = $this->getIdPessoaResp(true)->toPhp();
-            if ($idResp) {
-                $_mapper = new Ca_Model_Pessoa_Mapper();
-                $_mapper->setId($idResp)->retrieve();
+           $idResp = $this->getIdPessoaResp(true)->toPhp();
+           if ($idResp) {
+               $_mapper = new Ca_Model_Pessoa_Mapper();
+               $_mapper->setId($idResp)->retrieve();
 
-                $hirarquia = $_mapper->getHierarquia()->toPhp() . '.' . $this->getId()->toPhp();
+               $hirarquia = $_mapper->getHierarquia(true)->toPhp() . '.' . $this->getId()->toPhp();
+           } else {
+               $hirarquia = $this->getId()->toPhp();
+           }
 
-                $data = array();
-                $data['hierarquia'] = $hirarquia;
-                $where = array();
-                $where['id'] = $this->getId()->toPhp();
-                $this->getModel()->getAdapter()->update($this->getModel()->getTableName(), $data, $where);
-                
-                $this->setHierarquia($hirarquia);
-            }
+           $hierarquiaComp = substr($hirarquia, 0, strlen($oldHierarquia));
+           if ($hierarquiaComp && $oldHierarquia == $hierarquiaComp && $hierarquiaComp != $this->getId()->toPhp()) {
+               //throw new ZendT_Exception_Alert(_i18n('Não é possível associar a empresa responvável para este registro, devido a infringir a hierarquia!'));
+           }
 
-            if ($this->_action == 'update') {
-                $_where = new ZendT_Db_Where();
-                $_where->add($this->getModel()->getName() . '.hierarquia', $oldHierarquia, '?%');
+           if ($oldHierarquia != $hirarquia) {
+               $data = array();
+               $data['hierarquia'] = $hirarquia;
+               $this->getModel()->getAdapter()->update($this->getModel()->getName(), $data, 'id = ' . $this->getId()->toPhp());
+           }
+           $this->setHierarquia($hirarquia);
 
-                $_mapper = new Ca_Model_Pessoa_Mapper();
-                $_mapper->findAll($_where);
-                while ($_mapper->fetch()) {
-                    $_mapper->update();
-                }
-            }
-        }
+           if ($this->_action == 'update' && $oldHierarquia && $oldHierarquia != $hirarquia) {
+               $_where = new ZendT_Db_Where();
+               $_where->addFilter($this->getModel()->getName() . '.hierarquia', $oldHierarquia, '?%');
+               $_where->addFilter($this->getModel()->getName() . '.id', $this->getId(), '!=');
 
-    }
+               $_mapper = new Ca_DataView_Pessoa_MapperView();
+               $_mapper->findAll($_where, '*');
+               while ($_mapper->fetch()) {
+                   $_mapper->update();
+               }
+           }
+       }
+
+   }
 
 ?>

@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/models/Pessoa/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/configs/application.ini</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/configs/modules/ca/ca_pessoa.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Crud/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/ContaRel/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Mapper.php</file>
+        </group>
     </open-files>
 </project-private>

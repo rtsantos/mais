@@ -345,6 +345,7 @@ class ZendT_Tool_CrudTProvider extends Zend_Tool_Project_Provider_Abstract imple
                 $config['table']['columns'][$columnName]['object']['charMask'] = '@';
             }
             if (!isset($config['table']['columns'][$columnName]['object']['filter'])) {
+                $config['table']['columns'][$columnName]['object']['filter'][] = 'trim';
                 $config['table']['columns'][$columnName]['object']['filter'][] = 'strtoupper';
                 $config['table']['columns'][$columnName]['object']['filter'][] = 'removeAccent';
             }   

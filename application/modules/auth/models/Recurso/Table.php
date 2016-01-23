@@ -34,16 +34,17 @@
          * @return ZendT_Acl_Resource_Row[]
          */
         public function getResources($moduleName) {
-            $moduleName = strtoupper($moduleName);
+            $moduleName = strtolower($moduleName);
 
-            $sql = "SELECT rsu.id, rsu.nome as recurso, rsuPai.nome AS recurso_pai
-                      FROM recurso rsu
-                      LEFT JOIN Recurso rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
+            $sql = "SELECT rsu.id, rsu.hierarquia as recurso, rsuPai.hierarquia AS recurso_pai
+                      FROM ".Auth_Model_Recurso_Mapper::$table." rsu
+                      LEFT JOIN ".Auth_Model_Recurso_Mapper::$table." rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
                      WHERE rsu.Status = 'A'
                        AND rsu.hierarquia LIKE '" . $moduleName . "%'
                      ORDER BY rsu.hierarquia";
 
             $result = $this->getAdapter()->fetchAll($sql);
+            
             $resources = array();
             foreach ($result as $item) {
                 $resource = new ZendT_Acl_Resource_Row();

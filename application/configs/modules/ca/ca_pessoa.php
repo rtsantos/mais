@@ -114,10 +114,10 @@ return array (
             'css-width' => '200px',
             'id' => NULL,
           ),
-          'required' => false,
+          'required' => true,
         ),
         'length' => '60',
-        'nullable' => true,
+        'nullable' => false,
       ),
       'apelido' => 
       array (
@@ -224,6 +224,7 @@ return array (
           array (
             0 => 'strtolower',
             1 => 'removeAccent',
+            2 => 'trim',
           ),
           'filterDb' => 
           array (
@@ -1066,9 +1067,9 @@ return array (
         'length' => '10',
         'nullable' => true,
       ),
-      'cliente' => 
+      'papel_cliente' => 
       array (
-        'label' => 'Cliente',
+        'label' => 'Papel de Cliente',
         'multiple' => 0,
         'type' => 'String',
         'object' => 
@@ -1112,9 +1113,9 @@ return array (
         'length' => '1',
         'nullable' => true,
       ),
-      'cont_cli_resp' => 
+      'papel_funcionario' => 
       array (
-        'label' => 'Contato do Cliente',
+        'label' => 'Papel de Funcionário',
         'multiple' => 0,
         'type' => 'String',
         'object' => 
@@ -1158,9 +1159,9 @@ return array (
         'length' => '1',
         'nullable' => true,
       ),
-      'cont_cli_vend' => 
+      'papel_usuario' => 
       array (
-        'label' => 'Vendedor do Cliente',
+        'label' => 'Papel de Usuário',
         'multiple' => 0,
         'type' => 'String',
         'object' => 
@@ -1204,101 +1205,9 @@ return array (
         'length' => '1',
         'nullable' => true,
       ),
-      'funcionario' => 
+      'papel_empresa' => 
       array (
-        'label' => 'Funcionário',
-        'multiple' => 0,
-        'type' => 'String',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'strtoupper',
-            1 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-            0 => 
-            array (
-              'name' => 'Zend_Validate_StringLength',
-              'param' => 
-              array (
-                'max' => 1,
-              ),
-            ),
-          ),
-          'listOptions' => 
-          array (
-            1 => 'Sim',
-            0 => 'Não',
-          ),
-          'type' => 'Select',
-          'text' => 
-          array (
-            'maxlength' => '1',
-            'css-width' => '100px',
-            'id' => NULL,
-          ),
-          'required' => false,
-        ),
-        'length' => '1',
-        'nullable' => true,
-      ),
-      'usuario' => 
-      array (
-        'label' => 'Usuário',
-        'multiple' => 0,
-        'type' => 'String',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'strtoupper',
-            1 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-            0 => 
-            array (
-              'name' => 'Zend_Validate_StringLength',
-              'param' => 
-              array (
-                'max' => 1,
-              ),
-            ),
-          ),
-          'listOptions' => 
-          array (
-            1 => 'Sim',
-            0 => 'Não',
-          ),
-          'type' => 'Select',
-          'text' => 
-          array (
-            'maxlength' => '1',
-            'css-width' => '100px',
-            'id' => NULL,
-          ),
-          'required' => false,
-        ),
-        'length' => '1',
-        'nullable' => true,
-      ),
-      'empresa' => 
-      array (
-        'label' => 'Empresa',
+        'label' => 'Papel de Empresa',
         'multiple' => 0,
         'type' => 'String',
         'object' => 
@@ -1388,7 +1297,7 @@ return array (
       ),
       'id_empresa' => 
       array (
-        'label' => 'Empresa',
+        'label' => 'Registro da Empresa',
         'referenceMap' => true,
         'multiple' => 0,
         'type' => 'Integer',
@@ -1533,12 +1442,166 @@ return array (
         'length' => '150',
         'nullable' => true,
       ),
+      'papel_contato' => 
+      array (
+        'label' => 'Papel de Contato',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'strtoupper',
+            1 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 1,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+            1 => 'Sim',
+            0 => 'Não',
+          ),
+          'type' => 'Select',
+          'text' => 
+          array (
+            'maxlength' => '1',
+            'css-width' => '100px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '1',
+        'nullable' => true,
+      ),
+      'id_cargo' => 
+      array (
+        'label' => 'Cargo',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'strtoupper',
+            1 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'descricao',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/cargo/grid',
+              'search' => '/ca/cargo/seeker-search',
+              'retrieve' => '/ca/cargo/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'papel_fornecedor' => 
+      array (
+        'label' => 'Fornecedor',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'strtoupper',
+            1 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 1,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+             1 => 'Sim',
+             0 => 'Não'
+          ),
+          'type' => 'Select',
+          'text' => 
+          array (
+            'maxlength' => '1',
+            'css-width' => '100px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '1',
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
-      0 => 'Ca_Model_CaContrato',
-      1 => 'Ca_Model_Pessoa',
-      2 => 'Ca_Model_CaRegraContrato',
+      0 => 'Ca_Model_Cargo',
+      1 => 'Ca_Model_CaContrato',
+      2 => 'Ca_Model_Pessoa',
+      3 => 'Ca_Model_CaRegraContrato',
+      4 => 'Ca_Model_CvPedido',
+      5 => 'Ca_Model_CvProduto',
     ),
     'referenceMaps' => 
     array (
@@ -1551,6 +1614,14 @@ return array (
         'columnReference' => 'id',
       ),
       1 => 
+      array (
+        'columnName' => 'id_cargo',
+        'objectNameReference' => 'Ca_Model_Cargo',
+        'tableNameReference' => 'ca_cargo',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      2 => 
       array (
         'columnName' => 'id_empresa',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -1565,7 +1636,9 @@ return array (
     ),
     'unique' => 
     array (
-      0 => 'codigo',
+      0 => 'id_empresa',
+      1 => 'nome',
+      2 => 'apelido',
     ),
     'description' => 'Pessoa',
   ),

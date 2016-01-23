@@ -76,8 +76,8 @@
                                 <span class="ui-text">
                                     <?php
                                     $name = 'Entrar';
-                                    if ($_SESSION['logon']['usuario'] != '' && $_SESSION['logon']['usuario'] != 'GUEST') {
-                                        $data = explode(' ', $_SESSION['logon']['nome']);
+                                    if ($_SESSION['logon']['usuario']['login'] != '' && $_SESSION['logon']['usuario']['login'] != 'GUEST') {
+                                        $data = explode(' ', $_SESSION['logon']['usuario']['nome']);
                                         $name = ucwords(strtolower($data[0] . ' ' . end($data)));
 
                                         if (count($data) > 1) {
@@ -103,7 +103,7 @@
                                         <li class="dropdown-menu-group">
                                             <span>Op&ccedil;&otilde;es</span>
                                             <ul>
-                                                <li class="dropdown-align left link" onclick="jQuery.WindowT.open({type: 'IFRAME', title: 'Criação de Conta de Acesso', id: 'createAccount', url: '<?php echo $this->baseUrl; ?>/auth/user/create-account', height: 300, width: 600, modal: true, scrolling: 'NO'});">Cadastro</li>
+                                                <li class="dropdown-align left link" onclick="jQuery.WindowT.open({type: 'IFRAME', title: 'Criaï¿½ï¿½o de Conta de Acesso', id: 'createAccount', url: '<?php echo $this->baseUrl; ?>/auth/user/create-account', height: 300, width: 600, modal: true, scrolling: 'NO'});">Cadastro</li>
                                                 <li class="dropdown-align left link" onclick="jQuery.WindowT.open({id: 'winChangePass', url: '<?php echo $this->baseUrl; ?>/auth/user/change-password', modal: true});">Troca de Senha</li>
                                                 <li class="dropdown-align left link" onclick="jQuery.WindowT.open({id: 'forgetPassword', title: 'Esqueci minha senha', url: '<?php echo $this->baseUrl; ?>/auth/user/forget-password', height: 200, modal: true, param: 'email=' + jQuery('#usuario').val()});">Esqueci minha senha</li>
                                             </ul>

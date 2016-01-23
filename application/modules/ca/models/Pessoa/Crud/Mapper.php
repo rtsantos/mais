@@ -4,8 +4,9 @@
  */
 class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id');
+    protected $_required = array('id','nome');
     protected $_model = 'Ca_Model_Pessoa_Table';
+    public static $table = 'mais.ca_pessoa';
     /**
      *
      * @var Ca_Model_Pessoa_Mapper
@@ -31,6 +32,10 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
         return array(
                 'id_pessoa_resp' => array(
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
+                ),
+                'id_cargo' => array(
+                    'mapper' => 'Ca_DataView_Cargo_MapperView',
                     'column' => 'id'
                 ),
                 'id_empresa' => array(
@@ -101,6 +106,9 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
                 
         if (!$options['db']){
             
+         if ($options['required'])
+            $this->isRequired($value,'nome');
+                    
             $valid = new Zend_Validate_StringLength(array (   'max' => 60, ) );
             $valueValid = $this->_data['nome']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
@@ -218,7 +226,7 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
                                                                    ,'filterDb'=>array (
   0 => '',
 )
-                                                                   ,'filter'=>array('strtolower', 'removeAccent', )));
+                                                                   ,'filter'=>array('strtolower', 'removeAccent', 'trim', )));
         if ($options['db'])
             $this->_data['email']->setValueFromDb($value);
                 
@@ -948,33 +956,33 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna cliente
+     * Retorna os dados da coluna papel_cliente
      *
      * @return string
      */
-    public function getCliente($instance=false){
-        if ($instance && !is_object($this->_data['cliente'])){
-            $this->setCliente('',array('required'=>false));
+    public function getPapelCliente($instance=false){
+        if ($instance && !is_object($this->_data['papel_cliente'])){
+            $this->setPapelCliente('',array('required'=>false));
         }
-        return $this->_data['cliente'];
+        return $this->_data['papel_cliente'];
     }
     /**
-     * Seta o valor da coluna cliente
+     * Seta o valor da coluna papel_cliente
      *
      * @param string $value
      * @return Ca_Model_Pessoa_Crud_Mapper
      */
-    public function setCliente($value,$options=array('required'=>true)){        
+    public function setPapelCliente($value,$options=array('required'=>true)){        
         
         $options['listOptions']=array('1'=>'Sim','0'=>'Não');
-        $this->_data['cliente'] = new ZendT_Type_String($value,$options);
+        $this->_data['papel_cliente'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
-            $this->_data['cliente']->setValueFromDb($value);
+            $this->_data['papel_cliente']->setValueFromDb($value);
                 
         if (!$options['db']){
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['cliente']->getValueToDb();
+            $valueValid = $this->_data['papel_cliente']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
@@ -985,33 +993,33 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna cont_cli_resp
+     * Retorna os dados da coluna papel_funcionario
      *
      * @return string
      */
-    public function getContCliResp($instance=false){
-        if ($instance && !is_object($this->_data['cont_cli_resp'])){
-            $this->setContCliResp('',array('required'=>false));
+    public function getPapelFuncionario($instance=false){
+        if ($instance && !is_object($this->_data['papel_funcionario'])){
+            $this->setPapelFuncionario('',array('required'=>false));
         }
-        return $this->_data['cont_cli_resp'];
+        return $this->_data['papel_funcionario'];
     }
     /**
-     * Seta o valor da coluna cont_cli_resp
+     * Seta o valor da coluna papel_funcionario
      *
      * @param string $value
      * @return Ca_Model_Pessoa_Crud_Mapper
      */
-    public function setContCliResp($value,$options=array('required'=>true)){        
+    public function setPapelFuncionario($value,$options=array('required'=>true)){        
         
         $options['listOptions']=array('1'=>'Sim','0'=>'Não');
-        $this->_data['cont_cli_resp'] = new ZendT_Type_String($value,$options);
+        $this->_data['papel_funcionario'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
-            $this->_data['cont_cli_resp']->setValueFromDb($value);
+            $this->_data['papel_funcionario']->setValueFromDb($value);
                 
         if (!$options['db']){
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['cont_cli_resp']->getValueToDb();
+            $valueValid = $this->_data['papel_funcionario']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
@@ -1022,33 +1030,33 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna cont_cli_vend
+     * Retorna os dados da coluna papel_usuario
      *
      * @return string
      */
-    public function getContCliVend($instance=false){
-        if ($instance && !is_object($this->_data['cont_cli_vend'])){
-            $this->setContCliVend('',array('required'=>false));
+    public function getPapelUsuario($instance=false){
+        if ($instance && !is_object($this->_data['papel_usuario'])){
+            $this->setPapelUsuario('',array('required'=>false));
         }
-        return $this->_data['cont_cli_vend'];
+        return $this->_data['papel_usuario'];
     }
     /**
-     * Seta o valor da coluna cont_cli_vend
+     * Seta o valor da coluna papel_usuario
      *
      * @param string $value
      * @return Ca_Model_Pessoa_Crud_Mapper
      */
-    public function setContCliVend($value,$options=array('required'=>true)){        
+    public function setPapelUsuario($value,$options=array('required'=>true)){        
         
         $options['listOptions']=array('1'=>'Sim','0'=>'Não');
-        $this->_data['cont_cli_vend'] = new ZendT_Type_String($value,$options);
+        $this->_data['papel_usuario'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
-            $this->_data['cont_cli_vend']->setValueFromDb($value);
+            $this->_data['papel_usuario']->setValueFromDb($value);
                 
         if (!$options['db']){
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['cont_cli_vend']->getValueToDb();
+            $valueValid = $this->_data['papel_usuario']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
@@ -1059,107 +1067,33 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna funcionario
+     * Retorna os dados da coluna papel_empresa
      *
      * @return string
      */
-    public function getFuncionario($instance=false){
-        if ($instance && !is_object($this->_data['funcionario'])){
-            $this->setFuncionario('',array('required'=>false));
+    public function getPapelEmpresa($instance=false){
+        if ($instance && !is_object($this->_data['papel_empresa'])){
+            $this->setPapelEmpresa('',array('required'=>false));
         }
-        return $this->_data['funcionario'];
+        return $this->_data['papel_empresa'];
     }
     /**
-     * Seta o valor da coluna funcionario
+     * Seta o valor da coluna papel_empresa
      *
      * @param string $value
      * @return Ca_Model_Pessoa_Crud_Mapper
      */
-    public function setFuncionario($value,$options=array('required'=>true)){        
+    public function setPapelEmpresa($value,$options=array('required'=>true)){        
         
         $options['listOptions']=array('1'=>'Sim','0'=>'Não');
-        $this->_data['funcionario'] = new ZendT_Type_String($value,$options);
+        $this->_data['papel_empresa'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
-            $this->_data['funcionario']->setValueFromDb($value);
+            $this->_data['papel_empresa']->setValueFromDb($value);
                 
         if (!$options['db']){
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['funcionario']->getValueToDb();
-            if ($valueValid && !$valid->isValid($valueValid)){
-                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
-            }
-                    
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna usuario
-     *
-     * @return string
-     */
-    public function getUsuario($instance=false){
-        if ($instance && !is_object($this->_data['usuario'])){
-            $this->setUsuario('',array('required'=>false));
-        }
-        return $this->_data['usuario'];
-    }
-    /**
-     * Seta o valor da coluna usuario
-     *
-     * @param string $value
-     * @return Ca_Model_Pessoa_Crud_Mapper
-     */
-    public function setUsuario($value,$options=array('required'=>true)){        
-        
-        $options['listOptions']=array('1'=>'Sim','0'=>'Não');
-        $this->_data['usuario'] = new ZendT_Type_String($value,$options);
-        if ($options['db'])
-            $this->_data['usuario']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['usuario']->getValueToDb();
-            if ($valueValid && !$valid->isValid($valueValid)){
-                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
-            }
-                    
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna empresa
-     *
-     * @return string
-     */
-    public function getEmpresa($instance=false){
-        if ($instance && !is_object($this->_data['empresa'])){
-            $this->setEmpresa('',array('required'=>false));
-        }
-        return $this->_data['empresa'];
-    }
-    /**
-     * Seta o valor da coluna empresa
-     *
-     * @param string $value
-     * @return Ca_Model_Pessoa_Crud_Mapper
-     */
-    public function setEmpresa($value,$options=array('required'=>true)){        
-        
-        $options['listOptions']=array('1'=>'Sim','0'=>'Não');
-        $this->_data['empresa'] = new ZendT_Type_String($value,$options);
-        if ($options['db'])
-            $this->_data['empresa']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['empresa']->getValueToDb();
+            $valueValid = $this->_data['papel_empresa']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
@@ -1309,6 +1243,109 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 150, ) );
             $valueValid = $this->_data['hierarquia']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna papel_contato
+     *
+     * @return string
+     */
+    public function getPapelContato($instance=false){
+        if ($instance && !is_object($this->_data['papel_contato'])){
+            $this->setPapelContato('',array('required'=>false));
+        }
+        return $this->_data['papel_contato'];
+    }
+    /**
+     * Seta o valor da coluna papel_contato
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setPapelContato($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('1'=>'Sim','0'=>'Não');
+        $this->_data['papel_contato'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['papel_contato']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
+            $valueValid = $this->_data['papel_contato']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_cargo
+     *
+     * @return string
+     */
+    public function getIdCargo($instance=false){
+        if ($instance && !is_object($this->_data['id_cargo'])){
+            $this->setIdCargo('',array('required'=>false));
+        }
+        return $this->_data['id_cargo'];
+    }
+    /**
+     * Seta o valor da coluna id_cargo
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setIdCargo($value,$options=array('required'=>true)){        
+        $this->_data['id_cargo'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_cargo']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna papel_fornecedor
+     *
+     * @return string
+     */
+    public function getPapelFornecedor($instance=false){
+        if ($instance && !is_object($this->_data['papel_fornecedor'])){
+            $this->setPapelFornecedor('',array('required'=>false));
+        }
+        return $this->_data['papel_fornecedor'];
+    }
+    /**
+     * Seta o valor da coluna papel_fornecedor
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setPapelFornecedor($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('1'=>'Sim','0'=>'Não');
+        $this->_data['papel_fornecedor'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['papel_fornecedor']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
+            $valueValid = $this->_data['papel_fornecedor']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
