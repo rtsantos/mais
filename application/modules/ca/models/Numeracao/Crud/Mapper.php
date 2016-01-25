@@ -4,7 +4,7 @@
  */
 class Ca_Model_Numeracao_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id','nome','numero','tamanho');
+    protected $_required = array('id','nome','numero','tamanho','id_empresa');
     protected $_model = 'Ca_Model_Numeracao_Table';
     public static $table = 'mais.ca_numeracao';
     /**
@@ -29,7 +29,18 @@ class Ca_Model_Numeracao_Crud_Mapper extends ZendT_Db_Mapper
      * Retorna as referências do objeto
      */
     public function getReferenceMap(){
-        return array();
+        return array(
+                'id_empresa' => array(
+                    'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -166,6 +177,38 @@ class Ca_Model_Numeracao_Crud_Mapper extends ZendT_Db_Mapper
             
          if ($options['required'])
             $this->isRequired($value,'tamanho');
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_empresa
+     *
+     * @return string
+     */
+    public function getIdEmpresa($instance=false){
+        if ($instance && !is_object($this->_data['id_empresa'])){
+            $this->setIdEmpresa('',array('required'=>false));
+        }
+        return $this->_data['id_empresa'];
+    }
+    /**
+     * Seta o valor da coluna id_empresa
+     *
+     * @param string $value
+     * @return Ca_Model_Numeracao_Crud_Mapper
+     */
+    public function setIdEmpresa($value,$options=array('required'=>true)){        
+        $this->_data['id_empresa'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_empresa']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+         if ($options['required'])
+            $this->isRequired($value,'id_empresa');
                     
         }
         return $this;

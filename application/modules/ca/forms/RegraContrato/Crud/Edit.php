@@ -10,6 +10,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_ca_regra_contrato');
             
     
             $model = new Ca_Form_RegraContrato_Elements();

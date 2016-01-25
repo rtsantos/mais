@@ -50,6 +50,10 @@
        public function getHierarquiaEmpresa() {
            return $_SESSION['logon']['empresa']['hierarquia'];
        }
+       
+       public function getIdEmpresa() {
+           return $_SESSION['logon']['empresa']['id'];
+       }
 
        public function getNameFormat($empresa = true, $filial = true, $primeiroUltimo = false) {
            $_usuario = new Auth_Model_Usuario_Mapper();

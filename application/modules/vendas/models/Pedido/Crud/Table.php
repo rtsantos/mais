@@ -6,14 +6,16 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CV_PEDIDO';
     protected $_sequence = 'SID_CV_PEDIDO';
-    protected $_required = array('ID','NUMERO','TIPO','ID_USU_INC','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE');
+    protected $_required = array('ID','NUMERO','TIPO','ID_USU_INC','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','STATUS');
     protected $_primary = array('ID');
     protected $_unique = array('TIPO','NUMERO','ID_EMPRESA');
-    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','VLR_TOTAL','PAGAMENTO','VLR_PAGO','VLR_DESC','NRO_PARC','VLR_PARC');
+    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','STATUS');
     protected $_search = 'numero';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
-    protected $_dependentTables = array();
+    protected $_dependentTables = array(
+                'Vendas_Model_ItemPedido_Table',
+                'Vendas_Model_Pagamento_Table');
     protected $_referenceMap = array(
                 'IdUsuInc' => array(
                     'columns' => 'id_usu_inc',
@@ -53,10 +55,9 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_listOptions = array('tipo'=>array('V'=>'Venda'
                                                     ,'C'=>'Compra'
                                                     ,'O'=>'Orçamento')
-                                    ,'pagamento'=>array('D'=>'Crediário'
-                                                    ,'C'=>'Cartão'
-                                                    ,'Q'=>'Cheque'
-                                                    ,'F'=>'Faturar'));
+                                    ,'status'=>array('A'=>'Aberto'
+                                                    ,'C'=>'Confirmado'
+                                                    ,'E'=>'Efetivado'));
     protected $_mapper = 'Vendas_Model_Pedido_Mapper';
     protected $_element = 'Vendas_Form_Pedido_Elements';
     /**

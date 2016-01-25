@@ -288,8 +288,8 @@ return array (
           ),
           'listOptions' => 
           array (
-             'A' => 'Ativo',
-             'I' => 'Inativo'
+            'A' => 'Ativo',
+            'I' => 'Inativo',
           ),
           'type' => 'Select',
           'text' => 
@@ -307,7 +307,7 @@ return array (
       array (
         'label' => 'Valor Fixo',
         'multiple' => 0,
-        'type' => 'decimal',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -329,6 +329,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => '11.4',
         'nullable' => true,
@@ -337,7 +344,7 @@ return array (
       array (
         'label' => 'Valor Mínimo',
         'multiple' => 0,
-        'type' => 'decimal',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -359,6 +366,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => '11.4',
         'nullable' => true,
@@ -367,7 +381,7 @@ return array (
       array (
         'label' => 'Percentual',
         'multiple' => 0,
-        'type' => 'decimal',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -389,6 +403,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '4',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => '4.4',
         'nullable' => true,
@@ -432,6 +453,7 @@ return array (
     array (
     ),
     'description' => 'Regras do Contrato',
+    'tabs' => NULL,
   ),
 )
 ?>

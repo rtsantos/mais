@@ -10,6 +10,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_ca_contrato');
             
     
             $model = new Ca_Form_Contrato_Elements();
@@ -27,16 +28,7 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('dt_vig_ini');
-            $element->setRequired(true);
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('dt_vig_fim');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('id_cliente');
+            $element = $model->getElement('numero');
             $element->setRequired(true);
             $this->addElement($element);
 
@@ -47,6 +39,21 @@
 
             
             $element = $model->getElement('id_empresa');
+            $element->setRequired(true);
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_cliente');
+            $element->setRequired(true);
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('dt_vig_ini');
+            $element->setRequired(true);
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('dt_vig_fim');
             $this->addElement($element);
 
             

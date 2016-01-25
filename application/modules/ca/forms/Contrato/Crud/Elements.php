@@ -52,53 +52,15 @@ class Ca_Form_Contrato_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Date
+     * @return \ZendT_Form_Element_Text
      */
-    public function getDtVigIni(){
+    public function getNumero(){
 
-        $element = new ZendT_Form_Element_Date('dt_vig_ini');
-        $element->setLabel($this->_translate->_('ca_contrato.dt_vig_ini') . ':');
-        $element->setAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
-        $element->addValidators(array());
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Date
-     */
-    public function getDtVigFim(){
-
-        $element = new ZendT_Form_Element_Date('dt_vig_fim');
-        $element->setLabel($this->_translate->_('ca_contrato.dt_vig_fim') . ':');
-        $element->setAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
-        $element->addValidators(array());
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Seeker
-     */
-    public function getIdCliente(){
-
-        $element = new ZendT_Form_Element_Seeker('id_cliente');
-        $element->setSuffix('cliente');
-        $element->setLabel($this->_translate->_('ca_contrato.id_cliente') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/ca/pessoa/grid/profile_key/cliente');
-        $element->url()->setSearch('/ca/pessoa/seeker-search/profile_key/cliente');
-        $element->url()->setRetrieve('/ca/pessoa/retrieve/profile_key/cliente');
-        $element->setMapperView('Ca_DataView_Pessoa_MapperView');
-        $element->addValidators(array());
-                
+        $element = new ZendT_Form_Element_Text('numero');
+        $element->setLabel($this->_translate->_('ca_contrato.numero') . ':');
+        $element->setAttribs(array('maxlength'=>'10','css-width'=>'100px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
         return $element;
     }
             
@@ -131,10 +93,62 @@ class Ca_Form_Contrato_Crud_Elements
         $element->setSearchAttribs(array('css-width'=>'270px'));
         $element->modal()->setWidth(800);
         $element->modal()->setHeight(450);
-        $element->url()->setGrid('/ca/pessoa/grid/profile_key/empresa');
-        $element->url()->setSearch('/ca/pessoa/seeker-search/profile_key/empresa');
-        $element->url()->setRetrieve('/ca/pessoa/retrieve/profile_key/empresa');
+        $element->url()->setGrid('/ca/pessoa/grid');
+        $element->url()->setSearch('/ca/pessoa/seeker-search');
+        $element->url()->setRetrieve('/ca/pessoa/retrieve');
         $element->setMapperView('Ca_DataView_Pessoa_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdCliente(){
+
+        $element = new ZendT_Form_Element_Seeker('id_cliente');
+        $element->setSuffix('cliente');
+        $element->setLabel($this->_translate->_('ca_contrato.id_cliente') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('nome');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/ca/pessoa/grid');
+        $element->url()->setSearch('/ca/pessoa/seeker-search');
+        $element->url()->setRetrieve('/ca/pessoa/retrieve');
+        $element->setMapperView('Ca_DataView_Pessoa_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Date
+     */
+    public function getDtVigIni(){
+
+        $element = new ZendT_Form_Element_Date('dt_vig_ini');
+        $element->setLabel($this->_translate->_('ca_contrato.dt_vig_ini') . ':');
+        $element->setAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Date
+     */
+    public function getDtVigFim(){
+
+        $element = new ZendT_Form_Element_Date('dt_vig_fim');
+        $element->setLabel($this->_translate->_('ca_contrato.dt_vig_fim') . ':');
+        $element->setAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
         $element->addValidators(array());
                 
         return $element;

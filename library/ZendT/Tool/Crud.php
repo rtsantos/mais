@@ -15,7 +15,7 @@ class ZendT_Tool_Crud {
      * @param striing $table
      * @return string 
      */
-    public static function getModelName($pathBase, $table, $schema='') {
+    public static function getModelName($pathBase, $table, $schema='', $config=false) {
         $path = $pathBase.'/application/configs/modules';
         $path = str_replace("\\", "/", $path);
         $myDirectory = opendir($path);
@@ -26,7 +26,12 @@ class ZendT_Tool_Crud {
                 if (strtoupper($configTable['table']['name']) == strtoupper($table) && 
                     (strtoupper($configTable['table']['schema']) == strtoupper($schema) || $schema == '')) {
                     closedir($myDirectory);
-                    return $configTable['table']['objectName'];
+                    if ($config){
+                        return $configTable;
+                    }else{
+                        return $configTable['table']['objectName'];
+                    }
+                    
                 }
             }
         }

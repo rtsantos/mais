@@ -153,9 +153,9 @@ return array (
           ),
           'listOptions' => 
           array (
-             'V' => 'Venda',
-             'C' => 'Compra',
-             'O' => 'Orçamento'
+            'V' => 'Venda',
+            'C' => 'Compra',
+            'O' => 'Orçamento',
           ),
           'type' => 'Select',
           'text' => 
@@ -589,39 +589,9 @@ return array (
         'length' => NULL,
         'nullable' => true,
       ),
-      'vlr_total' => 
+      'status' => 
       array (
-        'label' => 'Valor Total',
-        'multiple' => 0,
-        'type' => 'decimal',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-        ),
-        'length' => '11.4',
-        'nullable' => true,
-      ),
-      'pagamento' => 
-      array (
-        'label' => 'Forma de Pagamento',
+        'label' => 'Situação',
         'multiple' => 0,
         'type' => 'String',
         'object' => 
@@ -651,11 +621,9 @@ return array (
           ),
           'listOptions' => 
           array (
-             'D' => 'Dinheiro',
-             'C' => 'Cartão',
-             'Q' => 'Cheque',
-             'D' => 'Crediário',
-             'F' => 'Faturar'
+             'A' => 'Aberto',
+             'C' => 'Confirmado',
+             'E' => 'Efetivado'
           ),
           'type' => 'Select',
           'text' => 
@@ -664,134 +632,25 @@ return array (
             'css-width' => '100px',
             'id' => NULL,
           ),
-          'required' => false,
+          'required' => true,
         ),
         'length' => '1',
-        'nullable' => true,
-      ),
-      'vlr_pago' => 
-      array (
-        'label' => 'Valor Pago',
-        'multiple' => 0,
-        'type' => 'decimal',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-        ),
-        'length' => '11.4',
-        'nullable' => true,
-      ),
-      'vlr_desc' => 
-      array (
-        'label' => 'Valor de Desconto',
-        'multiple' => 0,
-        'type' => 'decimal',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-        ),
-        'length' => '11.4',
-        'nullable' => true,
-      ),
-      'nro_parc' => 
-      array (
-        'label' => 'Número de Parcelas',
-        'multiple' => 0,
-        'type' => 'int',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-        ),
-        'length' => NULL,
-        'nullable' => true,
-      ),
-      'vlr_parc' => 
-      array (
-        'label' => 'Valor da Parcela',
-        'multiple' => 0,
-        'type' => 'decimal',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-        ),
-        'length' => '11.4',
-        'nullable' => true,
+        'nullable' => false,
       ),
     ),
     'dependentTables' => 
     array (
+      0 => 'Vendas_Model_ItemPedido',
+      1 => 'Vendas_Model_Pagamento',
+    ),
+    'tabs' => 
+    array (
+      0 => array('desc'=>'Itens'
+                ,'url'=>'/vendas/item-pedido/grid/tab/1/form/1'
+                ,'field'=>'id_pedido'),
+      1 => array('desc'=>'Pagamento'
+                ,'url'=>'/vendas/pagamento/form/tab/1'
+                ,'field'=>'id_pedido')
     ),
     'referenceMaps' => 
     array (
@@ -858,7 +717,9 @@ return array (
     ),
     'unique' => 
     array (
-       'tipo', 'numero', 'id_empresa'
+      0 => 'tipo',
+      1 => 'numero',
+      2 => 'id_empresa',
     ),
     'description' => 'Pedido',
   ),

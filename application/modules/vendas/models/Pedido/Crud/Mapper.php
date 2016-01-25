@@ -4,7 +4,7 @@
  */
 class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id','numero','tipo','id_usu_inc','id_empresa','id_funcionario','id_cliente');
+    protected $_required = array('id','numero','tipo','id_usu_inc','id_empresa','id_funcionario','id_cliente','status');
     protected $_model = 'Vendas_Model_Pedido_Table';
     public static $table = 'mais.cv_pedido';
     /**
@@ -58,6 +58,25 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+  0 => 
+  array (
+    'desc' => 'Itens',
+    'url' => '/vendas/item-pedido/grid/tab/1/form/1',
+    'field' => 'id_pedido',
+  ),
+  1 => 
+  array (
+    'desc' => 'Pagamento',
+    'url' => '/vendas/pagamento/form/tab/1',
+    'field' => 'id_pedido',
+  ),
+);
     }
     
     
@@ -392,182 +411,40 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna vlr_total
+     * Retorna os dados da coluna status
      *
      * @return string
      */
-    public function getVlrTotal($instance=false){
-        if ($instance && !is_object($this->_data['vlr_total'])){
-            $this->setVlrTotal('',array('required'=>false));
+    public function getStatus($instance=false){
+        if ($instance && !is_object($this->_data['status'])){
+            $this->setStatus('',array('required'=>false));
         }
-        return $this->_data['vlr_total'];
+        return $this->_data['status'];
     }
     /**
-     * Seta o valor da coluna vlr_total
+     * Seta o valor da coluna status
      *
      * @param string $value
      * @return Vendas_Model_Pedido_Crud_Mapper
      */
-    public function setVlrTotal($value,$options=array('required'=>true)){        
-        $this->_data['vlr_total'] = new ZendT_Type_String($value);
-        if ($options['db'])
-            $this->_data['vlr_total']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna pagamento
-     *
-     * @return string
-     */
-    public function getPagamento($instance=false){
-        if ($instance && !is_object($this->_data['pagamento'])){
-            $this->setPagamento('',array('required'=>false));
-        }
-        return $this->_data['pagamento'];
-    }
-    /**
-     * Seta o valor da coluna pagamento
-     *
-     * @param string $value
-     * @return Vendas_Model_Pedido_Crud_Mapper
-     */
-    public function setPagamento($value,$options=array('required'=>true)){        
+    public function setStatus($value,$options=array('required'=>true)){        
         
-        $options['listOptions']=array('D'=>'Crediário','C'=>'Cartão','Q'=>'Cheque','F'=>'Faturar');
-        $this->_data['pagamento'] = new ZendT_Type_String($value,$options);
+        $options['listOptions']=array('A'=>'Aberto','C'=>'Confirmado','E'=>'Efetivado');
+        $this->_data['status'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
-            $this->_data['pagamento']->setValueFromDb($value);
+            $this->_data['status']->setValueFromDb($value);
                 
         if (!$options['db']){
             
+         if ($options['required'])
+            $this->isRequired($value,'status');
+                    
             $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['pagamento']->getValueToDb();
+            $valueValid = $this->_data['status']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
                     
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna vlr_pago
-     *
-     * @return string
-     */
-    public function getVlrPago($instance=false){
-        if ($instance && !is_object($this->_data['vlr_pago'])){
-            $this->setVlrPago('',array('required'=>false));
-        }
-        return $this->_data['vlr_pago'];
-    }
-    /**
-     * Seta o valor da coluna vlr_pago
-     *
-     * @param string $value
-     * @return Vendas_Model_Pedido_Crud_Mapper
-     */
-    public function setVlrPago($value,$options=array('required'=>true)){        
-        $this->_data['vlr_pago'] = new ZendT_Type_String($value);
-        if ($options['db'])
-            $this->_data['vlr_pago']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna vlr_desc
-     *
-     * @return string
-     */
-    public function getVlrDesc($instance=false){
-        if ($instance && !is_object($this->_data['vlr_desc'])){
-            $this->setVlrDesc('',array('required'=>false));
-        }
-        return $this->_data['vlr_desc'];
-    }
-    /**
-     * Seta o valor da coluna vlr_desc
-     *
-     * @param string $value
-     * @return Vendas_Model_Pedido_Crud_Mapper
-     */
-    public function setVlrDesc($value,$options=array('required'=>true)){        
-        $this->_data['vlr_desc'] = new ZendT_Type_String($value);
-        if ($options['db'])
-            $this->_data['vlr_desc']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna nro_parc
-     *
-     * @return string
-     */
-    public function getNroParc($instance=false){
-        if ($instance && !is_object($this->_data['nro_parc'])){
-            $this->setNroParc('',array('required'=>false));
-        }
-        return $this->_data['nro_parc'];
-    }
-    /**
-     * Seta o valor da coluna nro_parc
-     *
-     * @param string $value
-     * @return Vendas_Model_Pedido_Crud_Mapper
-     */
-    public function setNroParc($value,$options=array('required'=>true)){        
-        $this->_data['nro_parc'] = new ZendT_Type_String($value);
-        if ($options['db'])
-            $this->_data['nro_parc']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna vlr_parc
-     *
-     * @return string
-     */
-    public function getVlrParc($instance=false){
-        if ($instance && !is_object($this->_data['vlr_parc'])){
-            $this->setVlrParc('',array('required'=>false));
-        }
-        return $this->_data['vlr_parc'];
-    }
-    /**
-     * Seta o valor da coluna vlr_parc
-     *
-     * @param string $value
-     * @return Vendas_Model_Pedido_Crud_Mapper
-     */
-    public function setVlrParc($value,$options=array('required'=>true)){        
-        $this->_data['vlr_parc'] = new ZendT_Type_String($value);
-        if ($options['db'])
-            $this->_data['vlr_parc']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
         }
         return $this;
     }

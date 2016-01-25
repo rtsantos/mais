@@ -235,104 +235,15 @@ class Vendas_Form_Pedido_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Seeker
-     */
-    public function getVlrTotal(){
-
-        $element = new ZendT_Form_Element_Seeker('id_cont_cli_vend');
-        $element->setSuffix('cont_cli_vend');
-        $element->setLabel($this->_translate->_('cv_pedido.id_cont_cli_vend') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/ca/pessoa/grid/profile_key/cont_vend');
-        $element->url()->setSearch('/ca/pessoa/seeker-search/profile_key/cont_vend');
-        $element->url()->setRetrieve('/ca/pessoa/retrieve/profile_key/cont_vend');
-        $element->setMapperView('Ca_DataView_Pessoa_MapperView');
-        $element->addValidators(array());
-                
-        return $element;
-    }
-            
-    /**
-     *
      * @return \ZendT_Form_Element_Select
      */
-    public function getPagamento(){
+    public function getStatus(){
 
-        $element = new ZendT_Form_Element_Select('pagamento');
-        $element->setLabel($this->_translate->_('cv_pedido.pagamento') . ':');
-        $element->addMultiOption('D', 'Crediário');
-        $element->addMultiOption('C', 'Cartão');
-        $element->addMultiOption('Q', 'Cheque');
-        $element->addMultiOption('F', 'Faturar');        
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Select
-     */
-    public function getVlrPago(){
-
-        $element = new ZendT_Form_Element_Select('pagamento');
-        $element->setLabel($this->_translate->_('cv_pedido.pagamento') . ':');
-        $element->addMultiOption('D', 'Crediário');
-        $element->addMultiOption('C', 'Cartão');
-        $element->addMultiOption('Q', 'Cheque');
-        $element->addMultiOption('F', 'Faturar');        
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Select
-     */
-    public function getVlrDesc(){
-
-        $element = new ZendT_Form_Element_Select('pagamento');
-        $element->setLabel($this->_translate->_('cv_pedido.pagamento') . ':');
-        $element->addMultiOption('D', 'Crediário');
-        $element->addMultiOption('C', 'Cartão');
-        $element->addMultiOption('Q', 'Cheque');
-        $element->addMultiOption('F', 'Faturar');        
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Select
-     */
-    public function getNroParc(){
-
-        $element = new ZendT_Form_Element_Select('pagamento');
-        $element->setLabel($this->_translate->_('cv_pedido.pagamento') . ':');
-        $element->addMultiOption('D', 'Crediário');
-        $element->addMultiOption('C', 'Cartão');
-        $element->addMultiOption('Q', 'Cheque');
-        $element->addMultiOption('F', 'Faturar');        
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Select
-     */
-    public function getVlrParc(){
-
-        $element = new ZendT_Form_Element_Select('pagamento');
-        $element->setLabel($this->_translate->_('cv_pedido.pagamento') . ':');
-        $element->addMultiOption('D', 'Crediário');
-        $element->addMultiOption('C', 'Cartão');
-        $element->addMultiOption('Q', 'Cheque');
-        $element->addMultiOption('F', 'Faturar');        
+        $element = new ZendT_Form_Element_Select('status');
+        $element->setLabel($this->_translate->_('cv_pedido.status') . ':');
+        $element->addMultiOption('A', 'Aberto');
+        $element->addMultiOption('C', 'Confirmado');
+        $element->addMultiOption('E', 'Efetivado');        
                 
         return $element;
     }

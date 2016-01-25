@@ -43,6 +43,13 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
                     'column' => 'id'
                 ));
     }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
+    }
     
     
     /**
@@ -228,10 +235,10 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
      * @return Ca_Model_RegraContrato_Crud_Mapper
      */
     public function setVlrFixo($value,$options=array('required'=>true)){        
-        $this->_data['vlr_fixo'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_fixo'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_fixo']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }
@@ -257,10 +264,10 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
      * @return Ca_Model_RegraContrato_Crud_Mapper
      */
     public function setVlrMin($value,$options=array('required'=>true)){        
-        $this->_data['vlr_min'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_min'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_min']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }
@@ -286,10 +293,10 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
      * @return Ca_Model_RegraContrato_Crud_Mapper
      */
     public function setVlrPerc($value,$options=array('required'=>true)){        
-        $this->_data['vlr_perc'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_perc'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_perc']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }

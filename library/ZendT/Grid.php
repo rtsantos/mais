@@ -1037,7 +1037,7 @@ class ZendT_Grid implements ZendT_JS_Interface {
 
     /**
      *
-     * @var type ZendT_Grid_Toolbar
+     * @var ZendT_Grid_Toolbar
      */
     private $_objToolbar;
 

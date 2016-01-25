@@ -14,8 +14,9 @@ class Vendas_Model_Produto_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
-                'Vendas_Model_CaRegraContrato_Table',
-                'Vendas_Model_CvProduto_Table');
+                'Ca_Model_RegraContrato_Table',
+                'Vendas_Model_ItemPedido_Table',
+                'Vendas_Model_Produto_Table');
     protected $_referenceMap = array(
                 'IdCliente' => array(
                     'columns' => 'id_cliente',

@@ -10,6 +10,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_ca_numeracao');
             
     
             $model = new Ca_Form_Numeracao_Elements();
@@ -33,6 +34,11 @@
 
             
             $element = $model->getElement('tamanho');
+            $element->setRequired(true);
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_empresa');
             $element->setRequired(true);
             $this->addElement($element);
 

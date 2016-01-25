@@ -2,7 +2,7 @@
     class Ca_PessoaController extends ZendT_Controller_ActionCrud {
         public function init() {
             $this->_init();
-            $this->_startupAcl();
+            //$this->_startupAcl();
             $this->_serviceName = 'Ca_Service_Pessoa';            
             $this->_formName = 'Ca_Form_Pessoa_Edit';
             $this->_formSearchName = 'Ca_Form_Pessoa_Search';            

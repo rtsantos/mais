@@ -53,12 +53,12 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','numero','tipo','id_usu_inc','nome_usu_inc','id_usu_alt','nome_usu_alt','id_empresa','nome_empresa','id_funcionario','nome_funcionario','id_cliente','nome_cliente','id_cont_cli_resp','nome_cont_cli_resp','id_cont_cli_vend','nome_cont_cli_vend','vlr_total','pagamento','vlr_pago','vlr_desc','nro_parc','vlr_parc');
-           $profile['width'] = array('id'=>100,'numero'=>100,'tipo'=>150,'id_usu_inc'=>120,'nome_usu_inc'=>200,'id_usu_alt'=>120,'nome_usu_alt'=>200,'id_empresa'=>120,'nome_empresa'=>200,'id_funcionario'=>120,'nome_funcionario'=>200,'id_cliente'=>120,'nome_cliente'=>200,'id_cont_cli_resp'=>120,'nome_cont_cli_resp'=>200,'id_cont_cli_vend'=>120,'nome_cont_cli_vend'=>200,'vlr_total'=>200,'pagamento'=>150,'vlr_pago'=>200,'vlr_desc'=>200,'nro_parc'=>200,'vlr_parc'=>200);
-           $profile['align'] = array('id'=>'left','numero'=>'left','tipo'=>'center','id_usu_inc'=>'left','nome_usu_inc'=>'left','id_usu_alt'=>'left','nome_usu_alt'=>'left','id_empresa'=>'left','nome_empresa'=>'left','id_funcionario'=>'left','nome_funcionario'=>'left','id_cliente'=>'left','nome_cliente'=>'left','id_cont_cli_resp'=>'left','nome_cont_cli_resp'=>'left','id_cont_cli_vend'=>'left','nome_cont_cli_vend'=>'left','vlr_total'=>'left','pagamento'=>'center','vlr_pago'=>'left','vlr_desc'=>'left','nro_parc'=>'left','vlr_parc'=>'left');
+           $profile['order'] = array('id','numero','tipo','id_usu_inc','nome_usu_inc','id_usu_alt','nome_usu_alt','id_empresa','nome_empresa','id_funcionario','nome_funcionario','id_cliente','nome_cliente','id_cont_cli_resp','nome_cont_cli_resp','id_cont_cli_vend','nome_cont_cli_vend','status');
+           $profile['width'] = array('id'=>100,'numero'=>100,'tipo'=>150,'id_usu_inc'=>120,'nome_usu_inc'=>200,'id_usu_alt'=>120,'nome_usu_alt'=>200,'id_empresa'=>120,'nome_empresa'=>200,'id_funcionario'=>120,'nome_funcionario'=>200,'id_cliente'=>120,'nome_cliente'=>200,'id_cont_cli_resp'=>120,'nome_cont_cli_resp'=>200,'id_cont_cli_vend'=>120,'nome_cont_cli_vend'=>200,'status'=>150);
+           $profile['align'] = array('id'=>'left','numero'=>'left','tipo'=>'center','id_usu_inc'=>'left','nome_usu_inc'=>'left','id_usu_alt'=>'left','nome_usu_alt'=>'left','id_empresa'=>'left','nome_empresa'=>'left','id_funcionario'=>'left','nome_funcionario'=>'left','id_cliente'=>'left','nome_cliente'=>'left','id_cont_cli_resp'=>'left','nome_cont_cli_resp'=>'left','id_cont_cli_vend'=>'left','nome_cont_cli_vend'=>'left','status'=>'center');
            $profile['hidden'] = array('id_usu_inc','id_usu_alt','id_empresa','id_funcionario','id_cliente','id_cont_cli_resp','id_cont_cli_vend');
            $profile['remove'] = array();
-           $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'pagamento'=>$this->getModel()->getListOptions('pagamento'));
+           $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'status'=>$this->getModel()->getListOptions('status'));
            return $profile;
         }
         /**
@@ -84,12 +84,7 @@
             $this->_columns->add('nome_cont_cli_resp', 'cont_cli_resp', 'nome', $this->_getPessoa()->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.id_cont_cli_resp.ca_pessoa.nome'),null,'?%');
             $this->_columns->add('id_cont_cli_vend', 'cv_pedido', 'id_cont_cli_vend', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.id_cont_cli_vend'), null, '=');
             $this->_columns->add('nome_cont_cli_vend', 'cont_cli_vend', 'nome', $this->_getPessoa()->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.id_cont_cli_vend.ca_pessoa.nome'),null,'?%');
-            $this->_columns->add('vlr_total', 'cv_pedido', 'vlr_total', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.vlr_total'),'String','%?%');
-            $this->_columns->add('pagamento', 'cv_pedido', 'pagamento', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.pagamento'),'String','=');
-            $this->_columns->add('vlr_pago', 'cv_pedido', 'vlr_pago', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.vlr_pago'),'String','%?%');
-            $this->_columns->add('vlr_desc', 'cv_pedido', 'vlr_desc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.vlr_desc'),'String','%?%');
-            $this->_columns->add('nro_parc', 'cv_pedido', 'nro_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.nro_parc'),'String','%?%');
-            $this->_columns->add('vlr_parc', 'cv_pedido', 'vlr_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.vlr_parc'),'String','%?%');
+            $this->_columns->add('status', 'cv_pedido', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.status'),'String','=');
 
         }
         /**

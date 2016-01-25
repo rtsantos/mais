@@ -6,15 +6,15 @@ class Ca_Model_Contrato_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CA_CONTRATO';
     protected $_sequence = 'SID_CA_CONTRATO';
-    protected $_required = array('ID','DESCRICAO','DT_VIG_INI','ID_CLIENTE','STATUS');
+    protected $_required = array('ID','DESCRICAO','NUMERO','STATUS','ID_EMPRESA','ID_CLIENTE','DT_VIG_INI');
     protected $_primary = array('ID');
-    protected $_unique = array('DESCRICAO','ID_EMPRESA','DT_VIG_INI','STATUS');
-    protected $_cols = array('ID','DESCRICAO','DT_VIG_INI','DT_VIG_FIM','ID_CLIENTE','STATUS','ID_EMPRESA');
-    protected $_search = 'descricao';
+    protected $_unique = array('DESCRICAO','ID_EMPRESA');
+    protected $_cols = array('ID','DESCRICAO','NUMERO','STATUS','ID_EMPRESA','ID_CLIENTE','DT_VIG_INI','DT_VIG_FIM');
+    protected $_search = 'numero';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
-                'Ca_Model_CaRegraContrato_Table');
+                'Ca_Model_RegraContrato_Table');
     protected $_referenceMap = array(
                 'IdCliente' => array(
                     'columns' => 'id_cliente',

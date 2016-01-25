@@ -1,0 +1,30 @@
+<?php
+
+   if (count($this->tabs) > 0 && $this->typeModal != 'AJAX' && Zend_Layout::getMvcInstance()->getLayout() != 'window') {
+
+       $idGrid = $this->grid->getID();
+       $_tab = new ZendT_View_Tabs('tab_' . $this->grid->getID());
+       $_tab->addTab($this->screenName, $this->grid);
+
+       foreach ($this->tabs as $name => $tab) {
+           $_tab->addTabUrl($tab['description']
+                 , new ZendT_JS_Command("function(){ "
+                 . "  var value = $('#" . $this->grid->getID() . "'); "
+                 . "  if (value){"
+                 . "      value = value.jqGrid('getGridParam','selrow'); "
+                 . "  }"
+                 . "  if (!value){"
+                 . "      alert('" . $tab['message'] . "');"
+                 . "      return false;"
+                 . "  }"
+                 . "  var url = '" . ZendT_Url::getBaseUrl() . $tab['url'] . "'; "
+                 . "  url = url + '?" . $tab['column'] . "=' + value; "
+                 . "  url = url + '&typeModal=AJAX'; "
+                 . "  return url; "
+                 . "}"));
+       }
+
+       echo $_tab->render();
+   } else {
+       echo $this->grid;
+   }

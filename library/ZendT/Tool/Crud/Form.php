@@ -83,6 +83,8 @@ class ZendT_Tool_Crud_Form {
             \$this->addElement(\$element);
             ";
         }
+        
+        $formName = strtolower($config['table']['name']);
 
         $contentText = <<<EOS
 <?php
@@ -97,6 +99,7 @@ class ZendT_Tool_Crud_Form {
          * @return void
          */
         public function loadElements(\$action='insert') {
+            \$this->setName('frm_{$formName}');
             {$elementId}
     
             \$model = new {$ucModuleName}_Form_{$modelName}_Elements();

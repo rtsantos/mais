@@ -181,12 +181,80 @@ return array (
         'length' => NULL,
         'nullable' => false,
       ),
+      'id_empresa' => 
+      array (
+        'label' => 'Empresa',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'nome',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/pessoa/grid',
+              'search' => '/ca/pessoa/seeker-search',
+              'retrieve' => '/ca/pessoa/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => true,
+        ),
+        'length' => NULL,
+        'nullable' => false,
+      ),
     ),
     'dependentTables' => 
     array (
     ),
     'referenceMaps' => 
     array (
+      0 => 
+      array (
+        'columnName' => 'id_empresa',
+        'objectNameReference' => 'Ca_Model_Pessoa',
+        'tableNameReference' => 'ca_pessoa',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
     ),
     'primary' => 
     array (
@@ -194,9 +262,11 @@ return array (
     ),
     'unique' => 
     array (
-       'nome','id_empresa'
+      0 => 'nome',
+      1 => 'id_empresa',
     ),
     'description' => 'Numeração',
+    'tabs' => NULL,
   ),
 )
 ?>

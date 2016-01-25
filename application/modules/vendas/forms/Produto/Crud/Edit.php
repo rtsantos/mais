@@ -10,6 +10,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_cv_produto');
             
     
             $model = new Vendas_Form_Produto_Elements();

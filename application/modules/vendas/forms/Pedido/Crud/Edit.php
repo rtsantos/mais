@@ -10,6 +10,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_cv_pedido');
             
     
             $model = new Vendas_Form_Pedido_Elements();
@@ -64,27 +65,8 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('vlr_total');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('pagamento');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('vlr_pago');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('vlr_desc');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('nro_parc');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('vlr_parc');
+            $element = $model->getElement('status');
+            $element->setRequired(true);
             $this->addElement($element);
 
             

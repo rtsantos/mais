@@ -31,7 +31,8 @@ class ZendT_Tool_Crud_View {
 
         $contentText = <<<EOS
 <?php
-    echo \$this->grid;
+    include APPLICATION_PATH.'/views/scripts/index/grid.phtml';
+    /*echo \$this->grid;*/
 ?>
 EOS;
         if (!file_exists($filename)) {
@@ -61,7 +62,8 @@ EOS;
 
         $contentText = <<<EOS
 <?php
-    echo \$this->form;
+    include APPLICATION_PATH.'/views/scripts/index/form.phtml';
+    /*echo \$this->grid;*/
 ?>
 EOS;
         if (!file_exists($filename)) {

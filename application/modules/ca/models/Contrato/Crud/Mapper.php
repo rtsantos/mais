@@ -4,7 +4,7 @@
  */
 class Ca_Model_Contrato_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id','descricao','dt_vig_ini','id_cliente','status');
+    protected $_required = array('id','descricao','numero','status','id_empresa','id_cliente','dt_vig_ini');
     protected $_model = 'Ca_Model_Contrato_Table';
     public static $table = 'mais.ca_contrato';
     /**
@@ -38,6 +38,20 @@ class Ca_Model_Contrato_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+  0 => 
+  array (
+    'description' => 'Regras do Contrato',
+    'url' => '/ca/regra-contrato/form/grid/1',
+    'column' => 'id_contrato',
+    'message' => 'Necessário seleção Contrato',
+  ),
+);
     }
     
     
@@ -117,92 +131,42 @@ class Ca_Model_Contrato_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna dt_vig_ini
+     * Retorna os dados da coluna numero
      *
      * @return string
      */
-    public function getDtVigIni($instance=false){
-        if ($instance && !is_object($this->_data['dt_vig_ini'])){
-            $this->setDtVigIni('',array('required'=>false));
+    public function getNumero($instance=false){
+        if ($instance && !is_object($this->_data['numero'])){
+            $this->setNumero('',array('required'=>false));
         }
-        return $this->_data['dt_vig_ini'];
+        return $this->_data['numero'];
     }
     /**
-     * Seta o valor da coluna dt_vig_ini
+     * Seta o valor da coluna numero
      *
      * @param string $value
      * @return Ca_Model_Contrato_Crud_Mapper
      */
-    public function setDtVigIni($value,$options=array('required'=>true)){        
-        $this->_data['dt_vig_ini'] = new ZendT_Type_Date($value,'Date');
-         if ($options['db'])
-            $this->_data['dt_vig_ini']->setValueFromDb($value);
-                    
+    public function setNumero($value,$options=array('required'=>true)){        
+        $this->_data['numero'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['numero']->setValueFromDb($value);
+                
         if (!$options['db']){
             
          if ($options['required'])
-            $this->isRequired($value,'dt_vig_ini');
+            $this->isRequired($value,'numero');
                     
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna dt_vig_fim
-     *
-     * @return string
-     */
-    public function getDtVigFim($instance=false){
-        if ($instance && !is_object($this->_data['dt_vig_fim'])){
-            $this->setDtVigFim('',array('required'=>false));
-        }
-        return $this->_data['dt_vig_fim'];
-    }
-    /**
-     * Seta o valor da coluna dt_vig_fim
-     *
-     * @param string $value
-     * @return Ca_Model_Contrato_Crud_Mapper
-     */
-    public function setDtVigFim($value,$options=array('required'=>true)){        
-        $this->_data['dt_vig_fim'] = new ZendT_Type_Date($value,'Date');
-         if ($options['db'])
-            $this->_data['dt_vig_fim']->setValueFromDb($value);
-                    
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna id_cliente
-     *
-     * @return string
-     */
-    public function getIdCliente($instance=false){
-        if ($instance && !is_object($this->_data['id_cliente'])){
-            $this->setIdCliente('',array('required'=>false));
-        }
-        return $this->_data['id_cliente'];
-    }
-    /**
-     * Seta o valor da coluna id_cliente
-     *
-     * @param string $value
-     * @return Ca_Model_Contrato_Crud_Mapper
-     */
-    public function setIdCliente($value,$options=array('required'=>true)){        
-        $this->_data['id_cliente'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
-         if ($options['db'])
-            $this->_data['id_cliente']->setValueFromDb($value);
-                    
-        if (!$options['db']){
-            
-         if ($options['required'])
-            $this->isRequired($value,'id_cliente');
+            $valid = new Zend_Validate_StringLength(array (   'max' => 10, ) );
+            $valueValid = $this->_data['numero']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
                     
         }
         return $this;
@@ -270,6 +234,102 @@ class Ca_Model_Contrato_Crud_Mapper extends ZendT_Db_Mapper
         $this->_data['id_empresa'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_empresa']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+         if ($options['required'])
+            $this->isRequired($value,'id_empresa');
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_cliente
+     *
+     * @return string
+     */
+    public function getIdCliente($instance=false){
+        if ($instance && !is_object($this->_data['id_cliente'])){
+            $this->setIdCliente('',array('required'=>false));
+        }
+        return $this->_data['id_cliente'];
+    }
+    /**
+     * Seta o valor da coluna id_cliente
+     *
+     * @param string $value
+     * @return Ca_Model_Contrato_Crud_Mapper
+     */
+    public function setIdCliente($value,$options=array('required'=>true)){        
+        $this->_data['id_cliente'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_cliente']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+         if ($options['required'])
+            $this->isRequired($value,'id_cliente');
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna dt_vig_ini
+     *
+     * @return string
+     */
+    public function getDtVigIni($instance=false){
+        if ($instance && !is_object($this->_data['dt_vig_ini'])){
+            $this->setDtVigIni('',array('required'=>false));
+        }
+        return $this->_data['dt_vig_ini'];
+    }
+    /**
+     * Seta o valor da coluna dt_vig_ini
+     *
+     * @param string $value
+     * @return Ca_Model_Contrato_Crud_Mapper
+     */
+    public function setDtVigIni($value,$options=array('required'=>true)){        
+        $this->_data['dt_vig_ini'] = new ZendT_Type_Date($value,'Date');
+         if ($options['db'])
+            $this->_data['dt_vig_ini']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+         if ($options['required'])
+            $this->isRequired($value,'dt_vig_ini');
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna dt_vig_fim
+     *
+     * @return string
+     */
+    public function getDtVigFim($instance=false){
+        if ($instance && !is_object($this->_data['dt_vig_fim'])){
+            $this->setDtVigFim('',array('required'=>false));
+        }
+        return $this->_data['dt_vig_fim'];
+    }
+    /**
+     * Seta o valor da coluna dt_vig_fim
+     *
+     * @param string $value
+     * @return Ca_Model_Contrato_Crud_Mapper
+     */
+    public function setDtVigFim($value,$options=array('required'=>true)){        
+        $this->_data['dt_vig_fim'] = new ZendT_Type_Date($value,'Date');
+         if ($options['db'])
+            $this->_data['dt_vig_fim']->setValueFromDb($value);
                     
         if (!$options['db']){
             

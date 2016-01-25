@@ -10,7 +10,8 @@
 
            if ($this->_action == 'insert' && !$this->getNumero(true)->toPhp()) {
                $_numeracao = new Ca_Model_Numeracao_Mapper();
-               $numero = $_numeracao->proximo(self::$table . '.numero');
+               $numero = $_numeracao->proximo(self::$table . '.numero'
+                                             ,$this->getIdEmpresa()->toPhp());
                $this->setNumero($numero);
            }
        }

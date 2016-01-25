@@ -6,15 +6,20 @@ class Ca_Model_Numeracao_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CA_NUMERACAO';
     protected $_sequence = 'SID_CA_NUMERACAO';
-    protected $_required = array('ID','NOME','NUMERO','TAMANHO');
+    protected $_required = array('ID','NOME','NUMERO','TAMANHO','ID_EMPRESA');
     protected $_primary = array('ID');
     protected $_unique = array('NOME','ID_EMPRESA');
-    protected $_cols = array('ID','NOME','NUMERO','TAMANHO');
+    protected $_cols = array('ID','NOME','NUMERO','TAMANHO','ID_EMPRESA');
     protected $_search = 'nome';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
-    protected $_referenceMap = array();
+    protected $_referenceMap = array(
+                'IdEmpresa' => array(
+                    'columns' => 'id_empresa',
+                    'refTableClass' => 'Ca_Model_Pessoa_Table',
+                    'refColumns' => 'id'
+                ));
     protected $_listOptions = array();
     protected $_mapper = 'Ca_Model_Numeracao_Mapper';
     protected $_element = 'Ca_Form_Numeracao_Elements';

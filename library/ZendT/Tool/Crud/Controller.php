@@ -31,16 +31,15 @@ class ZendT_Tool_Crud_Controller {
         }
         ZendT_Lib::createDirectory($pathBase, $path);
         $filename = $path . '/' . $modelName . 'Controller.php';
-
+        
         $contentText = "<?php
     class {$moduleControllerName} extends ZendT_Controller_ActionCrud {
         public function init() {
             \$this->_init();
-            //\$this->_startupAcl();
-            \$this->_serviceName = '{$ucModuleName}_Service_{$modelName}';            
+            //\$this->_startupAcl();            
             \$this->_formName = '{$ucModuleName}_Form_{$modelName}_Edit';
-            \$this->_formSearchName = '{$ucModuleName}_Form_{$modelName}_Search';            
             \$this->_mapper = new {$ucModuleName}_DataView_{$modelName}_MapperView();
+            \$this->view->tabs = \$this->_mapper->getTabs();
             /**
              * Configuração do Grid
              */
@@ -63,6 +62,7 @@ class ZendT_Tool_Crud_Controller {
         if ($replace === null || $replace === true) {
             file_put_contents($filename, $contentText);
         }
+        //file_put_contents($filename, $contentText);
     }
     
     /**

@@ -43,6 +43,34 @@ class Vendas_Model_Produto_Crud_Mapper extends ZendT_Db_Mapper
                     'column' => 'id'
                 ));
     }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+  0 => 
+  array (
+    'description' => 'Regras do Contrato',
+    'url' => '/ca/regra-contrato/grid',
+    'column' => 'id_produto',
+    'message' => 'Necessário seleção Produto/Serviço',
+  ),
+  1 => 
+  array (
+    'description' => 'Itens do Pedido/Serviço',
+    'url' => '/vendas/item-pedido/grid',
+    'column' => 'id_produto',
+    'message' => 'Necessário seleção Produto/Serviço',
+  ),
+  2 => 
+  array (
+    'description' => 'Produto/Serviço',
+    'url' => '/vendas/produto/grid',
+    'column' => 'id_produto_resp',
+    'message' => 'Necessário seleção Produto/Serviço',
+  ),
+);
+    }
     
     
     /**
@@ -261,10 +289,10 @@ class Vendas_Model_Produto_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_Produto_Crud_Mapper
      */
     public function setVlrVenda($value,$options=array('required'=>true)){        
-        $this->_data['vlr_venda'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_venda'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_venda']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
          if ($options['required'])
@@ -293,10 +321,10 @@ class Vendas_Model_Produto_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_Produto_Crud_Mapper
      */
     public function setVlrCompra($value,$options=array('required'=>true)){        
-        $this->_data['vlr_compra'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_compra'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_compra']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }
@@ -359,10 +387,10 @@ class Vendas_Model_Produto_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_Produto_Crud_Mapper
      */
     public function setQtdEstoque($value,$options=array('required'=>true)){        
-        $this->_data['qtd_estoque'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['qtd_estoque'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['qtd_estoque']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }

@@ -78,5 +78,29 @@ class Ca_Form_Numeracao_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdEmpresa(){
+
+        $element = new ZendT_Form_Element_Seeker('id_empresa');
+        $element->setSuffix('empresa');
+        $element->setLabel($this->_translate->_('ca_numeracao.id_empresa') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('nome');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/ca/pessoa/grid');
+        $element->url()->setSearch('/ca/pessoa/seeker-search');
+        $element->url()->setRetrieve('/ca/pessoa/retrieve');
+        $element->setMapperView('Ca_DataView_Pessoa_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
 }
 ?>

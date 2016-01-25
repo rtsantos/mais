@@ -33,6 +33,10 @@ class ZendT_Tool_Crud_Element {
 
         $strBody = '';
         foreach ($config['table']['columns'] as $column => $prop) {
+            
+            //echo $column . ' :: ' . $prop['object']['type'] . "\n";
+            
+            
             if (strpos($column, '_type') !== false || strpos($column, '_name') !== false) {
                 $name = str_replace(array('_type', '_name'), '', $column);
                 $_propLob = $config['table']['columns'][$name];
@@ -255,7 +259,7 @@ class ZendT_Tool_Crud_Element {
         \$element->enableMultiple(false);
         \$element->addValidators({$strValidators});
                 ";
-            }elseif ($prop['object']['type'] == 'Numeric') {
+            }elseif ($prop['object']['type'] == 'Numeric' || $prop['object']['type'] == 'Decimal' || $prop['object']['type'] == 'decimal') {
                 $strAttrbs = '';
                 foreach ($prop['object']['numeric'] as $key => $value) {
                     if (!in_array($key, array('numDecimal', 'numInteger'))) {

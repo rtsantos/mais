@@ -10,7 +10,8 @@
 
            if ($this->_action == 'insert' && !$this->getCodigo(true)->toPhp()) {
                $_numeracao = new Ca_Model_Numeracao_Mapper();
-               $codigo = $_numeracao->proximo(self::$table . '.codigo');
+               $codigo = $_numeracao->proximo(self::$table . '.codigo'
+                                             ,$this->getIdEmpresa());
                $this->setCodigo($codigo);
            }
        }

@@ -94,29 +94,33 @@ class Vendas_Form_Produto_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Text
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrVenda(){
 
-        $element = new ZendT_Form_Element_Text('apelido');
-        $element->setLabel($this->_translate->_('cv_produto.apelido') . ':');
-        $element->setAttribs(array('maxlength'=>'45','css-width'=>'200px'));        
-        $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        $element = new ZendT_Form_Element_Numeric('vlr_venda');
+        $element->setLabel($this->_translate->_('cv_produto.vlr_venda') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
+                
         return $element;
     }
             
     /**
      *
-     * @return \ZendT_Form_Element_Text
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrCompra(){
 
-        $element = new ZendT_Form_Element_Text('apelido');
-        $element->setLabel($this->_translate->_('cv_produto.apelido') . ':');
-        $element->setAttribs(array('maxlength'=>'45','css-width'=>'200px'));        
-        $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        $element = new ZendT_Form_Element_Numeric('vlr_compra');
+        $element->setLabel($this->_translate->_('cv_produto.vlr_compra') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
+                
         return $element;
     }
             
@@ -138,16 +142,16 @@ class Vendas_Form_Produto_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Select
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getQtdEstoque(){
 
-        $element = new ZendT_Form_Element_Select('medida');
-        $element->setLabel($this->_translate->_('cv_produto.medida') . ':');
-        $element->addMultiOption('Q', 'Quantidade');
-        $element->addMultiOption('M', 'Metro');
-        $element->addMultiOption('K', 'Kilo');
-        $element->addMultiOption('L', 'Litro');        
+        $element = new ZendT_Form_Element_Numeric('qtd_estoque');
+        $element->setLabel($this->_translate->_('cv_produto.qtd_estoque') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
                 
         return $element;
     }

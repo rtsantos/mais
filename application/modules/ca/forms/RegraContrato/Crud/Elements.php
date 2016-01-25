@@ -126,42 +126,48 @@ class Ca_Form_RegraContrato_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Select
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrFixo(){
 
-        $element = new ZendT_Form_Element_Select('status');
-        $element->setLabel($this->_translate->_('ca_regra_contrato.status') . ':');
-        $element->addMultiOption('A', 'Ativo');
-        $element->addMultiOption('I', 'Inativo');        
+        $element = new ZendT_Form_Element_Numeric('vlr_fixo');
+        $element->setLabel($this->_translate->_('ca_regra_contrato.vlr_fixo') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
                 
         return $element;
     }
             
     /**
      *
-     * @return \ZendT_Form_Element_Select
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrMin(){
 
-        $element = new ZendT_Form_Element_Select('status');
-        $element->setLabel($this->_translate->_('ca_regra_contrato.status') . ':');
-        $element->addMultiOption('A', 'Ativo');
-        $element->addMultiOption('I', 'Inativo');        
+        $element = new ZendT_Form_Element_Numeric('vlr_min');
+        $element->setLabel($this->_translate->_('ca_regra_contrato.vlr_min') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
                 
         return $element;
     }
             
     /**
      *
-     * @return \ZendT_Form_Element_Select
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrPerc(){
 
-        $element = new ZendT_Form_Element_Select('status');
-        $element->setLabel($this->_translate->_('ca_regra_contrato.status') . ':');
-        $element->addMultiOption('A', 'Ativo');
-        $element->addMultiOption('I', 'Inativo');        
+        $element = new ZendT_Form_Element_Numeric('vlr_perc');
+        $element->setLabel($this->_translate->_('ca_regra_contrato.vlr_perc') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','4');
+        $element->addValidators(array());
                 
         return $element;
     }
