@@ -225,6 +225,7 @@
            } else {
                $config = require ($fileName);
            }
+           
            $config['table']['seeker']['field']['id'] = array();
            $this->_connect($this->_loadedProfile, $adapter, $env);
 
@@ -318,6 +319,16 @@
                $config['table']['dependentTables'] = $_dependentTables;               
                $config['table']['tabs'] = $_tabs;
            }
+           
+           
+           if (!isset($config['table']['form'])){
+               $config['table']['form']['url']['retrieve'] = "/$module/$controllerName/retrieve";
+               $config['table']['form']['url']['insert'] = "/$module/$controllerName/insert";
+               $config['table']['form']['url']['update'] = "/$module/$controllerName/update";
+               $config['table']['form']['url']['delete'] = "/$module/$controllerName/delete";
+           }
+           
+           
            unset($describeModel['REFERENCE_MAP']);
            unset($describeModel['DEPENDENT_TABLES']);
 

@@ -172,5 +172,20 @@ class Ca_Form_RegraContrato_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Select
+     */
+    public function getTipo(){
+
+        $element = new ZendT_Form_Element_Select('tipo');
+        $element->setLabel($this->_translate->_('ca_regra_contrato.tipo') . ':');
+        $element->addMultiOption('PA', 'Acréscimo de Preço');
+        $element->addMultiOption('PD', 'Desconto de Preço');
+        $element->addMultiOption('CD', 'Custeio de Débito');        
+                
+        return $element;
+    }
+            
 }
 ?>

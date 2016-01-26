@@ -14,7 +14,7 @@
  *      Não há opções
  *
  */
-(function($) {
+(function ($) {
     $.widget('ta.TForm', {
         options: {
             url: {
@@ -24,12 +24,10 @@
                 delete: ''
             }
         },
-        
-        _create: function() {
+        _create: function () {
 
         },
-        
-        populate: function(data) {
+        populate: function (data) {
             var form = this.element[0];
             for (var field in data) {
                 try {
@@ -73,7 +71,7 @@
                              * Verifica se o campo possui instancia para o TSeeker
                              */
                             if ($(objField).Tdata('TSeeker')) {
-							    $(objField).Tdata('TSeeker').buttonNoFocus();
+                                $(objField).Tdata('TSeeker').buttonNoFocus();
                                 objField.valueold = objField.value;
                             }
                         }
@@ -83,12 +81,11 @@
                         $('#' + field.toLowerCase()).trigger('change');
                     }
                 } catch (ex) {
-                    
+
                 }
             }
         },
-        
-        retrieve: function(options) {
+        retrieve: function (options) {
             var self = this;
             if (typeof options == 'string') {
                 options = {
@@ -97,42 +94,143 @@
             }
 
             if (!options.url) {
-                options.url = this.options.url.retrieve;
+                options.url = self.options.url.retrieve;
             }
             if (!options.data) {
                 options.data = 'id=' + options.id;
             }
+            if (!options.before) {
+                options.before = function (result) {
+                    return true;
+                }
+            }
+            if (!options.after) {
+                options.after = function (result) {
+                    return true;
+                }
+            }
             jQuery.AjaxT.json({
                 url: options.url,
                 data: options.data,
-                success: function(result) {
+                success: function (result) {
+                    options.before(result);
                     self.populate(result);
+                    options.after(result);
                 }
             });
         },
-        
-        saveAjax: function(){
-            var self = this;
-            var id = self.find('#id').val();
-            if (id == ''){
-                self.attr('action',options.url.insert);
-            }else{
-                self.attr('action',options.url.update);
+        save: function (options) {
+            if (!options) {
+                options = {};
             }
-            jQuery.AjaxT.submitJson({selector: self});
-        },
-        
-        deleteAjax: function(){
             var self = this;
-            var id = self.find('#id').val();
-            if (id == ''){
+            var id = jQuery('#' + self.element.attr('id') + ' #id');
 
-            }else{
+            if (!options.success) {
+                options.success = function (result) {
+                    if (options.grid) {
+                        var grid = jQuery(options.grid);
+                        if (!grid) {
+                            grid = jQuery(options.grid, top.opener.document);
+                        }
+                        if (!grid) {
+                            grid = jQuery(options.grid, top.document);
+                        }
+                        grid.trigger('reloadGrid');
+                    }
+                    id.val(result.id);
+                };
+            }
+
+            if (id.val() == '') {
+                self.element.attr('action', self.options.url.insert + '/json/1');
+            } else {
+                self.element.attr('action', self.options.url.update + '/json/1');
+            }
+            jQuery.AjaxT.submitJson({selector: '#' + self.element.attr('id'), success: options.success});
+        },
+        delete: function (options) {
+            if (!options) {
+                options = {};
+            }
+            if (!options.url) {
+                options.url = self.options.url.delete;
+            }
+            if (!options.success) {
+                options.success = function () {
+                    var grid = jQuery(options.grid);
+                    if (!grid) {
+                        grid = jQuery(options.grid, top.opener.document);
+                    }
+                    if (!grid) {
+                        grid = jQuery(options.grid, top.document);
+                    }
+                    grid.trigger('reloadGrid');
+                    return true;
+                };
+            }
+            var self = this;
+            var id = jQuery('#' + self.element.attr('id') + ' #id');
+            if (id.val() == '') {
+                jQuery.DialogT.open('Necessário estar posicionado no registro!', 'Alert');
+                return false;
+            } else {
                 jQuery.AjaxT.json({
-                    url: options.url.delete,
-                    param: 'id=' + id
+                    url: options.url,
+                    param: 'id=' + id.val(),
+                    success: options.success
                 });
             }
         },
+        clear: function () {
+            var self = this;
+            self.element.reset();
+            return true;
+        },
+        navByGrid: function (options) {
+            if (!options.before) {
+                options.before = function (result) {
+                    return true;
+                }
+            }
+            if (!options.after) {
+                options.after = function (result) {
+                    return true;
+                }
+            }
+
+            var self = this;
+            var grid = jQuery(options.grid);
+            if (!grid) {
+                grid = jQuery(options.grid, top.opener.document);
+            }
+            if (!grid) {
+                grid = jQuery(options.grid, top.document);
+            }
+            var data = grid.getDataIDs();
+            var id = grid.getGridParam('selrow');
+            var pos = jQuery.inArray(id, data);
+            var result = [pos, data];
+            var selected = false;
+
+            if (result[0] != -1) {
+                if (options.move == 'next') {
+                    selected = result[1][result[0] + 1];
+                } else {
+                    selected = result[1][result[0] - 1];
+                }
+            }
+
+            if (selected) {
+                self.retrieve({
+                    id: seleted,
+                    before: options.before,
+                    after: options.after
+                });
+                grid.setSelection(selected);
+            }
+
+            return result;
+        }
     })
 })(jQuery);

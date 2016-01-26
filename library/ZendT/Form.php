@@ -23,6 +23,12 @@
 
         /**
          *
+         * @var array
+         */
+        protected $_url = array();
+
+        /**
+         *
          * @var bool
          */
         protected $_enableFocusFirstElement;
@@ -90,13 +96,27 @@
             $this->addElement($element);
             if ($this->_enablejQueryValidate) {
                 $onLoad = $this->getView()->placeholder('onLoad')->getValue();
-                $onLoad['jQueryValidate'] = "jQuery('#" . $this->getId() . "').validate({ignore:[]});";
+                $onLoad['jQueryFormValidate'] = "jQuery('#" . $this->getId() . "').validate({ignore:[]});";
+                $this->getView()->placeholder('onLoad')->set($onLoad);
+            }
+
+            if (count($this->_url) > 1) {
+                $this->getView()->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/widget/TForm.js?' . $data);
+
+                $baseUrl = ZendT_Url::getBaseUrl();
+                $url = array();
+                foreach($this->_url as $key=>$value){
+                    $url['url'][$key] = $baseUrl . $value;
+                }
+                $jsonParam = ZendT_JS_Json::encode($url);
+                $onLoad = $this->getView()->placeholder('onLoad')->getValue();
+                $onLoad['jQueryForm'] = "jQuery('#" . $this->getId() . "').TForm(" . $jsonParam . ");";
                 $this->getView()->placeholder('onLoad')->set($onLoad);
             }
 
             if ($this->_enableFocusFirstElement) {
                 $onLoad = $this->getView()->placeholder('onLoad')->getValue();
-                $onLoad['jQueryValidate'] = "focusFirstElement('#" . $this->getId() . " input, #" . $this->getId() . " textare, #" . $this->getId() . " select');";
+                $onLoad['jQueryFormFocus'] = "focusFirstElement('#" . $this->getId() . " input, #" . $this->getId() . " textare, #" . $this->getId() . " select');";
                 $this->getView()->placeholder('onLoad')->set($onLoad);
             }
             $enableTinyMCE = false;
@@ -267,10 +287,10 @@
                         $_element = new ZendT_Form_Element_Select($name);
                         $this->removeElement($name);
                         $this->addElement($_element);
-                        if ($element['filter_value']){
-                            $options = explode(";",$element['filter_value']);
-                            foreach($options as $option){
-                                $data = explode("|",$option);                                
+                        if ($element['filter_value']) {
+                            $options = explode(";", $element['filter_value']);
+                            foreach ($options as $option) {
+                                $data = explode("|", $option);
                                 $_element->addMultiOption($data[0], $data[1]);
                             }
                         }
@@ -293,7 +313,7 @@
                             $_element->setMultiOptions($options);
                         }
                     }
-                    
+
                     if (isset($element['order'])) {
                         $_element->setOrder($element['order']);
                     }
@@ -302,7 +322,7 @@
                     }
                     if ($element['value']) {
                         $element['value'] = $this->_parseValue($element['value'], $_element);
-                        if($element['autoselect']){
+                        if ($element['autoselect']) {
                             $row = $element['value']->getRow();
                             $element['value'] = $row['id']->get();
                         }
@@ -443,66 +463,66 @@
             $element->setValue('1');
             $this->addElement($element);
 
-			if(count($fields)){
-				foreach ($fields as $field => $config) {
-					if ($config['seeker']) {
-						$baseUri = $itens = ZendT_Lib::mapperViewToArrayUri($config['seeker']['mapperView']);
-						foreach ($config['seeker']['fields'] as $searchName => $searchProp) {
-							unset($config['seeker']['fields'][$searchName]);
-							break;
-						}
+            if (count($fields)) {
+                foreach ($fields as $field => $config) {
+                    if ($config['seeker']) {
+                        $baseUri = $itens = ZendT_Lib::mapperViewToArrayUri($config['seeker']['mapperView']);
+                        foreach ($config['seeker']['fields'] as $searchName => $searchProp) {
+                            unset($config['seeker']['fields'][$searchName]);
+                            break;
+                        }
 
-						$element = new ZendT_Form_Element_Seeker($field);
-						$element->setSufix(str_replace('id_', '', $field));
-						$element->setIdField('id');
-						$element->setSearchField($searchName);
-						$element->setSearchAttribs($searchProp);
-						$element->modal()->setWidth(800);
-						$element->modal()->setHeight(400);
-						$element->url()->setGrid("/{$baseUri['module']}/{$baseUri['controller']}/grid");
-						$element->url()->setSearch("/{$baseUri['module']}/{$baseUri['controller']}/seeker-search");
-						$element->url()->setRetrive("/{$baseUri['module']}/{$baseUri['controller']}/retrive");
-						$element->url()->setAutoComplete("/{$baseUri['module']}/{$baseUri['controller']}/auto-complete");
-						//$element->enableAutoComplete();
+                        $element = new ZendT_Form_Element_Seeker($field);
+                        $element->setSufix(str_replace('id_', '', $field));
+                        $element->setIdField('id');
+                        $element->setSearchField($searchName);
+                        $element->setSearchAttribs($searchProp);
+                        $element->modal()->setWidth(800);
+                        $element->modal()->setHeight(400);
+                        $element->url()->setGrid("/{$baseUri['module']}/{$baseUri['controller']}/grid");
+                        $element->url()->setSearch("/{$baseUri['module']}/{$baseUri['controller']}/seeker-search");
+                        $element->url()->setRetrive("/{$baseUri['module']}/{$baseUri['controller']}/retrive");
+                        $element->url()->setAutoComplete("/{$baseUri['module']}/{$baseUri['controller']}/auto-complete");
+                        //$element->enableAutoComplete();
 
-						if ($config['multiple'] !== '0') {
-							$element->setMultiple(true);
-						} else {
-							$element->setMultiple(false);
-						}
-						$element->setMapperView($config['seeker']['mapperView']);
+                        if ($config['multiple'] !== '0') {
+                            $element->setMultiple(true);
+                        } else {
+                            $element->setMultiple(false);
+                        }
+                        $element->setMapperView($config['seeker']['mapperView']);
 
-						//Procura os elementos que referenciam essa seeker, para criar uma dependência (filterRefer)
-						foreach ($fields as $field1 => $config1) {
-							if (isset($config1['seeker']) && isset($config1['seeker']['filter'])) {
-								$filterRefer = $config1['seeker']['filter'];
-								if ($filterRefer) {
-									foreach ($filterRefer as $filter1 => $key1) {
-										if ($filter1 == $field) {
-											$element->addFilterRefer($field1);
-										}
-									}
-								}
-							}
-						}
+                        //Procura os elementos que referenciam essa seeker, para criar uma dependência (filterRefer)
+                        foreach ($fields as $field1 => $config1) {
+                            if (isset($config1['seeker']) && isset($config1['seeker']['filter'])) {
+                                $filterRefer = $config1['seeker']['filter'];
+                                if ($filterRefer) {
+                                    foreach ($filterRefer as $filter1 => $key1) {
+                                        if ($filter1 == $field) {
+                                            $element->addFilterRefer($field1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
-						$_where = $config['seeker']['where'];
-						$preFilter = $config['seeker']['filter'];
-						if ($_where && !$preFilter) {
-							$element->setWhere($_where);
-						} else if ($preFilter) {
-							/* print_r($config['seeker']);
-							  exit; */
+                        $_where = $config['seeker']['where'];
+                        $preFilter = $config['seeker']['filter'];
+                        if ($_where && !$preFilter) {
+                            $element->setWhere($_where);
+                        } else if ($preFilter) {
+                            /* print_r($config['seeker']);
+                              exit; */
 
-							$dynamicWhere = "var where = new TWhere('AND');";
-							if ($_where) {
-								$whereFilters = $_where->getFilters();
-								foreach ($whereFilters as $i => $key) {
-									$value = $key['value'];
-									if (is_array($value)) {
-										$value = $value[0];
-									}
-									$dynamicWhere .= "
+                            $dynamicWhere = "var where = new TWhere('AND');";
+                            if ($_where) {
+                                $whereFilters = $_where->getFilters();
+                                foreach ($whereFilters as $i => $key) {
+                                    $value = $key['value'];
+                                    if (is_array($value)) {
+                                        $value = $value[0];
+                                    }
+                                    $dynamicWhere .= "
 									where.addFilter({
 									   field: '{$key['field']}',
 									   value: '{$value}',
@@ -510,14 +530,14 @@
 									   operation: '{$key['operation']}'
 									});
 								";
-								}
-							}
+                                }
+                            }
 
-							foreach ($preFilter as $filter => $key) {
-								if ($filter) {
-									$label = $fields[$filter]['label'];
-									$operation = (!$key['operation'] ? 'in' : $key['operation']);
-									$dynamicWhere .= "
+                            foreach ($preFilter as $filter => $key) {
+                                if ($filter) {
+                                    $label = $fields[$filter]['label'];
+                                    $operation = (!$key['operation'] ? 'in' : $key['operation']);
+                                    $dynamicWhere .= "
 										var value1 = $('#{$filter}').val();
 										var value2 = $('#{$filter}-multiple').val();
 										if(!value1 && !value2){
@@ -543,21 +563,21 @@
 										   operation: '{$operation}'
 										});
 									";
-								}
-							}
-							$dynamicWhere = "function(){ {$dynamicWhere} return where.toJson(); }";
-							#echo $preWhere;die;
-							$element->setOnFilter($dynamicWhere);
-						}
-						foreach ($config['seeker']['fields'] as $fieldName => $fieldProp) {
-							$element->addField($fieldName, $fieldName, 'text', $fieldProp);
-						}
-					} else if ($config['autocomplete']) {
-						$element = new ZendT_Form_Element_AutoComplete($field);
-						$url = ZendT_Url::getUri(true) . '/auto-complete/suggest/1/column/' . $field . '/profile/' . $params['profile'];
-						$element->setDataSource($url);
+                                }
+                            }
+                            $dynamicWhere = "function(){ {$dynamicWhere} return where.toJson(); }";
+                            #echo $preWhere;die;
+                            $element->setOnFilter($dynamicWhere);
+                        }
+                        foreach ($config['seeker']['fields'] as $fieldName => $fieldProp) {
+                            $element->addField($fieldName, $fieldName, 'text', $fieldProp);
+                        }
+                    } else if ($config['autocomplete']) {
+                        $element = new ZendT_Form_Element_AutoComplete($field);
+                        $url = ZendT_Url::getUri(true) . '/auto-complete/suggest/1/column/' . $field . '/profile/' . $params['profile'];
+                        $element->setDataSource($url);
 
-						$extraParams = array('filters' => new ZendT_JS_Command("function(){
+                        $extraParams = array('filters' => new ZendT_JS_Command("function(){
 							var formData = jQuery('#" . $this->getId() . "').serializeArray();
 							var data = '';
 							for(var index in formData){
@@ -566,69 +586,69 @@
 							return data.substr(1);
 						}"));
 
-						$element->setJQueryParam('limit', 100);
-						$element->setJQueryParam('extraParams', $extraParams);
-						$element->setJQueryParam('showButtonSearch', true);
-						if ($config['multiple'] !== '0') {
-							$element->setJQueryParam('multiple', true);
-						} else {
-							$element->setJQueryParam('multiple', false);
-						}
+                        $element->setJQueryParam('limit', 100);
+                        $element->setJQueryParam('extraParams', $extraParams);
+                        $element->setJQueryParam('showButtonSearch', true);
+                        if ($config['multiple'] !== '0') {
+                            $element->setJQueryParam('multiple', true);
+                        } else {
+                            $element->setJQueryParam('multiple', false);
+                        }
 
-						$element->setJQueryParam('multipleSeparator', ';');
-						$element->setJQueryParam('mustMatch', true);
-						$element->setJQueryParam('autoFill', true);
-					} else if (in_array($config['type'], array('Date', 'DateTime'))) {
-						if (getBrowser() != 'IE 8.0') {
-							$element = new ZendT_Form_Element_DateDynamic($field);
-							$_profile = new Profile_DataView_ObjectView_MapperView();
-							$_profile->newRow()->setId($params['profile'])->retrieve();
-							if ($_profile->getObjeto()) {
-								$objeto = $_profile->getObjeto()->toPhp();
-								$objeto = new $objeto();
-								$columns = $objeto->getColumns()->toArray();
-								if ($columns[$field]['bind']) {
-									$element->setJQueryParam('fix_elements', count($columns[$field]['bind']));
-								}
-							}
-							if ($config['max_periodo']) {
-								$element->setMaxPeriodo($config['max_periodo']);
-							}
-						} else {
-							$element = new ZendT_Form_Element_DateMulti($field);
-						}
-					} else if (in_array($config['type'], array('Numeric', 'Number'))) {
-						$element = new ZendT_Form_Element_NumericMulti($field);
-					} else {
-						$element = new ZendT_Form_Element_Text($field);
-					}
-					/**
-					 * Trata o valor a ser preenchido no elemento
-					 */
-					if ($params[$field]) {
-						$value = $params[$field];
-					} else {
-						$value = $config['value'];
-					}
-					$value = $this->_parseValue($value, $element, $config['type']);
-					/**
-					 * Preenche as propriedaddes do elemento
-					 */
-					$element->setValue($value);
-					$element->setLabel($config['label'] . ':');
-					$element->setRequired($config['required']);
-					if ($element instanceof ZendT_Form_Element_DateDynamic) {
-						$element->addStyle('width', '90px');
-					} else {
-						$element->addStyle('width', '270px');
-					}
-					if ($config['hidden']) {
-						$element->setDecorators(array(new ZendT_Form_Decorator_Hidden()));
-					}
-					#var_dump($config);die;
-					$this->addElement($element);
-				}
-			}
+                        $element->setJQueryParam('multipleSeparator', ';');
+                        $element->setJQueryParam('mustMatch', true);
+                        $element->setJQueryParam('autoFill', true);
+                    } else if (in_array($config['type'], array('Date', 'DateTime'))) {
+                        if (getBrowser() != 'IE 8.0') {
+                            $element = new ZendT_Form_Element_DateDynamic($field);
+                            $_profile = new Profile_DataView_ObjectView_MapperView();
+                            $_profile->newRow()->setId($params['profile'])->retrieve();
+                            if ($_profile->getObjeto()) {
+                                $objeto = $_profile->getObjeto()->toPhp();
+                                $objeto = new $objeto();
+                                $columns = $objeto->getColumns()->toArray();
+                                if ($columns[$field]['bind']) {
+                                    $element->setJQueryParam('fix_elements', count($columns[$field]['bind']));
+                                }
+                            }
+                            if ($config['max_periodo']) {
+                                $element->setMaxPeriodo($config['max_periodo']);
+                            }
+                        } else {
+                            $element = new ZendT_Form_Element_DateMulti($field);
+                        }
+                    } else if (in_array($config['type'], array('Numeric', 'Number'))) {
+                        $element = new ZendT_Form_Element_NumericMulti($field);
+                    } else {
+                        $element = new ZendT_Form_Element_Text($field);
+                    }
+                    /**
+                     * Trata o valor a ser preenchido no elemento
+                     */
+                    if ($params[$field]) {
+                        $value = $params[$field];
+                    } else {
+                        $value = $config['value'];
+                    }
+                    $value = $this->_parseValue($value, $element, $config['type']);
+                    /**
+                     * Preenche as propriedaddes do elemento
+                     */
+                    $element->setValue($value);
+                    $element->setLabel($config['label'] . ':');
+                    $element->setRequired($config['required']);
+                    if ($element instanceof ZendT_Form_Element_DateDynamic) {
+                        $element->addStyle('width', '90px');
+                    } else {
+                        $element->addStyle('width', '270px');
+                    }
+                    if ($config['hidden']) {
+                        $element->setDecorators(array(new ZendT_Form_Decorator_Hidden()));
+                    }
+                    #var_dump($config);die;
+                    $this->addElement($element);
+                }
+            }
 
             /* $element = new ZendT_Form_Element_Button('btPesquisar');
               $element->setDecorators(array(new ZendT_Form_Decorator_Button()));

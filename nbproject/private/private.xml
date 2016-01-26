@@ -3,20 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/sessions/User.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/render/Layout/User.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/render/Templates/intranet.phtml</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/PessoaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Acl.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/data-views/Pessoa/MapperView.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/ContaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Acl.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/UserController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/User/Logon.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/PapelRecurso/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/PapelRecurso/Table.php</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/public/scripts/jquery/plugin/AjaxT.js</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/library/ZendT/Form.php</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/application/configs/modules/ca/ca_regra_contrato.php</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/public/scripts/generic.js</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/public/scripts/jquery/extra/form/form.js</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/library/ZendT/Controller/ActionCrud.php</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/public/scripts/jquery/grid/button/edit.js</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/library/ZendT/Tool/CrudTProvider.php</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/public/scripts/jquery/widget/TForm.js</file>
+            <file>file:/C:/AppWeb/htdocs/Mais/library/ZendT/View/Helper/Date.php</file>
         </group>
     </open-files>
 </project-private>

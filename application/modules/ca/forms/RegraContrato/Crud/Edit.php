@@ -6,6 +6,15 @@
          */
         protected $_multiple;
         /**
+         * @var array
+         */
+        protected $_url = array (
+  'insert' => '/ca/regra-contrato/insert',
+  'update' => '/ca/regra-contrato/update',
+  'delete' => '/ca/regra-contrato/delete',
+  'retrieve' => '/ca/regra-contrato/retrieve',
+);
+        /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
          */
@@ -51,6 +60,11 @@
 
             
             $element = $model->getElement('vlr_perc');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('tipo');
+            $element->setRequired(true);
             $this->addElement($element);
 
             

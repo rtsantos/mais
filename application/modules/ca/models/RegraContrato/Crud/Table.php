@@ -5,11 +5,12 @@
 class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CA_REGRA_CONTRATO';
+    /*protected $_alias = 'REGRA_CONTRATO';*/
     protected $_sequence = 'SID_CA_REGRA_CONTRATO';
-    protected $_required = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS');
+    protected $_required = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','TIPO');
     protected $_primary = array('ID');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_CONTRATO','ID_PRODUTO','ID_FAVORECIDO','STATUS','VLR_FIXO','VLR_MIN','VLR_PERC');
+    protected $_cols = array('ID','ID_CONTRATO','ID_PRODUTO','ID_FAVORECIDO','STATUS','VLR_FIXO','VLR_MIN','VLR_PERC','TIPO');
     protected $_search = 'status';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
@@ -31,7 +32,10 @@ class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
                     'refColumns' => 'id'
                 ));
     protected $_listOptions = array('status'=>array('A'=>'Ativo'
-                                                    ,'I'=>'Inativo'));
+                                                    ,'I'=>'Inativo')
+                                    ,'tipo'=>array('PA'=>'Acréscimo de Preço'
+                                                    ,'PD'=>'Desconto de Preço'
+                                                    ,'CD'=>'Custeio de Débito'));
     protected $_mapper = 'Ca_Model_RegraContrato_Mapper';
     protected $_element = 'Ca_Form_RegraContrato_Elements';
     /**

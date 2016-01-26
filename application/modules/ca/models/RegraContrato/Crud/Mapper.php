@@ -4,9 +4,8 @@
  */
 class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id','id_contrato','id_produto','status');
+    protected $_required = array('id','id_contrato','id_produto','status','tipo');
     protected $_model = 'Ca_Model_RegraContrato_Table';
-    public static $table = 'mais.ca_regra_contrato';
     /**
      *
      * @var Ca_Model_RegraContrato_Mapper
@@ -42,13 +41,6 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
                     'column' => 'id'
                 ));
-    }
-    /**
-     * @retun array
-     */
-    public function getTabs(){
-        return array (
-);
     }
     
     
@@ -299,6 +291,46 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
                     
         if (!$options['db']){
             
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna tipo
+     *
+     * @return string
+     */
+    public function getTipo($instance=false){
+        if ($instance && !is_object($this->_data['tipo'])){
+            $this->setTipo('',array('required'=>false));
+        }
+        return $this->_data['tipo'];
+    }
+    /**
+     * Seta o valor da coluna tipo
+     *
+     * @param string $value
+     * @return Ca_Model_RegraContrato_Crud_Mapper
+     */
+    public function setTipo($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('PA'=>'Acréscimo de Preço','PD'=>'Desconto de Preço','CD'=>'Custeio de Débito');
+        $this->_data['tipo'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['tipo']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+         if ($options['required'])
+            $this->isRequired($value,'tipo');
+                    
+            $valid = new Zend_Validate_StringLength(array (   'max' => 2, ) );
+            $valueValid = $this->_data['tipo']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
         }
         return $this;
     }

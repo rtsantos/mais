@@ -73,12 +73,12 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','id_contrato','descricao_contrato','id_produto','codigo_produto','nome_produto','id_favorecido','nome_favorecido','status','vlr_fixo','vlr_min','vlr_perc');
-           $profile['width'] = array('id'=>100,'id_contrato'=>120,'descricao_contrato'=>200,'id_produto'=>120,'codigo_produto'=>200,'nome_produto'=>200,'id_favorecido'=>120,'nome_favorecido'=>200,'status'=>150,'vlr_fixo'=>150,'vlr_min'=>150,'vlr_perc'=>150);
-           $profile['align'] = array('id'=>'left','id_contrato'=>'left','descricao_contrato'=>'left','id_produto'=>'left','codigo_produto'=>'left','nome_produto'=>'left','id_favorecido'=>'left','nome_favorecido'=>'left','status'=>'center','vlr_fixo'=>'right','vlr_min'=>'right','vlr_perc'=>'right');
+           $profile['order'] = array('id','id_contrato','descricao_contrato','id_produto','codigo_produto','nome_produto','id_favorecido','nome_favorecido','status','vlr_fixo','vlr_min','vlr_perc','tipo');
+           $profile['width'] = array('id'=>100,'id_contrato'=>120,'descricao_contrato'=>200,'id_produto'=>120,'codigo_produto'=>200,'nome_produto'=>200,'id_favorecido'=>120,'nome_favorecido'=>200,'status'=>150,'vlr_fixo'=>150,'vlr_min'=>150,'vlr_perc'=>150,'tipo'=>150);
+           $profile['align'] = array('id'=>'left','id_contrato'=>'left','descricao_contrato'=>'left','id_produto'=>'left','codigo_produto'=>'left','nome_produto'=>'left','id_favorecido'=>'left','nome_favorecido'=>'left','status'=>'center','vlr_fixo'=>'right','vlr_min'=>'right','vlr_perc'=>'right','tipo'=>'center');
            $profile['hidden'] = array('id_contrato','id_produto','id_favorecido');
            $profile['remove'] = array();
-           $profile['listOptions'] = array('status'=>$this->getModel()->getListOptions('status'));
+           $profile['listOptions'] = array('status'=>$this->getModel()->getListOptions('status'),'tipo'=>$this->getModel()->getListOptions('tipo'));
            return $profile;
         }
         /**
@@ -99,6 +99,7 @@
             $this->_columns->add('vlr_fixo', 'ca_regra_contrato', 'vlr_fixo', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_regra_contrato.vlr_fixo'),'Numeric','=');
             $this->_columns->add('vlr_min', 'ca_regra_contrato', 'vlr_min', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_regra_contrato.vlr_min'),'Numeric','=');
             $this->_columns->add('vlr_perc', 'ca_regra_contrato', 'vlr_perc', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_regra_contrato.vlr_perc'),'Numeric','=');
+            $this->_columns->add('tipo', 'ca_regra_contrato', 'tipo', $this->getModel()->getMapperName(), ZendT_Lib::translate('ca_regra_contrato.tipo'),'String','=');
 
         }
         /**

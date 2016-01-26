@@ -84,6 +84,11 @@ class ZendT_Tool_Crud_Form {
             ";
         }
         
+        $url = 'array()';
+        if (count($config['table']['form']['url']) > 1) {
+            $url = var_export($config['table']['form']['url'], true);
+        }
+        
         $formName = strtolower($config['table']['name']);
 
         $contentText = <<<EOS
@@ -94,6 +99,10 @@ class ZendT_Tool_Crud_Form {
          * @var array
          */
         protected \$_multiple;
+        /**
+         * @var array
+         */
+        protected \$_url = {$url};
         /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
