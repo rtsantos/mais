@@ -1540,7 +1540,8 @@ tr.ui-search-toolbar input{
 }
 
 .ui-form-group > .item, 
-.ui-group > .item{
+.ui-group > .item,
+.ui-group-item.item{
     float: left;
     border-radius: 0px;
     height: 30px;
@@ -1570,7 +1571,8 @@ tr.ui-search-toolbar input{
 }
 
 .ui-form-group > .item:not(:first-child),
-.ui-group > .item:not(:first-child){
+.ui-group > .item:not(:first-child),
+.ui-group-item.item:not(.first){
     border-left: 1px solid transparent;
 }
 
@@ -1578,14 +1580,16 @@ tr.ui-search-toolbar input{
     border-left: 1px solid #dddddd;
 }
 
-.ui-form-group > .item:focus{
+.ui-form-group > .item:focus,
+.ui-group-item.item:focus{
     border-left: 1px solid #4ac31b;
 }
 
 .ui-form-group > .item:last-child, 
 .ui-form-group > .item.last,
 .ui-group > .item:last-child, 
-.ui-group > .item.last{
+.ui-group > .item.last,
+.ui-group-item.item.last{
     -moz-border-radius-topright: 3px !important; 
     -webkit-border-top-right-radius: 3px !important; 
     border-top-right-radius: 3px !important; 
@@ -1596,7 +1600,8 @@ tr.ui-search-toolbar input{
 
 .ui-group > .item:first-child, 
 .ui-group > .item.first,
-.ui-form-group > .item.first{
+.ui-form-group > .item.first
+.ui-group-item.item.first{
     -moz-border-radius-topleft: 3px !important; 
     -webkit-border-top-left-radius: 3px !important; 
     border-top-left-radius: 3px !important; 
@@ -1853,4 +1858,8 @@ tr.ui-search-toolbar input{
 .ui-cover-pdf {
     position: relative;
     z-index: 1;
+}
+
+.ui-nav-form{
+    clear: both;
 }

@@ -2646,6 +2646,9 @@ class ZendT_Grid implements ZendT_JS_Interface {
 
     public function setObjToolbar($objToolbar) {
         $this->_objToolbar = $objToolbar;
+        if ($objToolbar === null){
+            $this->_options['toolbar'][0] = false;
+        }
         return $this;
     }
 

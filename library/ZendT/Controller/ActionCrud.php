@@ -166,14 +166,51 @@
                $this->getColumns();
                $this->configGrid();
 
-               $this->getGrid()->getObjToolbar()->removeButton('add');
-               $this->getGrid()->getObjToolbar()->removeButton('edit');
+               $this->getGrid()->setObjToolbar(null);
+                     /*getObjToolbar()->removeButton('add');
+               $this->getGrid()->getObjToolbar()->removeButton('edit');*/
                //$this->getGrid()->getT
 //                      getToolbarButton('edit')
 
                $this->view->grid = $this->getGrid();
                
                $_element = new ZendT_Form_Element_Button('btn_save');
+               $_element->setLabel('Salvar');
+               $_element->setIcon('ui-icon ui-icon-disk');
+               $_element->setAttrib('onClick', "formSave('".$this->getForm()->getName()."');");               
+               $this->getForm()->addElement($_element);
+               
+               $_element = new ZendT_Form_Element_Button('btn_new');
+               $_element->setLabel('Novo');
+               $_element->setIcon('ui-icon ui-icon-document');
+               $_element->setAttrib('onClick', "formNew('".$this->getForm()->getName()."');");
+               $this->getForm()->addElement($_element);
+               
+               $_element = new ZendT_Form_Element_Button('btn_delete');
+               $_element->setLabel('Excluir');
+               $_element->setIcon('ui-icon ui-icon-trash');
+               $_element->setAttrib('onClick', "formDelete('".$this->getForm()->getName()."');");               
+               $this->getForm()->addElement($_element);
+               
+               $_element = new ZendT_Form_Element_Button('btn_next');
+               $_element->setIcon('ui-icon ui-icon-seek-next');
+               $_element->addStyle('float', 'right');
+               $_element->addClass('ui-button-icon ui-state-default ui-group-item item last');
+               $_element->setAttrib('onClick', "formNext('".$this->getForm()->getName()."','".$this->getGrid()->getID()."');");
+               $this->getForm()->addElement($_element);               
+               
+               $_element = new ZendT_Form_Element_Button('btn_prev');
+               $_element->setIcon('ui-icon ui-icon-seek-prev');
+               $_element->addStyle('float', 'right');
+               $_element->addClass('ui-button-icon ui-state-default ui-group-item item first');
+               $_element->setAttrib('onClick', "formPrev('".$this->getForm()->getName()."','".$this->getGrid()->getID()."');");
+               $this->getForm()->addElement($_element);               
+
+               
+               $this->getForm()->addDisplayGroup( array('btn_save','btn_new','btn_delete','btn_next','btn_prev')
+                                                , 'group-nav-buttons'
+                                                , array('id'=>'group-nav-buttons-' . $this->getForm()->getName()
+                                                       ,'class' => 'ui-nav-form'));
            }
            
            $this->view->form = $this->getForm();

@@ -19,11 +19,16 @@
         options: {
             url: {
                 retrieve: '',
+                insert: '',
+                update: '',
+                delete: ''
             }
         },
+        
         _create: function() {
 
         },
+        
         populate: function(data) {
             var form = this.element[0];
             for (var field in data) {
@@ -82,6 +87,7 @@
                 }
             }
         },
+        
         retrieve: function(options) {
             var self = this;
             if (typeof options == 'string') {
@@ -103,6 +109,30 @@
                     self.populate(result);
                 }
             });
-        }
+        },
+        
+        saveAjax: function(){
+            var self = this;
+            var id = self.find('#id').val();
+            if (id == ''){
+                self.attr('action',options.url.insert);
+            }else{
+                self.attr('action',options.url.update);
+            }
+            jQuery.AjaxT.submitJson({selector: self});
+        },
+        
+        deleteAjax: function(){
+            var self = this;
+            var id = self.find('#id').val();
+            if (id == ''){
+
+            }else{
+                jQuery.AjaxT.json({
+                    url: options.url.delete,
+                    param: 'id=' + id
+                });
+            }
+        },
     })
 })(jQuery);

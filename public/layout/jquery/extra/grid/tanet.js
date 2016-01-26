@@ -35,7 +35,11 @@ function gridResize(idGrid) {
                 jQuery('#pager-' + options.idGrid + '_left').show();
                 var parentId = containerGrid.attr('id');
                 if (parentId) {
-                    width = containerGrid.width() - 45;
+                    if (box.parent().parent().hasClass('ui-tabs-item')){
+                        width = containerGrid.width() - 65;
+                    }else{
+                        width = containerGrid.width() - 45;
+                    }                    
                 } else {
                     width = jQuery(window).width() - 85;
                 }
@@ -53,9 +57,12 @@ function gridResize(idGrid) {
 
         if (!options.height && height == 0) {
             var parentId = containerGrid.attr('id');
+            
+            var pos = box.position();
+            ///console.log();
 
             if (parentId) {
-                height = jQuery(window).height() - 400;
+                height = jQuery(window).height() - pos.top - 210;
             } else {
                 height = jQuery(window).height() - 350;
             }
