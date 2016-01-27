@@ -10,7 +10,7 @@ class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_required = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','TIPO');
     protected $_primary = array('ID');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_CONTRATO','ID_PRODUTO','ID_FAVORECIDO','STATUS','VLR_FIXO','VLR_MIN','VLR_PERC','TIPO');
+    protected $_cols = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','VLR_FIXO','VLR_MIN','VLR_PERC','TIPO','FAVORECIDO');
     protected $_search = 'status';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
@@ -25,17 +25,15 @@ class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
                     'columns' => 'id_produto',
                     'refTableClass' => 'Vendas_Model_Produto_Table',
                     'refColumns' => 'id'
-                ),
-                'IdFavorecido' => array(
-                    'columns' => 'id_favorecido',
-                    'refTableClass' => 'Ca_Model_Pessoa_Table',
-                    'refColumns' => 'id'
                 ));
     protected $_listOptions = array('status'=>array('A'=>'Ativo'
                                                     ,'I'=>'Inativo')
                                     ,'tipo'=>array('PA'=>'Acréscimo de Preço'
                                                     ,'PD'=>'Desconto de Preço'
-                                                    ,'CD'=>'Custeio de Débito'));
+                                                    ,'CD'=>'Custeio de Débito')
+                                    ,'favorecido'=>array('ca_pedido.id_cliente'=>'Cliente do Pedido'
+                                                    ,'ca_pedido.id_cont_cli_resp'=>'Gerente do Cliente'
+                                                    ,'ca_pedido.id_cont_cli_vend'=>'Vendedor do Cliente'));
     protected $_mapper = 'Ca_Model_RegraContrato_Mapper';
     protected $_element = 'Ca_Form_RegraContrato_Elements';
     /**

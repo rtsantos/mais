@@ -104,5 +104,6 @@ array (
   'ca_numeracao.id_empresa' => 'Empresa',
   'ca_numeracao.id_empresa.ca_pessoa.nome' => 'Nome Empresa',
   'ca_regra_contrato.tipo' => 'Tipo',
+  'ca_regra_contrato.favorecido' => 'Favorecido',
 )
 ?>

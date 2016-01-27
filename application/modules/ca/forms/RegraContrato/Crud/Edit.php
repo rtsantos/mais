@@ -42,10 +42,6 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('id_favorecido');
-            $this->addElement($element);
-
-            
             $element = $model->getElement('status');
             $element->setRequired(true);
             $this->addElement($element);
@@ -65,6 +61,10 @@
             
             $element = $model->getElement('tipo');
             $element->setRequired(true);
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('favorecido');
             $this->addElement($element);
 
             

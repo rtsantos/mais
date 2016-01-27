@@ -88,30 +88,6 @@ class Ca_Form_RegraContrato_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Seeker
-     */
-    public function getIdFavorecido(){
-
-        $element = new ZendT_Form_Element_Seeker('id_favorecido');
-        $element->setSuffix('favorecido');
-        $element->setLabel($this->_translate->_('ca_regra_contrato.id_favorecido') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/ca/pessoa/grid/profile_key/clientes');
-        $element->url()->setSearch('/ca/pessoa/seeker-search/profile_key/clientes');
-        $element->url()->setRetrieve('/ca/pessoa/retrieve/profile_key/clientes');
-        $element->setMapperView('Ca_DataView_Pessoa_MapperView');
-        $element->addValidators(array());
-                
-        return $element;
-    }
-            
-    /**
-     *
      * @return \ZendT_Form_Element_Select
      */
     public function getStatus(){
@@ -183,6 +159,21 @@ class Ca_Form_RegraContrato_Crud_Elements
         $element->addMultiOption('PA', 'Acréscimo de Preço');
         $element->addMultiOption('PD', 'Desconto de Preço');
         $element->addMultiOption('CD', 'Custeio de Débito');        
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Select
+     */
+    public function getFavorecido(){
+
+        $element = new ZendT_Form_Element_Select('favorecido');
+        $element->setLabel($this->_translate->_('ca_regra_contrato.favorecido') . ':');
+        $element->addMultiOption('ca_pedido.id_cliente', 'Cliente do Pedido');
+        $element->addMultiOption('ca_pedido.id_cont_cli_resp', 'Gerente do Cliente');
+        $element->addMultiOption('ca_pedido.id_cont_cli_vend', 'Vendedor do Cliente');        
                 
         return $element;
     }
