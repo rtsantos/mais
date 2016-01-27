@@ -47,6 +47,13 @@ class Vendas_Model_ItemPedido_Crud_Mapper extends ZendT_Db_Mapper
                     'column' => 'id'
                 ));
     }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
+    }
     
     
     /**
@@ -227,10 +234,10 @@ class Vendas_Model_ItemPedido_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_ItemPedido_Crud_Mapper
      */
     public function setQtdItem($value,$options=array('required'=>true)){        
-        $this->_data['qtd_item'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['qtd_item'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['qtd_item']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }
@@ -256,10 +263,10 @@ class Vendas_Model_ItemPedido_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_ItemPedido_Crud_Mapper
      */
     public function setVlrItem($value,$options=array('required'=>true)){        
-        $this->_data['vlr_item'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_item'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_item']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }
@@ -285,10 +292,10 @@ class Vendas_Model_ItemPedido_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_ItemPedido_Crud_Mapper
      */
     public function setVlrDesc($value,$options=array('required'=>true)){        
-        $this->_data['vlr_desc'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['vlr_desc'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
             $this->_data['vlr_desc']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }

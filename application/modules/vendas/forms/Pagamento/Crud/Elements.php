@@ -68,7 +68,8 @@ class Vendas_Form_Pagamento_Crud_Elements
 
         $element = new ZendT_Form_Element_Select('forma');
         $element->setLabel($this->_translate->_('cv_pagto_pedido.forma') . ':');
-        $element->addMultiOption('D', 'Crediário');
+        $element->addMultiOption('D', 'Dinheiro');
+        $element->addMultiOption('O', 'Crediário');
         $element->addMultiOption('C', 'Cartão');
         $element->addMultiOption('Q', 'Cheque');
         $element->addMultiOption('F', 'Faturar');        
@@ -146,11 +147,11 @@ class Vendas_Form_Pagamento_Crud_Elements
      */
     public function getNroParc(){
 
-        $element = new ZendT_Form_Element_Numeric('vlr_acrec');
-        $element->setLabel($this->_translate->_('cv_pagto_pedido.vlr_acrec') . ':');
+        $element = new ZendT_Form_Element_Numeric('nro_parc');
+        $element->setLabel($this->_translate->_('cv_pagto_pedido.nro_parc') . ':');
         $element->setAttribs(array());
-        $element->setJQueryParam('numDecimal','4');
-        $element->setJQueryParam('numInteger','11');
+        $element->setJQueryParam('numDecimal','');
+        $element->setJQueryParam('numInteger','');
         $element->addValidators(array());
                 
         return $element;

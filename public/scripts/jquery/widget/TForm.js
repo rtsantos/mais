@@ -150,6 +150,9 @@
             jQuery.AjaxT.submitJson({selector: '#' + self.element.attr('id'), success: options.success});
         },
         delete: function (options) {
+            var self = this;
+            var id = jQuery('#' + self.element.attr('id') + ' #id');
+
             if (!options) {
                 options = {};
             }
@@ -166,25 +169,30 @@
                         grid = jQuery(options.grid, top.document);
                     }
                     grid.trigger('reloadGrid');
+                    self.clear({});
                     return true;
                 };
             }
-            var self = this;
-            var id = jQuery('#' + self.element.attr('id') + ' #id');
+
             if (id.val() == '') {
-                jQuery.DialogT.open('Necessário estar posicionado no registro!', 'Alert');
+                jQuery.DialogT.alert('Necessário estar posicionado no registro!');
                 return false;
             } else {
-                jQuery.AjaxT.json({
-                    url: options.url,
-                    param: 'id=' + id.val(),
-                    success: options.success
-                });
+                jQuery.DialogT.confirm('Tem certeza que deseja excluir o registro?'
+                        , function (confirm) {
+                            if (confirm) {
+                                jQuery.AjaxT.json({
+                                    url: options.url,
+                                    data: 'id=' + id.val(),
+                                    success: options.success
+                                });
+                            }
+                        });
             }
         },
         clear: function () {
             var self = this;
-            self.element.reset();
+            self.element.resetForm();
             return true;
         },
         navByGrid: function (options) {
@@ -223,7 +231,7 @@
 
             if (selected) {
                 self.retrieve({
-                    id: seleted,
+                    id: selected,
                     before: options.before,
                     after: options.after
                 });

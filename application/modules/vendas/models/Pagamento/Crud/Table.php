@@ -20,7 +20,8 @@ class Vendas_Model_Pagamento_Crud_Table extends ZendT_Db_Table_Abstract
                     'refTableClass' => 'Vendas_Model_Pedido_Table',
                     'refColumns' => 'id'
                 ));
-    protected $_listOptions = array('forma'=>array('D'=>'Crediário'
+    protected $_listOptions = array('forma'=>array('D'=>'Dinheiro'
+                                                    ,'O'=>'Crediário'
                                                     ,'C'=>'Cartão'
                                                     ,'Q'=>'Cheque'
                                                     ,'F'=>'Faturar'));

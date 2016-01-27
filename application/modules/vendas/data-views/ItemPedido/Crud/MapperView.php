@@ -74,8 +74,8 @@
         protected function _getSettingsDefault(){
            $profile = array();
            $profile['order'] = array('id','id_pedido','numero_pedido','id_produto','codigo_produto','nome_produto','id_usu_inc','nome_usu_inc','id_usu_alt','nome_usu_alt','qtd_item','vlr_item','vlr_desc','calculo');
-           $profile['width'] = array('id'=>100,'id_pedido'=>120,'numero_pedido'=>200,'id_produto'=>120,'codigo_produto'=>200,'nome_produto'=>200,'id_usu_inc'=>120,'nome_usu_inc'=>200,'id_usu_alt'=>120,'nome_usu_alt'=>200,'qtd_item'=>200,'vlr_item'=>200,'vlr_desc'=>200,'calculo'=>200);
-           $profile['align'] = array('id'=>'left','id_pedido'=>'left','numero_pedido'=>'left','id_produto'=>'left','codigo_produto'=>'left','nome_produto'=>'left','id_usu_inc'=>'left','nome_usu_inc'=>'left','id_usu_alt'=>'left','nome_usu_alt'=>'left','qtd_item'=>'left','vlr_item'=>'left','vlr_desc'=>'left','calculo'=>'left');
+           $profile['width'] = array('id'=>100,'id_pedido'=>120,'numero_pedido'=>200,'id_produto'=>120,'codigo_produto'=>200,'nome_produto'=>200,'id_usu_inc'=>120,'nome_usu_inc'=>200,'id_usu_alt'=>120,'nome_usu_alt'=>200,'qtd_item'=>150,'vlr_item'=>150,'vlr_desc'=>150,'calculo'=>200);
+           $profile['align'] = array('id'=>'left','id_pedido'=>'left','numero_pedido'=>'left','id_produto'=>'left','codigo_produto'=>'left','nome_produto'=>'left','id_usu_inc'=>'left','nome_usu_inc'=>'left','id_usu_alt'=>'left','nome_usu_alt'=>'left','qtd_item'=>'right','vlr_item'=>'right','vlr_desc'=>'right','calculo'=>'left');
            $profile['hidden'] = array('id_pedido','id_produto','id_usu_inc','id_usu_alt');
            $profile['remove'] = array();
            $profile['listOptions'] = array();
@@ -97,9 +97,9 @@
             $this->_columns->add('nome_usu_inc', 'usu_inc', 'nome', $this->_getConta()->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.id_usu_inc.papel.nome'),null,'?%');
             $this->_columns->add('id_usu_alt', 'cv_item_pedido', 'id_usu_alt', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.id_usu_alt'), null, '=');
             $this->_columns->add('nome_usu_alt', 'usu_alt', 'nome', $this->_getConta()->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.id_usu_alt.papel.nome'),null,'?%');
-            $this->_columns->add('qtd_item', 'cv_item_pedido', 'qtd_item', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.qtd_item'),'String','%?%');
-            $this->_columns->add('vlr_item', 'cv_item_pedido', 'vlr_item', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.vlr_item'),'String','%?%');
-            $this->_columns->add('vlr_desc', 'cv_item_pedido', 'vlr_desc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.vlr_desc'),'String','%?%');
+            $this->_columns->add('qtd_item', 'cv_item_pedido', 'qtd_item', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.qtd_item'),'Numeric','=');
+            $this->_columns->add('vlr_item', 'cv_item_pedido', 'vlr_item', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.vlr_item'),'Numeric','=');
+            $this->_columns->add('vlr_desc', 'cv_item_pedido', 'vlr_desc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.vlr_desc'),'Numeric','=');
             $this->_columns->add('calculo', 'cv_item_pedido', 'calculo', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_item_pedido.calculo'),'String','%?%');
 
         }

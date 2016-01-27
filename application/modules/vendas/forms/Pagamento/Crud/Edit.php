@@ -6,6 +6,15 @@
          */
         protected $_multiple;
         /**
+         * @var array
+         */
+        protected $_url = array (
+  'retrieve' => '/vendas/pagto-pedido/retrieve',
+  'insert' => '/vendas/pagto-pedido/insert',
+  'update' => '/vendas/pagto-pedido/update',
+  'delete' => '/vendas/pagto-pedido/delete',
+);
+        /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
          */

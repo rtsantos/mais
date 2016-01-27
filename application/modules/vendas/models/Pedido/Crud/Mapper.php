@@ -66,15 +66,17 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
         return array (
   0 => 
   array (
-    'desc' => 'Itens',
-    'url' => '/vendas/item-pedido/grid/tab/1/form/1',
-    'field' => 'id_pedido',
+    'description' => 'Itens do Pedido/Serviço',
+    'url' => '/vendas/item-pedido/form/grid/1',
+    'column' => 'id_pedido',
+    'message' => 'Necessário seleção Pedido',
   ),
   1 => 
   array (
-    'desc' => 'Pagamento',
-    'url' => '/vendas/pagamento/form/tab/1',
-    'field' => 'id_pedido',
+    'description' => 'Pagamento',
+    'url' => '/vendas/pagamento/form/grid/1',
+    'column' => 'id_pedido',
+    'message' => 'Necessário seleção Pedido',
   ),
 );
     }

@@ -621,9 +621,9 @@ return array (
           ),
           'listOptions' => 
           array (
-             'A' => 'Aberto',
-             'C' => 'Confirmado',
-             'E' => 'Efetivado'
+            'A' => 'Aberto',
+            'C' => 'Confirmado',
+            'E' => 'Efetivado',
           ),
           'type' => 'Select',
           'text' => 
@@ -645,12 +645,20 @@ return array (
     ),
     'tabs' => 
     array (
-      0 => array('desc'=>'Itens'
-                ,'url'=>'/vendas/item-pedido/grid/tab/1/form/1'
-                ,'field'=>'id_pedido'),
-      1 => array('desc'=>'Pagamento'
-                ,'url'=>'/vendas/pagamento/form/tab/1'
-                ,'field'=>'id_pedido')
+      0 => 
+      array (
+        'description' => 'Itens do Pedido/Serviço',
+        'url' => '/vendas/item-pedido/form/grid/1',
+        'column' => 'id_pedido',
+        'message' => 'Necessário seleção Pedido',
+      ),
+      1 => 
+      array (
+        'description' => 'Pagamento',
+        'url' => '/vendas/pagamento/form/grid/1',
+        'column' => 'id_pedido',
+        'message' => 'Necessário seleção Pedido',
+      ),
     ),
     'referenceMaps' => 
     array (
@@ -722,6 +730,16 @@ return array (
       2 => 'id_empresa',
     ),
     'description' => 'Pedido',
+    'form' => 
+    array (
+      'url' => 
+      array (
+        'retrieve' => '/vendas/pedido/retrieve',
+        'insert' => '/vendas/pedido/insert',
+        'update' => '/vendas/pedido/update',
+        'delete' => '/vendas/pedido/delete',
+      ),
+    ),
   ),
 )
 ?>

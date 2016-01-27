@@ -5,7 +5,7 @@ return array (
     'name' => 'cv_item_pedido',
     'modelName' => 'item_pedido',
     'schema' => 'mais',
-    'sequenceName' => 'sid_cv_item_pedido',
+    'sequenceName' => 'sid_item_pedido',
     'moduleName' => 'vendas',
     'objectName' => 'Vendas_Model_ItemPedido',
     'controllerName' => true,
@@ -320,7 +320,7 @@ return array (
       array (
         'label' => 'Quantidade',
         'multiple' => 0,
-        'type' => 'decimal',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -342,6 +342,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => '11.4',
         'nullable' => true,
@@ -350,7 +357,7 @@ return array (
       array (
         'label' => 'Valor',
         'multiple' => 0,
-        'type' => 'decimal',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -372,6 +379,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => '11.4',
         'nullable' => true,
@@ -380,7 +394,7 @@ return array (
       array (
         'label' => 'Desconto',
         'multiple' => 0,
-        'type' => 'decimal',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -402,6 +416,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => '11.4',
         'nullable' => true,
@@ -496,9 +517,19 @@ return array (
     ),
     'unique' => 
     array (
-
     ),
     'description' => 'Itens do Pedido/Serviço',
+    'tabs' => NULL,
+    'form' => 
+    array (
+      'url' => 
+      array (
+        'retrieve' => '/vendas/item-pedido/retrieve',
+        'insert' => '/vendas/item-pedido/insert',
+        'update' => '/vendas/item-pedido/update',
+        'delete' => '/vendas/item-pedido/delete',
+      ),
+    ),
   ),
 )
 ?>

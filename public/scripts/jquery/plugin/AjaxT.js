@@ -79,10 +79,12 @@
             var ajaxT = this;
 
             if (!options.url) {
-                alert('É necessário informar o parâmetro "options.url"!');
+                jQuery.DialogT.alert('É necessário informar o parâmetro "options.url"!');
+                return false;
             }
             if (!options.data) {
-                alert('É necessário informar o parâmetro "options.data" que representa os dados a serem postados!');
+                jQuery.DialogT.alert('É necessário informar o parâmetro "options.data" que representa os dados a serem postados!');
+                return false;
             }
             if (options.abort) {
                 options.mode = 'abort';

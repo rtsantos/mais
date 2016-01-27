@@ -6,10 +6,20 @@
          */
         protected $_multiple;
         /**
+         * @var array
+         */
+        protected $_url = array (
+  'retrieve' => '/vendas/item-pedido/retrieve',
+  'insert' => '/vendas/item-pedido/insert',
+  'update' => '/vendas/item-pedido/update',
+  'delete' => '/vendas/item-pedido/delete',
+);
+        /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_cv_item_pedido');
             
     
             $model = new Vendas_Form_ItemPedido_Elements();

@@ -957,7 +957,7 @@
                                             var id = grid.jqGrid('getGridParam','selarrrow');
                                         }else{
                                             var id = grid.jqGrid('getGridParam','selrow');
-                                        }        
+                                        }
                                         var seeker = " . $seekerAccess . "('#" . $seekerName . "');
                                         try{
                                             seeker.{$objectRetrieve}('retrieve',{value: id});

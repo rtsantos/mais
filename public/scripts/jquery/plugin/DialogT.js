@@ -212,25 +212,25 @@
             $.DialogT.options = settings;
             $.TDialog(exception.notification, settings, exception.notification, exception.message);
         },
-        ajax: function(url, settings){
-            var message = $.ajax({url:url,async:false}).responseText;
+        ajax: function (url, settings) {
+            var message = $.ajax({url: url, async: false}).responseText;
             $.DialogT.options = settings;
-            if(!settings.title){
+            if (!settings.title) {
                 settings.title = 'Informação';
             }
             $.TDialog('Information', settings, settings.title, message);
         },
-        iframe: function(url, settings){
-			if (typeof settings.id == 'undefined'){
-				settings.id = 'dialog-message';
-			}
-            if(!settings.title){
+        iframe: function (url, settings) {
+            if (typeof settings.id == 'undefined') {
+                settings.id = 'dialog-message';
+            }
+            if (!settings.title) {
                 settings.title = 'Informação';
             }
-			
+
             $.DialogT.options = settings;
 
-			var message = '<iframe width="100%" height="100%" align="left" frameborder="0" name="ifr-'+ settings.id +'" id="ifr-'+ settings.id +'" src="' + url + '" border="0" noresize="noresize" scrolling="off"></iframe>&nbsp;';
+            var message = '<iframe width="100%" height="100%" align="left" frameborder="0" name="ifr-' + settings.id + '" id="ifr-' + settings.id + '" src="' + url + '" border="0" noresize="noresize" scrolling="off"></iframe>&nbsp;';
             $.TDialog('blank', settings, settings.title, message);
         },
         close: function (id) {
@@ -242,6 +242,12 @@
             $('#' + id).dialog("destroy");
             $('#' + id).remove();
             //$('#' + id).html('');
-        }
+        },
+        alert: function (message) {
+            this.open(message, 'Alert',{title:'Alerta'});
+        },
+        confirm: function (message, onConfirm) {
+            this.open(message, 'Confirm', {onConfirm: onConfirm,title:'Confirmação'});
+        },
     }
 })(jQuery);

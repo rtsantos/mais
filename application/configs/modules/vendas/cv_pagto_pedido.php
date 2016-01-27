@@ -168,7 +168,8 @@ return array (
           ),
           'listOptions' => 
           array (
-            'D' => 'Crediário',
+            'D' => 'Dinheiro',
+            'O' => 'Crediário',
             'C' => 'Cartão',
             'Q' => 'Cheque',
             'F' => 'Faturar',
@@ -337,7 +338,7 @@ return array (
       array (
         'label' => 'Número de Parcelas',
         'multiple' => 0,
-        'type' => 'int',
+        'type' => 'Number',
         'object' => 
         array (
           'mask' => NULL,
@@ -359,6 +360,13 @@ return array (
           array (
           ),
           'required' => false,
+          'numeric' => 
+          array (
+            'numDecimal' => NULL,
+            'numInteger' => '',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
         ),
         'length' => NULL,
         'nullable' => true,
@@ -425,6 +433,16 @@ return array (
     ),
     'description' => 'Pagamento',
     'tabs' => NULL,
+    'form' => 
+    array (
+      'url' => 
+      array (
+        'retrieve' => '/vendas/pagto-pedido/retrieve',
+        'insert' => '/vendas/pagto-pedido/insert',
+        'update' => '/vendas/pagto-pedido/update',
+        'delete' => '/vendas/pagto-pedido/delete',
+      ),
+    ),
   ),
 )
 ?>

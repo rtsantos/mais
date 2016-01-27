@@ -271,9 +271,9 @@
             if ($data) {
                 $result = parent::update($data, $cmdWhere);
             }
-            if (!$result) {
+            /*if (!$result) {
                 return false;
-            }
+            }*/
             return $data;
         }
 

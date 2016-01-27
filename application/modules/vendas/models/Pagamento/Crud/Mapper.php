@@ -127,7 +127,7 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function setForma($value,$options=array('required'=>true)){        
         
-        $options['listOptions']=array('D'=>'Crediário','C'=>'Cartão','Q'=>'Cheque','F'=>'Faturar');
+        $options['listOptions']=array('D'=>'Dinheiro','O'=>'Crediário','C'=>'Cartão','Q'=>'Cheque','F'=>'Faturar');
         $this->_data['forma'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['forma']->setValueFromDb($value);
@@ -285,10 +285,10 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
      * @return Vendas_Model_Pagamento_Crud_Mapper
      */
     public function setNroParc($value,$options=array('required'=>true)){        
-        $this->_data['nro_parc'] = new ZendT_Type_String($value);
-        if ($options['db'])
+        $this->_data['nro_parc'] = new ZendT_Type_Number($value,array('numDecimal'=>0));
+         if ($options['db'])
             $this->_data['nro_parc']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
         }

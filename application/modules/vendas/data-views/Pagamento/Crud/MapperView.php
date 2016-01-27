@@ -34,8 +34,8 @@
         protected function _getSettingsDefault(){
            $profile = array();
            $profile['order'] = array('id','id_pedido','numero_pedido','forma','vlr_total','vlr_pago','vlr_desc','vlr_acrec','nro_parc','vlr_parc');
-           $profile['width'] = array('id'=>100,'id_pedido'=>120,'numero_pedido'=>200,'forma'=>150,'vlr_total'=>150,'vlr_pago'=>150,'vlr_desc'=>150,'vlr_acrec'=>150,'nro_parc'=>200,'vlr_parc'=>150);
-           $profile['align'] = array('id'=>'left','id_pedido'=>'left','numero_pedido'=>'left','forma'=>'center','vlr_total'=>'right','vlr_pago'=>'right','vlr_desc'=>'right','vlr_acrec'=>'right','nro_parc'=>'left','vlr_parc'=>'right');
+           $profile['width'] = array('id'=>100,'id_pedido'=>120,'numero_pedido'=>200,'forma'=>150,'vlr_total'=>150,'vlr_pago'=>150,'vlr_desc'=>150,'vlr_acrec'=>150,'nro_parc'=>150,'vlr_parc'=>150);
+           $profile['align'] = array('id'=>'left','id_pedido'=>'left','numero_pedido'=>'left','forma'=>'center','vlr_total'=>'right','vlr_pago'=>'right','vlr_desc'=>'right','vlr_acrec'=>'right','nro_parc'=>'right','vlr_parc'=>'right');
            $profile['hidden'] = array('id_pedido');
            $profile['remove'] = array();
            $profile['listOptions'] = array('forma'=>$this->getModel()->getListOptions('forma'));
@@ -55,7 +55,7 @@
             $this->_columns->add('vlr_pago', 'cv_pagto_pedido', 'vlr_pago', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_pago'),'Numeric','=');
             $this->_columns->add('vlr_desc', 'cv_pagto_pedido', 'vlr_desc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_desc'),'Numeric','=');
             $this->_columns->add('vlr_acrec', 'cv_pagto_pedido', 'vlr_acrec', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_acrec'),'Numeric','=');
-            $this->_columns->add('nro_parc', 'cv_pagto_pedido', 'nro_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.nro_parc'),'String','%?%');
+            $this->_columns->add('nro_parc', 'cv_pagto_pedido', 'nro_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.nro_parc'),'Numeric','=');
             $this->_columns->add('vlr_parc', 'cv_pagto_pedido', 'vlr_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_parc'),'Numeric','=');
 
         }

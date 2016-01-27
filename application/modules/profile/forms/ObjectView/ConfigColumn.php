@@ -140,6 +140,13 @@
                $element->addMultiOption('1', ZendT_Lib::translate('Seleção'));
                $this->addElement($element);
            }
+           
+           $element = new ZendT_Form_Element_Textarea('eventChange');
+           $element->setAttrib('cols', 20);
+           $element->setAttrib('rows', 5);
+           $element->setAttrib('onKeyUp', "setConfig(event,this);");
+           $element->setLabel(ZendT_Lib::translate('Script de Mudança:'));
+           $this->addElement($element);
        }
 
        public function loadElementsXColsFilter() {
@@ -410,6 +417,13 @@
            $element = new ZendT_Form_Element_Text('value');
            $element->setAttrib('onKeyUp', "setConfig(event,this);");
            $element->setLabel(ZendT_Lib::translate('Filtro Padrão:'));
+           $this->addElement($element);
+           
+           $element = new ZendT_Form_Element_Textarea('listOptions');
+           $element->setAttrib('cols', 20);
+           $element->setAttrib('rows', 5);
+           $element->setAttrib('onKeyUp', "setConfig(event,this);");
+           $element->setLabel(ZendT_Lib::translate('Lista de Valores:'));
            $this->addElement($element);
 
            $element = new ZendT_Form_Element_Select('hidden');

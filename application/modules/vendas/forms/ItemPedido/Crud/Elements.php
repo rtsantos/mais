@@ -136,23 +136,15 @@ class Vendas_Form_ItemPedido_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Seeker
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getQtdItem(){
 
-        $element = new ZendT_Form_Element_Seeker('id_usu_alt');
-        $element->setSuffix('usu_alt');
-        $element->setLabel($this->_translate->_('cv_item_pedido.id_usu_alt') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/auth/conta/grid/profile_key/usuario');
-        $element->url()->setSearch('/auth/conta/seeker-search/profile_key/usuario');
-        $element->url()->setRetrieve('/auth/conta/retrieve/profile_key/usuario');
-        $element->setMapperView('Auth_DataView_Conta_MapperView');
+        $element = new ZendT_Form_Element_Numeric('qtd_item');
+        $element->setLabel($this->_translate->_('cv_item_pedido.qtd_item') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
         $element->addValidators(array());
                 
         return $element;
@@ -160,23 +152,15 @@ class Vendas_Form_ItemPedido_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Seeker
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrItem(){
 
-        $element = new ZendT_Form_Element_Seeker('id_usu_alt');
-        $element->setSuffix('usu_alt');
-        $element->setLabel($this->_translate->_('cv_item_pedido.id_usu_alt') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/auth/conta/grid/profile_key/usuario');
-        $element->url()->setSearch('/auth/conta/seeker-search/profile_key/usuario');
-        $element->url()->setRetrieve('/auth/conta/retrieve/profile_key/usuario');
-        $element->setMapperView('Auth_DataView_Conta_MapperView');
+        $element = new ZendT_Form_Element_Numeric('vlr_item');
+        $element->setLabel($this->_translate->_('cv_item_pedido.vlr_item') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
         $element->addValidators(array());
                 
         return $element;
@@ -184,23 +168,15 @@ class Vendas_Form_ItemPedido_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Seeker
+     * @return \ZendT_Form_Element_Numeric
      */
     public function getVlrDesc(){
 
-        $element = new ZendT_Form_Element_Seeker('id_usu_alt');
-        $element->setSuffix('usu_alt');
-        $element->setLabel($this->_translate->_('cv_item_pedido.id_usu_alt') . ':');
-        $element->setIdField('id');
-        $element->setIdAttribs(array());
-        $element->setSearchField('nome');
-        $element->setSearchAttribs(array('css-width'=>'270px'));
-        $element->modal()->setWidth(800);
-        $element->modal()->setHeight(450);
-        $element->url()->setGrid('/auth/conta/grid/profile_key/usuario');
-        $element->url()->setSearch('/auth/conta/seeker-search/profile_key/usuario');
-        $element->url()->setRetrieve('/auth/conta/retrieve/profile_key/usuario');
-        $element->setMapperView('Auth_DataView_Conta_MapperView');
+        $element = new ZendT_Form_Element_Numeric('vlr_desc');
+        $element->setLabel($this->_translate->_('cv_item_pedido.vlr_desc') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
         $element->addValidators(array());
                 
         return $element;
