@@ -80,5 +80,10 @@ array (
   'cv_pagto_pedido.vlr_acrec' => 'Acréscimo',
   'cv_pagto_pedido.nro_parc' => 'Número de Parcelas',
   'cv_pagto_pedido.vlr_parc' => 'Valor da Parcela',
+  'cv_pedido.id_cliente_con' => 'ID_CLIENTE_CON',
+  'cv_pedido.id_cliente_con.ca_pessoa.nome' => 'Nome ID_CLIENTE_CON',
+  'cv_pedido.sinistro' => 'Sinistro',
+  'cv_pedido.id_veiculo' => 'Veículo',
+  'cv_pedido.id_veiculo.fr_veiculo.placa' => 'Placa Veículo',
 )
 ?>

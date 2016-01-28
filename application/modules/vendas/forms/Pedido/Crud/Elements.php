@@ -248,5 +248,67 @@ class Vendas_Form_Pedido_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdClienteCon(){
+
+        $element = new ZendT_Form_Element_Seeker('id_cliente_con');
+        $element->setSuffix('cliente_con');
+        $element->setLabel($this->_translate->_('cv_pedido.id_cliente_con') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('nome');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/ca/pessoa/grid');
+        $element->url()->setSearch('/ca/pessoa/seeker-search');
+        $element->url()->setRetrieve('/ca/pessoa/retrieve');
+        $element->setMapperView('Ca_DataView_Pessoa_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getSinistro(){
+
+        $element = new ZendT_Form_Element_Text('sinistro');
+        $element->setLabel($this->_translate->_('cv_pedido.sinistro') . ':');
+        $element->setAttribs(array('maxlength'=>'80','css-width'=>'200px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdVeiculo(){
+
+        $element = new ZendT_Form_Element_Seeker('id_veiculo');
+        $element->setSuffix('veiculo');
+        $element->setLabel($this->_translate->_('cv_pedido.id_veiculo') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('placa');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/frota/veiculo/grid');
+        $element->url()->setSearch('/frota/veiculo/seeker-search');
+        $element->url()->setRetrieve('/frota/veiculo/retrieve');
+        $element->setMapperView('Frota_DataView_Veiculo_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
 }
 ?>

@@ -30,6 +30,10 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getReferenceMap(){
         return array(
+                'id_veiculo' => array(
+                    'mapper' => 'Frota_DataView_Veiculo_MapperView',
+                    'column' => 'id'
+                ),
                 'id_usu_inc' => array(
                     'mapper' => 'Auth_DataView_Conta_MapperView',
                     'column' => 'id'
@@ -57,6 +61,10 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
                 'id_cont_cli_vend' => array(
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
                     'column' => 'id'
+                ),
+                'id_cliente_con' => array(
+                    'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
                 ));
     }
     /**
@@ -64,14 +72,14 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getTabs(){
         return array (
-  0 => 
+  'cv_item_pedido' => 
   array (
     'description' => 'Itens do Pedido/Serviço',
     'url' => '/vendas/item-pedido/form/grid/1',
     'column' => 'id_pedido',
     'message' => 'Necessário seleção Pedido',
   ),
-  1 => 
+  'cv_pagto_pedido' => 
   array (
     'description' => 'Pagamento',
     'url' => '/vendas/pagamento/form/grid/1',
@@ -447,6 +455,104 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
                     
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_cliente_con
+     *
+     * @return string
+     */
+    public function getIdClienteCon($instance=false){
+        if ($instance && !is_object($this->_data['id_cliente_con'])){
+            $this->setIdClienteCon('',array('required'=>false));
+        }
+        return $this->_data['id_cliente_con'];
+    }
+    /**
+     * Seta o valor da coluna id_cliente_con
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setIdClienteCon($value,$options=array('required'=>true)){        
+        $this->_data['id_cliente_con'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_cliente_con']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna sinistro
+     *
+     * @return string
+     */
+    public function getSinistro($instance=false){
+        if ($instance && !is_object($this->_data['sinistro'])){
+            $this->setSinistro('',array('required'=>false));
+        }
+        return $this->_data['sinistro'];
+    }
+    /**
+     * Seta o valor da coluna sinistro
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setSinistro($value,$options=array('required'=>true)){        
+        $this->_data['sinistro'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['sinistro']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 80, ) );
+            $valueValid = $this->_data['sinistro']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_veiculo
+     *
+     * @return string
+     */
+    public function getIdVeiculo($instance=false){
+        if ($instance && !is_object($this->_data['id_veiculo'])){
+            $this->setIdVeiculo('',array('required'=>false));
+        }
+        return $this->_data['id_veiculo'];
+    }
+    /**
+     * Seta o valor da coluna id_veiculo
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setIdVeiculo($value,$options=array('required'=>true)){        
+        $this->_data['id_veiculo'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_veiculo']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
         }
         return $this;
     }

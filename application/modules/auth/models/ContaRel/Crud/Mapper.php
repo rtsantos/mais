@@ -6,6 +6,7 @@ class Auth_Model_ContaRel_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_papel','id_papel_rel','status');
     protected $_model = 'Auth_Model_ContaRel_Table';
+    public static $table = 'prouser.papel_rel';
     /**
      *
      * @var Auth_Model_ContaRel_Mapper
@@ -37,6 +38,13 @@ class Auth_Model_ContaRel_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Auth_DataView_Conta_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     

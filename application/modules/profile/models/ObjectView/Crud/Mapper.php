@@ -6,6 +6,7 @@ class Profile_Model_ObjectView_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','tipo','padrao','nome','objeto','id_usuario');
     protected $_model = 'Profile_Model_ObjectView_Table';
+    public static $table = 'prouser.profile_object_view';
     /**
      *
      * @var Profile_Model_ObjectView_Mapper
@@ -33,6 +34,13 @@ class Profile_Model_ObjectView_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Auth_DataView_Conta_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     

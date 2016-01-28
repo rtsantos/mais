@@ -6,6 +6,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_profile_object_view','id_papel');
     protected $_model = 'Profile_Model_ObjectViewPriv_Table';
+    public static $table = 'prouser.profile_object_view_priv';
     /**
      *
      * @var Profile_Model_ObjectViewPriv_Mapper
@@ -23,6 +24,27 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array(
+                'ID_PAPEL' => array(
+                    'mapper' => 'Auth_DataView_Conta_MapperView',
+                    'column' => 'ID'
+                ),
+                'ID_PROFILE_OBJECT_VIEW' => array(
+                    'mapper' => 'Profile_DataView_ObjectView_MapperView',
+                    'column' => 'ID'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -44,10 +66,10 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
      * @return Profile_Model_ObjectViewPriv_Crud_Mapper
      */
     public function setId($value,$options=array('required'=>true)){        
-        $this->_data['id'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
-        if ($options['db'])
+        $this->_data['id'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
             $this->_data['id']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
          if ($options['required'])
@@ -56,6 +78,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_profile_object_view
@@ -75,7 +98,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
      * @return Profile_Model_ObjectViewPriv_Crud_Mapper
      */
     public function setIdProfileObjectView($value,$options=array('required'=>true)){        
-        $this->_data['id_profile_object_view'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
+        $this->_data['id_profile_object_view'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_profile_object_view']->setValueFromDb($value);
                     
@@ -87,6 +110,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_papel
@@ -106,7 +130,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
      * @return Profile_Model_ObjectViewPriv_Crud_Mapper
      */
     public function setIdPapel($value,$options=array('required'=>true)){        
-        $this->_data['id_papel'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
+        $this->_data['id_papel'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_papel']->setValueFromDb($value);
                     
@@ -118,6 +142,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna tipo
@@ -148,6 +173,7 @@ class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

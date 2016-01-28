@@ -79,6 +79,18 @@
             $this->addElement($element);
 
             
+            $element = $model->getElement('id_cliente_con');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('sinistro');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_veiculo');
+            $this->addElement($element);
+
+            
         }
         /**
          * Configura uma coluna para ser multipla, ou seja,

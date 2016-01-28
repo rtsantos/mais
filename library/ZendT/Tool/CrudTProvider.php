@@ -305,19 +305,21 @@
                        $_dependentTables[] = $modelName['table']['objectName'];
                        $tab['description'] = $modelName['table']['description'];
                        $tab['url'] = str_replace('/grid','/form/grid/1',$modelName['table']['seeker']['url']['grid']);
-                       $tab['column'] = $dependentTable['COLUMN_NAME'];
+                       $tab['column'] = strtolower($dependentTable['COLUMN_NAME']);
                        $tab['message'] = 'Necessário seleção ' . $config['table']['description'];
+                       if (!isset($config['table']['tabs'][$modelName['table']['name']])){
+                           $config['table']['tabs'][$modelName['table']['name']] = $tab;
+                       }                       
                    } else {
                        $_dependentTables[] = str_replace("_Crud", "", ZendT_Lib::convertTableNameToObjectName($module, $dependentTable['TABLE_NAME']));
-                       $tab['description'] = $dependentTable['TABLE_NAME'];
+                       /*$tab['description'] = $dependentTable['TABLE_NAME'];
                        $tab['url'] = '/' . strtolower($module).'/' . strtolower(str_replace('_', '-', $dependentTable['TABLE_NAME'])) . '/form/grid/1';
-                       $tab['column'] = 'ID_' . strtoupper($config['table']);
-                       $tab['message'] = 'Necessário seleção ' . $config['table']['description'];
-                   }
-                   $_tabs[] = $tab;
+                       $tab['column'] = 'ID_' . strtoupper($config['table']['name']);
+                       $tab['message'] = 'Necessário seleção ' . $config['table']['description'];*/
+                   }                   
                }
-               $config['table']['dependentTables'] = $_dependentTables;               
-               $config['table']['tabs'] = $_tabs;
+               $config['table']['dependentTables'] = $_dependentTables;
+               //$config['table']['tabs'] = $_tabs;
            }
            
            
@@ -571,7 +573,7 @@
                        $config['table']['columns'][$columnName]['object']['time']['id'] = null;
                    }
                    $config['table']['columns'][$columnName]['type'] = 'Time';
-               } elseif (in_array($column['DATA_TYPE'], array('NUMBER', 'INTEGER','DECIMAL'))) {
+               } elseif (in_array($column['DATA_TYPE'], array('NUMBER', 'INTEGER', 'DECIMAL', 'INT'))) {
                    if (!isset($config['table']['columns'][$columnName]['object']['numeric'])) {
                        $config['table']['columns'][$columnName]['object']['numeric'] = array();
                    }

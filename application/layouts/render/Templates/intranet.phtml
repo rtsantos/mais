@@ -76,8 +76,8 @@
                                 <span class="ui-text">
                                     <?php
                                     $name = 'Entrar';
-                                    if ($_SESSION['logon']['usuario']['login'] != '' && $_SESSION['logon']['usuario']['login'] != 'GUEST') {
-                                        $data = explode(' ', $_SESSION['logon']['usuario']['nome']);
+                                    if (Auth_Session_User::getInstance()->authenticated()) {
+                                        $data = explode(' ', Auth_Session_User::getInstance()->getName());
                                         $name = ucwords(strtolower($data[0] . ' ' . end($data)));
 
                                         if (count($data) > 1) {

@@ -9,7 +9,7 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_required = array('ID','NUMERO','TIPO','ID_USU_INC','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','STATUS');
     protected $_primary = array('ID');
     protected $_unique = array('TIPO','NUMERO','ID_EMPRESA');
-    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','STATUS');
+    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','STATUS','ID_CLIENTE_CON','SINISTRO','ID_VEICULO');
     protected $_search = 'numero';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
@@ -17,6 +17,11 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
                 'Vendas_Model_ItemPedido_Table',
                 'Vendas_Model_Pagamento_Table');
     protected $_referenceMap = array(
+                'IdVeiculo' => array(
+                    'columns' => 'id_veiculo',
+                    'refTableClass' => 'Frota_Model_Veiculo_Table',
+                    'refColumns' => 'id'
+                ),
                 'IdUsuInc' => array(
                     'columns' => 'id_usu_inc',
                     'refTableClass' => 'Auth_Model_Conta_Table',
@@ -49,6 +54,11 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
                 ),
                 'IdContCliVend' => array(
                     'columns' => 'id_cont_cli_vend',
+                    'refTableClass' => 'Ca_Model_Pessoa_Table',
+                    'refColumns' => 'id'
+                ),
+                'IdClienteCon' => array(
+                    'columns' => 'id_cliente_con',
                     'refTableClass' => 'Ca_Model_Pessoa_Table',
                     'refColumns' => 'id'
                 ));

@@ -11,8 +11,32 @@
            if ($this->_action == 'insert' && !$this->getNumero(true)->toPhp()) {
                $_numeracao = new Ca_Model_Numeracao_Mapper();
                $numero = $_numeracao->proximo(self::$table . '.numero'
-                                             ,$this->getIdEmpresa()->toPhp());
+                     , $this->getIdEmpresa()->toPhp());
                $this->setNumero($numero);
+           }
+
+           if ($this->getIdEmpresa(true)->toPhp() == '') {
+               $this->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
+           }
+
+           if ($this->getIdCliente(true)->toPhp() == '') {
+               $_pessoa = new Ca_DataView_Pessoa_MapperView();
+               $_pessoa->setNome(_i18n('CONSUMIDOR'));
+               $_pessoa->retrieve();
+               $this->setIdCliente($_pessoa->getId());
+           }
+
+           if ($this->getIdUsuInc(true)->toPhp() == '') {
+               $this->setIdUsuInc(Auth_Session_User::getInstance()->getId());
+           }
+
+           $this->setIdUsuAlt(Auth_Session_User::getInstance()->getId());
+
+           if ($this->getIdFuncionario(true)->toPhp() == '') {
+               $_pessoa = new Ca_DataView_Pessoa_MapperView();
+               $_pessoa->setEmail(Auth_Session_User::getInstance()->getLogin());
+               $_pessoa->retrieve();
+               $this->setIdFuncionario($_pessoa->getId());
            }
        }
 

@@ -11,8 +11,19 @@
            if ($this->_action == 'insert' && !$this->getNumero(true)->toPhp()) {
                $_numeracao = new Ca_Model_Numeracao_Mapper();
                $numero = $_numeracao->proximo(self::$table . '.numero'
-                                             ,$this->getIdEmpresa(true)->toPhp());
+                     , $this->getIdEmpresa(true)->toPhp());
                $this->setNumero($numero);
+           }
+
+           if ($this->getIdEmpresa(true)->toPhp() == '') {
+               $this->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
+           }
+           
+           if ($this->getIdCliente(true)->toPhp() == '') {
+               $_pessoa = new Ca_DataView_Pessoa_MapperView();
+               $_pessoa->setNome(_i18n('CONSUMIDOR'));
+               $_pessoa->retrieve();
+               $this->setIdCliente($_pessoa->getId());
            }
        }
 

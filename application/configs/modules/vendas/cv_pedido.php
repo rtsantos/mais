@@ -637,6 +637,171 @@ return array (
         'length' => '1',
         'nullable' => false,
       ),
+      'id_cliente_con' => 
+      array (
+        'label' => 'ID_CLIENTE_CON',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'nome',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/pessoa/grid',
+              'search' => '/ca/pessoa/seeker-search',
+              'retrieve' => '/ca/pessoa/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'sinistro' => 
+      array (
+        'label' => 'Sinistro',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 80,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Text',
+          'text' => 
+          array (
+            'maxlength' => '80',
+            'css-width' => '200px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '80',
+        'nullable' => true,
+      ),
+      'id_veiculo' => 
+      array (
+        'label' => 'Veículo',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'placa',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/frota/veiculo/grid',
+              'search' => '/frota/veiculo/seeker-search',
+              'retrieve' => '/frota/veiculo/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
@@ -645,14 +810,14 @@ return array (
     ),
     'tabs' => 
     array (
-      0 => 
+      'cv_item_pedido' => 
       array (
         'description' => 'Itens do Pedido/Serviço',
         'url' => '/vendas/item-pedido/form/grid/1',
         'column' => 'id_pedido',
         'message' => 'Necessário seleção Pedido',
       ),
-      1 => 
+      'cv_pagto_pedido' => 
       array (
         'description' => 'Pagamento',
         'url' => '/vendas/pagamento/form/grid/1',
@@ -664,15 +829,15 @@ return array (
     array (
       0 => 
       array (
-        'columnName' => 'id_usu_inc',
-        'objectNameReference' => 'Auth_Model_Conta',
-        'tableNameReference' => 'papel',
-        'schemaNameReference' => 'prouser',
+        'columnName' => 'id_veiculo',
+        'objectNameReference' => 'Frota_Model_Veiculo',
+        'tableNameReference' => 'fr_veiculo',
+        'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
       1 => 
       array (
-        'columnName' => 'id_usu_alt',
+        'columnName' => 'id_usu_inc',
         'objectNameReference' => 'Auth_Model_Conta',
         'tableNameReference' => 'papel',
         'schemaNameReference' => 'prouser',
@@ -680,15 +845,15 @@ return array (
       ),
       2 => 
       array (
-        'columnName' => 'id_empresa',
-        'objectNameReference' => 'Ca_Model_Pessoa',
-        'tableNameReference' => 'ca_pessoa',
-        'schemaNameReference' => 'mais',
+        'columnName' => 'id_usu_alt',
+        'objectNameReference' => 'Auth_Model_Conta',
+        'tableNameReference' => 'papel',
+        'schemaNameReference' => 'prouser',
         'columnReference' => 'id',
       ),
       3 => 
       array (
-        'columnName' => 'id_funcionario',
+        'columnName' => 'id_empresa',
         'objectNameReference' => 'Ca_Model_Pessoa',
         'tableNameReference' => 'ca_pessoa',
         'schemaNameReference' => 'mais',
@@ -696,7 +861,7 @@ return array (
       ),
       4 => 
       array (
-        'columnName' => 'id_cliente',
+        'columnName' => 'id_funcionario',
         'objectNameReference' => 'Ca_Model_Pessoa',
         'tableNameReference' => 'ca_pessoa',
         'schemaNameReference' => 'mais',
@@ -704,7 +869,7 @@ return array (
       ),
       5 => 
       array (
-        'columnName' => 'id_cont_cli_resp',
+        'columnName' => 'id_cliente',
         'objectNameReference' => 'Ca_Model_Pessoa',
         'tableNameReference' => 'ca_pessoa',
         'schemaNameReference' => 'mais',
@@ -712,7 +877,23 @@ return array (
       ),
       6 => 
       array (
+        'columnName' => 'id_cont_cli_resp',
+        'objectNameReference' => 'Ca_Model_Pessoa',
+        'tableNameReference' => 'ca_pessoa',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      7 => 
+      array (
         'columnName' => 'id_cont_cli_vend',
+        'objectNameReference' => 'Ca_Model_Pessoa',
+        'tableNameReference' => 'ca_pessoa',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      8 => 
+      array (
+        'columnName' => 'id_cliente_con',
         'objectNameReference' => 'Ca_Model_Pessoa',
         'tableNameReference' => 'ca_pessoa',
         'schemaNameReference' => 'mais',

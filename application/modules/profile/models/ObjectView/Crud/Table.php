@@ -5,7 +5,6 @@
 class Profile_Model_ObjectView_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'PROFILE_OBJECT_VIEW';
-    /*protected $_alias = 'OBJECT_VIEW';*/
     protected $_sequence = 'SID_PROFILE_OBJECT_VIEW';
     protected $_required = array('ID','TIPO','PADRAO','NOME','OBJETO','ID_USUARIO');
     protected $_primary = array('ID');
