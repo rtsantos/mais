@@ -1863,3 +1863,25 @@ tr.ui-search-toolbar input{
 .ui-nav-form{
     clear: both;
 }
+
+.ui-loading{
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('images/ui-loading.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+body.ui-block {
+    overflow: hidden;   
+}
+
+body.ui-block .ui-loading {
+    display: block;
+}
