@@ -1,4 +1,122 @@
 <?php
-    include APPLICATION_PATH.'/views/scripts/index/form.phtml';
-    /*echo $this->grid;*/
+   include APPLICATION_PATH . '/views/scripts/index/form.phtml';
+   /* echo $this->grid; */
 ?>
+<script>
+    function _itemPedidoChangeProduto() {
+        var vlrFinal = jQuery('#<?php echo $this->form->getName(); ?> #vlr_final_produto');
+        var vlrItem = jQuery('#<?php echo $this->form->getName(); ?> #vlr_item');
+        vlrItem.val(vlrFinal.val());
+        _itemPedidoCalcTotal('vlr_item');
+    }
+
+    function _itemPedidoCalcTotal(field) {
+        var $vlrItem = jQuery('#<?php echo $this->form->getName(); ?> #vlr_item');
+        var $qtdItem = jQuery('#<?php echo $this->form->getName(); ?> #qtd_item');
+        var $perDesc = jQuery('#<?php echo $this->form->getName(); ?> #per_desc');
+        var $perAcre = jQuery('#<?php echo $this->form->getName(); ?> #per_acre');
+        var $vlrFinal = jQuery('#<?php echo $this->form->getName(); ?> #vlr_final');
+        var $calculo = jQuery('#<?php echo $this->form->getName(); ?> #calculo');
+
+        if ($qtdItem.val() == '') {
+            $qtdItem.val(number(1).format(4));
+        }
+
+        var vlrItem = number($vlrItem.val()).toFloat();
+        var qtdItem = number($qtdItem.val()).toFloat();
+        var perDesc = number($perDesc.val()).toFloat();
+        var vlrDesc = 0;
+        var perAcre = number($perAcre.val()).toFloat();
+        var vlrAcre = 0;
+        var vlrFinal = number($vlrFinal.val()).toFloat();
+        var calculo = '';
+
+        vlrFinal = vlrItem * qtdItem;
+        calculo = '(' + vlrItem + ' * ' + qtdItem + ')';
+
+        /**
+         * Faz o calculo de desconto
+         */
+        if (perDesc > 0) {
+            vlrDesc = number(((vlrFinal * perDesc) / 100)).round(4);
+            vlrFinal = vlrFinal - vlrDesc;
+            calculo = calculo + ' - ' + vlrDesc + '(' + perDesc + '%)';
+        }
+
+        /**
+         * Faz o calculo de acréscimo
+         */
+        if (perAcre > 0) {
+            vlrAcre = number(((vlrFinal * perAcre) / 100)).round(4);
+            vlrFinal = vlrFinal + vlrAcre;
+            calculo = calculo + ' + ' + vlrAcre + '(' + perAcre + '%)';
+        }
+
+        $vlrFinal.val(number(vlrFinal).format(2));
+        $vlrFinal.attr('value_old', $vlrFinal.val());
+        $calculo.val(calculo);
+    }
+
+    jQuery('#<?php echo $this->form->getName(); ?> #per_desc').Tchange(function () {
+        var self = jQuery('#<?php echo $this->form->getName(); ?> #per_desc');
+        if (self.attr('value') != self.attr('value_old')) {
+            var per = jQuery('#<?php echo $this->form->getName(); ?> #per_acre');
+            var value = number(0).format(4);
+            per.val(value).attr('value_old', value);
+            _itemPedidoCalcTotal('per_desc');
+        }
+    });
+
+    jQuery('#<?php echo $this->form->getName(); ?> #per_acre').Tchange(function () {
+        var self = jQuery('#<?php echo $this->form->getName(); ?> #per_acre');
+
+        if (self.attr('value') != self.attr('value_old')) {
+            var per = jQuery('#<?php echo $this->form->getName(); ?> #per_desc');
+            var value = number(0).format(4);
+            per.val(value).attr('value_old', value);
+            _itemPedidoCalcTotal('per_acre');
+        }
+    });
+
+    jQuery('#<?php echo $this->form->getName(); ?> #qtd_item').Tchange(function () {
+        _itemPedidoCalcTotal('qtd_item');
+    });
+
+    jQuery('#<?php echo $this->form->getName(); ?> #vlr_final').Tchange(function () {
+        
+        var $vlrItem = jQuery('#<?php echo $this->form->getName(); ?> #vlr_item');
+        var $qtdItem = jQuery('#<?php echo $this->form->getName(); ?> #qtd_item');        
+        var $vlrFinal = jQuery('#<?php echo $this->form->getName(); ?> #vlr_final');
+        
+        if ($qtdItem.val() == '') {
+            $qtdItem.val(number(1).format(4));
+        }
+        
+        var vlrItem = number($vlrItem.val()).toFloat();
+        var qtdItem = number($qtdItem.val()).toFloat();
+        var vlrFinal = number($vlrFinal.val()).toFloat();
+        var value = 0;
+        
+        value = number(value).format(4);
+        jQuery('#<?php echo $this->form->getName(); ?> #per_acre').val(value).attr('value_old', value);
+        jQuery('#<?php echo $this->form->getName(); ?> #per_desc').val(value).attr('value_old', value);
+
+        vlrTotal = vlrItem * qtdItem;
+        if (vlrFinal == vlrTotal) {
+
+        } else if (vlrFinal > vlrTotal) {
+            // acréscimo
+            value = ((100 * vlrFinal) / vlrTotal) - 100;
+            value = number(value).format(4);
+            jQuery('#<?php echo $this->form->getName(); ?> #per_acre').val(value).attr('value_old', value);
+        } else {
+            // desconto
+            value = 100 - ((100 * vlrFinal) / vlrTotal);
+            value = number(value).format(4);
+            jQuery('#<?php echo $this->form->getName(); ?> #per_desc').val(value).attr('value_old', value);
+        }
+
+        _itemPedidoCalcTotal('vlr_final');
+    });
+
+</script>

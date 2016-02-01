@@ -275,26 +275,26 @@ class Vendas_Model_ItemPedido_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna vlr_desc
+     * Retorna os dados da coluna per_desc
      *
      * @return string
      */
-    public function getVlrDesc($instance=false){
-        if ($instance && !is_object($this->_data['vlr_desc'])){
-            $this->setVlrDesc('',array('required'=>false));
+    public function getPerDesc($instance=false){
+        if ($instance && !is_object($this->_data['per_desc'])){
+            $this->setPerDesc('',array('required'=>false));
         }
-        return $this->_data['vlr_desc'];
+        return $this->_data['per_desc'];
     }
     /**
-     * Seta o valor da coluna vlr_desc
+     * Seta o valor da coluna per_desc
      *
      * @param string $value
      * @return Vendas_Model_ItemPedido_Crud_Mapper
      */
-    public function setVlrDesc($value,$options=array('required'=>true)){        
-        $this->_data['vlr_desc'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+    public function setPerDesc($value,$options=array('required'=>true)){        
+        $this->_data['per_desc'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
          if ($options['db'])
-            $this->_data['vlr_desc']->setValueFromDb($value);
+            $this->_data['per_desc']->setValueFromDb($value);
                     
         if (!$options['db']){
             
@@ -338,6 +338,64 @@ class Vendas_Model_ItemPedido_Crud_Mapper extends ZendT_Db_Mapper
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
                     
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna per_acre
+     *
+     * @return string
+     */
+    public function getPerAcre($instance=false){
+        if ($instance && !is_object($this->_data['per_acre'])){
+            $this->setPerAcre('',array('required'=>false));
+        }
+        return $this->_data['per_acre'];
+    }
+    /**
+     * Seta o valor da coluna per_acre
+     *
+     * @param string $value
+     * @return Vendas_Model_ItemPedido_Crud_Mapper
+     */
+    public function setPerAcre($value,$options=array('required'=>true)){        
+        $this->_data['per_acre'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
+            $this->_data['per_acre']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna vlr_final
+     *
+     * @return string
+     */
+    public function getVlrFinal($instance=false){
+        if ($instance && !is_object($this->_data['vlr_final'])){
+            $this->setVlrFinal('',array('required'=>false));
+        }
+        return $this->_data['vlr_final'];
+    }
+    /**
+     * Seta o valor da coluna vlr_final
+     *
+     * @param string $value
+     * @return Vendas_Model_ItemPedido_Crud_Mapper
+     */
+    public function setVlrFinal($value,$options=array('required'=>true)){        
+        $this->_data['vlr_final'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
+            $this->_data['vlr_final']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
         }
         return $this;
     }

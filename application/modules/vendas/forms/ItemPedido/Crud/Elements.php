@@ -75,9 +75,9 @@ class Vendas_Form_ItemPedido_Crud_Elements
         $element->setSearchAttribs(array('css-width'=>'70px'));
         $element->modal()->setWidth(800);
         $element->modal()->setHeight(450);
-        $element->url()->setGrid('/vendas/produto/grid/profile_key/produto');
-        $element->url()->setSearch('/vendas/produto/seeker-search/profile_key/produto');
-        $element->url()->setRetrieve('/vendas/produto/retrieve/profile_key/produto');
+        $element->url()->setGrid('/vendas/produto/grid/mapper/produto-contrato/profile_key/vendas');
+        $element->url()->setSearch('/vendas/produto/seeker-search/mapper/produto-contrato/profile_key/vendas');
+        $element->url()->setRetrieve('/vendas/produto/retrieve/mapper/produto-contrato/profile_key/vendas');
         $element->setMapperView('Vendas_DataView_Produto_MapperView');
         $element->addValidators(array());
                 
@@ -170,10 +170,10 @@ class Vendas_Form_ItemPedido_Crud_Elements
      *
      * @return \ZendT_Form_Element_Numeric
      */
-    public function getVlrDesc(){
+    public function getPerDesc(){
 
-        $element = new ZendT_Form_Element_Numeric('vlr_desc');
-        $element->setLabel($this->_translate->_('cv_item_pedido.vlr_desc') . ':');
+        $element = new ZendT_Form_Element_Numeric('per_desc');
+        $element->setLabel($this->_translate->_('cv_item_pedido.per_desc') . ':');
         $element->setAttribs(array());
         $element->setJQueryParam('numDecimal','4');
         $element->setJQueryParam('numInteger','11');
@@ -193,6 +193,38 @@ class Vendas_Form_ItemPedido_Crud_Elements
         $element->setAttribs(array('maxlength'=>'100','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Numeric
+     */
+    public function getPerAcre(){
+
+        $element = new ZendT_Form_Element_Numeric('per_acre');
+        $element->setLabel($this->_translate->_('cv_item_pedido.per_acre') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Numeric
+     */
+    public function getVlrFinal(){
+
+        $element = new ZendT_Form_Element_Numeric('vlr_final');
+        $element->setLabel($this->_translate->_('cv_item_pedido.vlr_final') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
+                
         return $element;
     }
             

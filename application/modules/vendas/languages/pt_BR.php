@@ -85,5 +85,10 @@ array (
   'cv_pedido.sinistro' => 'Sinistro',
   'cv_pedido.id_veiculo' => 'Veículo',
   'cv_pedido.id_veiculo.fr_veiculo.placa' => 'Placa Veículo',
+  'cv_item_pedido.vlr_acrec' => '% de Acréscimo',
+  'cv_item_pedido.vlr_final' => 'Valor Final',
+  'cv_item_pedido.vlr_acre' => '% de Acréscimo',
+  'cv_item_pedido.per_desc' => '% de Desconto',
+  'cv_item_pedido.per_acre' => '% de Acréscimo',
 )
 ?>

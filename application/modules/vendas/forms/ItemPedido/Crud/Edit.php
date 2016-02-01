@@ -60,11 +60,19 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('vlr_desc');
+            $element = $model->getElement('per_desc');
             $this->addElement($element);
 
             
             $element = $model->getElement('calculo');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('per_acre');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('vlr_final');
             $this->addElement($element);
 
             

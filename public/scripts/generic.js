@@ -109,10 +109,10 @@ function focusFirstElement(formSelector) {
         try {
             idElement = elements.eq(index).attr('id');
             if (jQuery('#group-' + idElement).css('display') == 'block') {
-				if(!elements.eq(index).hasClass('item') && !elements.eq(index).hasClass('hasDatepicker') && elements.eq(index).is('input')){
-					elements.eq(index).focus();
-					break;
-				}
+                if (!elements.eq(index).hasClass('item') && !elements.eq(index).hasClass('hasDatepicker') && elements.eq(index).is('input')) {
+                    elements.eq(index).focus();
+                    break;
+                }
             }
         } catch (err) {
 
@@ -978,6 +978,71 @@ Object.keys = Object.keys || function (o) {
     return result;
 };
 
+function number($value) {
+    var self = this;
+    self.value = $value;
+    self.numberOfDecimals = 2;
+    self.decimalSeparator = ',';
+    self.thousandSeparator = '.';
+    self.symbol = '';
+
+    self.toFloat = function () {
+        var value = str_replace(['.', ','], ['', '.'], self.value + '');
+        return value * 1;
+    };
+    
+    self.round = function (decimals) {
+        var value = self.format(decimals);
+        value = str_replace(['.', ','], ['', '.'], value + '');
+        return value * 1;
+    };
+    
+    self.format = function (decimals) {
+        if (!decimals) {
+            decimals = self.numberOfDecimals;
+        }
+
+        //CORPO DO PLUGIN
+        var number = self.value;
+        var exponent = "";
+        var numberstr = number.toString();
+        var eindex = numberstr.indexOf("e");
+        if (eindex > -1) {
+            exponent = numberstr.substring(eindex);
+            number = parseFloat(numberstr.substring(0, eindex));
+        }
+
+        if (decimals != null) {
+            var temp = Math.pow(10, decimals);
+            number = Math.round(number * temp) / temp;
+        }
+        var sign = number < 0 ? "-" : "";
+        var integer = (number > 0 ?
+                Math.floor(number) : Math.abs(Math.ceil(number))).toString();
+
+        var fractional = number.toString().substring(integer.length + sign.length);
+        self.decimalSeparator = self.decimalSeparator != null ? self.decimalSeparator : ".";
+        fractional = decimals != null && decimals > 0 || fractional.length > 1 ? (self.decimalSeparator + fractional.substring(1)) : "";
+        if (decimals != null && decimals > 0) {
+            for (i = fractional.length - 1, z = decimals; i < z; ++i)
+                fractional += "0";
+        }
+
+        self.thousandSeparator = (self.thousandSeparator != self.decimalSeparator || fractional.length == 0) ? self.thousandSeparator : null;
+        if (self.thousandSeparator != null && self.thousandSeparator != "") {
+            for (i = integer.length - 3; i > 0; i -= 3)
+                integer = integer.substring(0, i) + self.thousandSeparator + integer.substring(i);
+        }
+
+        if (self.symbol == '') {
+            return sign + integer + fractional + exponent;
+        } else {
+            return self.symbol + ' ' + sign + integer + fractional + exponent;
+        }
+    };
+    return self;
+}
+
 function block(param) {
     $.BlockT.open();
 }
@@ -988,12 +1053,12 @@ function unblock(param) {
 
 function replaceAll(find, replace, str)
 {
-	if(str){
-		while (str.indexOf(find) > -1)
-		{
-			str = str.replace(find, replace);
-		}
-	}
+    if (str) {
+        while (str.indexOf(find) > -1)
+        {
+            str = str.replace(find, replace);
+        }
+    }
     return str;
 }
 
@@ -1024,9 +1089,9 @@ function mceUploadImage(editor) {
                     selector: form,
                     success: function (result) {
                         if (result.url) {
-                            for(var index in result.url){
+                            for (var index in result.url) {
                                 editor.execCommand("mceInsertContent", false, '<img src=" ' + result.url[index] + '" />');
-                            }                            
+                            }
                             jQuery.DialogT.close('dialog-image-upload');
                         }
                     },
@@ -1040,55 +1105,55 @@ function mceUploadImage(editor) {
 }
 
 function utf8_decode(str_data) {
-  //  discuss at: http://phpjs.org/functions/utf8_decode/
-  // original by: Webtoolkit.info (http://www.webtoolkit.info/)
-  //    input by: Aman Gupta
-  //    input by: Brett Zamir (http://brett-zamir.me)
-  // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // improved by: Norman "zEh" Fuchs
-  // bugfixed by: hitwork
-  // bugfixed by: Onno Marsman
-  // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // bugfixed by: kirilloid
-  //   example 1: utf8_decode('Kevin van Zonneveld');
-  //   returns 1: 'Kevin van Zonneveld'
+    //  discuss at: http://phpjs.org/functions/utf8_decode/
+    // original by: Webtoolkit.info (http://www.webtoolkit.info/)
+    //    input by: Aman Gupta
+    //    input by: Brett Zamir (http://brett-zamir.me)
+    // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // improved by: Norman "zEh" Fuchs
+    // bugfixed by: hitwork
+    // bugfixed by: Onno Marsman
+    // bugfixed by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // bugfixed by: kirilloid
+    //   example 1: utf8_decode('Kevin van Zonneveld');
+    //   returns 1: 'Kevin van Zonneveld'
 
-  var tmp_arr = [],
-    i = 0,
-    ac = 0,
-    c1 = 0,
-    c2 = 0,
-    c3 = 0,
-    c4 = 0;
+    var tmp_arr = [],
+            i = 0,
+            ac = 0,
+            c1 = 0,
+            c2 = 0,
+            c3 = 0,
+            c4 = 0;
 
-  str_data += '';
+    str_data += '';
 
-  while (i < str_data.length) {
-    c1 = str_data.charCodeAt(i);
-    if (c1 <= 191) {
-      tmp_arr[ac++] = String.fromCharCode(c1);
-      i++;
-    } else if (c1 <= 223) {
-      c2 = str_data.charCodeAt(i + 1);
-      tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
-      i += 2;
-    } else if (c1 <= 239) {
-      // http://en.wikipedia.org/wiki/UTF-8#Codepage_layout
-      c2 = str_data.charCodeAt(i + 1);
-      c3 = str_data.charCodeAt(i + 2);
-      tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-      i += 3;
-    } else {
-      c2 = str_data.charCodeAt(i + 1);
-      c3 = str_data.charCodeAt(i + 2);
-      c4 = str_data.charCodeAt(i + 3);
-      c1 = ((c1 & 7) << 18) | ((c2 & 63) << 12) | ((c3 & 63) << 6) | (c4 & 63);
-      c1 -= 0x10000;
-      tmp_arr[ac++] = String.fromCharCode(0xD800 | ((c1 >> 10) & 0x3FF));
-      tmp_arr[ac++] = String.fromCharCode(0xDC00 | (c1 & 0x3FF));
-      i += 4;
+    while (i < str_data.length) {
+        c1 = str_data.charCodeAt(i);
+        if (c1 <= 191) {
+            tmp_arr[ac++] = String.fromCharCode(c1);
+            i++;
+        } else if (c1 <= 223) {
+            c2 = str_data.charCodeAt(i + 1);
+            tmp_arr[ac++] = String.fromCharCode(((c1 & 31) << 6) | (c2 & 63));
+            i += 2;
+        } else if (c1 <= 239) {
+            // http://en.wikipedia.org/wiki/UTF-8#Codepage_layout
+            c2 = str_data.charCodeAt(i + 1);
+            c3 = str_data.charCodeAt(i + 2);
+            tmp_arr[ac++] = String.fromCharCode(((c1 & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+            i += 3;
+        } else {
+            c2 = str_data.charCodeAt(i + 1);
+            c3 = str_data.charCodeAt(i + 2);
+            c4 = str_data.charCodeAt(i + 3);
+            c1 = ((c1 & 7) << 18) | ((c2 & 63) << 12) | ((c3 & 63) << 6) | (c4 & 63);
+            c1 -= 0x10000;
+            tmp_arr[ac++] = String.fromCharCode(0xD800 | ((c1 >> 10) & 0x3FF));
+            tmp_arr[ac++] = String.fromCharCode(0xDC00 | (c1 & 0x3FF));
+            i += 4;
+        }
     }
-  }
 
-  return tmp_arr.join('');
+    return tmp_arr.join('');
 }

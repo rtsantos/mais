@@ -6,6 +6,7 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_contrato','id_produto','status','tipo');
     protected $_model = 'Ca_Model_RegraContrato_Table';
+    public static $table = 'mais.ca_regra_contrato';
     /**
      *
      * @var Ca_Model_RegraContrato_Mapper
@@ -37,6 +38,13 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Vendas_DataView_Produto_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     

@@ -1,12 +1,22 @@
 <?php
     class Vendas_ProdutoController extends ZendT_Controller_ActionCrud {
         public function init() {
+            $mapperName = $this->getRequest()->getParam('mapper');
+            if (!$mapperName){
+                $mapperName = 'produto';
+            }
+            
+            //ZendT_Tool::
+            
+            $mapperName = ZendT_Lib::paramToMethod($mapperName);
+            $mapperName = 'Vendas_DataView_'.$mapperName.'_MapperView';
+            
             $this->_init();
             //$this->_startupAcl();
             $this->_serviceName = 'Vendas_Service_Produto';            
             $this->_formName = 'Vendas_Form_Produto_Edit';
-            $this->_formSearchName = 'Vendas_Form_Produto_Search';            
-            $this->_mapper = new Vendas_DataView_Produto_MapperView();
+            $this->_formSearchName = 'Vendas_Form_Produto_Search';
+            $this->_mapper = new $mapperName();
             /**
              * Configuração do Grid
              */

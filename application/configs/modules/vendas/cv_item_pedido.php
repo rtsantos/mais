@@ -181,9 +181,9 @@ return array (
             ),
             'url' => 
             array (
-              'grid' => '/vendas/produto/grid/profile_key/produto',
-              'search' => '/vendas/produto/seeker-search/profile_key/produto',
-              'retrieve' => '/vendas/produto/retrieve/profile_key/produto',
+              'grid' => '/vendas/produto/grid/mapper/produto-contrato/profile_key/vendas',
+              'search' => '/vendas/produto/seeker-search/mapper/produto-contrato/profile_key/vendas',
+              'retrieve' => '/vendas/produto/retrieve/mapper/produto-contrato/profile_key/vendas',
             ),
             'modal' => 
             array (
@@ -390,9 +390,9 @@ return array (
         'length' => '11.4',
         'nullable' => true,
       ),
-      'vlr_desc' => 
+      'per_desc' => 
       array (
-        'label' => 'Desconto',
+        'label' => '% de Desconto',
         'multiple' => 0,
         'type' => 'Number',
         'object' => 
@@ -470,6 +470,80 @@ return array (
           'required' => false,
         ),
         'length' => '100',
+        'nullable' => true,
+      ),
+      'per_acre' => 
+      array (
+        'label' => '% de Acréscimo',
+        'multiple' => 0,
+        'type' => 'Number',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
+          'required' => false,
+        ),
+        'length' => '11.4',
+        'nullable' => true,
+      ),
+      'vlr_final' => 
+      array (
+        'label' => 'Valor Final',
+        'multiple' => 0,
+        'type' => 'Number',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
+          'required' => false,
+        ),
+        'length' => '11.4',
         'nullable' => true,
       ),
     ),

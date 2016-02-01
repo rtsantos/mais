@@ -7,9 +7,10 @@
 
         public function getIdProduto() {
             $_element = parent::getIdProduto();
-            $_element->addField('vlr_venda');
-            $_element->getField('vlr_venda')->setAttrib('css-width', '105px');
+            $_element->addField('vlr_final','vlr_final','hidden');
+            $_element->getField('vlr_final')->setAttrib('css-width', '105px');
             $_element->setSearchAttribs(array('css-width' => '105px'));
+            $_element->setOnChange("function(){ _itemPedidoChangeProduto(); }");
             return $_element;
         }
 
