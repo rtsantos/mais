@@ -6,7 +6,6 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_pedido','forma','vlr_total');
     protected $_model = 'Vendas_Model_Pagamento_Table';
-    public static $table = 'mais.cv_pagto_pedido';
     /**
      *
      * @var Vendas_Model_Pagamento_Mapper
@@ -34,13 +33,6 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Vendas_DataView_Pedido_MapperView',
                     'column' => 'id'
                 ));
-    }
-    /**
-     * @retun array
-     */
-    public function getTabs(){
-        return array (
-);
     }
     
     
@@ -210,55 +202,26 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
 
             
     /**
-     * Retorna os dados da coluna vlr_desc
+     * Retorna os dados da coluna per_acre
      *
      * @return string
      */
-    public function getVlrDesc($instance=false){
-        if ($instance && !is_object($this->_data['vlr_desc'])){
-            $this->setVlrDesc('',array('required'=>false));
+    public function getPerAcre($instance=false){
+        if ($instance && !is_object($this->_data['per_acre'])){
+            $this->setPerAcre('',array('required'=>false));
         }
-        return $this->_data['vlr_desc'];
+        return $this->_data['per_acre'];
     }
     /**
-     * Seta o valor da coluna vlr_desc
+     * Seta o valor da coluna per_acre
      *
      * @param string $value
      * @return Vendas_Model_Pagamento_Crud_Mapper
      */
-    public function setVlrDesc($value,$options=array('required'=>true)){        
-        $this->_data['vlr_desc'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+    public function setPerAcre($value,$options=array('required'=>true)){        
+        $this->_data['per_acre'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
          if ($options['db'])
-            $this->_data['vlr_desc']->setValueFromDb($value);
-                    
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna vlr_acrec
-     *
-     * @return string
-     */
-    public function getVlrAcrec($instance=false){
-        if ($instance && !is_object($this->_data['vlr_acrec'])){
-            $this->setVlrAcrec('',array('required'=>false));
-        }
-        return $this->_data['vlr_acrec'];
-    }
-    /**
-     * Seta o valor da coluna vlr_acrec
-     *
-     * @param string $value
-     * @return Vendas_Model_Pagamento_Crud_Mapper
-     */
-    public function setVlrAcrec($value,$options=array('required'=>true)){        
-        $this->_data['vlr_acrec'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
-         if ($options['db'])
-            $this->_data['vlr_acrec']->setValueFromDb($value);
+            $this->_data['per_acre']->setValueFromDb($value);
                     
         if (!$options['db']){
             
@@ -320,6 +283,104 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
                     
         if (!$options['db']){
             
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna vlr_a_pagar
+     *
+     * @return string
+     */
+    public function getVlrAPagar($instance=false){
+        if ($instance && !is_object($this->_data['vlr_a_pagar'])){
+            $this->setVlrAPagar('',array('required'=>false));
+        }
+        return $this->_data['vlr_a_pagar'];
+    }
+    /**
+     * Seta o valor da coluna vlr_a_pagar
+     *
+     * @param string $value
+     * @return Vendas_Model_Pagamento_Crud_Mapper
+     */
+    public function setVlrAPagar($value,$options=array('required'=>true)){        
+        $this->_data['vlr_a_pagar'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
+            $this->_data['vlr_a_pagar']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna per_desc
+     *
+     * @return string
+     */
+    public function getPerDesc($instance=false){
+        if ($instance && !is_object($this->_data['per_desc'])){
+            $this->setPerDesc('',array('required'=>false));
+        }
+        return $this->_data['per_desc'];
+    }
+    /**
+     * Seta o valor da coluna per_desc
+     *
+     * @param string $value
+     * @return Vendas_Model_Pagamento_Crud_Mapper
+     */
+    public function setPerDesc($value,$options=array('required'=>true)){        
+        $this->_data['per_desc'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
+         if ($options['db'])
+            $this->_data['per_desc']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna nro_comprov
+     *
+     * @return string
+     */
+    public function getNroComprov($instance=false){
+        if ($instance && !is_object($this->_data['nro_comprov'])){
+            $this->setNroComprov('',array('required'=>false));
+        }
+        return $this->_data['nro_comprov'];
+    }
+    /**
+     * Seta o valor da coluna nro_comprov
+     *
+     * @param string $value
+     * @return Vendas_Model_Pagamento_Crud_Mapper
+     */
+    public function setNroComprov($value,$options=array('required'=>true)){        
+        $this->_data['nro_comprov'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['nro_comprov']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 20, ) );
+            $valueValid = $this->_data['nro_comprov']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
         }
         return $this;
     }

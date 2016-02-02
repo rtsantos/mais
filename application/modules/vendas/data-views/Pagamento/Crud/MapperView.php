@@ -33,9 +33,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','id_pedido','numero_pedido','forma','vlr_total','vlr_pago','vlr_desc','vlr_acrec','nro_parc','vlr_parc');
-           $profile['width'] = array('id'=>100,'id_pedido'=>120,'numero_pedido'=>200,'forma'=>150,'vlr_total'=>150,'vlr_pago'=>150,'vlr_desc'=>150,'vlr_acrec'=>150,'nro_parc'=>150,'vlr_parc'=>150);
-           $profile['align'] = array('id'=>'left','id_pedido'=>'left','numero_pedido'=>'left','forma'=>'center','vlr_total'=>'right','vlr_pago'=>'right','vlr_desc'=>'right','vlr_acrec'=>'right','nro_parc'=>'right','vlr_parc'=>'right');
+           $profile['order'] = array('id','id_pedido','numero_pedido','forma','vlr_total','vlr_pago','per_acre','nro_parc','vlr_parc','vlr_a_pagar','per_desc','nro_comprov');
+           $profile['width'] = array('id'=>100,'id_pedido'=>120,'numero_pedido'=>200,'forma'=>150,'vlr_total'=>150,'vlr_pago'=>150,'per_acre'=>150,'nro_parc'=>150,'vlr_parc'=>150,'vlr_a_pagar'=>150,'per_desc'=>150,'nro_comprov'=>175);
+           $profile['align'] = array('id'=>'left','id_pedido'=>'left','numero_pedido'=>'left','forma'=>'center','vlr_total'=>'right','vlr_pago'=>'right','per_acre'=>'right','nro_parc'=>'right','vlr_parc'=>'right','vlr_a_pagar'=>'right','per_desc'=>'right','nro_comprov'=>'left');
            $profile['hidden'] = array('id_pedido');
            $profile['remove'] = array();
            $profile['listOptions'] = array('forma'=>$this->getModel()->getListOptions('forma'));
@@ -53,10 +53,12 @@
             $this->_columns->add('forma', 'cv_pagto_pedido', 'forma', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.forma'),'String','=');
             $this->_columns->add('vlr_total', 'cv_pagto_pedido', 'vlr_total', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_total'),'Numeric','=');
             $this->_columns->add('vlr_pago', 'cv_pagto_pedido', 'vlr_pago', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_pago'),'Numeric','=');
-            $this->_columns->add('vlr_desc', 'cv_pagto_pedido', 'vlr_desc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_desc'),'Numeric','=');
-            $this->_columns->add('vlr_acrec', 'cv_pagto_pedido', 'vlr_acrec', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_acrec'),'Numeric','=');
+            $this->_columns->add('per_acre', 'cv_pagto_pedido', 'per_acre', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.per_acre'),'Numeric','=');
             $this->_columns->add('nro_parc', 'cv_pagto_pedido', 'nro_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.nro_parc'),'Numeric','=');
             $this->_columns->add('vlr_parc', 'cv_pagto_pedido', 'vlr_parc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_parc'),'Numeric','=');
+            $this->_columns->add('vlr_a_pagar', 'cv_pagto_pedido', 'vlr_a_pagar', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.vlr_a_pagar'),'Numeric','=');
+            $this->_columns->add('per_desc', 'cv_pagto_pedido', 'per_desc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.per_desc'),'Numeric','=');
+            $this->_columns->add('nro_comprov', 'cv_pagto_pedido', 'nro_comprov', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pagto_pedido.nro_comprov'),'String','%?%');
 
         }
         /**

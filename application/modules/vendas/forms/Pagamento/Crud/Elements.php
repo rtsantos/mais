@@ -113,26 +113,10 @@ class Vendas_Form_Pagamento_Crud_Elements
      *
      * @return \ZendT_Form_Element_Numeric
      */
-    public function getVlrDesc(){
+    public function getPerAcre(){
 
-        $element = new ZendT_Form_Element_Numeric('vlr_desc');
-        $element->setLabel($this->_translate->_('cv_pagto_pedido.vlr_desc') . ':');
-        $element->setAttribs(array());
-        $element->setJQueryParam('numDecimal','4');
-        $element->setJQueryParam('numInteger','11');
-        $element->addValidators(array());
-                
-        return $element;
-    }
-            
-    /**
-     *
-     * @return \ZendT_Form_Element_Numeric
-     */
-    public function getVlrAcrec(){
-
-        $element = new ZendT_Form_Element_Numeric('vlr_acrec');
-        $element->setLabel($this->_translate->_('cv_pagto_pedido.vlr_acrec') . ':');
+        $element = new ZendT_Form_Element_Numeric('per_acre');
+        $element->setLabel($this->_translate->_('cv_pagto_pedido.per_acre') . ':');
         $element->setAttribs(array());
         $element->setJQueryParam('numDecimal','4');
         $element->setJQueryParam('numInteger','11');
@@ -170,6 +154,52 @@ class Vendas_Form_Pagamento_Crud_Elements
         $element->setJQueryParam('numInteger','11');
         $element->addValidators(array());
                 
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Numeric
+     */
+    public function getVlrAPagar(){
+
+        $element = new ZendT_Form_Element_Numeric('vlr_a_pagar');
+        $element->setLabel($this->_translate->_('cv_pagto_pedido.vlr_a_pagar') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Numeric
+     */
+    public function getPerDesc(){
+
+        $element = new ZendT_Form_Element_Numeric('per_desc');
+        $element->setLabel($this->_translate->_('cv_pagto_pedido.per_desc') . ':');
+        $element->setAttribs(array());
+        $element->setJQueryParam('numDecimal','4');
+        $element->setJQueryParam('numInteger','11');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getNroComprov(){
+
+        $element = new ZendT_Form_Element_Text('nro_comprov');
+        $element->setLabel($this->_translate->_('cv_pagto_pedido.nro_comprov') . ':');
+        $element->setAttribs(array('maxlength'=>'20','css-width'=>'175px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
         return $element;
     }
             

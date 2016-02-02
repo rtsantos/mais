@@ -51,11 +51,7 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('vlr_desc');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('vlr_acrec');
+            $element = $model->getElement('per_acre');
             $this->addElement($element);
 
             
@@ -64,6 +60,18 @@
 
             
             $element = $model->getElement('vlr_parc');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('vlr_a_pagar');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('per_desc');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('nro_comprov');
             $this->addElement($element);
 
             

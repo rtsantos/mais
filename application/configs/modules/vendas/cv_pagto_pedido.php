@@ -260,46 +260,9 @@ return array (
         'length' => '11.4',
         'nullable' => true,
       ),
-      'vlr_desc' => 
+      'per_acre' => 
       array (
-        'label' => 'Desconto',
-        'multiple' => 0,
-        'type' => 'Number',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-          'numeric' => 
-          array (
-            'numDecimal' => '4',
-            'numInteger' => '11',
-            'id' => NULL,
-          ),
-          'type' => 'Numeric',
-        ),
-        'length' => '11.4',
-        'nullable' => true,
-      ),
-      'vlr_acrec' => 
-      array (
-        'label' => 'Acréscimo',
+        'label' => '% de Acréscimo',
         'multiple' => 0,
         'type' => 'Number',
         'object' => 
@@ -338,7 +301,7 @@ return array (
       array (
         'label' => 'Número de Parcelas',
         'multiple' => 0,
-        'type' => 'Number',
+        'type' => 'int',
         'object' => 
         array (
           'mask' => NULL,
@@ -408,6 +371,125 @@ return array (
         'length' => '11.4',
         'nullable' => true,
       ),
+      'vlr_a_pagar' => 
+      array (
+        'label' => 'Valor a Pagar',
+        'multiple' => 0,
+        'type' => 'Number',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
+          'required' => false,
+        ),
+        'length' => '11.4',
+        'nullable' => true,
+      ),
+      'per_desc' => 
+      array (
+        'label' => '% de Desconto',
+        'multiple' => 0,
+        'type' => 'Number',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'numeric' => 
+          array (
+            'numDecimal' => '4',
+            'numInteger' => '11',
+            'id' => NULL,
+          ),
+          'type' => 'Numeric',
+          'required' => false,
+        ),
+        'length' => '11.4',
+        'nullable' => true,
+      ),
+      'nro_comprov' => 
+      array (
+        'label' => 'Número de Comprovante',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 20,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Text',
+          'text' => 
+          array (
+            'maxlength' => '20',
+            'css-width' => '175px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '20',
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
@@ -429,7 +511,6 @@ return array (
     ),
     'unique' => 
     array (
-      0 => 'id_pedido',
     ),
     'description' => 'Pagamento',
     'tabs' => NULL,

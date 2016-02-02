@@ -1,4 +1,8 @@
 <?php
     include APPLICATION_PATH.'/views/scripts/index/form.phtml';
+    $this->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/application/Vendas/PagamentoController.js');
     /*echo $this->grid;*/
 ?>
+<script>
+    var $_pagamento = new Vendas_PagamentoController();
+</script>

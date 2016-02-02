@@ -5,11 +5,12 @@
 class Vendas_Model_Pagamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CV_PAGTO_PEDIDO';
+    /*protected $_alias = 'PAGAMENTO';*/
     protected $_sequence = 'SID_CV_PAGTO_PEDIDO';
     protected $_required = array('ID','ID_PEDIDO','FORMA','VLR_TOTAL');
     protected $_primary = array('ID');
-    protected $_unique = array('ID_PEDIDO');
-    protected $_cols = array('ID','ID_PEDIDO','FORMA','VLR_TOTAL','VLR_PAGO','VLR_DESC','VLR_ACREC','NRO_PARC','VLR_PARC');
+    protected $_unique = array();
+    protected $_cols = array('ID','ID_PEDIDO','FORMA','VLR_TOTAL','VLR_PAGO','PER_ACRE','NRO_PARC','VLR_PARC','VLR_A_PAGAR','PER_DESC','NRO_COMPROV');
     protected $_search = 'forma';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
