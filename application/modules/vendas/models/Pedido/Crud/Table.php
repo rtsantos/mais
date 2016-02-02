@@ -9,7 +9,7 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_required = array('ID','NUMERO','TIPO','ID_USU_INC','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','STATUS');
     protected $_primary = array('ID');
     protected $_unique = array('TIPO','NUMERO','ID_EMPRESA');
-    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','STATUS','ID_CLIENTE_CON','SINISTRO','ID_VEICULO');
+    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','STATUS','ID_CLIENTE_CON','SINISTRO','ID_VEICULO','DH_INC','DT_EMIS');
     protected $_search = 'numero';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
@@ -17,11 +17,6 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
                 'Vendas_Model_ItemPedido_Table',
                 'Vendas_Model_Pagamento_Table');
     protected $_referenceMap = array(
-                'IdVeiculo' => array(
-                    'columns' => 'id_veiculo',
-                    'refTableClass' => 'Frota_Model_Veiculo_Table',
-                    'refColumns' => 'id'
-                ),
                 'IdUsuInc' => array(
                     'columns' => 'id_usu_inc',
                     'refTableClass' => 'Auth_Model_Conta_Table',
@@ -61,13 +56,19 @@ class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
                     'columns' => 'id_cliente_con',
                     'refTableClass' => 'Ca_Model_Pessoa_Table',
                     'refColumns' => 'id'
+                ),
+                'IdVeiculo' => array(
+                    'columns' => 'id_veiculo',
+                    'refTableClass' => 'Frota_Model_Veiculo_Table',
+                    'refColumns' => 'id'
                 ));
     protected $_listOptions = array('tipo'=>array('V'=>'Venda'
                                                     ,'C'=>'Compra'
                                                     ,'O'=>'Orçamento')
                                     ,'status'=>array('A'=>'Aberto'
-                                                    ,'C'=>'Confirmado'
-                                                    ,'E'=>'Efetivado'));
+                                                    ,'P'=>'Pago'
+                                                    ,'E'=>'Efetivado'
+                                                    ,'C'=>'Cancelado'));
     protected $_mapper = 'Vendas_Model_Pedido_Mapper';
     protected $_element = 'Vendas_Form_Pedido_Elements';
     /**

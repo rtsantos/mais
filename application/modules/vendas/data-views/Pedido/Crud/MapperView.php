@@ -73,9 +73,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','numero','tipo','id_usu_inc','nome_usu_inc','id_usu_alt','nome_usu_alt','id_empresa','nome_empresa','id_funcionario','nome_funcionario','id_cliente','nome_cliente','id_cont_cli_resp','nome_cont_cli_resp','id_cont_cli_vend','nome_cont_cli_vend','status','id_cliente_con','nome_cliente_con','sinistro','id_veiculo','placa_veiculo');
-           $profile['width'] = array('id'=>100,'numero'=>100,'tipo'=>150,'id_usu_inc'=>120,'nome_usu_inc'=>200,'id_usu_alt'=>120,'nome_usu_alt'=>200,'id_empresa'=>120,'nome_empresa'=>200,'id_funcionario'=>120,'nome_funcionario'=>200,'id_cliente'=>120,'nome_cliente'=>200,'id_cont_cli_resp'=>120,'nome_cont_cli_resp'=>200,'id_cont_cli_vend'=>120,'nome_cont_cli_vend'=>200,'status'=>150,'id_cliente_con'=>120,'nome_cliente_con'=>200,'sinistro'=>200,'id_veiculo'=>120,'placa_veiculo'=>200);
-           $profile['align'] = array('id'=>'left','numero'=>'left','tipo'=>'center','id_usu_inc'=>'left','nome_usu_inc'=>'left','id_usu_alt'=>'left','nome_usu_alt'=>'left','id_empresa'=>'left','nome_empresa'=>'left','id_funcionario'=>'left','nome_funcionario'=>'left','id_cliente'=>'left','nome_cliente'=>'left','id_cont_cli_resp'=>'left','nome_cont_cli_resp'=>'left','id_cont_cli_vend'=>'left','nome_cont_cli_vend'=>'left','status'=>'center','id_cliente_con'=>'left','nome_cliente_con'=>'left','sinistro'=>'left','id_veiculo'=>'left','placa_veiculo'=>'left');
+           $profile['order'] = array('id','numero','tipo','id_usu_inc','nome_usu_inc','id_usu_alt','nome_usu_alt','id_empresa','nome_empresa','id_funcionario','nome_funcionario','id_cliente','nome_cliente','id_cont_cli_resp','nome_cont_cli_resp','id_cont_cli_vend','nome_cont_cli_vend','status','id_cliente_con','nome_cliente_con','sinistro','id_veiculo','placa_veiculo','dh_inc','dt_emis');
+           $profile['width'] = array('id'=>100,'numero'=>100,'tipo'=>150,'id_usu_inc'=>120,'nome_usu_inc'=>200,'id_usu_alt'=>120,'nome_usu_alt'=>200,'id_empresa'=>120,'nome_empresa'=>200,'id_funcionario'=>120,'nome_funcionario'=>200,'id_cliente'=>120,'nome_cliente'=>200,'id_cont_cli_resp'=>120,'nome_cont_cli_resp'=>200,'id_cont_cli_vend'=>120,'nome_cont_cli_vend'=>200,'status'=>150,'id_cliente_con'=>120,'nome_cliente_con'=>200,'sinistro'=>200,'id_veiculo'=>120,'placa_veiculo'=>200,'dh_inc'=>150,'dt_emis'=>100);
+           $profile['align'] = array('id'=>'left','numero'=>'left','tipo'=>'center','id_usu_inc'=>'left','nome_usu_inc'=>'left','id_usu_alt'=>'left','nome_usu_alt'=>'left','id_empresa'=>'left','nome_empresa'=>'left','id_funcionario'=>'left','nome_funcionario'=>'left','id_cliente'=>'left','nome_cliente'=>'left','id_cont_cli_resp'=>'left','nome_cont_cli_resp'=>'left','id_cont_cli_vend'=>'left','nome_cont_cli_vend'=>'left','status'=>'center','id_cliente_con'=>'left','nome_cliente_con'=>'left','sinistro'=>'left','id_veiculo'=>'left','placa_veiculo'=>'left','dh_inc'=>'center','dt_emis'=>'center');
            $profile['hidden'] = array('id_usu_inc','id_usu_alt','id_empresa','id_funcionario','id_cliente','id_cont_cli_resp','id_cont_cli_vend','id_cliente_con','id_veiculo');
            $profile['remove'] = array();
            $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'status'=>$this->getModel()->getListOptions('status'));
@@ -110,6 +110,8 @@
             $this->_columns->add('sinistro', 'cv_pedido', 'sinistro', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.sinistro'),'String','%?%');
             $this->_columns->add('id_veiculo', 'cv_pedido', 'id_veiculo', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.id_veiculo'), null, '=');
             $this->_columns->add('placa_veiculo', 'veiculo', 'placa', $this->_getVeiculo()->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.id_veiculo.fr_veiculo.placa'),null,'?%');
+            $this->_columns->add('dh_inc', 'cv_pedido', 'dh_inc', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.dh_inc'),'DateTime','=');
+            $this->_columns->add('dt_emis', 'cv_pedido', 'dt_emis', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_pedido.dt_emis'),'Date','=');
 
         }
         /**

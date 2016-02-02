@@ -91,6 +91,14 @@
             $this->addElement($element);
 
             
+            $element = $model->getElement('dh_inc');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('dt_emis');
+            $this->addElement($element);
+
+            
         }
         /**
          * Configura uma coluna para ser multipla, ou seja,

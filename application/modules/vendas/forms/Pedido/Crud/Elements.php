@@ -242,8 +242,9 @@ class Vendas_Form_Pedido_Crud_Elements
         $element = new ZendT_Form_Element_Select('status');
         $element->setLabel($this->_translate->_('cv_pedido.status') . ':');
         $element->addMultiOption('A', 'Aberto');
-        $element->addMultiOption('C', 'Confirmado');
-        $element->addMultiOption('E', 'Efetivado');        
+        $element->addMultiOption('P', 'Pago');
+        $element->addMultiOption('E', 'Efetivado');
+        $element->addMultiOption('C', 'Cancelado');        
                 
         return $element;
     }
@@ -305,6 +306,36 @@ class Vendas_Form_Pedido_Crud_Elements
         $element->url()->setSearch('/frota/veiculo/seeker-search');
         $element->url()->setRetrieve('/frota/veiculo/retrieve');
         $element->setMapperView('Frota_DataView_Veiculo_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_DateTime
+     */
+    public function getDhInc(){
+
+        $element = new ZendT_Form_Element_DateTime('dh_inc');
+        $element->setLabel($this->_translate->_('cv_pedido.dh_inc') . ':');
+        $element->setDateAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
+        $element->setTimeAttribs(array('css-width'=>'43.75px','maxlength'=>'5','id'=>''));
+        $element->addValidators(array());
+        /*$element->renderDateTime();*/
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Date
+     */
+    public function getDtEmis(){
+
+        $element = new ZendT_Form_Element_Date('dt_emis');
+        $element->setLabel($this->_translate->_('cv_pedido.dt_emis') . ':');
+        $element->setAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
         $element->addValidators(array());
                 
         return $element;

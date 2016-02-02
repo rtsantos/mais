@@ -622,8 +622,9 @@ return array (
           'listOptions' => 
           array (
             'A' => 'Aberto',
-            'C' => 'Confirmado',
+            'P' => 'Pago',
             'E' => 'Efetivado',
+            'C' => 'Cancelado',
           ),
           'type' => 'Select',
           'text' => 
@@ -802,6 +803,89 @@ return array (
         'length' => NULL,
         'nullable' => true,
       ),
+      'dh_inc' => 
+      array (
+        'label' => 'Data de Inclusão',
+        'multiple' => 0,
+        'type' => 'DateTime',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'datetime' => 
+          array (
+          ),
+          'type' => 'DateTime',
+          'date' => 
+          array (
+            'css-width' => '87.5px',
+            'maxlength' => 10,
+            'id' => NULL,
+          ),
+          'time' => 
+          array (
+            'css-width' => '43.75px',
+            'maxlength' => 5,
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'dt_emis' => 
+      array (
+        'label' => 'Data de Emissão',
+        'multiple' => 0,
+        'type' => 'Date',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'date' => 
+          array (
+            'css-width' => '87.5px',
+            'maxlength' => 10,
+            'id' => NULL,
+          ),
+          'type' => 'Date',
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
@@ -829,21 +913,13 @@ return array (
     array (
       0 => 
       array (
-        'columnName' => 'id_veiculo',
-        'objectNameReference' => 'Frota_Model_Veiculo',
-        'tableNameReference' => 'fr_veiculo',
-        'schemaNameReference' => 'mais',
-        'columnReference' => 'id',
-      ),
-      1 => 
-      array (
         'columnName' => 'id_usu_inc',
         'objectNameReference' => 'Auth_Model_Conta',
         'tableNameReference' => 'papel',
         'schemaNameReference' => 'prouser',
         'columnReference' => 'id',
       ),
-      2 => 
+      1 => 
       array (
         'columnName' => 'id_usu_alt',
         'objectNameReference' => 'Auth_Model_Conta',
@@ -851,7 +927,7 @@ return array (
         'schemaNameReference' => 'prouser',
         'columnReference' => 'id',
       ),
-      3 => 
+      2 => 
       array (
         'columnName' => 'id_empresa',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -859,7 +935,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      4 => 
+      3 => 
       array (
         'columnName' => 'id_funcionario',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -867,7 +943,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      5 => 
+      4 => 
       array (
         'columnName' => 'id_cliente',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -875,7 +951,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      6 => 
+      5 => 
       array (
         'columnName' => 'id_cont_cli_resp',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -883,7 +959,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      7 => 
+      6 => 
       array (
         'columnName' => 'id_cont_cli_vend',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -891,11 +967,19 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      8 => 
+      7 => 
       array (
         'columnName' => 'id_cliente_con',
         'objectNameReference' => 'Ca_Model_Pessoa',
         'tableNameReference' => 'ca_pessoa',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      8 => 
+      array (
+        'columnName' => 'id_veiculo',
+        'objectNameReference' => 'Frota_Model_Veiculo',
+        'tableNameReference' => 'fr_veiculo',
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),

@@ -8,6 +8,7 @@
       'compras' => 'Compras',
       'cms' => 'Site',
       'ged' => 'Gestão Eletrônica de Documentos',
-      'frota' => 'Gestão de Veículos'
+      'frota' => 'Gestão de Veículos',
+      'financeiro' => 'Financeiro'
    );
 ?>

@@ -5,12 +5,11 @@
 class Vendas_Model_Pagamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CV_PAGTO_PEDIDO';
-    /*protected $_alias = 'PAGAMENTO';*/
     protected $_sequence = 'SID_CV_PAGTO_PEDIDO';
-    protected $_required = array('ID','ID_PEDIDO','FORMA','VLR_TOTAL');
+    protected $_required = array('ID','ID_PEDIDO','VLR_TOTAL');
     protected $_primary = array('ID');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_PEDIDO','FORMA','VLR_TOTAL','VLR_PAGO','PER_ACRE','NRO_PARC','VLR_PARC','VLR_A_PAGAR','PER_DESC','NRO_COMPROV');
+    protected $_cols = array('ID','ID_PEDIDO','VLR_TOTAL','VLR_PAGO','PER_ACRE','VLR_PARC','VLR_A_PAGAR','PER_DESC','NRO_COMPROV','ID_FORMA_PAGTO','ID_PARCELA','DT_VENC_PARC');
     protected $_search = 'forma';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
@@ -20,12 +19,18 @@ class Vendas_Model_Pagamento_Crud_Table extends ZendT_Db_Table_Abstract
                     'columns' => 'id_pedido',
                     'refTableClass' => 'Vendas_Model_Pedido_Table',
                     'refColumns' => 'id'
+                ),
+                'IdFormaPagto' => array(
+                    'columns' => 'id_forma_pagto',
+                    'refTableClass' => 'Vendas_Model_FormaPagamento_Table',
+                    'refColumns' => 'id'
+                ),
+                'IdParcela' => array(
+                    'columns' => 'id_parcela',
+                    'refTableClass' => 'Vendas_Model_Parcela_Table',
+                    'refColumns' => 'id'
                 ));
-    protected $_listOptions = array('forma'=>array('D'=>'Dinheiro'
-                                                    ,'O'=>'Crediário'
-                                                    ,'C'=>'Cartão'
-                                                    ,'Q'=>'Cheque'
-                                                    ,'F'=>'Faturar'));
+    protected $_listOptions = array();
     protected $_mapper = 'Vendas_Model_Pagamento_Mapper';
     protected $_element = 'Vendas_Form_Pagamento_Elements';
     /**

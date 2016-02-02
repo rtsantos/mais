@@ -30,10 +30,6 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getReferenceMap(){
         return array(
-                'id_veiculo' => array(
-                    'mapper' => 'Frota_DataView_Veiculo_MapperView',
-                    'column' => 'id'
-                ),
                 'id_usu_inc' => array(
                     'mapper' => 'Auth_DataView_Conta_MapperView',
                     'column' => 'id'
@@ -64,6 +60,10 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
                 ),
                 'id_cliente_con' => array(
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
+                ),
+                'id_veiculo' => array(
+                    'mapper' => 'Frota_DataView_Veiculo_MapperView',
                     'column' => 'id'
                 ));
     }
@@ -439,7 +439,7 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function setStatus($value,$options=array('required'=>true)){        
         
-        $options['listOptions']=array('A'=>'Aberto','C'=>'Confirmado','E'=>'Efetivado');
+        $options['listOptions']=array('A'=>'Aberto','P'=>'Pago','E'=>'Efetivado','C'=>'Cancelado');
         $this->_data['status'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['status']->setValueFromDb($value);
@@ -550,6 +550,64 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
         $this->_data['id_veiculo'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_veiculo']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna dh_inc
+     *
+     * @return string
+     */
+    public function getDhInc($instance=false){
+        if ($instance && !is_object($this->_data['dh_inc'])){
+            $this->setDhInc('',array('required'=>false));
+        }
+        return $this->_data['dh_inc'];
+    }
+    /**
+     * Seta o valor da coluna dh_inc
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setDhInc($value,$options=array('required'=>true)){        
+        $this->_data['dh_inc'] = new ZendT_Type_Date($value,'DateTime');
+         if ($options['db'])
+            $this->_data['dh_inc']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna dt_emis
+     *
+     * @return string
+     */
+    public function getDtEmis($instance=false){
+        if ($instance && !is_object($this->_data['dt_emis'])){
+            $this->setDtEmis('',array('required'=>false));
+        }
+        return $this->_data['dt_emis'];
+    }
+    /**
+     * Seta o valor da coluna dt_emis
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setDtEmis($value,$options=array('required'=>true)){        
+        $this->_data['dt_emis'] = new ZendT_Type_Date($value,'Date');
+         if ($options['db'])
+            $this->_data['dt_emis']->setValueFromDb($value);
                     
         if (!$options['db']){
             

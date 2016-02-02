@@ -136,56 +136,6 @@ return array (
         'length' => NULL,
         'nullable' => false,
       ),
-      'forma' => 
-      array (
-        'label' => 'Forma de Pagamento',
-        'multiple' => 0,
-        'type' => 'String',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-            0 => 
-            array (
-              'name' => 'Zend_Validate_StringLength',
-              'param' => 
-              array (
-                'max' => 1,
-              ),
-            ),
-          ),
-          'listOptions' => 
-          array (
-            'D' => 'Dinheiro',
-            'O' => 'Crediário',
-            'C' => 'Cartão',
-            'Q' => 'Cheque',
-            'F' => 'Faturar',
-          ),
-          'type' => 'Select',
-          'text' => 
-          array (
-            'maxlength' => '1',
-            'css-width' => '100px',
-            'id' => NULL,
-          ),
-          'required' => true,
-        ),
-        'length' => '1',
-        'nullable' => false,
-      ),
       'vlr_total' => 
       array (
         'label' => 'Valor Total',
@@ -295,43 +245,6 @@ return array (
           'type' => 'Numeric',
         ),
         'length' => '11.4',
-        'nullable' => true,
-      ),
-      'nro_parc' => 
-      array (
-        'label' => 'Número de Parcelas',
-        'multiple' => 0,
-        'type' => 'int',
-        'object' => 
-        array (
-          'mask' => NULL,
-          'charMask' => '@',
-          'filter' => 
-          array (
-            0 => 'trim',
-            1 => 'strtoupper',
-            2 => 'removeAccent',
-          ),
-          'filterDb' => 
-          array (
-            0 => '',
-          ),
-          'validators' => 
-          array (
-          ),
-          'listOptions' => 
-          array (
-          ),
-          'required' => false,
-          'numeric' => 
-          array (
-            'numDecimal' => NULL,
-            'numInteger' => '',
-            'id' => NULL,
-          ),
-          'type' => 'Numeric',
-        ),
-        'length' => NULL,
         'nullable' => true,
       ),
       'vlr_parc' => 
@@ -490,6 +403,163 @@ return array (
         'length' => '20',
         'nullable' => true,
       ),
+      'id_forma_pagto' => 
+      array (
+        'label' => 'Forma de Pagamento',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'descricao',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/vendas/forma-pagamento/grid',
+              'search' => '/vendas/forma-pagamento/seeker-search',
+              'retrieve' => '/vendas/forma-pagamento/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'id_parcela' => 
+      array (
+        'label' => 'Parcelas',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'descricao',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/vendas/parcela/grid',
+              'search' => '/vendas/parcela/seeker-search',
+              'retrieve' => '/vendas/parcela/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'dt_venc_parc' => 
+      array (
+        'label' => 'Data de Vencimento',
+        'multiple' => 0,
+        'type' => 'Date',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'date' => 
+          array (
+            'css-width' => '87.5px',
+            'maxlength' => 10,
+            'id' => NULL,
+          ),
+          'type' => 'Date',
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
@@ -501,6 +571,22 @@ return array (
         'columnName' => 'id_pedido',
         'objectNameReference' => 'Vendas_Model_Pedido',
         'tableNameReference' => 'cv_pedido',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      1 => 
+      array (
+        'columnName' => 'id_forma_pagto',
+        'objectNameReference' => 'Vendas_Model_FormaPagamento',
+        'tableNameReference' => 'cv_forma_pagto',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      2 => 
+      array (
+        'columnName' => 'id_parcela',
+        'objectNameReference' => 'Vendas_Model_Parcela',
+        'tableNameReference' => 'cv_parcela',
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
@@ -518,10 +604,10 @@ return array (
     array (
       'url' => 
       array (
-        'retrieve' => '/vendas/pagto-pedido/retrieve',
-        'insert' => '/vendas/pagto-pedido/insert',
-        'update' => '/vendas/pagto-pedido/update',
-        'delete' => '/vendas/pagto-pedido/delete',
+        'retrieve' => '/vendas/pagamento/retrieve',
+        'insert' => '/vendas/pagamento/insert',
+        'update' => '/vendas/pagamento/update',
+        'delete' => '/vendas/pagamento/delete',
       ),
     ),
   ),

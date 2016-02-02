@@ -9,10 +9,10 @@
          * @var array
          */
         protected $_url = array (
-  'retrieve' => '/vendas/pagto-pedido/retrieve',
-  'insert' => '/vendas/pagto-pedido/insert',
-  'update' => '/vendas/pagto-pedido/update',
-  'delete' => '/vendas/pagto-pedido/delete',
+  'retrieve' => '/vendas/pagamento/retrieve',
+  'insert' => '/vendas/pagamento/insert',
+  'update' => '/vendas/pagamento/update',
+  'delete' => '/vendas/pagamento/delete',
 );
         /**
          * Carrega os elementos no formulário para serem renderizado
@@ -37,11 +37,6 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('forma');
-            $element->setRequired(true);
-            $this->addElement($element);
-
-            
             $element = $model->getElement('vlr_total');
             $element->setRequired(true);
             $this->addElement($element);
@@ -52,10 +47,6 @@
 
             
             $element = $model->getElement('per_acre');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('nro_parc');
             $this->addElement($element);
 
             
@@ -72,6 +63,18 @@
 
             
             $element = $model->getElement('nro_comprov');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_forma_pagto');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_parcela');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('dt_venc_parc');
             $this->addElement($element);
 
             

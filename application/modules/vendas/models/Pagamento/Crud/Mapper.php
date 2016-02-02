@@ -4,8 +4,9 @@
  */
 class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id','id_pedido','forma','vlr_total');
+    protected $_required = array('id','id_pedido','vlr_total');
     protected $_model = 'Vendas_Model_Pagamento_Table';
+    public static $table = 'mais.cv_pagto_pedido';
     /**
      *
      * @var Vendas_Model_Pagamento_Mapper
@@ -32,7 +33,22 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
                 'id_pedido' => array(
                     'mapper' => 'Vendas_DataView_Pedido_MapperView',
                     'column' => 'id'
+                ),
+                'id_forma_pagto' => array(
+                    'mapper' => 'Vendas_DataView_FormaPagamento_MapperView',
+                    'column' => 'id'
+                ),
+                'id_parcela' => array(
+                    'mapper' => 'Vendas_DataView_Parcela_MapperView',
+                    'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -94,46 +110,6 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
             
          if ($options['required'])
             $this->isRequired($value,'id_pedido');
-                    
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna forma
-     *
-     * @return string
-     */
-    public function getForma($instance=false){
-        if ($instance && !is_object($this->_data['forma'])){
-            $this->setForma('',array('required'=>false));
-        }
-        return $this->_data['forma'];
-    }
-    /**
-     * Seta o valor da coluna forma
-     *
-     * @param string $value
-     * @return Vendas_Model_Pagamento_Crud_Mapper
-     */
-    public function setForma($value,$options=array('required'=>true)){        
-        
-        $options['listOptions']=array('D'=>'Dinheiro','O'=>'Crediário','C'=>'Cartão','Q'=>'Cheque','F'=>'Faturar');
-        $this->_data['forma'] = new ZendT_Type_String($value,$options);
-        if ($options['db'])
-            $this->_data['forma']->setValueFromDb($value);
-                
-        if (!$options['db']){
-            
-         if ($options['required'])
-            $this->isRequired($value,'forma');
-                    
-            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
-            $valueValid = $this->_data['forma']->getValueToDb();
-            if ($valueValid && !$valid->isValid($valueValid)){
-                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
-            }
                     
         }
         return $this;
@@ -222,35 +198,6 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
         $this->_data['per_acre'] = new ZendT_Type_Number($value,array('numDecimal'=>4));
          if ($options['db'])
             $this->_data['per_acre']->setValueFromDb($value);
-                    
-        if (!$options['db']){
-            
-        }
-        return $this;
-    }
-
-            
-    /**
-     * Retorna os dados da coluna nro_parc
-     *
-     * @return string
-     */
-    public function getNroParc($instance=false){
-        if ($instance && !is_object($this->_data['nro_parc'])){
-            $this->setNroParc('',array('required'=>false));
-        }
-        return $this->_data['nro_parc'];
-    }
-    /**
-     * Seta o valor da coluna nro_parc
-     *
-     * @param string $value
-     * @return Vendas_Model_Pagamento_Crud_Mapper
-     */
-    public function setNroParc($value,$options=array('required'=>true)){        
-        $this->_data['nro_parc'] = new ZendT_Type_Number($value,array('numDecimal'=>0));
-         if ($options['db'])
-            $this->_data['nro_parc']->setValueFromDb($value);
                     
         if (!$options['db']){
             
@@ -381,6 +328,93 @@ class Vendas_Model_Pagamento_Crud_Mapper extends ZendT_Db_Mapper
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
                     
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_forma_pagto
+     *
+     * @return string
+     */
+    public function getIdFormaPagto($instance=false){
+        if ($instance && !is_object($this->_data['id_forma_pagto'])){
+            $this->setIdFormaPagto('',array('required'=>false));
+        }
+        return $this->_data['id_forma_pagto'];
+    }
+    /**
+     * Seta o valor da coluna id_forma_pagto
+     *
+     * @param string $value
+     * @return Vendas_Model_Pagamento_Crud_Mapper
+     */
+    public function setIdFormaPagto($value,$options=array('required'=>true)){        
+        $this->_data['id_forma_pagto'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_forma_pagto']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_parcela
+     *
+     * @return string
+     */
+    public function getIdParcela($instance=false){
+        if ($instance && !is_object($this->_data['id_parcela'])){
+            $this->setIdParcela('',array('required'=>false));
+        }
+        return $this->_data['id_parcela'];
+    }
+    /**
+     * Seta o valor da coluna id_parcela
+     *
+     * @param string $value
+     * @return Vendas_Model_Pagamento_Crud_Mapper
+     */
+    public function setIdParcela($value,$options=array('required'=>true)){        
+        $this->_data['id_parcela'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_parcela']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna dt_venc_parc
+     *
+     * @return string
+     */
+    public function getDtVencParc($instance=false){
+        if ($instance && !is_object($this->_data['dt_venc_parc'])){
+            $this->setDtVencParc('',array('required'=>false));
+        }
+        return $this->_data['dt_venc_parc'];
+    }
+    /**
+     * Seta o valor da coluna dt_venc_parc
+     *
+     * @param string $value
+     * @return Vendas_Model_Pagamento_Crud_Mapper
+     */
+    public function setDtVencParc($value,$options=array('required'=>true)){        
+        $this->_data['dt_venc_parc'] = new ZendT_Type_Date($value,'Date');
+         if ($options['db'])
+            $this->_data['dt_venc_parc']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
         }
         return $this;
     }

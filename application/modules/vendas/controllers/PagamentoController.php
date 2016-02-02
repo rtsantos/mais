@@ -20,9 +20,19 @@
 
         public function formAction() {
             $idPedido = $this->getRequest()->getParam('id_pedido');
-            $vlrTotal = $this->_mapper->getVlrPagar($idPedido);
+            $vlrTotal = $this->_mapper->getSaldoPagar($idPedido);
             $this->_mapper->setVlrTotal($vlrTotal);
-            $this->getRequest()->setParam('vlr_total', $this->_mapper->getVlrTotal($vlrTotal)->get());
+            $vlrTotal = $this->_mapper->getVlrTotal()->get();
+            
+            $perDesc = 0;
+            $this->_mapper->setPerDesc($perDesc);
+            $perDesc = $this->_mapper->getPerDesc()->get();
+            
+            $this->getRequest()->setParam('vlr_total', $vlrTotal);
+            $this->getRequest()->setParam('vlr_a_pagar', $vlrTotal);
+            $this->getRequest()->setParam('per_desc', $perDesc);
+            $this->getRequest()->setParam('per_acre', $perDesc);
+            
             parent::formAction();
         }
 
