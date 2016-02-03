@@ -68,6 +68,18 @@
             $this->addElement($element);
 
             
+            $element = $model->getElement('id_favorecido');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('desc_lanc');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('pago');
+            $this->addElement($element);
+
+            
         }
         /**
          * Configura uma coluna para ser multipla, ou seja,

@@ -7,6 +7,10 @@
 
        protected function _beforeSave() {
            parent::_beforeSave();
+           
+           if ($this->getStatus(true)->toPhp() == '') {
+               $this->setStatus('A');
+           }
 
            if ($this->getDhInc(true)->toPhp() == '') {
                $this->setDhInc(ZendT_Type_Date::nowDate());
@@ -24,7 +28,7 @@
                $this->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
            }
 
-           if ($this->getVlrLanc()->toPhp() <= ZendT_Type_Date::nowDate()->toPhp()) {
+           if ($this->getDtLanc()->toPhp() <= ZendT_Type_Date::nowDate()->toPhp() && $this->getUltimo(true)->toPhp() != 'N') {
                $vlrSaldo = 0;
                $_lancamento = new Financeiro_Model_Lancamento_Mapper();
                $_lancamento->newRow()
@@ -34,7 +38,7 @@
                if ($_lancamento->getId(true)->toPhp()) {
                    $vlrSaldo = $_lancamento->getVlrSaldo()->toPhp();
                    $_lancamento->setUltimo('N')
-                         ->update();
+                               ->update();
                }
 
                if ($this->getTipo()->toPhp() == 'D') {

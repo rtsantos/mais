@@ -5,11 +5,12 @@
 class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CA_REGRA_CONTRATO';
+    /*protected $_alias = 'REGRA_CONTRATO';*/
     protected $_sequence = 'SID_CA_REGRA_CONTRATO';
     protected $_required = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','TIPO');
     protected $_primary = array('ID');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','VLR_FIXO','VLR_MIN','VLR_PERC','TIPO','FAVORECIDO');
+    protected $_cols = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','VLR_FIXO','VLR_MIN','VLR_PERC','TIPO','FAVORECIDO','ID_FAVORECIDO','DESC_LANC','PAGO');
     protected $_search = 'status';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
@@ -24,6 +25,11 @@ class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
                     'columns' => 'id_produto',
                     'refTableClass' => 'Vendas_Model_Produto_Table',
                     'refColumns' => 'id'
+                ),
+                'IdFavorecido' => array(
+                    'columns' => 'id_favorecido',
+                    'refTableClass' => 'Ca_Model_Pessoa_Table',
+                    'refColumns' => 'id'
                 ));
     protected $_listOptions = array('status'=>array('A'=>'Ativo'
                                                     ,'I'=>'Inativo')
@@ -32,7 +38,11 @@ class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
                                                     ,'CD'=>'Custeio de Débito')
                                     ,'favorecido'=>array('ca_pedido.id_cliente'=>'Cliente do Pedido'
                                                     ,'ca_pedido.id_cont_cli_resp'=>'Gerente do Cliente'
-                                                    ,'ca_pedido.id_cont_cli_vend'=>'Vendedor do Cliente'));
+                                                    ,'ca_pedido.id_cont_cli_vend'=>'Vendedor do Cliente'
+                                                    ,'ca_pedido.id_funcionario'=>'Funcionário'
+                                                    ,'ca_pedido.especifico'=>'Específico')
+                                    ,'pago'=>array('S'=>'Sim'
+                                                    ,'N'=>'Não'));
     protected $_mapper = 'Ca_Model_RegraContrato_Mapper';
     protected $_element = 'Ca_Form_RegraContrato_Elements';
     /**

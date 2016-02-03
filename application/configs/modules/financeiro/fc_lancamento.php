@@ -80,7 +80,7 @@ return array (
       array (
         'label' => 'Empresa',
         'multiple' => 0,
-        'type' => 'Number',
+        'type' => 'Integer',
         'object' => 
         array (
           'mask' => NULL,
@@ -107,11 +107,40 @@ return array (
             'numInteger' => '',
             'id' => NULL,
           ),
-          'type' => 'Numeric',
+          'type' => 'Seeker',
           'required' => true,
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'nome',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/pessoa/grid',
+              'search' => '/ca/pessoa/seeker-search',
+              'retrieve' => '/ca/pessoa/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
         ),
         'length' => NULL,
         'nullable' => false,
+        'referenceMap' => true,
       ),
       'tipo' => 
       array (
@@ -145,8 +174,8 @@ return array (
           ),
           'listOptions' => 
           array (
-             'D' => 'Débito',
-             'C' => 'Crédito'
+            'D' => 'Débito',
+            'C' => 'Crédito',
           ),
           'type' => 'Select',
           'text' => 
@@ -209,7 +238,7 @@ return array (
       array (
         'label' => 'Usuário Inclusão',
         'multiple' => 0,
-        'type' => 'DateTime',
+        'type' => 'Integer',
         'object' => 
         array (
           'mask' => NULL,
@@ -233,7 +262,7 @@ return array (
           'datetime' => 
           array (
           ),
-          'type' => 'DateTime',
+          'type' => 'Seeker',
           'date' => 
           array (
             'css-width' => '87.5px',
@@ -247,9 +276,38 @@ return array (
             'id' => NULL,
           ),
           'required' => true,
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'descricao',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/auth/conta/grid',
+              'search' => '/auth/conta/seeker-search',
+              'retrieve' => '/auth/conta/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
         ),
         'length' => NULL,
         'nullable' => false,
+        'referenceMap' => true,
       ),
       'dh_inc' => 
       array (
@@ -301,7 +359,7 @@ return array (
       array (
         'label' => 'Data do Lançamento',
         'multiple' => 0,
-        'type' => 'Date',
+        'type' => 'date',
         'object' => 
         array (
           'mask' => NULL,
@@ -485,8 +543,8 @@ return array (
           ),
           'listOptions' => 
           array (
-             'A' => 'Ativo',
-             'I' => 'Inativo'
+            'A' => 'Ativo',
+            'I' => 'Inativo',
           ),
           'type' => 'Select',
           'text' => 
@@ -504,7 +562,7 @@ return array (
       array (
         'label' => 'Favorecido',
         'multiple' => 0,
-        'type' => 'Number',
+        'type' => 'Integer',
         'object' => 
         array (
           'mask' => NULL,
@@ -531,19 +589,299 @@ return array (
             'numInteger' => '',
             'id' => NULL,
           ),
-          'type' => 'Numeric',
+          'type' => 'Seeker',
           'required' => true,
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'nome',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/pessoa/grid',
+              'search' => '/ca/pessoa/seeker-search',
+              'retrieve' => '/ca/pessoa/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
         ),
         'length' => NULL,
         'nullable' => false,
+        'referenceMap' => true,
+      ),
+      'id_contrato' => 
+      array (
+        'label' => 'Contrato',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'numero',
+              'display' => 'descricao',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '70px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '200px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/contrato/grid',
+              'search' => '/ca/contrato/seeker-search',
+              'retrieve' => '/ca/contrato/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'id_forma_pagto' => 
+      array (
+        'label' => 'Forma de Pagamento',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'descricao',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/vendas/forma-pagamento/grid',
+              'search' => '/vendas/forma-pagamento/seeker-search',
+              'retrieve' => '/vendas/forma-pagamento/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'pago' => 
+      array (
+        'label' => 'Pago',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 1,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+            'S' => 'Sim',
+            'N' => 'Não',
+          ),
+          'type' => 'Select',
+          'text' => 
+          array (
+            'maxlength' => '1',
+            'css-width' => '100px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '1',
+        'nullable' => true,
+      ),
+      'observacao' => 
+      array (
+        'label' => 'Observação',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 100,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Text',
+          'text' => 
+          array (
+            'maxlength' => '100',
+            'css-width' => '200px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '100',
+        'nullable' => true,
       ),
     ),
     'dependentTables' => 
     array (
-      0 => 'Financeiro_Model_CvPagtoLanc',
     ),
     'referenceMaps' => 
     array (
+      0 => 
+      array (
+        'columnName' => 'id_empresa',
+        'objectNameReference' => 'Ca_Model_Pessoa',
+        'tableNameReference' => 'ca_pessoa',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      1 => 
+      array (
+        'columnName' => 'id_favorecido',
+        'objectNameReference' => 'Ca_Model_Pessoa',
+        'tableNameReference' => 'ca_pessoa',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      2 => 
+      array (
+        'columnName' => 'id_contrato',
+        'objectNameReference' => 'Ca_Model_Contrato',
+        'tableNameReference' => 'ca_contrato',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      3 => 
+      array (
+        'columnName' => 'id_forma_pagto',
+        'objectNameReference' => 'Vendas_Model_FormaPagamento',
+        'tableNameReference' => 'cv_forma_pagto',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      4 => 
+      array (
+        'columnName' => 'id_usu_inc',
+        'objectNameReference' => 'Auth_Model_Conta',
+        'tableNameReference' => 'papel',
+        'schemaNameReference' => 'prouser',
+        'columnReference' => 'id',
+      ),
     ),
     'form' => 
     array (
@@ -561,9 +899,12 @@ return array (
     ),
     'unique' => 
     array (
-       'id_empresa','ultimo'
+
     ),
     'description' => 'Lançamento',
+    'tabs' => 
+    array (
+    ),
   ),
 )
 ?>

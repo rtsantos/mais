@@ -6,7 +6,6 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_contrato','id_produto','status','tipo');
     protected $_model = 'Ca_Model_RegraContrato_Table';
-    public static $table = 'mais.ca_regra_contrato';
     /**
      *
      * @var Ca_Model_RegraContrato_Mapper
@@ -37,14 +36,11 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
                 'id_produto' => array(
                     'mapper' => 'Vendas_DataView_Produto_MapperView',
                     'column' => 'id'
+                ),
+                'id_favorecido' => array(
+                    'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
                 ));
-    }
-    /**
-     * @retun array
-     */
-    public function getTabs(){
-        return array (
-);
     }
     
     
@@ -330,7 +326,7 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function setFavorecido($value,$options=array('required'=>true)){        
         
-        $options['listOptions']=array('ca_pedido.id_cliente'=>'Cliente do Pedido','ca_pedido.id_cont_cli_resp'=>'Gerente do Cliente','ca_pedido.id_cont_cli_vend'=>'Vendedor do Cliente');
+        $options['listOptions']=array('ca_pedido.id_cliente'=>'Cliente do Pedido','ca_pedido.id_cont_cli_resp'=>'Gerente do Cliente','ca_pedido.id_cont_cli_vend'=>'Vendedor do Cliente','ca_pedido.id_funcionario'=>'Funcionário','ca_pedido.especifico'=>'Específico');
         $this->_data['favorecido'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['favorecido']->setValueFromDb($value);
@@ -339,6 +335,112 @@ class Ca_Model_RegraContrato_Crud_Mapper extends ZendT_Db_Mapper
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 50, ) );
             $valueValid = $this->_data['favorecido']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_favorecido
+     *
+     * @return string
+     */
+    public function getIdFavorecido($instance=false){
+        if ($instance && !is_object($this->_data['id_favorecido'])){
+            $this->setIdFavorecido('',array('required'=>false));
+        }
+        return $this->_data['id_favorecido'];
+    }
+    /**
+     * Seta o valor da coluna id_favorecido
+     *
+     * @param string $value
+     * @return Ca_Model_RegraContrato_Crud_Mapper
+     */
+    public function setIdFavorecido($value,$options=array('required'=>true)){        
+        $this->_data['id_favorecido'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_favorecido']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna desc_lanc
+     *
+     * @return string
+     */
+    public function getDescLanc($instance=false){
+        if ($instance && !is_object($this->_data['desc_lanc'])){
+            $this->setDescLanc('',array('required'=>false));
+        }
+        return $this->_data['desc_lanc'];
+    }
+    /**
+     * Seta o valor da coluna desc_lanc
+     *
+     * @param string $value
+     * @return Ca_Model_RegraContrato_Crud_Mapper
+     */
+    public function setDescLanc($value,$options=array('required'=>true)){        
+        $this->_data['desc_lanc'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['desc_lanc']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 50, ) );
+            $valueValid = $this->_data['desc_lanc']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna pago
+     *
+     * @return string
+     */
+    public function getPago($instance=false){
+        if ($instance && !is_object($this->_data['pago'])){
+            $this->setPago('',array('required'=>false));
+        }
+        return $this->_data['pago'];
+    }
+    /**
+     * Seta o valor da coluna pago
+     *
+     * @param string $value
+     * @return Ca_Model_RegraContrato_Crud_Mapper
+     */
+    public function setPago($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('S'=>'Sim','N'=>'Não');
+        $this->_data['pago'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['pago']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
+            $valueValid = $this->_data['pago']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }

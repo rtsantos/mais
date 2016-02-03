@@ -6,7 +6,6 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_empresa','tipo','descricao','id_usu_inc','dh_inc','dt_lanc','vlr_saldo','ultimo','status','id_favorecido');
     protected $_model = 'Financeiro_Model_Lancamento_Table';
-    public static $table = 'mais.fc_lancamento';
     /**
      *
      * @var Financeiro_Model_Lancamento_Mapper
@@ -29,14 +28,27 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      * Retorna as referências do objeto
      */
     public function getReferenceMap(){
-        return array();
-    }
-    /**
-     * @retun array
-     */
-    public function getTabs(){
-        return array (
-);
+        return array(
+                'id_empresa' => array(
+                    'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
+                ),
+                'id_favorecido' => array(
+                    'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                    'column' => 'id'
+                ),
+                'id_contrato' => array(
+                    'mapper' => 'Ca_DataView_Contrato_MapperView',
+                    'column' => 'id'
+                ),
+                'id_forma_pagto' => array(
+                    'mapper' => 'Vendas_DataView_FormaPagamento_MapperView',
+                    'column' => 'id'
+                ),
+                'id_usu_inc' => array(
+                    'mapper' => 'Auth_DataView_Conta_MapperView',
+                    'column' => 'id'
+                ));
     }
     
     
@@ -90,7 +102,7 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      * @return Financeiro_Model_Lancamento_Crud_Mapper
      */
     public function setIdEmpresa($value,$options=array('required'=>true)){        
-        $this->_data['id_empresa'] = new ZendT_Type_Number($value,array('numDecimal'=>0));
+        $this->_data['id_empresa'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_empresa']->setValueFromDb($value);
                     
@@ -205,7 +217,7 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      * @return Financeiro_Model_Lancamento_Crud_Mapper
      */
     public function setIdUsuInc($value,$options=array('required'=>true)){        
-        $this->_data['id_usu_inc'] = new ZendT_Type_Date($value,'DateTime');
+        $this->_data['id_usu_inc'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_usu_inc']->setValueFromDb($value);
                     
@@ -445,7 +457,7 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      * @return Financeiro_Model_Lancamento_Crud_Mapper
      */
     public function setIdFavorecido($value,$options=array('required'=>true)){        
-        $this->_data['id_favorecido'] = new ZendT_Type_Number($value,array('numDecimal'=>0));
+        $this->_data['id_favorecido'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_favorecido']->setValueFromDb($value);
                     
@@ -453,6 +465,141 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
             
          if ($options['required'])
             $this->isRequired($value,'id_favorecido');
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_contrato
+     *
+     * @return string
+     */
+    public function getIdContrato($instance=false){
+        if ($instance && !is_object($this->_data['id_contrato'])){
+            $this->setIdContrato('',array('required'=>false));
+        }
+        return $this->_data['id_contrato'];
+    }
+    /**
+     * Seta o valor da coluna id_contrato
+     *
+     * @param string $value
+     * @return Financeiro_Model_Lancamento_Crud_Mapper
+     */
+    public function setIdContrato($value,$options=array('required'=>true)){        
+        $this->_data['id_contrato'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_contrato']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_forma_pagto
+     *
+     * @return string
+     */
+    public function getIdFormaPagto($instance=false){
+        if ($instance && !is_object($this->_data['id_forma_pagto'])){
+            $this->setIdFormaPagto('',array('required'=>false));
+        }
+        return $this->_data['id_forma_pagto'];
+    }
+    /**
+     * Seta o valor da coluna id_forma_pagto
+     *
+     * @param string $value
+     * @return Financeiro_Model_Lancamento_Crud_Mapper
+     */
+    public function setIdFormaPagto($value,$options=array('required'=>true)){        
+        $this->_data['id_forma_pagto'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_forma_pagto']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna pago
+     *
+     * @return string
+     */
+    public function getPago($instance=false){
+        if ($instance && !is_object($this->_data['pago'])){
+            $this->setPago('',array('required'=>false));
+        }
+        return $this->_data['pago'];
+    }
+    /**
+     * Seta o valor da coluna pago
+     *
+     * @param string $value
+     * @return Financeiro_Model_Lancamento_Crud_Mapper
+     */
+    public function setPago($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('S'=>'Sim','N'=>'Não');
+        $this->_data['pago'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['pago']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
+            $valueValid = $this->_data['pago']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna observacao
+     *
+     * @return string
+     */
+    public function getObservacao($instance=false){
+        if ($instance && !is_object($this->_data['observacao'])){
+            $this->setObservacao('',array('required'=>false));
+        }
+        return $this->_data['observacao'];
+    }
+    /**
+     * Seta o valor da coluna observacao
+     *
+     * @param string $value
+     * @return Financeiro_Model_Lancamento_Crud_Mapper
+     */
+    public function setObservacao($value,$options=array('required'=>true)){        
+        $this->_data['observacao'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['observacao']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 100, ) );
+            $valueValid = $this->_data['observacao']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
                     
         }
         return $this;

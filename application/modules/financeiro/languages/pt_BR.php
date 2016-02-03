@@ -20,5 +20,15 @@ array (
   'fc_lancamento.ultimo' => 'Último',
   'fc_lancamento.status' => 'Situação',
   'fc_lancamento.id_favorecido' => 'Favorecido',
+  'fc_lancamento.id_empresa.ca_pessoa.nome' => 'Nome Empresa',
+  'fc_lancamento.id_favorecido.ca_pessoa.nome' => 'Nome Favorecido',
+  'fc_lancamento.id_contrato' => 'Contrato',
+  'fc_lancamento.id_contrato.ca_contrato.numero' => 'Número Contrato',
+  'fc_lancamento.id_contrato.ca_contrato.descricao' => 'Descrição Contrato',
+  'fc_lancamento.id_forma_pagto' => 'Forma de Pagamento',
+  'fc_lancamento.id_forma_pagto.cv_forma_pagto.descricao' => 'Descrição Forma de Pagamento',
+  'fc_lancamento.pago' => 'Pago',
+  'fc_lancamento.observacao' => 'Observação',
+  'fc_lancamento.id_usu_inc.papel.descricao' => 'Descrição Usuário Inclusão',
 )
 ?>

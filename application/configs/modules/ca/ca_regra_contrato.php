@@ -422,7 +422,7 @@ return array (
           'charMask' => '@',
           'filter' => 
           array (
-            0 => 'trim'
+            0 => 'trim',
           ),
           'filterDb' => 
           array (
@@ -441,9 +441,11 @@ return array (
           ),
           'listOptions' => 
           array (
-              'ca_pedido.id_cliente' => 'Cliente do Pedido',
-              'ca_pedido.id_cont_cli_resp' => 'Gerente do Cliente',
-              'ca_pedido.id_cont_cli_vend' => 'Vendedor do Cliente',
+            'ca_pedido.id_cliente' => 'Cliente do Pedido',
+            'ca_pedido.id_cont_cli_resp' => 'Gerente do Cliente',
+            'ca_pedido.id_cont_cli_vend' => 'Vendedor do Cliente',
+            'ca_pedido.id_funcionario' => 'Funcionário',
+            'ca_pedido.especifico' => 'Específico'
           ),
           'type' => 'Select',
           'text' => 
@@ -455,6 +457,158 @@ return array (
           'required' => false,
         ),
         'length' => '50',
+        'nullable' => true,
+      ),
+      'id_favorecido' => 
+      array (
+        'label' => 'Pessoa Favorecida',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'nome',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/pessoa/grid',
+              'search' => '/ca/pessoa/seeker-search',
+              'retrieve' => '/ca/pessoa/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'desc_lanc' => 
+      array (
+        'label' => 'Descrição no Lançamento',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 50,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Text',
+          'text' => 
+          array (
+            'maxlength' => '50',
+            'css-width' => '200px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '50',
+        'nullable' => true,
+      ),
+      'pago' => 
+      array (
+        'label' => 'Pago',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 1,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+              'S' => 'Sim',
+              'N' => 'Não'
+          ),
+          'type' => 'Select',
+          'text' => 
+          array (
+            'maxlength' => '1',
+            'css-width' => '100px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '1',
         'nullable' => true,
       ),
     ),
@@ -476,6 +630,14 @@ return array (
         'columnName' => 'id_produto',
         'objectNameReference' => 'Vendas_Model_Produto',
         'tableNameReference' => 'cv_produto',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      2 => 
+      array (
+        'columnName' => 'id_favorecido',
+        'objectNameReference' => 'Ca_Model_Pessoa',
+        'tableNameReference' => 'ca_pessoa',
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),

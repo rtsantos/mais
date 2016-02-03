@@ -86,6 +86,22 @@
             $this->addElement($element);
 
             
+            $element = $model->getElement('id_contrato');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_forma_pagto');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('pago');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('observacao');
+            $this->addElement($element);
+
+            
         }
         /**
          * Configura uma coluna para ser multipla, ou seja,
