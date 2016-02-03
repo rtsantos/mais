@@ -5,7 +5,6 @@
 class Ca_Model_RegraContrato_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'CA_REGRA_CONTRATO';
-    /*protected $_alias = 'REGRA_CONTRATO';*/
     protected $_sequence = 'SID_CA_REGRA_CONTRATO';
     protected $_required = array('ID','ID_CONTRATO','ID_PRODUTO','STATUS','TIPO');
     protected $_primary = array('ID');

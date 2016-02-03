@@ -1536,6 +1536,15 @@
            return $this;
        }
 
+       public function paramName($name) {
+           $method = 'set' . $this->fieldToMethod($name);
+           if (method_exists($this, $method)) {
+               return strtolower($this->getModel()->getName() . '-' . $name);
+           } else {
+               return false;
+           }
+       }
+
        /**
         * Trata o valor do campo para pesquisa no Banco de Dados
         *

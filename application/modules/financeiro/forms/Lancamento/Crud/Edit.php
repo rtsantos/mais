@@ -102,6 +102,10 @@
             $this->addElement($element);
 
             
+            $element = $model->getElement('id_lancamento_orig');
+            $this->addElement($element);
+
+            
         }
         /**
          * Configura uma coluna para ser multipla, ou seja,

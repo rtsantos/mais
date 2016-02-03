@@ -5,17 +5,24 @@
 class Financeiro_Model_Lancamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'FC_LANCAMENTO';
-    /*protected $_alias = 'LANCAMENTO';*/
     protected $_sequence = 'SID_FC_LANCAMENTO';
     protected $_required = array('ID','ID_EMPRESA','TIPO','DESCRICAO','ID_USU_INC','DH_INC','DT_LANC','VLR_SALDO','ULTIMO','STATUS','ID_FAVORECIDO');
     protected $_primary = array('ID');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_EMPRESA','TIPO','DESCRICAO','ID_USU_INC','DH_INC','DT_LANC','VLR_LANC','VLR_SALDO','ULTIMO','STATUS','ID_FAVORECIDO','ID_CONTRATO','ID_FORMA_PAGTO','PAGO','OBSERVACAO');
+    protected $_cols = array('ID','ID_EMPRESA','TIPO','DESCRICAO','ID_USU_INC','DH_INC','DT_LANC','VLR_LANC','VLR_SALDO','ULTIMO','STATUS','ID_FAVORECIDO','ID_CONTRATO','ID_FORMA_PAGTO','PAGO','OBSERVACAO','ID_LANCAMENTO_ORIG');
     protected $_search = 'tipo';
     protected $_schema  = 'MAIS';
     protected $_adapter = 'db.mais';
-    protected $_dependentTables = array();
+    protected $_dependentTables = array(
+                'Vendas_Model_ItemLanc_Table',
+                'Vendas_Model_PagtoLanc_Table',
+                'Financeiro_Model_Lancamento_Table');
     protected $_referenceMap = array(
+                'IdLancamentoOrig' => array(
+                    'columns' => 'id_lancamento_orig',
+                    'refTableClass' => 'Financeiro_Model_Lancamento_Table',
+                    'refColumns' => 'id'
+                ),
                 'IdEmpresa' => array(
                     'columns' => 'id_empresa',
                     'refTableClass' => 'Ca_Model_Pessoa_Table',
@@ -43,8 +50,9 @@ class Financeiro_Model_Lancamento_Crud_Table extends ZendT_Db_Table_Abstract
                 ));
     protected $_listOptions = array('tipo'=>array('D'=>'Débito'
                                                     ,'C'=>'Crédito')
-                                    ,'status'=>array('A'=>'Ativo'
-                                                    ,'I'=>'Inativo')
+                                    ,'status'=>array('A'=>'Aberto'
+                                                    ,'E'=>'Efetivado'
+                                                    ,'C'=>'Cancelado')
                                     ,'pago'=>array('S'=>'Sim'
                                                     ,'N'=>'Não'));
     protected $_mapper = 'Financeiro_Model_Lancamento_Mapper';

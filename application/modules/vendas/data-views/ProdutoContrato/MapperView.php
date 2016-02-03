@@ -4,6 +4,13 @@
     * Classe de visão da tabela cv_produto
     */
    class Vendas_DataView_ProdutoContrato_MapperView extends Vendas_DataView_Produto_Crud_MapperView {
+       protected $_idClienteCon;
+       
+       public function setIdClienteCon($value){
+           $this->_idClienteCon = $value;
+           return $this;
+       }
+
 
        protected function _loadColumns($param) {
            $_number4 = new ZendT_Type_Number(null, array('numDecimal' => 4));
@@ -32,7 +39,10 @@
        protected function _getSqlBase() {
            $idPedido = Zend_Controller_Front::getInstance()->getRequest()->getParam('id_pedido');
            $idCliente = Zend_Controller_Front::getInstance()->getRequest()->getParam('id_cliente');
-
+           
+           if ($this->_idClienteCon){
+               $idCliente = $this->_idClienteCon;
+           }
 
            if (!$idCliente) {
 

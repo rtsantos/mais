@@ -130,5 +130,13 @@ array (
   'cv_pagto_lanc.id_lancamento.fc_lancamento.tipo' => 'Tipo Lançamento',
   'cv_pedido.dh_inc' => 'Data de Inclusão',
   'cv_pedido.dt_emis' => 'Data de Emissão',
+  'vendas.item-lanc.form' => 'Cadastro de Itens do Pedido com o Financeiro',
+  'vendas.item-lanc.grid' => 'Listagem de Itens do Pedido com o Financeiro',
+  'cv_item_lanc' => 'Itens do Pedido com o Financeiro',
+  'cv_item_lanc.id' => 'Id.',
+  'cv_item_lanc.id_item_pedido' => 'Item do Pedido',
+  'cv_item_lanc.id_item_pedido.cv_item_pedido.calculo' => 'Calculo Item do Pedido',
+  'cv_item_lanc.id_lancamento' => 'Lançamento',
+  'cv_item_lanc.id_lancamento.fc_lancamento.tipo' => 'Tipo Lançamento',
 )
 ?>

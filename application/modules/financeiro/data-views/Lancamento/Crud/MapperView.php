@@ -33,6 +33,13 @@
          */
         protected $_formaPagamento;
                 
+        /**
+         * Objeto de Mapeamento da Tabela
+         *
+         * @return Financeiro_Model_Lancamento_Mapper
+         */
+        protected $_lancamento;
+                
         
                 
         /**
@@ -86,6 +93,19 @@
             return $this->_formaPagamento;
         }
                 
+                
+        /**
+         * Objeto de Mapeamento da Tabela
+         *
+         * @return Financeiro_Model_Lancamento_Mapper
+         */
+        protected function _getLancamento(){
+            if (!is_object($this->_lancamento)){
+                $this->_lancamento = new Financeiro_Model_Lancamento_Mapper();
+            }
+            return $this->_lancamento;
+        }
+                
         /**
          * Retorna as configurações padrão da visualização
          *
@@ -93,12 +113,12 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','id_empresa','nome_empresa','tipo','descricao','id_usu_inc','descricao_usu_inc','dh_inc','dt_lanc','vlr_lanc','vlr_saldo','ultimo','status','id_favorecido','nome_favorecido','id_contrato','numero_contrato','descricao_contrato','id_forma_pagto','descricao_forma_pagto','pago','observacao');
-           $profile['width'] = array('id'=>100,'id_empresa'=>120,'nome_empresa'=>200,'tipo'=>150,'descricao'=>200,'id_usu_inc'=>120,'descricao_usu_inc'=>200,'dh_inc'=>150,'dt_lanc'=>100,'vlr_lanc'=>150,'vlr_saldo'=>150,'ultimo'=>100,'status'=>150,'id_favorecido'=>120,'nome_favorecido'=>200,'id_contrato'=>120,'numero_contrato'=>200,'descricao_contrato'=>200,'id_forma_pagto'=>120,'descricao_forma_pagto'=>200,'pago'=>150,'observacao'=>200);
-           $profile['align'] = array('id'=>'left','id_empresa'=>'left','nome_empresa'=>'left','tipo'=>'center','descricao'=>'left','id_usu_inc'=>'left','descricao_usu_inc'=>'left','dh_inc'=>'center','dt_lanc'=>'center','vlr_lanc'=>'right','vlr_saldo'=>'right','ultimo'=>'left','status'=>'center','id_favorecido'=>'left','nome_favorecido'=>'left','id_contrato'=>'left','numero_contrato'=>'left','descricao_contrato'=>'left','id_forma_pagto'=>'left','descricao_forma_pagto'=>'left','pago'=>'center','observacao'=>'left');
-           $profile['hidden'] = array('id_empresa','id_usu_inc','id_favorecido','id_contrato','id_forma_pagto');
+           $profile['order'] = array('id','id_empresa','nome_empresa','tipo','descricao','id_usu_inc','descricao_usu_inc','dh_inc','dt_lanc','vlr_lanc','vlr_saldo','ultimo','status','id_favorecido','nome_favorecido','id_contrato','numero_contrato','descricao_contrato','id_forma_pagto','descricao_forma_pagto','pago','observacao','id_lancamento_orig','tipo_lancamento_orig');
+           $profile['width'] = array('id'=>100,'id_empresa'=>120,'nome_empresa'=>200,'tipo'=>150,'descricao'=>200,'id_usu_inc'=>120,'descricao_usu_inc'=>200,'dh_inc'=>150,'dt_lanc'=>100,'vlr_lanc'=>150,'vlr_saldo'=>150,'ultimo'=>100,'status'=>150,'id_favorecido'=>120,'nome_favorecido'=>200,'id_contrato'=>120,'numero_contrato'=>200,'descricao_contrato'=>200,'id_forma_pagto'=>120,'descricao_forma_pagto'=>200,'pago'=>150,'observacao'=>200,'id_lancamento_orig'=>120,'tipo_lancamento_orig'=>200);
+           $profile['align'] = array('id'=>'left','id_empresa'=>'left','nome_empresa'=>'left','tipo'=>'center','descricao'=>'left','id_usu_inc'=>'left','descricao_usu_inc'=>'left','dh_inc'=>'center','dt_lanc'=>'center','vlr_lanc'=>'right','vlr_saldo'=>'right','ultimo'=>'left','status'=>'center','id_favorecido'=>'left','nome_favorecido'=>'left','id_contrato'=>'left','numero_contrato'=>'left','descricao_contrato'=>'left','id_forma_pagto'=>'left','descricao_forma_pagto'=>'left','pago'=>'center','observacao'=>'left','id_lancamento_orig'=>'left','tipo_lancamento_orig'=>'left');
+           $profile['hidden'] = array('id_empresa','id_usu_inc','id_favorecido','id_contrato','id_forma_pagto','id_lancamento_orig');
            $profile['remove'] = array();
-           $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'status'=>$this->getModel()->getListOptions('status'),'pago'=>$this->getModel()->getListOptions('pago'));
+           $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'status'=>$this->getModel()->getListOptions('status'),'pago'=>$this->getModel()->getListOptions('pago'),'tipo_lancamento_orig'=>$this->_getLancamento()->getModel()->getListOptions('tipo'));
            return $profile;
         }
         /**
@@ -129,6 +149,8 @@
             $this->_columns->add('descricao_forma_pagto', 'forma_pagto', 'descricao', $this->_getFormaPagamento()->getModel()->getMapperName(), ZendT_Lib::translate('fc_lancamento.id_forma_pagto.cv_forma_pagto.descricao'),null,'?%');
             $this->_columns->add('pago', 'fc_lancamento', 'pago', $this->getModel()->getMapperName(), ZendT_Lib::translate('fc_lancamento.pago'),'String','=');
             $this->_columns->add('observacao', 'fc_lancamento', 'observacao', $this->getModel()->getMapperName(), ZendT_Lib::translate('fc_lancamento.observacao'),'String','%?%');
+            $this->_columns->add('id_lancamento_orig', 'fc_lancamento', 'id_lancamento_orig', $this->getModel()->getMapperName(), ZendT_Lib::translate('fc_lancamento.id_lancamento_orig'), null, '=');
+            $this->_columns->add('tipo_lancamento_orig', 'lancamento_orig', 'tipo', $this->_getLancamento()->getModel()->getMapperName(), ZendT_Lib::translate('fc_lancamento.id_lancamento_orig.fc_lancamento.tipo'),null,'?%');
 
         }
         /**
@@ -140,7 +162,8 @@
                     JOIN ".$this->_getConta()->getModel()->getTableName()." usu_inc ON ( fc_lancamento.id_usu_inc = usu_inc.id ) 
                     JOIN ".$this->_getPessoa()->getModel()->getTableName()." favorecido ON ( fc_lancamento.id_favorecido = favorecido.id ) 
                     LEFT  JOIN ".$this->_getContrato()->getModel()->getTableName()." contrato ON ( fc_lancamento.id_contrato = contrato.id ) 
-                    LEFT  JOIN ".$this->_getFormaPagamento()->getModel()->getTableName()." forma_pagto ON ( fc_lancamento.id_forma_pagto = forma_pagto.id )  "; 
+                    LEFT  JOIN ".$this->_getFormaPagamento()->getModel()->getTableName()." forma_pagto ON ( fc_lancamento.id_forma_pagto = forma_pagto.id ) 
+                    LEFT  JOIN ".$this->_getLancamento()->getModel()->getTableName()." lancamento_orig ON ( fc_lancamento.id_lancamento_orig = lancamento_orig.id )  "; 
             return $sql;
         }
     }

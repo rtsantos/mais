@@ -6,6 +6,7 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_empresa','tipo','descricao','id_usu_inc','dh_inc','dt_lanc','vlr_saldo','ultimo','status','id_favorecido');
     protected $_model = 'Financeiro_Model_Lancamento_Table';
+    public static $table = 'mais.fc_lancamento';
     /**
      *
      * @var Financeiro_Model_Lancamento_Mapper
@@ -29,6 +30,10 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getReferenceMap(){
         return array(
+                'id_lancamento_orig' => array(
+                    'mapper' => 'Financeiro_DataView_Lancamento_MapperView',
+                    'column' => 'id'
+                ),
                 'id_empresa' => array(
                     'mapper' => 'Ca_DataView_Pessoa_MapperView',
                     'column' => 'id'
@@ -49,6 +54,34 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Auth_DataView_Conta_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+  'cv_item_lanc' => 
+  array (
+    'description' => 'Itens do Pedido com o Financeiro',
+    'url' => '/vendas/item-lanc/form/grid/1',
+    'column' => 'id_lancamento',
+    'message' => 'Necessário seleção Lançamento',
+  ),
+  'cv_pagto_lanc' => 
+  array (
+    'description' => 'Lançamentos do Pagamento',
+    'url' => '/vendas/pagto-lanc/form/grid/1',
+    'column' => 'id_lancamento',
+    'message' => 'Necessário seleção Lançamento',
+  ),
+  'fc_lancamento' => 
+  array (
+    'description' => 'Lançamento',
+    'url' => '/financeiro/lancamento/form/grid/1',
+    'column' => 'id_lancamento_orig',
+    'message' => 'Necessário seleção Lançamento',
+  ),
+);
     }
     
     
@@ -418,7 +451,7 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function setStatus($value,$options=array('required'=>true)){        
         
-        $options['listOptions']=array('A'=>'Ativo','I'=>'Inativo');
+        $options['listOptions']=array('A'=>'Aberto','E'=>'Efetivado','C'=>'Cancelado');
         $this->_data['status'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['status']->setValueFromDb($value);
@@ -601,6 +634,35 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }
                     
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_lancamento_orig
+     *
+     * @return string
+     */
+    public function getIdLancamentoOrig($instance=false){
+        if ($instance && !is_object($this->_data['id_lancamento_orig'])){
+            $this->setIdLancamentoOrig('',array('required'=>false));
+        }
+        return $this->_data['id_lancamento_orig'];
+    }
+    /**
+     * Seta o valor da coluna id_lancamento_orig
+     *
+     * @param string $value
+     * @return Financeiro_Model_Lancamento_Crud_Mapper
+     */
+    public function setIdLancamentoOrig($value,$options=array('required'=>true)){        
+        $this->_data['id_lancamento_orig'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_lancamento_orig']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
         }
         return $this;
     }

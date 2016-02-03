@@ -543,8 +543,9 @@ return array (
           ),
           'listOptions' => 
           array (
-            'A' => 'Ativo',
-            'I' => 'Inativo',
+            'A' => 'Aberto',
+            'E' => 'Efetivado',
+            'C' => 'Cancelado',
           ),
           'type' => 'Select',
           'text' => 
@@ -836,13 +837,84 @@ return array (
         'length' => '100',
         'nullable' => true,
       ),
+      'id_lancamento_orig' => 
+      array (
+        'label' => 'Lançamento de Origem',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'tipo',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/financeiro/lancamento/grid',
+              'search' => '/financeiro/lancamento/seeker-search',
+              'retrieve' => '/financeiro/lancamento/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
+      0 => 'Vendas_Model_ItemLanc',
+      1 => 'Vendas_Model_PagtoLanc',
+      2 => 'Financeiro_Model_Lancamento',
     ),
     'referenceMaps' => 
     array (
       0 => 
+      array (
+        'columnName' => 'id_lancamento_orig',
+        'objectNameReference' => 'Financeiro_Model_Lancamento',
+        'tableNameReference' => 'fc_lancamento',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      1 => 
       array (
         'columnName' => 'id_empresa',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -850,7 +922,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      1 => 
+      2 => 
       array (
         'columnName' => 'id_favorecido',
         'objectNameReference' => 'Ca_Model_Pessoa',
@@ -858,7 +930,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      2 => 
+      3 => 
       array (
         'columnName' => 'id_contrato',
         'objectNameReference' => 'Ca_Model_Contrato',
@@ -866,7 +938,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      3 => 
+      4 => 
       array (
         'columnName' => 'id_forma_pagto',
         'objectNameReference' => 'Vendas_Model_FormaPagamento',
@@ -874,7 +946,7 @@ return array (
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
-      4 => 
+      5 => 
       array (
         'columnName' => 'id_usu_inc',
         'objectNameReference' => 'Auth_Model_Conta',
@@ -899,11 +971,31 @@ return array (
     ),
     'unique' => 
     array (
-
     ),
     'description' => 'Lançamento',
     'tabs' => 
     array (
+      'cv_item_lanc' => 
+      array (
+        'description' => 'Itens do Pedido com o Financeiro',
+        'url' => '/vendas/item-lanc/form/grid/1',
+        'column' => 'id_lancamento',
+        'message' => 'Necessário seleção Lançamento',
+      ),
+      'cv_pagto_lanc' => 
+      array (
+        'description' => 'Lançamentos do Pagamento',
+        'url' => '/vendas/pagto-lanc/form/grid/1',
+        'column' => 'id_lancamento',
+        'message' => 'Necessário seleção Lançamento',
+      ),
+      'fc_lancamento' => 
+      array (
+        'description' => 'Lançamento',
+        'url' => '/financeiro/lancamento/form/grid/1',
+        'column' => 'id_lancamento_orig',
+        'message' => 'Necessário seleção Lançamento',
+      ),
     ),
   ),
 )

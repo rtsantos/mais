@@ -30,5 +30,7 @@ array (
   'fc_lancamento.pago' => 'Pago',
   'fc_lancamento.observacao' => 'Observação',
   'fc_lancamento.id_usu_inc.papel.descricao' => 'Descrição Usuário Inclusão',
+  'fc_lancamento.id_lancamento_orig' => 'Lançamento de Origem',
+  'fc_lancamento.id_lancamento_orig.fc_lancamento.tipo' => 'Tipo Lançamento de Origem',
 )
 ?>

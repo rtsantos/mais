@@ -917,7 +917,22 @@
                     ->setPostData(urldecode($params['postData']))
                     ->setBeforeRequest("function(){ gridResize('" . $this->getGrid()->getID() . "'); }")
                     ->setGridComplete(" function(){ jQuery.gridAtivaNavKey({ idGrid:'" . $this->getGrid()->getID() . "' }); }");
-
+            
+            /**
+             * Analisa Parâmetros
+             */
+            $newPostData = array();
+            foreach($params as $name=>$value){
+                $param = $this->getMapper()->paramName($name);
+                if ($param){
+                    $newPostData[$param] = $value;
+                }
+            }
+            
+            if (count($newPostData) > 0){
+                $this->getGrid()->setPostData($newPostData);
+            }
+            
             if ($this->getRequest()->getParam('seekerAjax')) {
                 $objectRetrieve = 'TSeeker';
                 if ($this->getRequest()->getParam('objectRetrive')) {
