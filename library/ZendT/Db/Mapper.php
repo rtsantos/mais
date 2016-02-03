@@ -239,10 +239,12 @@
                    $cmdFrom = "   FROM " . $this->_getSqlBase();
                    $cmdWhereFilter = " AND " . $column . " = filtro." . $field[1] . ")";
                    $cmdRownum = " AND ROWNUM = 1 ";
+                   $cmdLimit = " LIMIT 1 ";
                } else {
                    $cmdSelect = "SELECT DISTINCT " . $column . " as " . $columnAlias;
                    $cmdFrom = "   FROM " . $this->_getSqlBase();
                    $cmdRownum = " AND ROWNUM <= 30000 ";
+                   $cmdLimit = " LIMIT 30000 ";
                }
 
                $whereGroup = new ZendT_Db_Where_Group();
@@ -279,13 +281,25 @@
 
                $cmdOrderBy = "  ORDER BY 1 ";
 
-               $sql = $cmdSelect
-                     . $cmdFrom
-                     . $cmdWhere
-                     . $cmdRownum
-                     . $cmdWhereFilter
-                     . $cmdGroupBy
-                     . $cmdOrderBy;
+               $oracle = false;
+               if ($oracle) {
+                   $sql = $cmdSelect
+                         . $cmdFrom
+                         . $cmdWhere
+                         . $cmdRownum
+                         . $cmdWhereFilter
+                         . $cmdGroupBy
+                         . $cmdOrderBy;
+               } else {
+                   $sql = $cmdSelect
+                         . $cmdFrom
+                         . $cmdWhere
+                         . $cmdWhereFilter
+                         . $cmdGroupBy
+                         . $cmdOrderBy
+                         . $cmdLimit;
+               }
+
 
                $this->_prepareSql($sql, $binds, 'full');
                /**

@@ -819,9 +819,10 @@
                 $content = preg_replace('#TaStyles#', $this->_tastyles, $content);
                 
                 $this->_mergeFile($content);
+                $content = file_get_contents($this->_fileName);
 
 
-                @$conn = ftp_connect('impressao02.tanet.com.br');
+                /*@$conn = ftp_connect('impressao02.tanet.com.br');
                 if (!$conn) {
                     throw new ZendT_Exception(error_get_last());
                 }
@@ -877,7 +878,7 @@
                     
                     unlink($fileNameLocal);
                     unlink($this->_fileName);
-                }                
+                }*/                
                 if ($dest == 'S'){
                     return $content;
                 }else{

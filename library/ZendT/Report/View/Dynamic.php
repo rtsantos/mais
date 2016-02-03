@@ -30,6 +30,7 @@
            if (!isset($this->_options['log'])) {
                $this->_options['log'] = true;
            }
+           $this->_options['log'] = false;
 
            $advanced = $options['advanced'];
            $this->_options['refresh'] = $advanced['refresh'];

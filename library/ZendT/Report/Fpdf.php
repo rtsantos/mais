@@ -48,21 +48,7 @@ class ZendT_Report_Fpdf extends FPDF {
      * @return void
      */
     function Header() {
-        switch ($this->_empresa) {
-            case 'TA': $this->Image("public/images/logo_ta.jpg", 8, 5, 30);
-                break;
-            case 'TAE': $this->Image("public/images/logo_tae.jpg", 8, 5, 30);
-                break;
-            case 'TAL':
-            case 'TLG': $this->Image("public/images/logo_tal.jpg", 8, 5, 30);
-                break;
-            case 'WIN': $this->Image("public/images/logo_tae.jpg", 8, 5, 30);
-                break;
-            case 'TAA': $this->Image("public/images/logo_tae.jpg", 8, 5, 30);
-                break;
-            default: $this->Image("public/images/logo_ta.jpg", 8, 5, 30);
-                break;
-        }
+        $this->Image("public/images/mais-venda.gif", 8, 5, 15);
         $this->Ln(10);
 
         if (isset($this->_titulo) && $this->_titulo != '') {
