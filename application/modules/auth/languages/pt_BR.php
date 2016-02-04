@@ -41,7 +41,7 @@ array (
   'usuario.id_papel' => 'Papel',
   'usuario.solic_info_adic' => 'Solic. Dados Adicionais',
   'usuario.old_login' => 'old_login',
-  'portalName' => 'Portal TA',
+  'portalName' => 'Mais Vistoria',
   'listing' => 'Listagem de',
   'editing' => 'Edição de',
   'search' => 'Pesquisa de',

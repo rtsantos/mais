@@ -48,7 +48,7 @@
             $this->_columns = new ZendT_Db_Column_View('Profile_DataView_Job_MapperView',$this->_getSettingsDefault());
             
             $this->_columns->add('id', 'profile_job', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job.id'),'String','%?%');
-            $this->_columns->add('id_profile_object_view', 'profile_job', 'id_profile_object_view', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job.id_profile_object_view'), null, '?%');
+            $this->_columns->add('id_profile_object_view', 'profile_job', 'id_profile_object_view', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job.id_profile_object_view'), null, '=');
             $this->_columns->add('nome_profile_object_view', 'profile_object_view', 'nome', $this->_getObjectView()->getModel()->getMapperName(), ZendT_Lib::translate('profile_job.id_profile_object_view.profile_object_view.nome'),null,'?%');
             $this->_columns->add('descricao', 'profile_job', 'descricao', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job.descricao'),'String','%?%');
             $this->_columns->add('dh_ini_exec', 'profile_job', 'dh_ini_exec', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job.dh_ini_exec'),'DateTime','=');

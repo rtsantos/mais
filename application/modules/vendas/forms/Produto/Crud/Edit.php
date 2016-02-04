@@ -6,6 +6,10 @@
          */
         protected $_multiple;
         /**
+         * @var array
+         */
+        protected $_url = array();
+        /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
          */

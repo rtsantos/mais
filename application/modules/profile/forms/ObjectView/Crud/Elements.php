@@ -170,7 +170,7 @@ class Profile_Form_ObjectView_Crud_Elements
         $element->setLabel($this->_translate->_('profile_object_view.chave') . ':');
         $element->setAttribs(array('maxlength'=>'40','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=trim(this.value);");
         return $element;
     }
             

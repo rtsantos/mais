@@ -24,12 +24,31 @@
          * 
          * @var string
          */
-        private $_icon;
+        private $_parent;
         /**
          *
          * @var bool
          */
         private $_group;
+        
+        /**
+         *
+         * @return string
+         */
+        public function getParent() {
+            return $this->_parent;
+        }
+
+        /**
+         *
+         * @param string $parent
+         * @return \ZendT_Acl_Resource_RowMenu 
+         */
+        public function setParent($parent) {
+            $this->_parent = $parent;
+            return $this;
+        }
+        
         /**
          *
          * @return string

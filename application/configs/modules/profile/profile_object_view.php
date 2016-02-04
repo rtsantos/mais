@@ -433,7 +433,7 @@ return array (
       ),
       'chave' => 
       array (
-        'label' => 'CHAVE',
+        'label' => 'Chave',
         'multiple' => 0,
         'type' => 'String',
         'object' => 
@@ -442,8 +442,7 @@ return array (
           'charMask' => '@',
           'filter' => 
           array (
-            0 => 'strtoupper',
-            1 => 'removeAccent',
+            0 => 'trim'
           ),
           'filterDb' => 
           array (

@@ -4,7 +4,7 @@
 
         public function init() {
             $this->_init();
-            //$this->_startupAcl();            
+            $this->_startupAcl();
             $this->_formName = 'Vendas_Form_Pedido_Edit';
             $this->_mapper = new Vendas_DataView_Pedido_MapperView();
             $this->view->tabs = $this->_mapper->getTabs();

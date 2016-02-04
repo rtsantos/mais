@@ -4,14 +4,14 @@
  */
 class Frota_Model_Modelo_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'FR_MODELO';
-    protected $_sequence = 'SID_FR_MODELO';
-    protected $_required = array('ID','ID_MARCA','DESCRICAO','STATUS','ID_EMPRESA');
-    protected $_primary = array('ID');
-    protected $_unique = array('DESCRICAO','ID_EMPRESA');
-    protected $_cols = array('ID','ID_MARCA','DESCRICAO','STATUS','ID_EMPRESA');
+    protected $_name = 'fr_modelo';
+    protected $_sequence = 'sid_fr_modelo';
+    protected $_required = array('id','id_marca','descricao','status','id_empresa');
+    protected $_primary = array('id');
+    protected $_unique = array('descricao','id_empresa');
+    protected $_cols = array('id','id_marca','descricao','status','id_empresa');
     protected $_search = 'descricao';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Frota_Model_Veiculo_Table');

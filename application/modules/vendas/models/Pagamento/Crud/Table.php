@@ -4,14 +4,14 @@
  */
 class Vendas_Model_Pagamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_PAGTO_PEDIDO';
-    protected $_sequence = 'SID_CV_PAGTO_PEDIDO';
-    protected $_required = array('ID','ID_PEDIDO','VLR_TOTAL');
-    protected $_primary = array('ID');
+    protected $_name = 'cv_pagto_pedido';
+    protected $_sequence = 'sid_cv_pagto_pedido';
+    protected $_required = array('id','id_pedido','vlr_total');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_PEDIDO','VLR_TOTAL','VLR_PAGO','PER_ACRE','VLR_PARC','VLR_A_PAGAR','PER_DESC','NRO_COMPROV','ID_FORMA_PAGTO','ID_PARCELA','DT_VENC_PARC');
+    protected $_cols = array('id','id_pedido','vlr_total','vlr_pago','per_acre','vlr_parc','vlr_a_pagar','per_desc','nro_comprov','id_forma_pagto','id_parcela','dt_venc_parc');
     protected $_search = 'forma';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

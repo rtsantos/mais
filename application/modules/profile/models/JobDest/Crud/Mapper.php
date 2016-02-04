@@ -6,6 +6,7 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_profile_job','id_papel');
     protected $_model = 'Profile_Model_JobDest_Table';
+    public static $table = 'prouser.profile_job_dest';
     /**
      *
      * @var Profile_Model_JobDest_Mapper
@@ -23,6 +24,27 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array(
+                'ID_PROFILE_JOB' => array(
+                    'mapper' => 'Profile_DataView_Job_MapperView',
+                    'column' => 'ID'
+                ),
+                'ID_PAPEL' => array(
+                    'mapper' => 'Auth_DataView_Papel_MapperView',
+                    'column' => 'ID'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -44,10 +66,10 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
      * @return Profile_Model_JobDest_Crud_Mapper
      */
     public function setId($value,$options=array('required'=>true)){        
-        $this->_data['id'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
-        if ($options['db'])
+        $this->_data['id'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
             $this->_data['id']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
          if ($options['required'])
@@ -56,6 +78,7 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_profile_job
@@ -75,10 +98,10 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
      * @return Profile_Model_JobDest_Crud_Mapper
      */
     public function setIdProfileJob($value,$options=array('required'=>true)){        
-        $this->_data['id_profile_job'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
-        if ($options['db'])
+        $this->_data['id_profile_job'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
             $this->_data['id_profile_job']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
          if ($options['required'])
@@ -87,6 +110,7 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_papel
@@ -106,10 +130,10 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
      * @return Profile_Model_JobDest_Crud_Mapper
      */
     public function setIdPapel($value,$options=array('required'=>true)){        
-        $this->_data['id_papel'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
-        if ($options['db'])
+        $this->_data['id_papel'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
             $this->_data['id_papel']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
          if ($options['required'])
@@ -118,6 +142,7 @@ class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

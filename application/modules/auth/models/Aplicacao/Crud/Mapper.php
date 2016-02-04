@@ -6,6 +6,7 @@ class Auth_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','sigla','nome','status');
     protected $_model = 'Auth_Model_Aplicacao_Table';
+    public static $table = 'prouser.aplicacao';
     /**
      *
      * @var Auth_Model_Aplicacao_Mapper
@@ -29,6 +30,13 @@ class Auth_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getReferenceMap(){
         return array();
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     

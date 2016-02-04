@@ -4,20 +4,20 @@
  */
 class Profile_Model_ObjectViewPriv_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'PROFILE_OBJECT_VIEW_PRIV';
-    protected $_sequence = 'SID_PROFILE_OBJECT_VIEW_PRIV';
-    protected $_required = array('ID','ID_PROFILE_OBJECT_VIEW','ID_PAPEL');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_PROFILE_OBJECT_VIEW','ID_PAPEL','TIPO');
-    protected $_cols = array('ID','ID_PROFILE_OBJECT_VIEW','ID_PAPEL','TIPO');
+    protected $_name = 'profile_object_view_priv';
+    protected $_sequence = 'sid_profile_object_view_priv';
+    protected $_required = array('id','id_profile_object_view','id_papel');
+    protected $_primary = array('id');
+    protected $_unique = array('id_profile_object_view','id_papel','tipo');
+    protected $_cols = array('id','id_profile_object_view','id_papel','tipo');
     protected $_search = '';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array();
     protected $_referenceMap = array(
                 'IdPapel' => array(
                     'columns' => 'ID_PAPEL',
-                    'refTableClass' => 'Auth_Model_Papel_Table',
+                    'refTableClass' => 'Auth_Model_Conta_Table',
                     'refColumns' => 'ID'
                 ),
                 'IdProfileObjectView' => array(

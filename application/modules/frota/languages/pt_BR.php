@@ -3,7 +3,7 @@
 array (
   'operacao' => 'Operação',
   'valor' => 'Valor',
-  'portalName' => 'Portal TA',
+  'portalName' => 'Mais Vistoria',
   'moduleName' => 'Gestão de Veículos',
   'frota.marca.form' => 'Cadastro de Marca',
   'frota.marca.grid' => 'Listagem de Marca',

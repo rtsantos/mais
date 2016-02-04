@@ -4,14 +4,14 @@
  */
 class Vendas_Model_ItemPedido_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_ITEM_PEDIDO';
-    protected $_sequence = 'SID_ITEM_PEDIDO';
-    protected $_required = array('ID','ID_PEDIDO','ID_PRODUTO','ID_USU_INC','ID_USU_ALT');
-    protected $_primary = array('ID');
+    protected $_name = 'cv_item_pedido';
+    protected $_sequence = 'sid_item_pedido';
+    protected $_required = array('id','id_pedido','id_produto','id_usu_inc','id_usu_alt');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_PEDIDO','ID_PRODUTO','ID_USU_INC','ID_USU_ALT','QTD_ITEM','VLR_ITEM','PER_DESC','CALCULO','PER_ACRE','VLR_FINAL');
+    protected $_cols = array('id','id_pedido','id_produto','id_usu_inc','id_usu_alt','qtd_item','vlr_item','per_desc','calculo','per_acre','vlr_final');
     protected $_search = 'calculo';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

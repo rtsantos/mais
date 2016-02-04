@@ -4,14 +4,14 @@
  */
 class Vendas_Model_PagtoLanc_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_PAGTO_LANC';
-    protected $_sequence = 'SID_CV_PAGTO_LANC';
-    protected $_required = array('ID');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_PAGTO_PEDIDO','ID_LANCAMENTO');
-    protected $_cols = array('ID','ID_PAGTO_PEDIDO','ID_LANCAMENTO');
+    protected $_name = 'cv_pagto_lanc';
+    protected $_sequence = 'sid_cv_pagto_lanc';
+    protected $_required = array('id');
+    protected $_primary = array('id');
+    protected $_unique = array('id_pagto_pedido','id_lancamento');
+    protected $_cols = array('id','id_pagto_pedido','id_lancamento');
     protected $_search = '';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

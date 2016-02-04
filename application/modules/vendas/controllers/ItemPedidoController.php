@@ -2,7 +2,7 @@
     class Vendas_ItemPedidoController extends ZendT_Controller_ActionCrud {
         public function init() {
             $this->_init();
-            //$this->_startupAcl();
+            $this->_startupAcl();
             $this->_serviceName = 'Vendas_Service_ItemPedido';            
             $this->_formName = 'Vendas_Form_ItemPedido_Edit';
             $this->_formSearchName = 'Vendas_Form_ItemPedido_Search';            

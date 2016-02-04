@@ -3,7 +3,7 @@
 array (
   'operacao' => 'Operação',
   'valor' => 'Valor',
-  'portalName' => 'Portal TA',
+  'portalName' => 'Mais Vistoria',
   'moduleName' => 'Vendas',
   'vendas.pedido.form' => 'Cadastro de Pedido',
   'vendas.pedido.grid' => 'Listagem de Pedido',

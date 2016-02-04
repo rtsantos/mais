@@ -2,7 +2,7 @@
     class Ca_RegraContratoController extends ZendT_Controller_ActionCrud {
         public function init() {
             $this->_init();
-            //$this->_startupAcl();
+            $this->_startupAcl();
             $this->_serviceName = 'Ca_Service_RegraContrato';            
             $this->_formName = 'Ca_Form_RegraContrato_Edit';
             $this->_formSearchName = 'Ca_Form_RegraContrato_Search';            

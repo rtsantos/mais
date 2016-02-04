@@ -13,13 +13,13 @@
 
            $this->_oldHierarquia = $this->getHierarquia();
 
-           $hirarquia = $this->getNome()->toPhp();
-           $idPai = $this->getIdPapelPai()->toPhp();
+           $hirarquia = $this->getNome(true)->toPhp();
+           $idPai = $this->getIdPapelPai(true)->toPhp();
            if ($idPai) {
                $_mapper = new Auth_Model_Conta_Mapper();
                $_mapper->setId($idPai)->retrieve();
 
-               $hirarquia = $_mapper->getHierarquia()->toPhp() . '.' . $hirarquia;
+               $hirarquia = $_mapper->getHierarquia(true)->toPhp() . '.' . $hirarquia;
            }
            $this->setHierarquia($hirarquia);
 

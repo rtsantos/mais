@@ -4,14 +4,14 @@
  */
 class Vendas_Model_Parcela_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_PARCELA';
-    protected $_sequence = 'SID_CV_PARCELA';
-    protected $_required = array('ID','DESCRICAO','STATUS','QTD','ID_EMPRESA');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_EMPRESA','DESCRICAO');
-    protected $_cols = array('ID','DESCRICAO','PER_JURO','STATUS','QTD','ID_EMPRESA','DIAS_VENC');
+    protected $_name = 'cv_parcela';
+    protected $_sequence = 'sid_cv_parcela';
+    protected $_required = array('id','descricao','status','qtd','id_empresa');
+    protected $_primary = array('id');
+    protected $_unique = array('id_empresa','descricao');
+    protected $_cols = array('id','descricao','per_juro','status','qtd','id_empresa','dias_venc');
     protected $_search = 'descricao';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Vendas_Model_Pagamento_Table');

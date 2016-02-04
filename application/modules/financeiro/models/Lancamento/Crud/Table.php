@@ -4,14 +4,14 @@
  */
 class Financeiro_Model_Lancamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'FC_LANCAMENTO';
-    protected $_sequence = 'SID_FC_LANCAMENTO';
-    protected $_required = array('ID','ID_EMPRESA','TIPO','DESCRICAO','ID_USU_INC','DH_INC','DT_LANC','VLR_SALDO','ULTIMO','STATUS','ID_FAVORECIDO');
-    protected $_primary = array('ID');
+    protected $_name = 'fc_lancamento';
+    protected $_sequence = 'sid_fc_lancamento';
+    protected $_required = array('id','id_empresa','tipo','descricao','id_usu_inc','dh_inc','dt_lanc','vlr_saldo','ultimo','status','id_favorecido');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_EMPRESA','TIPO','DESCRICAO','ID_USU_INC','DH_INC','DT_LANC','VLR_LANC','VLR_SALDO','ULTIMO','STATUS','ID_FAVORECIDO','ID_CONTRATO','ID_FORMA_PAGTO','PAGO','OBSERVACAO','ID_LANCAMENTO_ORIG');
+    protected $_cols = array('id','id_empresa','tipo','descricao','id_usu_inc','dh_inc','dt_lanc','vlr_lanc','vlr_saldo','ultimo','status','id_favorecido','id_contrato','id_forma_pagto','pago','observacao','id_lancamento_orig');
     protected $_search = 'tipo';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Vendas_Model_ItemLanc_Table',

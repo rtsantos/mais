@@ -4,14 +4,14 @@
  */
 class Vendas_Model_ItemLanc_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_ITEM_LANC';
-    protected $_sequence = 'SID_CV_ITEM_LANC';
-    protected $_required = array('ID','ID_ITEM_PEDIDO','ID_LANCAMENTO');
-    protected $_primary = array('ID');
+    protected $_name = 'cv_item_lanc';
+    protected $_sequence = 'sid_cv_item_lanc';
+    protected $_required = array('id','id_item_pedido','id_lancamento');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_ITEM_PEDIDO','ID_LANCAMENTO');
+    protected $_cols = array('id','id_item_pedido','id_lancamento');
     protected $_search = '';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

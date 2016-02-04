@@ -4,14 +4,14 @@
  */
 class Ca_Model_Cargo_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CA_CARGO';
-    protected $_sequence = 'SID_CA_CARGO';
-    protected $_required = array('ID');
-    protected $_primary = array('ID');
-    protected $_unique = array('DESCRICAO','ID_EMPRESA');
-    protected $_cols = array('ID','DESCRICAO','SIGLA','ID_EMPRESA');
+    protected $_name = 'ca_cargo';
+    protected $_sequence = 'sid_ca_cargo';
+    protected $_required = array('id');
+    protected $_primary = array('id');
+    protected $_unique = array('descricao','id_empresa');
+    protected $_cols = array('id','descricao','sigla','id_empresa');
     protected $_search = 'descricao';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

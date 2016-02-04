@@ -23,11 +23,11 @@ class ZendT_Tool_Crud_Table {
 
         $strPrimary = '';
         if (is_string($config['table']['primary'])) {
-            $upPrimary = strtoupper($config['table']['primary']);
+            $upPrimary = strtolower($config['table']['primary']);
             $strPrimary = "'{$upPrimary}'";
         } else {
             foreach ($config['table']['primary'] as $primary) {
-                $upPrimary = strtoupper($primary);
+                $upPrimary = strtolower($primary);
                 $strPrimary .= ",'{$upPrimary}'";
             }
             $strPrimary = substr($strPrimary, 1);
@@ -36,7 +36,7 @@ class ZendT_Tool_Crud_Table {
         $strUnique = '';
         if (isset($config['table']['unique'])){            
             foreach ($config['table']['unique'] as $unique) {
-                $upUnique = strtoupper($unique);
+                $upUnique = strtolower($unique);
                 $strUnique .= ",'{$upUnique}'";
             }
             $strUnique = substr($strUnique, 1);
@@ -81,12 +81,12 @@ class ZendT_Tool_Crud_Table {
         $strRequired = '';
         $strColumnMappers = "array('default'=>array('mapper'=>'{$ucModuleName}_Model_{$modelName}_Mapper'),";
         foreach ($config['table']['columns'] as $column => $prop) {
-            $upColumn = strtoupper($column);
+            $upColumn = strtolower($column);
             $strCols.= ",'$upColumn'";
             $listOptions = $prop['object']['listOptions'];
             
             if ($prop['object']['required']) {
-                $strRequired .= ",'" . strtoupper($column) . "'";
+                $strRequired .= ",'" . strtolower($column) . "'";
             }
             
             if (count($listOptions) > 0) {
@@ -140,18 +140,13 @@ class ZendT_Tool_Crud_Table {
         $strCols = substr($strCols, 1);
         $strRequired = ltrim($strRequired, ',');
 
-        $upTableName = strtoupper($config['table']['name']);
-        $upSchemaName = strtoupper($config['table']['schema']);
-        $upSequenceName = strtoupper($config['table']['sequenceName']);
+        $upTableName = strtolower($config['table']['name']);
+        $upSchemaName = strtolower($config['table']['schema']);
+        $upSequenceName = strtolower($config['table']['sequenceName']);
         if ($upSequenceName == ''){
             $upSequenceName = '';
         }else{
             $upSequenceName = "protected \$_sequence = '{$upSequenceName}';";
-        }
-        
-        $tableName = strtoupper($config['table']['modelName']);
-        if (!$tableName){
-            $tableName = $upTableName;
         }
 
         $contentText = <<<EOS
@@ -162,7 +157,6 @@ class ZendT_Tool_Crud_Table {
 class {$ucModuleName}_Model_{$modelName}_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected \$_name = '{$upTableName}';
-    /*protected \$_alias = '{$tableName}';*/
     {$upSequenceName}
     protected \$_required = array({$strRequired});
     protected \$_primary = array({$strPrimary});

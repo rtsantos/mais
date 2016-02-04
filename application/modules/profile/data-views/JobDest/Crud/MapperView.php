@@ -15,7 +15,7 @@
         /**
          * Objeto de Mapeamento da Tabela
          *
-         * @return Auth_Model_Conta_Mapper
+         * @return Auth_Model_Papel_Mapper
          */
         protected $_papel;
                 
@@ -37,11 +37,11 @@
         /**
          * Objeto de Mapeamento da Tabela
          *
-         * @return Auth_Model_Conta_Mapper
+         * @return Auth_Model_Papel_Mapper
          */
         protected function _getPapel(){
             if (!is_object($this->_papel)){
-                $this->_papel = new Auth_Model_Conta_Mapper();
+                $this->_papel = new Auth_Model_Papel_Mapper();
             }
             return $this->_papel;
         }
@@ -65,12 +65,12 @@
          * Carrega as colunas com suas configurações 
          */
         protected function _loadColumns(){
-            $this->_columns = new ZendT_Db_Column_View('Profile_Model_JobDest_MapperView',$this->_getSettingsDefault());
+            $this->_columns = new ZendT_Db_Column_View('Profile_DataView_JobDest_MapperView',$this->_getSettingsDefault());
             
             $this->_columns->add('id', 'profile_job_dest', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id'),'String','%?%');
-            $this->_columns->add('id_profile_job', 'profile_job_dest', 'id_profile_job', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_profile_job'), null, '?%');
+            $this->_columns->add('id_profile_job', 'profile_job_dest', 'id_profile_job', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_profile_job'), null, '=');
             $this->_columns->add('descricao_profile_job', 'profile_job', 'descricao', $this->_getJob()->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_profile_job.profile_job.descricao'),null,'?%');
-            $this->_columns->add('id_papel', 'profile_job_dest', 'id_papel', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_papel'), null, '?%');
+            $this->_columns->add('id_papel', 'profile_job_dest', 'id_papel', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_papel'), null, '=');
             $this->_columns->add('nome_papel', 'papel', 'nome', $this->_getPapel()->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_papel.papel.nome'),null,'?%');
 
         }

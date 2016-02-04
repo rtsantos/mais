@@ -4,14 +4,14 @@
  */
 class Auth_Model_ContaRel_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'PAPEL_REL';
-    protected $_sequence = 'SID_PAPEL_REL';
-    protected $_required = array('ID','ID_PAPEL','ID_PAPEL_REL','STATUS');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_PAPEL','ID_PAPEL_REL');
-    protected $_cols = array('ID','ID_PAPEL','ID_PAPEL_REL','STATUS');
+    protected $_name = 'papel_rel';
+    protected $_sequence = 'sid_papel_rel';
+    protected $_required = array('id','id_papel','id_papel_rel','status');
+    protected $_primary = array('id');
+    protected $_unique = array('id_papel','id_papel_rel');
+    protected $_cols = array('id','id_papel','id_papel_rel','status');
     protected $_search = 'status';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

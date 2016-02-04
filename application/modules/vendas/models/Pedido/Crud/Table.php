@@ -4,14 +4,14 @@
  */
 class Vendas_Model_Pedido_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_PEDIDO';
-    protected $_sequence = 'SID_CV_PEDIDO';
-    protected $_required = array('ID','NUMERO','TIPO','ID_USU_INC','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','STATUS');
-    protected $_primary = array('ID');
-    protected $_unique = array('TIPO','NUMERO','ID_EMPRESA');
-    protected $_cols = array('ID','NUMERO','TIPO','ID_USU_INC','ID_USU_ALT','ID_EMPRESA','ID_FUNCIONARIO','ID_CLIENTE','ID_CONT_CLI_RESP','ID_CONT_CLI_VEND','STATUS','ID_CLIENTE_CON','SINISTRO','ID_VEICULO','DH_INC','DT_EMIS');
+    protected $_name = 'cv_pedido';
+    protected $_sequence = 'sid_cv_pedido';
+    protected $_required = array('id','numero','tipo','id_usu_inc','id_empresa','id_funcionario','id_cliente','status');
+    protected $_primary = array('id');
+    protected $_unique = array('tipo','numero','id_empresa');
+    protected $_cols = array('id','numero','tipo','id_usu_inc','id_usu_alt','id_empresa','id_funcionario','id_cliente','id_cont_cli_resp','id_cont_cli_vend','status','id_cliente_con','sinistro','id_veiculo','dh_inc','dt_emis');
     protected $_search = 'numero';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Vendas_Model_ItemPedido_Table',

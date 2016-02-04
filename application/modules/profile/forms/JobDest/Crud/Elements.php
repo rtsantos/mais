@@ -22,21 +22,28 @@ class Profile_Form_JobDest_Crud_Elements
     }
      
     
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
         $element->setLabel($this->_translate->_('profile_job_dest.id') . ':');
         $element->setAttribs(array('css-width'=>'100px','maxlength'=>'10'));        
         $element->addValidators(array());
-        $element->addAttr('onBlur',"this.value=strtoupper(this.value);");
-        $element->addAttr('onBlur',"this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
     public function getIdProfileJob(){
 
         $element = new ZendT_Form_Element_Seeker('id_profile_job');
-        $element->setSufix('profile_job');
+        $element->setSuffix('profile_job');
         $element->setLabel($this->_translate->_('profile_job_dest.id_profile_job') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -46,16 +53,21 @@ class Profile_Form_JobDest_Crud_Elements
         $element->modal()->setHeight(450);
         $element->url()->setGrid('/profile/job/grid');
         $element->url()->setSearch('/profile/job/seeker-search');
-        $element->url()->setRetrive('/profile/job/retrive');
+        $element->url()->setRetrieve('/profile/job/retrive');
+        $element->setMapperView('Profile_DataView_Job_MapperView');
         $element->addValidators(array());
                 
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
     public function getIdPapel(){
 
         $element = new ZendT_Form_Element_Seeker('id_papel');
-        $element->setSufix('papel');
+        $element->setSuffix('papel');
         $element->setLabel($this->_translate->_('profile_job_dest.id_papel') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -65,7 +77,8 @@ class Profile_Form_JobDest_Crud_Elements
         $element->modal()->setHeight(400);
         $element->url()->setGrid('/auth/conta/grid');
         $element->url()->setSearch('/auth/conta/seeker-search');
-        $element->url()->setRetrive('/auth/conta/retrive');
+        $element->url()->setRetrieve('/auth/conta/retrive');
+        $element->setMapperView('Auth_DataView_Conta_MapperView');
         $element->addValidators(array());
                 
         return $element;

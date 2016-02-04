@@ -259,7 +259,7 @@
 					       $menu.= '<li id="' . $id . '" class="link">' . "\n";
                            $menu.= '<div class="ui-helper-clearfix">' . "\n";
                            $menu.= '  <span class="ui-text">' . $item['desc'] . '</span>' . "\n";
-                           $menu.= '  <span class="ui-icon ui-icon-carat-1-e">' . "\n";
+                           $menu.= '  <span class="ui-icon ui-icon-carat-1-e"></span>' . "\n";
                            $menu.= '</div>' . "\n";
                        } else {
 					       $menu.= '<li id="' . $id . '" class="' . $group . '">' . "\n";

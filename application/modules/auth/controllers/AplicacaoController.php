@@ -2,7 +2,7 @@
     class Auth_AplicacaoController extends ZendT_Controller_ActionCrud {
         public function init() {
             $this->_init();
-            //$this->_startupAcl();
+            #$this->_startupAcl();
             $this->_serviceName = 'Auth_Service_Aplicacao';            
             $this->_formName = 'Auth_Form_Aplicacao_Edit';
             $this->_formSearchName = 'Auth_Form_Aplicacao_Search';            

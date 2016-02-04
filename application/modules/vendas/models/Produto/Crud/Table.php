@@ -4,14 +4,14 @@
  */
 class Vendas_Model_Produto_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_PRODUTO';
-    protected $_sequence = 'SID_CV_PRODUTO';
-    protected $_required = array('ID','CODIGO','NOME','TIPO','VLR_VENDA','ID_EMPRESA');
-    protected $_primary = array('ID');
-    protected $_unique = array('CODIGO','ID_EMPRESA');
-    protected $_cols = array('ID','CODIGO','NOME','TIPO','APELIDO','VLR_VENDA','VLR_COMPRA','MEDIDA','QTD_ESTOQUE','ID_CLIENTE','ID_PRODUTO_RESP','ID_EMPRESA');
+    protected $_name = 'cv_produto';
+    protected $_sequence = 'sid_cv_produto';
+    protected $_required = array('id','codigo','nome','tipo','vlr_venda','id_empresa');
+    protected $_primary = array('id');
+    protected $_unique = array('codigo','id_empresa');
+    protected $_cols = array('id','codigo','nome','tipo','apelido','vlr_venda','vlr_compra','medida','qtd_estoque','id_cliente','id_produto_resp','id_empresa');
     protected $_search = 'codigo';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Ca_Model_RegraContrato_Table',

@@ -265,7 +265,7 @@
         * 
         */
        public function quoteObject($name) {
-           return "`" . strtoupper($name) . "`";
+           return "`" . strtolower($name) . "`";
        }
 
        /**
@@ -307,6 +307,5 @@
        public function nextSequenceTable($tableName, $columnName) {
            return 0;
        }
-
    }
    

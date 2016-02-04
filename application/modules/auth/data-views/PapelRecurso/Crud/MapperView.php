@@ -10,7 +10,7 @@
          *
          * @return Auth_Model_Conta_Mapper
          */
-        protected $_papel;
+        protected $_conta;
                 
         /**
          * Objeto de Mapeamento da Tabela
@@ -26,11 +26,11 @@
          *
          * @return Auth_Model_Conta_Mapper
          */
-        protected function _getPapel(){
-            if (!is_object($this->_papel)){
-                $this->_papel = new Auth_Model_Conta_Mapper();
+        protected function _getConta(){
+            if (!is_object($this->_conta)){
+                $this->_conta = new Auth_Model_Conta_Mapper();
             }
-            return $this->_papel;
+            return $this->_conta;
         }
                 
                 
@@ -69,7 +69,7 @@
             
             $this->_columns->add('id', 'papel_recurso', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.id'),'String','%?%');
             $this->_columns->add('id_papel', 'papel_recurso', 'id_papel', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.id_papel'), null, '=');
-            $this->_columns->add('hierarquia_papel', 'papel', 'hierarquia', $this->_getPapel()->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.id_papel.papel.hierarquia'),null,'?%');
+            $this->_columns->add('hierarquia_papel', 'papel', 'hierarquia', $this->_getConta()->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.id_papel.papel.hierarquia'),null,'?%');
             $this->_columns->add('id_recurso', 'papel_recurso', 'id_recurso', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.id_recurso'), null, '=');
             $this->_columns->add('hierarquia_recurso', 'recurso', 'hierarquia', $this->_getRecurso()->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.id_recurso.recurso.hierarquia'),null,'?%');
             $this->_columns->add('acesso', 'papel_recurso', 'acesso', $this->getModel()->getMapperName(), ZendT_Lib::translate('papel_recurso.acesso'),'String','=');
@@ -80,7 +80,7 @@
          */
         protected function _getSqlBase() {
             $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
-                    LEFT  JOIN ".$this->_getPapel()->getModel()->getTableName()." papel ON ( papel_recurso.id_papel = papel.id ) 
+                    LEFT  JOIN ".$this->_getConta()->getModel()->getTableName()." papel ON ( papel_recurso.id_papel = papel.id ) 
                     LEFT  JOIN ".$this->_getRecurso()->getModel()->getTableName()." recurso ON ( papel_recurso.id_recurso = recurso.id )  "; 
             return $sql;
         }

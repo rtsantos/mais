@@ -406,7 +406,7 @@ class Profile_Model_ObjectView_Crud_Mapper extends ZendT_Db_Mapper
                                                                    ,'filterDb'=>array (
   0 => '',
 )
-                                                                   ,'filter'=>array('strtoupper', 'removeAccent', )));
+                                                                   ,'filter'=>array('trim', )));
         if ($options['db'])
             $this->_data['chave']->setValueFromDb($value);
                 

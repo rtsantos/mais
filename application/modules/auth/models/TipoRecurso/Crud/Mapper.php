@@ -6,6 +6,7 @@ class Auth_Model_TipoRecurso_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','nome','descricao');
     protected $_model = 'Auth_Model_TipoRecurso_Table';
+    public static $table = 'prouser.tipo_recurso';
     /**
      *
      * @var Auth_Model_TipoRecurso_Mapper
@@ -23,6 +24,19 @@ class Auth_Model_TipoRecurso_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array();
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -56,6 +70,7 @@ class Auth_Model_TipoRecurso_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna nome
@@ -96,6 +111,7 @@ class Auth_Model_TipoRecurso_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna descricao
@@ -136,6 +152,7 @@ class Auth_Model_TipoRecurso_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

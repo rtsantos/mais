@@ -4,14 +4,14 @@
  */
 class Ca_Model_Pessoa_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CA_PESSOA';
-    protected $_sequence = 'SID_CA_PESSOA';
-    protected $_required = array('ID','NOME');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_EMPRESA','NOME','APELIDO');
-    protected $_cols = array('ID','NOME','APELIDO','CODIGO','EMAIL','ID_PESSOA_RESP','TELEFONE','CELULAR','FAX','ED_LOGR','ED_NUMERO','ED_COMPL','ED_BAIRRO','ED_CIDADE','ED_ESTADO','ED_CEP','ED_COB_LOGR','ED_COB_NUMERO','ED_COB_COMPL','ED_COB_BAIRRO','ED_COB_CIDADE','ED_COB_ESTADO','ED_COB_CEP','PAPEL_CLIENTE','PAPEL_FUNCIONARIO','PAPEL_USUARIO','PAPEL_EMPRESA','REGISTRO','ID_EMPRESA','EMAIL_COB','HIERARQUIA','PAPEL_CONTATO','ID_CARGO','PAPEL_FORNECEDOR');
+    protected $_name = 'ca_pessoa';
+    protected $_sequence = 'sid_ca_pessoa';
+    protected $_required = array('id','nome');
+    protected $_primary = array('id');
+    protected $_unique = array('id_empresa','nome','apelido');
+    protected $_cols = array('id','nome','apelido','codigo','email','id_pessoa_resp','telefone','celular','fax','ed_logr','ed_numero','ed_compl','ed_bairro','ed_cidade','ed_estado','ed_cep','ed_cob_logr','ed_cob_numero','ed_cob_compl','ed_cob_bairro','ed_cob_cidade','ed_cob_estado','ed_cob_cep','papel_cliente','papel_funcionario','papel_usuario','papel_empresa','registro','id_empresa','email_cob','hierarquia','papel_contato','id_cargo','papel_fornecedor');
     protected $_search = 'nome';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Ca_Model_Cargo_Table',

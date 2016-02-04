@@ -452,7 +452,7 @@
            $json = new ZendT_Json_Result();
            try {
                $id = $this->getRequest()->getParam('id');
-               $row = $this->getMapper()->setId($id)->retriveRow();               
+               $row = $this->getMapper()->setId($id)->retriveRow();
 
                if ($row['tipo']->toPhp() == 'F') {
                    $config = $this->_getConfigForm($row);
@@ -593,7 +593,7 @@
                }
                $observacao = $this->getRequest()->getParam('observacao');
                $config = serialize($this->getRequest()->getParam('groups'));
-               
+
                //print_r($config);
 
                $this->getMapper()->setId($id)
@@ -736,14 +736,14 @@
            try {
                $param = $this->getRequest()->getParams();
                $this->getMapper()->populate($param);
-               $data = $this->getMapper()->insert();               
+               $data = $this->getMapper()->insert();
+               if ($data['id']) {
+                   $this->getMapper()->setDefaultPrivilege($data['id']);
+               }
+               $json->setResult($data['id']->toPhp());
            } catch (Exception $Ex) {
                $json->setException($Ex);
            }
-           if ($data['id']) {
-               $this->getMapper()->setDefaultPrivilege($data['id']);
-           }
-           $json->setResult($data['id']->toPhp());
            echo $json->render();
        }
 

@@ -17,7 +17,7 @@
          *
          * @return Auth_Model_Conta_Mapper
          */
-        protected $_papel;
+        protected $_conta;
                 
         
                 
@@ -39,11 +39,11 @@
          *
          * @return Auth_Model_Conta_Mapper
          */
-        protected function _getPapel(){
-            if (!is_object($this->_papel)){
-                $this->_papel = new Auth_Model_Conta_Mapper();
+        protected function _getConta(){
+            if (!is_object($this->_conta)){
+                $this->_conta = new Auth_Model_Conta_Mapper();
             }
-            return $this->_papel;
+            return $this->_conta;
         }
                 
         /**
@@ -71,7 +71,7 @@
             $this->_columns->add('id_profile_object_view', 'profile_object_view_priv', 'id_profile_object_view', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view_priv.id_profile_object_view'), null, '=');
             $this->_columns->add('nome_profile_object_view', 'profile_object_view', 'nome', $this->_getObjectView()->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view_priv.id_profile_object_view.profile_object_view.nome'),null,'?%');
             $this->_columns->add('id_papel', 'profile_object_view_priv', 'id_papel', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view_priv.id_papel'), null, '=');
-            $this->_columns->add('nome_papel', 'papel', 'nome', $this->_getPapel()->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view_priv.id_papel.papel.nome'),null,'?%');
+            $this->_columns->add('nome_papel', 'papel', 'nome', $this->_getConta()->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view_priv.id_papel.papel.nome'),null,'?%');
             $this->_columns->add('tipo', 'profile_object_view_priv', 'tipo', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view_priv.tipo'),'String','=');
 
         }
@@ -81,7 +81,7 @@
         protected function _getSqlBase() {
             $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
                     JOIN ".$this->_getObjectView()->getModel()->getTableName()." profile_object_view ON ( profile_object_view_priv.id_profile_object_view = profile_object_view.id ) 
-                    JOIN ".$this->_getPapel()->getModel()->getTableName()." papel ON ( profile_object_view_priv.id_papel = papel.id )  "; 
+                    JOIN ".$this->_getConta()->getModel()->getTableName()." papel ON ( profile_object_view_priv.id_papel = papel.id )  "; 
             return $sql;
         }
     }

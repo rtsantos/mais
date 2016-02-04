@@ -249,7 +249,7 @@
                 0 =>
                 array(
                     'columnName' => 'id_papel',
-                    'objectNameReference' => 'Auth_Model_Papel',
+                    'objectNameReference' => 'Auth_Model_Conta',
                     'tableNameReference' => 'papel',
                     'schemaNameReference' => 'prouser',
                     'columnReference' => 'id',

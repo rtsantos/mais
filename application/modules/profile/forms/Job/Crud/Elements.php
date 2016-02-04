@@ -22,21 +22,28 @@ class Profile_Form_Job_Crud_Elements
     }
      
     
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
         $element->setLabel($this->_translate->_('profile_job.id') . ':');
         $element->setAttribs(array('css-width'=>'100px','maxlength'=>'10'));        
         $element->addValidators(array());
-        $element->addAttr('onBlur',"this.value=strtoupper(this.value);");
-        $element->addAttr('onBlur',"this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
     public function getIdProfileObjectView(){
 
         $element = new ZendT_Form_Element_Seeker('id_profile_object_view');
-        $element->setSufix('profile_object_view');
+        $element->setSuffix('profile_object_view');
         $element->setLabel($this->_translate->_('profile_job.id_profile_object_view') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -46,23 +53,31 @@ class Profile_Form_Job_Crud_Elements
         $element->modal()->setHeight(450);
         $element->url()->setGrid('/profile/object-view/grid');
         $element->url()->setSearch('/profile/object-view/seeker-search');
-        $element->url()->setRetrive('/profile/object-view/retrive');
+        $element->url()->setRetrieve('/profile/object-view/retrive');
+        $element->setMapperView('Profile_DataView_ObjectView_MapperView');
         $element->addValidators(array());
                 
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
     public function getDescricao(){
 
         $element = new ZendT_Form_Element_Text('descricao');
         $element->setLabel($this->_translate->_('profile_job.descricao') . ':');
         $element->setAttribs(array('maxlength'=>'50','css-width'=>'524px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=strtoupper(this.value);");
-        $element->addAttr('onBlur',"this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_DateTime
+     */
     public function getDhIniExec(){
 
         $element = new ZendT_Form_Element_DateTime('dh_ini_exec');
@@ -75,6 +90,10 @@ class Profile_Form_Job_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_DateTime
+     */
     public function getDhUltExec(){
 
         $element = new ZendT_Form_Element_DateTime('dh_ult_exec');
@@ -87,6 +106,10 @@ class Profile_Form_Job_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Select
+     */
     public function getTipo(){
 
         $element = new ZendT_Form_Element_Select('tipo');
@@ -99,6 +122,10 @@ class Profile_Form_Job_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Numeric
+     */
     public function getFrequencia(){
 
         $element = new ZendT_Form_Element_Numeric('frequencia');
@@ -111,6 +138,10 @@ class Profile_Form_Job_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Date
+     */
     public function getDtFimExec(){
 
         $element = new ZendT_Form_Element_Date('dt_fim_exec');

@@ -117,7 +117,7 @@
                                WHERE recurso.status = 'A'
                                  AND papel_recurso.acesso = 'P'
                                  AND papel.status = 'A'
-                                 AND papel.hierarquia LIKE {$this->getAdapter()->concat(array("papel_usu.hierarquia", "'%'"))}
+                                 AND papel_usu.hierarquia LIKE {$this->getAdapter()->concat(array("papel.hierarquia", "'%'"))}
                                  AND recurso.hierarquia LIKE {$this->getAdapter()->concat(array("aplicacao.hierarquia", "'%'"))}
                          ) ORDER BY aplicacao.descricao ";
            $rows = $this->getAdapter()->fetchAll($sql, array('id_usuario' => $id));

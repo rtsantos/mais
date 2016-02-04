@@ -4,14 +4,14 @@
  */
 class Profile_Model_JobDest_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'PROFILE_JOB_DEST';
+    protected $_name = 'profile_job_dest';
     
-    protected $_required = array('ID','ID_PROFILE_JOB','ID_PAPEL');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_PROFILE_JOB','ID_PAPEL');
-    protected $_cols = array('ID','ID_PROFILE_JOB','ID_PAPEL');
+    protected $_required = array('id','id_profile_job','id_papel');
+    protected $_primary = array('id');
+    protected $_unique = array('id_profile_job','id_papel');
+    protected $_cols = array('id','id_profile_job','id_papel');
     protected $_search = '';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array();
     protected $_referenceMap = array(

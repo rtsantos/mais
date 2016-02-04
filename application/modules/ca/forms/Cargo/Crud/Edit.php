@@ -6,10 +6,15 @@
          */
         protected $_multiple;
         /**
+         * @var array
+         */
+        protected $_url = array();
+        /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
          */
         public function loadElements($action='insert') {
+            $this->setName('frm_ca_cargo');
             
     
             $model = new Ca_Form_Cargo_Elements();

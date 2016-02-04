@@ -257,15 +257,17 @@
             if (count($bindWhere) > 0) {
                 $cmdWhere = $this->mergeWhereToString($cmdWhere, $bindWhere);
             }
+            
+            $newData = array();
             foreach ($data as $columName => $value) {
                 #@todo verificar motivo das colunas que represetam a chave primária estar sendo populado para update            
-                if (in_array(strtoupper($columName), $this->_primary) && count($this->_primary) == 1) {
+                if (in_array(strtolower($columName), $this->_primary) && count($this->_primary) == 1) {
                     unset($data[$columName]);
                 } else {
-                    $data[strtoupper($columName)] = $value;
-                    unset($data[$columName]);
+                    $newData[strtolower($columName)] = $value;
                 }
             }
+            $data = $newData;
 
             $this->_setAdapter($this->_adapter);
             if ($data) {
@@ -286,16 +288,18 @@
             if ($data instanceof ZendT_Db_Mapper) {
                 $data = $data->getData();
             }
+            $newData = array();
             foreach ($data as $columName => $value) {
-                $data[strtoupper($columName)] = $value;
-                unset($data[$columName]);
+                $newData[strtolower($columName)] = $value;
+                //unset($data[$columName]);
             }
+            $data = $newData;
 
             $this->_setAdapter($this->_adapter);
             $result = parent::insert($data);
-            if ($result || $result === null) {
+            #if ($result || $result === null) {
                 $result = $data;
-                $cid = strtoupper($this->_primary[1]);
+                $cid = strtolower($this->_primary[1]);
                 $id = $result[$cid];
                 if ($id instanceof ZendT_Type){
                     $id = $id->toPhp();
@@ -303,7 +307,7 @@
                 if (count($this->_primary) == 1 && !$id){
                     $result[$cid] = $this->getAdapter()->lastInsertId($this->_name, $cid);
                 }
-            }
+            #}
             return $result;
         }
 
@@ -509,7 +513,7 @@
             if (isset($this->_alias)){
                 return $this->_alias;
             }
-            return $this->_name;
+            return strtolower($this->_name);
         }
 
         /**

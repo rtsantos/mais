@@ -66,7 +66,11 @@
         public function getMenu($moduleName) {
             $moduleName = strtoupper($moduleName);
 
-            $sql = "SELECT rsu.hierarquia AS recurso, rsu.descricao, rsuPai.hierarquia AS recurso_pai,rsu.nivel
+            $sql = "SELECT rsu.hierarquia AS recurso, 
+                           rsu.descricao, 
+                           rsuPai.hierarquia AS recurso_pai,
+                           rsu.nivel,
+                           rsu.observacao
                       FROM recurso rsu
                       JOIN tipo_recurso tpRsu ON (rsu.id_tipo_recurso = tpRsu.Id)
                       LEFT JOIN recurso rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
@@ -79,10 +83,14 @@
 
             $result = array();
             foreach ($rows as $row) {
+                if ($row['observacao'] == ''){
+                    $row['observacao'] = $row['recurso'];
+                }
                 $menu = new ZendT_Acl_Resource_RowMenu();
                 $menu
-                        ->setDescription(utf8_encode($row['descricao']))
-                        ->setUrl($row['recurso']);
+                        ->setDescription(($row['descricao']))
+                        ->setParent($row['recurso'])
+                        ->setUrl(str_replace("{baseUrl}",  ZendT_Url::getBaseUrl(), $row['observacao']));
 
                 $result[$row['recurso_pai']][] = $menu;
             }

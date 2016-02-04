@@ -7,7 +7,7 @@
     $this->baseUrl = $this->getParam('baseUrl');
     $this->apps = $this->getParam('apps');
 
-    $this->baseUrlPublic = str_replace('/index.php', '/public', $this->baseUrl);
+    $this->baseUrlPublic = str_replace('/index.php', '', $this->baseUrl) . '/public';
 
     function _browser() {
         $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -92,10 +92,12 @@
 
                                 <ul class="dropdown-menu position ui-helper-clearfix" align="right" role="layout-header-user-avatar">
                                     <?php if ($name != 'Entrar') {
-                                        ?>
+                                        /*
                                         <li class="link" onclick="jQuery.WindowT.open({id: 'winChangePass', url: '<?php echo $this->baseUrl; ?>/auth/user/change-password', modal: true});">Troca de Senha</li>
                                         <li class="link" onClick="jQuery.WindowT.open({type: 'IFRAME', title: 'Meu Perfil', id: 'myProfile', url: '/AppTA/index.php/auth/usuario/form/profile_key/my-profile/id/<?php echo $_SESSION['logon']['id_usuario']; ?>', height: 300, width: 600, modal: true, scrolling: 'NO'});">Meu Perfil</li>
                                         <li class="divider" role="separator"></li>
+                                         */
+                                        ?>
                                         <li class="link" onclick="document.location = '<?php echo $this->baseUrl; ?>/auth/user/logout';">Sair</li>
                                         <?php
                                     } else {
@@ -146,26 +148,28 @@
                             </div>
 
                             <div id="layout-header-user-apps" class="ui-button-icon">
-                                <span class="ui-icon-20 icon-apps" onclick="$('#search-app').focus();">
+                                <span class="ui-icon-20 icon-apps">
                                     &nbsp;
                                 </span>
 
                                 <ul class="dropdown-menu position ui-helper-clearfix" align="right" role="layout-header-user-apps">
-                                    <li>
-                                        <input id="search-app" placeholder="Procurar" type="text" class="ui-radius-5 shadow" />
-                                    </li>
-                                    <li class="divider" role="separator"></li>
                                     <?php
                                     foreach ($this->apps as $app => $values) {
                                         ?>
-                                        <li class="link" onclick="document.location.href = '<?php echo $values['obsvervacao']; ?>';"><?php echo $values['descricao']; ?></li>
+                                        <li class="link" onclick="document.location.href = '<?php echo $values['observacao']; ?>';"><?php echo $values['descricao']; ?></li>
                                         <?php
                                     }
                                     ?>
                                 </ul>
                             </div>
 
-                            <div id="layout-header-fast-row" class="ui-button-icon">
+                            
+
+
+                            <?php
+                            if ($content->getUser()->authenticated()) {
+/*
+<div id="layout-header-fast-row" class="ui-button-icon">
                                 <span class="ui-icon-20 icon-add-doc">
                                     &nbsp;
                                 </span>
@@ -179,11 +183,7 @@
                                     <li class="link">Acesso</li>
                                 </ul>
                             </div>
-
-
-                            <?php
-                            if ($content->getUser()->authenticated()) {
-                                
+ */                                
                             }
                             ?>
 
@@ -214,7 +214,11 @@
                     ?>
                 </div>
 
-                <div id="layout-header-company" class="ui-button-icon">
+                
+                
+                <?php
+/*
+<div id="layout-header-company" class="ui-button-icon">
                     <span class="ui-text">Mais Vendas</span>
                     <span class="ui-icon ui-icon-triangle-1-s"></span>
 
@@ -225,6 +229,10 @@
                         <li class="link">4Hand</li>
                     </ul>
                 </div>
+ */                   
+                   
+                ?>
+                   
             </div>        
 
             <div id="layout-content" class="ui-helper-clearfix">

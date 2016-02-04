@@ -4,14 +4,14 @@
  */
 class Profile_Model_ObjectView_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'PROFILE_OBJECT_VIEW';
-    protected $_sequence = 'SID_PROFILE_OBJECT_VIEW';
-    protected $_required = array('ID','TIPO','PADRAO','NOME','OBJETO','ID_USUARIO');
-    protected $_primary = array('ID');
-    protected $_unique = array('OBJETO','ID_USUARIO','NOME');
-    protected $_cols = array('ID','TIPO','PADRAO','NOME','OBJETO','OBSERVACAO','CONFIG','ID_USUARIO','URI','CHAVE');
+    protected $_name = 'profile_object_view';
+    protected $_sequence = 'sid_profile_object_view';
+    protected $_required = array('id','tipo','padrao','nome','objeto','id_usuario');
+    protected $_primary = array('id');
+    protected $_unique = array('objeto','id_usuario','nome');
+    protected $_cols = array('id','tipo','padrao','nome','objeto','observacao','config','id_usuario','uri','chave');
     protected $_search = 'nome';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array(
                 'Profile_Model_Job_Table',

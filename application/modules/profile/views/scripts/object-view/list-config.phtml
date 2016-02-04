@@ -1,4 +1,4 @@
-<form name="profile-user" id="profile-user" action="/Mais/index.php/profile/object-view/list-config">
+<form name="profile-user" id="profile-user" action="<?php echo $this->baseUrl; ?>/profile/object-view/list-config">
     <input type="hidden" name="objeto_profile" id="objeto_profile" value="<?php echo $this->objeto; ?>" />
     <input type="hidden" name="uri_profile" id="uri_profile" value="<?php echo $this->uri; ?>" />
     <input type="hidden" name="id_profile" id="id_profile" value="<?php echo $this->id; ?>" />
@@ -645,7 +645,7 @@
             } else {
                 var result = $.ajax({
                     type: 'POST',
-                    url: '/Mais/index.php/profile/object-view/form-config',
+                    url: '<?php echo $this->baseUrl; ?>/profile/object-view/form-config',
                     data: 'type_object_view=' + $('#tipo_profile').val() + '&type_group=' + sTypeGroup + '&column_name=' + $(obj).attr('name') + '&object_name=<?php echo $this->objeto; ?>',
                     async: false
                 }).responseText;
@@ -1020,7 +1020,7 @@
 
                     $.BlockT.open();
                     var result = ajaxJson({
-                        url: '/Mais/index.php/profile/object-view/insert',
+                        url: '<?php echo $this->baseUrl; ?>/profile/object-view/insert',
                         data: sParam
                     });
                     if (result) {
@@ -1079,7 +1079,7 @@
 
         $.BlockT.open();
         var result = ajaxJson({
-            url: '/Mais/index.php/profile/object-view/config',
+            url: '<?php echo $this->baseUrl; ?>/profile/object-view/config',
             data: 'id=' + idProfile
         });
         if (result) {
@@ -1329,7 +1329,7 @@
         }
 
         ajaxJson({
-            url: '/Mais/index.php/profile/object-view/save',
+            url: '<?php echo $this->baseUrl; ?>/profile/object-view/save',
             data: objData
         });
 
@@ -1426,7 +1426,7 @@
                         }
                         $.BlockT.open();
                         var result = ajaxJson({
-                            url: '/Mais/index.php/profile/object-view/copy',
+                            url: '<?php echo $this->baseUrl; ?>/profile/object-view/copy',
                             data: sParam
                         });
                         if (result) {
@@ -1454,7 +1454,7 @@
 
         $.BlockT.open();
         var result = ajaxJson({
-            url: '/Mais/index.php/profile/object-view/count-privileges',
+            url: '<?php echo $this->baseUrl; ?>/profile/object-view/count-privileges',
             data: 'id=' + gConfig['id']
         });
         var count = result['count'];
@@ -1464,7 +1464,7 @@
             if (!count || (count && confirm('Todos os privilégios (' + count + ') serão apagados também. Continuar?'))) {
                 $.BlockT.open();
                 var result = ajaxJson({
-                    url: '/Mais/index.php/profile/object-view/delete',
+                    url: '<?php echo $this->baseUrl; ?>/profile/object-view/delete',
                     data: 'id=' + gConfig['id']
                 });
                 if (result) {

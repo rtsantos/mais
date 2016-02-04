@@ -4,14 +4,14 @@
  */
 class Auth_Model_TipoRecurso_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'TIPO_RECURSO';
-    protected $_sequence = 'SID_TIPO_RECURSO';
-    protected $_required = array('ID','NOME','DESCRICAO');
-    protected $_primary = array('ID');
-    protected $_unique = array('NOME');
-    protected $_cols = array('ID','NOME','DESCRICAO');
+    protected $_name = 'tipo_recurso';
+    protected $_sequence = 'sid_tipo_recurso';
+    protected $_required = array('id','nome','descricao');
+    protected $_primary = array('id');
+    protected $_unique = array('nome');
+    protected $_cols = array('id','nome','descricao');
     protected $_search = 'nome';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array(
                 'Auth_Model_Recurso_Table');

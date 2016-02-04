@@ -39,6 +39,13 @@ class Auth_Model_Conta_Crud_Mapper extends ZendT_Db_Mapper
                     'column' => 'id'
                 ));
     }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
+    }
     
     
     /**

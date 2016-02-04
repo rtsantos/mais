@@ -4,14 +4,14 @@
  */
 class Vendas_Model_FormaPagamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'CV_FORMA_PAGTO';
-    protected $_sequence = 'SID_CV_FORMA_PAGTO';
-    protected $_required = array('ID','DESCRICAO','PARCELA','STATUS','ID_EMPRESA');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_EMPRESA','DESCRICAO');
-    protected $_cols = array('ID','DESCRICAO','PARCELA','STATUS','ID_EMPRESA','PAGO');
+    protected $_name = 'cv_forma_pagto';
+    protected $_sequence = 'sid_cv_forma_pagto';
+    protected $_required = array('id','descricao','parcela','status','id_empresa');
+    protected $_primary = array('id');
+    protected $_unique = array('id_empresa','descricao');
+    protected $_cols = array('id','descricao','parcela','status','id_empresa','pago');
     protected $_search = 'descricao';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Vendas_Model_Pagamento_Table');

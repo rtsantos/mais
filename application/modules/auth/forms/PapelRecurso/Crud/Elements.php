@@ -54,7 +54,7 @@ class Auth_Form_PapelRecurso_Crud_Elements
         $element->url()->setGrid('/auth/conta/grid');
         $element->url()->setSearch('/auth/conta/seeker-search');
         $element->url()->setRetrieve('/auth/conta/retrieve');
-        $element->setMapperView('Auth_DataView_Papel_MapperView');
+        $element->setMapperView('Auth_DataView_Conta_MapperView');
         $element->addValidators(array());
                 
         return $element;

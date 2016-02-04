@@ -4,20 +4,20 @@
  */
 class Auth_Model_PapelRecurso_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'PAPEL_RECURSO';
-    protected $_sequence = 'SID_PAPEL_RECURSO';
-    protected $_required = array('ID');
-    protected $_primary = array('ID');
-    protected $_unique = array('ID_PAPEL','ID_RECURSO');
-    protected $_cols = array('ID','ID_PAPEL','ID_RECURSO','ACESSO');
+    protected $_name = 'papel_recurso';
+    protected $_sequence = 'sid_papel_recurso';
+    protected $_required = array('id');
+    protected $_primary = array('id');
+    protected $_unique = array('id_papel','id_recurso');
+    protected $_cols = array('id','id_papel','id_recurso','acesso');
     protected $_search = 'acesso';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array();
     protected $_referenceMap = array(
                 'IdPapel' => array(
                     'columns' => 'id_papel',
-                    'refTableClass' => 'Auth_Model_Papel_Table',
+                    'refTableClass' => 'Auth_Model_Conta_Table',
                     'refColumns' => 'id'
                 ),
                 'IdRecurso' => array(

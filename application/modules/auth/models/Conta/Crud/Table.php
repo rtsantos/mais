@@ -4,14 +4,14 @@
  */
 class Auth_Model_Conta_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'PAPEL';
-    protected $_sequence = 'SID_PAPEL';
-    protected $_required = array('ID','NOME','DESCRICAO','HIERARQUIA','TIPO','STATUS');
-    protected $_primary = array('ID');
-    protected $_unique = array('HIERARQUIA');
-    protected $_cols = array('ID','NOME','DESCRICAO','HIERARQUIA','ID_PAPEL_PAI','TIPO','STATUS','SENHA','AVATAR','EMAIL','ID_EMPRESA');
+    protected $_name = 'papel';
+    protected $_sequence = 'sid_papel';
+    protected $_required = array('id','nome','descricao','hierarquia','tipo','status');
+    protected $_primary = array('id');
+    protected $_unique = array('hierarquia');
+    protected $_cols = array('id','nome','descricao','hierarquia','id_papel_pai','tipo','status','senha','avatar','email','id_empresa');
     protected $_search = 'hierarquia';
-    protected $_schema  = 'PROUSER';
+    protected $_schema  = 'prouser';
     protected $_adapter = 'db.prouser';
     protected $_dependentTables = array(
                 'Auth_Model_Conta_Table',

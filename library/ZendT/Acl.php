@@ -357,7 +357,7 @@
                     $roles = $rowSession->getRoles();
                     foreach ($dataMenu as $parentName => &$itens) {
                         foreach ($itens as $menu) {
-                            $isAllow = $this->_acl->isAllowed($rowSession->getRole(), $menu->getUrl());
+                            $isAllow = $this->_acl->isAllowed($rowSession->getRole(), $menu->getParent());
 
                             if ($isAllow) {
                                 $rowSession->dataMenu[$moduleName][$parentName][] = $menu->toArray();
@@ -365,7 +365,7 @@
                             if (!$isAllow && is_array($roles)) {
 
                                 foreach ($roles as $role) {
-                                    $isAllow = $this->_acl->isAllowed($role, $menu->getUrl());
+                                    $isAllow = $this->_acl->isAllowed($role, $menu->getParent());
                                     if ($isAllow) {
                                         $rowSession->dataMenu[$moduleName][$parentName][] = $menu->toArray();
                                         break;

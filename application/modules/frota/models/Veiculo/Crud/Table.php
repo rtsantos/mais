@@ -4,14 +4,14 @@
  */
 class Frota_Model_Veiculo_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'FR_VEICULO';
-    protected $_sequence = 'SID_FR_VEICULO';
-    protected $_required = array('ID','PLACA','DESCRICAO','ID_EMPRESA');
-    protected $_primary = array('ID');
-    protected $_unique = array('PLACA','ID_EMPRESA');
-    protected $_cols = array('ID','ID_MODELO','PLACA','DESCRICAO','CHASSI','RENAVAM','ID_EMPRESA');
+    protected $_name = 'fr_veiculo';
+    protected $_sequence = 'sid_fr_veiculo';
+    protected $_required = array('id','placa','descricao','id_empresa');
+    protected $_primary = array('id');
+    protected $_unique = array('placa','id_empresa');
+    protected $_cols = array('id','id_modelo','placa','descricao','chassi','renavam','id_empresa');
     protected $_search = 'placa';
-    protected $_schema  = 'MAIS';
+    protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Vendas_Model_Pedido_Table');

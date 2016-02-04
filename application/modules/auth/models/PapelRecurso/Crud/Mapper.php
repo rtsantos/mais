@@ -6,6 +6,7 @@ class Auth_Model_PapelRecurso_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id');
     protected $_model = 'Auth_Model_PapelRecurso_Table';
+    public static $table = 'prouser.papel_recurso';
     /**
      *
      * @var Auth_Model_PapelRecurso_Mapper
@@ -30,13 +31,20 @@ class Auth_Model_PapelRecurso_Crud_Mapper extends ZendT_Db_Mapper
     public function getReferenceMap(){
         return array(
                 'id_papel' => array(
-                    'mapper' => 'Auth_DataView_Papel_MapperView',
+                    'mapper' => 'Auth_DataView_Conta_MapperView',
                     'column' => 'id'
                 ),
                 'id_recurso' => array(
                     'mapper' => 'Auth_DataView_Recurso_MapperView',
                     'column' => 'id'
                 ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
