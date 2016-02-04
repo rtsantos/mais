@@ -50,6 +50,8 @@ class Financeiro_Model_Lancamento_Crud_Table extends ZendT_Db_Table_Abstract
                 ));
     protected $_listOptions = array('tipo'=>array('D'=>'Débito'
                                                     ,'C'=>'Crédito')
+                                    ,'ultimo'=>array('S'=>'Sim'
+                                                    ,'N'=>'Não')
                                     ,'status'=>array('A'=>'Aberto'
                                                     ,'E'=>'Efetivado'
                                                     ,'C'=>'Cancelado')

@@ -407,12 +407,9 @@ class Financeiro_Model_Lancamento_Crud_Mapper extends ZendT_Db_Mapper
      * @return Financeiro_Model_Lancamento_Crud_Mapper
      */
     public function setUltimo($value,$options=array('required'=>true)){        
-        $this->_data['ultimo'] = new ZendT_Type_String($value,array('mask'=>''
-                                                                   ,'charMask'=>''
-                                                                   ,'filterDb'=>array (
-  0 => '',
-)
-                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        
+        $options['listOptions']=array('S'=>'Sim','N'=>'Não');
+        $this->_data['ultimo'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['ultimo']->setValueFromDb($value);
                 

@@ -107,6 +107,7 @@
                       JOIN prouser.tipo_recurso tipo_recurso ON (aplicacao.id_tipo_recurso = tipo_recurso.id)
                      WHERE tipo_recurso.nome = 'MODULE'
                        AND aplicacao.status = 'A'
+                       AND aplicacao.observacao IS NOT NULL
                        AND EXISTS (
                               SELECT 1
                                 FROM papel_recurso 

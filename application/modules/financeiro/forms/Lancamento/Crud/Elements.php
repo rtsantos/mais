@@ -176,15 +176,15 @@ class Financeiro_Form_Lancamento_Crud_Elements
             
     /**
      *
-     * @return \ZendT_Form_Element_Text
+     * @return \ZendT_Form_Element_Select
      */
     public function getUltimo(){
 
-        $element = new ZendT_Form_Element_Text('ultimo');
+        $element = new ZendT_Form_Element_Select('ultimo');
         $element->setLabel($this->_translate->_('fc_lancamento.ultimo') . ':');
-        $element->setAttribs(array('maxlength'=>'1','css-width'=>'100px'));        
-        $element->addValidators(array('Zend_Validate_StringLength'));
-        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        $element->addMultiOption('S', 'Sim');
+        $element->addMultiOption('N', 'Não');        
+                
         return $element;
     }
             

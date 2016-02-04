@@ -498,8 +498,10 @@ return array (
           ),
           'listOptions' => 
           array (
+             'S' => 'Sim',
+             'N' => 'Não'
           ),
-          'type' => 'Text',
+          'type' => 'Select',
           'text' => 
           array (
             'maxlength' => '1',
