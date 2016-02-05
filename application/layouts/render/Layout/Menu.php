@@ -256,11 +256,9 @@
 
                    if (isset($this->_data[$item['url']])) {
                        if (!$group) {
-					       $menu.= '<li id="' . $id . '" class="link">' . "\n";
-                           $menu.= '<div class="ui-helper-clearfix">' . "\n";
+					       $menu.= '<li id="' . $id . '" class="link ui-helper-clearfix">' . "\n";
                            $menu.= '  <span class="ui-text">' . $item['desc'] . '</span>' . "\n";
-                           $menu.= '  <span class="ui-icon ui-icon-carat-1-e"></span>' . "\n";
-                           $menu.= '</div>' . "\n";
+                           $menu.= '  <span class="ui-icon ui-icon-carat-1-e" style="float: right; margin: 0;"></span>' . "\n";
                        } else {
 					       $menu.= '<li id="' . $id . '" class="' . $group . '">' . "\n";
                            $menu.= '  <span>' . $item['desc'] . '</span>' . "\n";
@@ -298,7 +296,7 @@
                        $link = '';
                        if (isset($this->_data[$menu['url']])) {
 
-                           $this->_html.= '<div id="' . $id . '" class="default ui-button-icon" ' . $link . '>' . "\n";
+                           $this->_html.= '<div id="' . $id . '" class="default ui-button-icon" ' . $link . '> ' . "\n";
                            $this->_html.= '   <span t-href="' . $menu['url'] . '" class="ui-text">' . "\n";
                            $this->_html.= '      ' . $desc . "\n";
                            $this->_html.= '   </span>' . "\n";
@@ -307,7 +305,7 @@
                            $this->_html.= $this->_renderItens($menu['url']) . "\n";
                            unset($this->_data[$menu['url']]);
                        } else {
-                           $this->_html.= '<div id="' . $id . '" class="default ui-button-icon" ' . $link . '>' . "\n";
+                           $this->_html.= '<div id="' . $id . '" class="default ui-button-icon" ' . $link . '> ' . "\n";
                            $this->_html.= '   <span t-href="' . $menu['url'] . '" class="ui-text">' . "\n";
                            $this->_html.= '      ' . $desc . "\n";
                            $this->_html.= '   </span>' . "\n";

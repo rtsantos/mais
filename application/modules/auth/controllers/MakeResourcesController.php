@@ -21,10 +21,12 @@
 
            $modules = array();
 
-           $path = realpath('.') . './application/modules/';
-           $dir_handle = @opendir($path);
+           $path = APPLICATION_PATH . '/modules/';
+           echo $path . "<br />\n";
+           $dir_handle = opendir($path);
            while ($file = readdir($dir_handle)) {
                if ($file != '.' && $file != '..' && $file != '.svn') {
+                   echo $path . $file . "<br />\n";
                    if (is_dir($path . $file)) {
                        if ($moduleName != '') {
                            if ($moduleName == $file) {
@@ -41,12 +43,15 @@
        }
 
        public function getControllers($module) {
-           $path = realpath('.') . '\\application\\modules\\' . $module . '\\controllers\\';
+           $path = APPLICATION_PATH . '/modules/' . $module . '/controllers/';
+           echo $path . "<br />\n";
+               
            $controllers = glob($path . "*Controller.php");
            $result = array();
            $i = 0;
-           foreach ($controllers as &$controller) {
+           foreach ($controllers as &$controller) {               
                $fileName = str_replace($path, '', $controller);
+               echo $fileName . "<br />\n";
                if ($fileName != 'ErrorController.php') {
                    $result[$i]['path'] = $path;
                    $result[$i]['fileName'] = $fileName;

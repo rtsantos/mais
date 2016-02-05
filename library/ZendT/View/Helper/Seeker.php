@@ -266,7 +266,7 @@
            $this->view->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/jquery.autocomplete.css');
            $this->view->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/extra/jquery.autocomplete.js');
            $this->view->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/widget/TAutocomplete.js');
-           $this->view->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/widget/TSeeker.js?1' . date('ymd'));
+           $this->view->headScript()->appendFile(ZendT_Url::getBaseDiretoryPublic() . '/scripts/jquery/widget/TSeeker.js');
 
            $params = ZendT_JS_Json::encode($params);
            $params = str_replace('{id}', $searchId, $params);
