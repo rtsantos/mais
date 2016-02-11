@@ -12,8 +12,8 @@
         */
        public function getRoles() {
            $sql = "SELECT ppl.hierarquia as papel, pplSup.hierarquia AS papel_pai
-                      FROM ".Auth_Model_Conta_Mapper::$table." ppl
-                      LEFT JOIN ".Auth_Model_Conta_Mapper::$table." pplSup ON (ppl.id_papel_pai = pplSup.Id)
+                      FROM " . Auth_Model_Conta_Mapper::$table . " ppl
+                      LEFT JOIN " . Auth_Model_Conta_Mapper::$table . " pplSup ON (ppl.id_papel_pai = pplSup.Id)
                      ORDER BY ppl.hierarquia";
 
            $result = $this->getAdapter()->fetchAll($sql);
@@ -46,10 +46,10 @@
                $binds = $where->getBinds();
            }
            $sql = 'SELECT usuario.* 
-                      FROM prouser.papel papel
-                      JOIN prouser.papel_rel papel_rel ON (papel_rel.id_papel_rel = papel.id)
-                      JOIN prouser.papel usuario ON (papel_rel.id_papel = usuario.id)
-                     WHERE ' . $cmdWhere;
+                     FROM ' . Auth_Model_Conta_Mapper::$table . ' papel
+                     JOIN ' . Auth_Model_ContaRel_Mapper::$table . ' papel_rel ON (papel_rel.id_papel_rel = papel.id)
+                     JOIN ' . Auth_Model_Conta_Mapper::$table . ' usuario ON (papel_rel.id_papel = usuario.id)
+                    WHERE ' . $cmdWhere;
            return $this->getAdapter()->fetchAll($sql, $binds);
        }
 
@@ -102,25 +102,26 @@
        }
 
        public function getApps($id) {
+
            $sql = "SELECT aplicacao.descricao, aplicacao.observacao, aplicacao.hierarquia
-                      FROM prouser.recurso aplicacao
-                      JOIN prouser.tipo_recurso tipo_recurso ON (aplicacao.id_tipo_recurso = tipo_recurso.id)
-                     WHERE tipo_recurso.nome = 'MODULE'
-                       AND aplicacao.status = 'A'
-                       AND aplicacao.observacao IS NOT NULL
-                       AND EXISTS (
-                              SELECT 1
-                                FROM papel_recurso 
-                                JOIN papel ON (papel_recurso.id_papel = papel.id)
-                                JOIN recurso ON (papel_recurso.id_recurso = recurso.id)
-                                JOIN papel_rel ON (papel_rel.id_papel = :id_usuario)
-                                JOIN papel papel_usu ON (papel_rel.id_papel_rel = papel_usu.id)
-                               WHERE recurso.status = 'A'
-                                 AND papel_recurso.acesso = 'P'
-                                 AND papel.status = 'A'
-                                 AND papel_usu.hierarquia LIKE {$this->getAdapter()->concat(array("papel.hierarquia", "'%'"))}
-                                 AND recurso.hierarquia LIKE {$this->getAdapter()->concat(array("aplicacao.hierarquia", "'%'"))}
-                         ) ORDER BY aplicacao.descricao ";
+                     FROM " . Auth_Model_Recurso_Mapper::$table . " aplicacao
+                     JOIN " . Auth_Model_TipoRecurso_Mapper::$table . " tipo_recurso ON (aplicacao.id_tipo_recurso = tipo_recurso.id)
+                    WHERE tipo_recurso.nome = 'MODULE'
+                      AND aplicacao.status = 'A'
+                      AND aplicacao.observacao IS NOT NULL
+                      AND EXISTS (
+                             SELECT 1
+                               FROM " . Auth_Model_Privilegio_Mapper::$table . " privilegio
+                               JOIN " . Auth_Model_Conta_Mapper::$table . " papel ON (privilegio.id_papel = papel.id)
+                               JOIN " . Auth_Model_Recurso_Mapper::$table . " recurso ON (privilegio.id_recurso = recurso.id)
+                               JOIN " . Auth_Model_ContaRel_Mapper::$table . " papel_rel ON (papel_rel.id_papel = :id_usuario)
+                               JOIN " . Auth_Model_Conta_Mapper::$table . " papel_usu ON (papel_rel.id_papel_rel = papel_usu.id)
+                              WHERE recurso.status = 'A'
+                                AND privilegio.acesso = 'P'
+                                AND papel.status = 'A'
+                                AND papel_usu.hierarquia LIKE {$this->getAdapter()->concat(array("papel.hierarquia", "'%'"))}
+                                AND recurso.hierarquia LIKE {$this->getAdapter()->concat(array("aplicacao.hierarquia", "'%'"))}
+                        ) ORDER BY aplicacao.descricao ";
            $rows = $this->getAdapter()->fetchAll($sql, array('id_usuario' => $id));
            $baseUrl = ZendT_Url::getBaseUrl();
            if ($rows) {
@@ -148,7 +149,7 @@
                        empresa.nome as nome_empresa,
                        empresa.apelido as apelido_empresa,
                        empresa.hierarquia as hierarquia_empresa
-                   FROM prouser.papel usr
+                   FROM " . Auth_Model_Conta_Mapper::$table . " usr
                    LEFT JOIN " . Auth_Model_Conta_Mapper::$table . " ppl ON (usr.id_papel_pai = ppl.id)
                    LEFT JOIN " . Ca_Model_Pessoa_Mapper::$table . " empresa ON (ppl.id_empresa = empresa.id)
                   WHERE usr.id = :id_usuario";
@@ -190,17 +191,17 @@
 
        public function getIdEmpresaUsuario($id) {
            $sql = "SELECT pe.id_empresa
-                      FROM prouser.papel_empresa pe
-                     WHERE pe.id_papel = :id_usuario
-                       AND pe.padrao = 'S' ";
+                     FROM " . Auth_Model_ContaEmpresa_Mapper::$table . " pe
+                    WHERE pe.id_papel = :id_usuario
+                      AND pe.padrao = 'S' ";
            $rows = $this->getAdapter()->fetchCol($sql, array('id_usuario' => $id));
            return $rows;
        }
 
        public function getIdEmpresasUsuario($id) {
            $sql = "SELECT pe.id_empresa
-                      FROM prouser.papel_empresa pe
-                     WHERE pe.id_papel = :id_usuario";
+                     FROM " . Auth_Model_ContaEmpresa_Mapper::$table . " pe
+                    WHERE pe.id_papel = :id_usuario";
            $row = $this->getAdapter()->fetchOne($sql, array('id_usuario' => $id));
            return $row;
        }

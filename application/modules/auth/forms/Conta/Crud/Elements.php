@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela papel
+ * Classe de mapeamento dos pontos de entrada da tabela at_papel
  */
 class Auth_Form_Conta_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('papel.id') . ':');
+        $element->setLabel($this->_translate->_('at_papel.id') . ':');
         $element->setAttribs(array('css-width'=>'100px'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -43,7 +43,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getNome(){
 
         $element = new ZendT_Form_Element_Text('nome');
-        $element->setLabel($this->_translate->_('papel.nome') . ':');
+        $element->setLabel($this->_translate->_('at_papel.nome') . ':');
         $element->setAttribs(array('maxlength'=>'50','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);this.value=trim(this.value);");
@@ -57,7 +57,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getDescricao(){
 
         $element = new ZendT_Form_Element_Text('descricao');
-        $element->setLabel($this->_translate->_('papel.descricao') . ':');
+        $element->setLabel($this->_translate->_('at_papel.descricao') . ':');
         $element->setAttribs(array('maxlength'=>'50','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=trim(this.value);");
@@ -71,7 +71,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getHierarquia(){
 
         $element = new ZendT_Form_Element_Text('hierarquia');
-        $element->setLabel($this->_translate->_('papel.hierarquia') . ':');
+        $element->setLabel($this->_translate->_('at_papel.hierarquia') . ':');
         $element->setAttribs(array('maxlength'=>'1000','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);this.value=trim(this.value);");
@@ -86,7 +86,7 @@ class Auth_Form_Conta_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_papel_pai');
         $element->setSuffix('papel_pai');
-        $element->setLabel($this->_translate->_('papel.id_papel_pai') . ':');
+        $element->setLabel($this->_translate->_('at_papel.id_papel_pai') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');
@@ -109,7 +109,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getTipo(){
 
         $element = new ZendT_Form_Element_Select('tipo');
-        $element->setLabel($this->_translate->_('papel.tipo') . ':');
+        $element->setLabel($this->_translate->_('at_papel.tipo') . ':');
         $element->addMultiOption('U', 'Usuário');
         $element->addMultiOption('G', 'Grupo');        
                 
@@ -123,7 +123,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getStatus(){
 
         $element = new ZendT_Form_Element_Select('status');
-        $element->setLabel($this->_translate->_('papel.status') . ':');
+        $element->setLabel($this->_translate->_('at_papel.status') . ':');
         $element->addMultiOption('A', 'Ativo');
         $element->addMultiOption('I', 'Inativo');        
                 
@@ -137,7 +137,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getSenha(){
 
         $element = new ZendT_Form_Element_Password('senha');
-        $element->setLabel($this->_translate->_('papel.senha') . ':');
+        $element->setLabel($this->_translate->_('at_papel.senha') . ':');
         $element->setAttribs(array('maxlength'=>'20','css-width'=>'175px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
                 
@@ -151,7 +151,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getAvatar(){
 
         $element = new ZendT_Form_Element_Password('senha');
-        $element->setLabel($this->_translate->_('papel.senha') . ':');
+        $element->setLabel($this->_translate->_('at_papel.senha') . ':');
         $element->setAttribs(array('maxlength'=>'20','css-width'=>'175px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
                 
@@ -165,7 +165,7 @@ class Auth_Form_Conta_Crud_Elements
     public function getEmail(){
 
         $element = new ZendT_Form_Element_Text('email');
-        $element->setLabel($this->_translate->_('papel.email') . ':');
+        $element->setLabel($this->_translate->_('at_papel.email') . ':');
         $element->setAttribs(array('maxlength'=>'60','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtolower(this.value);this.value=removeAccent(this.value);this.value=trim(this.value);");
@@ -180,7 +180,7 @@ class Auth_Form_Conta_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_empresa');
         $element->setSuffix('empresa');
-        $element->setLabel($this->_translate->_('papel.id_empresa') . ':');
+        $element->setLabel($this->_translate->_('at_papel.id_empresa') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');

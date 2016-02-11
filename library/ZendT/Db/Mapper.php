@@ -92,7 +92,7 @@
         * @return string
         */
        protected function _getSqlBase() {
-           return $this->getModel()->getTableName() . ' ' . $this->getModel()->getName();
+           return $this->getModel()->getTableName() . ' ' . $this->getModel()->getAlias();
        }
 
        /**
@@ -446,7 +446,7 @@
                                }
                                $countExpr = 0;
                                foreach ($this->_userExp[$index]['columns'][1] as &$colExpr) {
-                                   $newColumnsGroup[$index]['columns-exp'][$countExpr] = "DECODE({$colName},{$colValue},{$colExpr},0)";
+                                   $newColumnsGroup[$index]['columns-exp'][$countExpr] = "CASE WHEN {$colName} = {$colValue} THEN {$colExpr} ELSE 0 END";
                                    $countExpr++;
                                }
                            }
@@ -457,7 +457,7 @@
                        /* if($infoColumnTotal['func'] == 'count'){
                          $exp = 1;
                          } */
-                       $newColumnsGroup[$index]['column'] = "DECODE({$colName},{$colValue},{$exp},0)";
+                       $newColumnsGroup[$index]['column'] = "CASE WHEN {$colName} = {$colValue} THEN {$exp} ELSE 0 END";
 
                        $configColumns[$index] = $configColumns[$infoColumnTotal['column']];
                        $configColumns[$index]['label'] = $colLabel;
@@ -534,7 +534,7 @@
                    throw new ZendT_Exception_Alert('Formula de porcentagem não contém a coluna fator para divisão!');
                }
 
-               $config['expression_original'] = 'DECODE(NVL(' . $columnFat . ',0),0,0,(' . $columnFat . '/' . $total . ')*100)';
+               $config['expression_original'] = 'CASE WHEN ' . $columnFat . ' IS NULL OR ' . $columnFat . ' = 0 THEN 0 ELSE (' . $columnFat . '/' . $total . ')*100 END';
                $config['expression'] = $config['expression_original'];
                return true;
            } else if ($config['percentage-columns']) {
@@ -551,7 +551,7 @@
                    throw new ZendT_Exception_Alert('Formula de porcentagem não contém a coluna para divisão!');
                }
 
-               $config['expression_original'] = 'DECODE(NVL(' . $columnFat . ',0),0,0,(' . $columnFat . '/' . $columnDiv . ')*100)';
+               $config['expression_original'] = 'CASE WHEN ' . $columnFat . ' IS NULL OR ' . $columnFat . ' = 0 THEN 0 ELSE (' . $columnFat . '/' . $columnDiv . ')*100) END';
                $config['expression'] = $config['expression_original'];
                return true;
            }
@@ -995,15 +995,15 @@
                                if ($replace) {
                                    $lines = explode("\n", $config['expr_replace_value']);
                                    if (is_array($lines)) {
-                                       $config['expression'] = 'DECODE(' . $expElements[0][0];
+                                       $config['expression'] = 'CASE WHEN ' . $expElements[0][0];
                                        foreach ($lines as $line) {
                                            list($value, $newValue) = explode('=', $line);
                                            if ($value && $newValue) {
-                                               $config['expression'].= ',' . $this->getModel()->getAdapter()->quote($value);
-                                               $config['expression'].= ',' . $this->getModel()->getAdapter()->quote($newValue);
+                                               $config['expression'].= ' = ' . $this->getModel()->getAdapter()->quote($value);
+                                               $config['expression'].= ' THEN ' . $this->getModel()->getAdapter()->quote($newValue);
                                            }
                                        }
-                                       $config['expression'].= ',' . $expElements[0][0] . ')';
+                                       $config['expression'].= ' ELSE ' . $expElements[0][0] . ' END';
                                    }
                                }
                                $expression = str_replace($expElements[0], $expElements[1], $config['expression']);
@@ -1470,7 +1470,7 @@
            if ($data == null) {
                $hasFilter = false;
                foreach ($this->getModel()->getPrimary() as $field) {
-                   $tableAndField = $this->getModel()->getName() . '.' . $field;
+                   $tableAndField = $this->getModel()->getAlias() . '.' . $field;
                    if ($this->_data[strtolower($field)]) {
                        $hasFilter = true;
                        $where->addFilter($tableAndField, array($this->_data[strtolower($field)]), '=');
@@ -1481,13 +1481,13 @@
                        if (!$value instanceof ZendT_Type) {
                            $value = $this->escape($value, $field);
                        }
-                       $tableAndField = $this->getModel()->getName() . '.' . $field;
+                       $tableAndField = $this->getModel()->getAlias() . '.' . $field;
                        $where->addFilter($tableAndField, $value, '=');
                    }
                }
            } else {
                foreach ($data as $field => $value) {
-                   $tableAndField = $this->getModel()->getName() . '.' . $field;
+                   $tableAndField = $this->getModel()->getAlias() . '.' . $field;
                    $method = 'set' . $this->fieldToMethod($field);
                    if (method_exists($this, $method)) {
                        if (strtolower($field) == 'id') {
@@ -1495,13 +1495,13 @@
                            if (count($_primary) > 1) {
                                $this->$method($value);
                                foreach ($_primary as $fieldPrimay) {
-                                   $tableAndField = $this->getModel()->getName() . '.' . $fieldPrimay;
+                                   $tableAndField = $this->getModel()->getAlias() . '.' . $fieldPrimay;
                                    $method = 'get' . $this->fieldToMethod(strtolower($fieldPrimay));
                                    $value = $this->$method();
                                    $where->addFilter($tableAndField, $value, '=', $this->getModel()->getMapperName());
                                }
                            } else {
-                               $tableAndField = $this->getModel()->getName() . '.' . $_primary[0];
+                               $tableAndField = $this->getModel()->getAlias() . '.' . $_primary[0];
                                $where->addFilter($tableAndField, $value, '=', $this->getModel()->getMapperName());
                            }
                        } else {
@@ -1553,7 +1553,7 @@
        public function paramName($name) {
            $method = 'set' . $this->fieldToMethod($name);
            if (method_exists($this, $method)) {
-               return strtolower($this->getModel()->getName() . '-' . $name);
+               return strtolower($this->getModel()->getAlias() . '-' . $name);
            } else {
                return false;
            }

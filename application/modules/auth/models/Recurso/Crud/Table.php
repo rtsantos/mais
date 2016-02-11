@@ -1,18 +1,18 @@
 <?php
 /**
- * Classe de mapeamento da tabela recurso
+ * Classe de mapeamento da tabela at_recurso
  */
 class Auth_Model_Recurso_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'recurso';
-    protected $_sequence = 'sid_recurso';
+    protected $_name = 'at_recurso';
+    protected $_sequence = 'sid_at_recurso';
     protected $_required = array('id','id_tipo_recurso','id_aplicacao','nome','hierarquia','status');
     protected $_primary = array('id');
     protected $_unique = array();
     protected $_cols = array('id','id_tipo_recurso','id_aplicacao','id_recurso_pai','nome','hierarquia','descricao','status','icone','observacao','ordem','nivel');
     protected $_search = 'hierarquia';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Auth_Model_PapelRecurso_Table',
                 'Auth_Model_Recurso_Table');

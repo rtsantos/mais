@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela profile_job_dest
+ * Classe de mapeamento dos pontos de entrada da tabela pf_job_dest
  */
 class Profile_Form_JobDest_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Profile_Form_JobDest_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('profile_job_dest.id') . ':');
+        $element->setLabel($this->_translate->_('pf_job_dest.id') . ':');
         $element->setAttribs(array('css-width'=>'100px','maxlength'=>'10'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -44,7 +44,7 @@ class Profile_Form_JobDest_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_profile_job');
         $element->setSuffix('profile_job');
-        $element->setLabel($this->_translate->_('profile_job_dest.id_profile_job') . ':');
+        $element->setLabel($this->_translate->_('pf_job_dest.id_profile_job') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('descricao');
@@ -68,7 +68,7 @@ class Profile_Form_JobDest_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_papel');
         $element->setSuffix('papel');
-        $element->setLabel($this->_translate->_('profile_job_dest.id_papel') . ':');
+        $element->setLabel($this->_translate->_('pf_job_dest.id_papel') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');

@@ -43,7 +43,7 @@ class Ged_Form_PropDocto_Crud_Elements
     public function getIdAplicacao(){
 
         $element = new ZendT_Form_Element_Seeker('id_aplicacao');
-        $element->setSufix('aplicacao');
+        $element->setSuffix('aplicacao');
         $element->setLabel($this->_translate->_('img_prop_docto.id_aplicacao') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());

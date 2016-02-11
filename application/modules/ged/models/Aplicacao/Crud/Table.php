@@ -4,15 +4,15 @@
  */
 class Ged_Model_Aplicacao_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'IMG_APLICACAO';
-    protected $_sequence = 'SID_IMG_APLICACAO';
-    protected $_required = array('ID','ID_APLIC_PROUSER');
-    protected $_primary = array('ID');
+    protected $_name = 'img_aplicacao';
+    protected $_sequence = 'sid_img_aplicacao';
+    protected $_required = array('id','id_aplic_prouser');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_APLIC_PROUSER');
+    protected $_cols = array('id','id_aplic_prouser');
     protected $_search = 'sigla_aplic_prouser';
-    protected $_schema  = 'IMAGE';
-    protected $_adapter = 'db.image';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Ged_Model_ImgPropDocto_Table');
     protected $_referenceMap = array(

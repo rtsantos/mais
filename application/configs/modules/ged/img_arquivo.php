@@ -4,7 +4,7 @@ return array (
   array (
     'name' => 'img_arquivo',
     'modelName' => 'arquivo',
-    'schema' => 'image',
+    'schema' => 'mais',
     'sequenceName' => 'sid_img_arquivo',
     'moduleName' => 'ged',
     'objectName' => 'Ged_Model_Arquivo',

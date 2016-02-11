@@ -14,7 +14,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
-            $this->setName('frm_recurso');
+            $this->setName('frm_at_recurso');
             
     
             $model = new Auth_Form_Recurso_Elements();

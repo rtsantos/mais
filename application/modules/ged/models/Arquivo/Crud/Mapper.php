@@ -6,6 +6,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','conteudo_name','conteudo_type','dh_inc');
     protected $_model = 'Ged_Model_Arquivo_Table';
+    public static $table = 'mais.img_arquivo';
     /**
      *
      * @var Ged_Model_Arquivo_Mapper
@@ -23,6 +24,23 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array(
+                'ID_PROP_DOCTO' => array(
+                    'mapper' => 'Ged_DataView_PropDocto_MapperView',
+                    'column' => 'ID'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -56,6 +74,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna conteudo_name
@@ -98,6 +117,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna conteudo_type
@@ -140,6 +160,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna dh_inc
@@ -171,6 +192,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna hashcode
@@ -210,6 +232,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna conteudo
@@ -238,6 +261,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_prop_docto
@@ -266,6 +290,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna path_arq
@@ -305,6 +330,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna dt_expira
@@ -333,6 +359,7 @@ class Ged_Model_Arquivo_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

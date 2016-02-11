@@ -3,56 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/controllers/ProdutoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/MakeResourcesController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/sessions/User.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/UserController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/render/Layout/Menu.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Lib.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/CargoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/AplicacaoController.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Profile.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/profile/models/ObjectViewPriv/Mapper.php</file>
             <file>file:/C:/AppWeb/htdocs/mais/application/configs/application.ini</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/NumeracaoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/controllers/PagtoLancController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/languages/pt_BR.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/profile/controllers/ObjectViewController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/frota/controllers/MarcaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Controller/Action.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Crud/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/frota/controllers/ModeloController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/ClienteContratoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/RegraContratoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Db/Adapter/Abstract.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Db/Statement/Mysqli.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/configs/modules/financeiro/fc_lancamento.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/frota/controllers/VeiculoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/frota/languages/pt_BR.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/configs/modules/profile/profile_object_view.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/languages/pt_BR.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Mapper.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/index.php</file>
             <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/financeiro/controllers/LancamentoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/controllers/ParcelaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/render/Templates/intranet.phtml</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Db/Table/Abstract.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/layouts/scripts/intranet.phtml</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/TipoRecursoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Conta/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/PapelRecursoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/languages/pt_BR.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/profile/views/scripts/object-view/list-config.phtml</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/controllers/ItemPedidoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/controllers/ItemLancController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/vendas/controllers/PedidoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/RecursoController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/ContaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/ContaRelController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/controllers/LogonController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/User/Logon.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/PessoaController.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/ca/controllers/ContratoController.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Translate.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Translate/Adapter.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Table.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/PapelRecurso/Table.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Adapter/Oracle.php</file>
+            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Adapter/Mysqli.php</file>
         </group>
     </open-files>
 </project-private>

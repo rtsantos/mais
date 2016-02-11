@@ -4,7 +4,7 @@ return array (
   array (
     'name' => 'img_aplicacao',
     'modelName' => 'aplicacao',
-    'schema' => 'image',
+    'schema' => 'mais',
     'sequenceName' => 'sid_img_aplicacao',
     'moduleName' => 'ged',
     'objectName' => 'Ged_Model_Aplicacao',

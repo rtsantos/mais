@@ -1,18 +1,18 @@
 <?php
 /**
- * Classe de mapeamento da tabela aplicacao
+ * Classe de mapeamento da tabela at_aplicacao
  */
 class Auth_Model_Aplicacao_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'aplicacao';
-    protected $_sequence = 'sid_aplicacao';
+    protected $_name = 'at_aplicacao';
+    protected $_sequence = 'sid_at_aplicacao';
     protected $_required = array('id','sigla','nome','status');
     protected $_primary = array('id');
     protected $_unique = array('sigla');
     protected $_cols = array('id','sigla','nome','status','observacao','icone','url','dh_inc');
     protected $_search = 'sigla';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Auth_Model_Recurso_Table');
     protected $_referenceMap = array();

@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento do registro da tabela profile_job_dest
+ * Classe de mapeamento do registro da tabela pf_job_dest
  */
 class Profile_Model_JobDest_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_profile_job','id_papel');
     protected $_model = 'Profile_Model_JobDest_Table';
-    public static $table = 'prouser.profile_job_dest';
+    public static $table = 'mais.pf_job_dest';
     /**
      *
      * @var Profile_Model_JobDest_Mapper

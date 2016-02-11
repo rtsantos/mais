@@ -6,6 +6,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_aplicacao','nome');
     protected $_model = 'Ged_Model_PropDocto_Table';
+    public static $table = 'mais.img_prop_docto';
     /**
      *
      * @var Ged_Model_PropDocto_Mapper
@@ -23,6 +24,23 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array(
+                'ID_APLICACAO' => array(
+                    'mapper' => 'Ged_DataView_Aplicacao_MapperView',
+                    'column' => 'ID'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -56,6 +74,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_aplicacao
@@ -87,6 +106,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna nome
@@ -129,6 +149,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna tabela
@@ -168,6 +189,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna sql
@@ -202,6 +224,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna config
@@ -241,6 +264,7 @@ class Ged_Model_PropDocto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

@@ -6,6 +6,7 @@ class Ged_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_aplic_prouser');
     protected $_model = 'Ged_Model_Aplicacao_Table';
+    public static $table = 'mais.img_aplicacao';
     /**
      *
      * @var Ged_Model_Aplicacao_Mapper
@@ -23,6 +24,23 @@ class Ged_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array(
+                'ID_APLIC_PROUSER' => array(
+                    'mapper' => 'Auth_DataView_Aplicacao_MapperView',
+                    'column' => 'ID'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -44,10 +62,10 @@ class Ged_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
      * @return Ged_Model_Aplicacao_Crud_Mapper
      */
     public function setId($value,$options=array('required'=>true)){        
-        $this->_data['id'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
-        if ($options['db'])
+        $this->_data['id'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
             $this->_data['id']->setValueFromDb($value);
-                
+                    
         if (!$options['db']){
             
          if ($options['required'])
@@ -56,6 +74,7 @@ class Ged_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_aplic_prouser
@@ -75,7 +94,7 @@ class Ged_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
      * @return Ged_Model_Aplicacao_Crud_Mapper
      */
     public function setIdAplicProuser($value,$options=array('required'=>true)){        
-        $this->_data['id_aplic_prouser'] = new ZendT_Type_Number($value,array('numDecimal'=>NULL));
+        $this->_data['id_aplic_prouser'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
          if ($options['db'])
             $this->_data['id_aplic_prouser']->setValueFromDb($value);
                     
@@ -87,6 +106,7 @@ class Ged_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

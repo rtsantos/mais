@@ -6,6 +6,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_tipo_docto','id_prop_relac','dh_inclusao');
     protected $_model = 'Ged_Model_Docto_Table';
+    public static $table = 'mais.img_docto';
     /**
      *
      * @var Ged_Model_Docto_Mapper
@@ -23,6 +24,31 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
             $this->_dataOld->retrive();
         }
         return $this->_dataOld;
+    }
+    /**
+     * Retorna as referências do objeto
+     */
+    public function getReferenceMap(){
+        return array(
+                'ID_TIPO_DOCTO' => array(
+                    'mapper' => 'Ged_DataView_TipoDocto_MapperView',
+                    'column' => 'ID'
+                ),
+                'ID_ARQUIVO' => array(
+                    'mapper' => 'Ged_DataView_Arquivo_MapperView',
+                    'column' => 'ID'
+                ),
+                'ID_USU_INCL' => array(
+                    'mapper' => 'Auth_DataView_Usuario_MapperView',
+                    'column' => 'ID'
+                ));
+    }
+    /**
+     * @retun array
+     */
+    public function getTabs(){
+        return array (
+);
     }
     
     
@@ -56,6 +82,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_tipo_docto
@@ -87,6 +114,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_prop_relac
@@ -118,6 +146,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna dh_inclusao
@@ -149,6 +178,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_usu_incl
@@ -177,6 +207,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna descricao
@@ -216,6 +247,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
     /**
      * Retorna os dados da coluna id_arquivo
@@ -244,6 +276,7 @@ class Ged_Model_Docto_Crud_Mapper extends ZendT_Db_Mapper
         }
         return $this;
     }
+
             
 }
 ?>

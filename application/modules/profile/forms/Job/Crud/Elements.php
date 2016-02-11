@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela profile_job
+ * Classe de mapeamento dos pontos de entrada da tabela pf_job
  */
 class Profile_Form_Job_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Profile_Form_Job_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('profile_job.id') . ':');
+        $element->setLabel($this->_translate->_('pf_job.id') . ':');
         $element->setAttribs(array('css-width'=>'100px','maxlength'=>'10'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -44,7 +44,7 @@ class Profile_Form_Job_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_profile_object_view');
         $element->setSuffix('profile_object_view');
-        $element->setLabel($this->_translate->_('profile_job.id_profile_object_view') . ':');
+        $element->setLabel($this->_translate->_('pf_job.id_profile_object_view') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');
@@ -67,7 +67,7 @@ class Profile_Form_Job_Crud_Elements
     public function getDescricao(){
 
         $element = new ZendT_Form_Element_Text('descricao');
-        $element->setLabel($this->_translate->_('profile_job.descricao') . ':');
+        $element->setLabel($this->_translate->_('pf_job.descricao') . ':');
         $element->setAttribs(array('maxlength'=>'50','css-width'=>'524px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -81,7 +81,7 @@ class Profile_Form_Job_Crud_Elements
     public function getDhIniExec(){
 
         $element = new ZendT_Form_Element_DateTime('dh_ini_exec');
-        $element->setLabel($this->_translate->_('profile_job.dh_ini_exec') . ':');
+        $element->setLabel($this->_translate->_('pf_job.dh_ini_exec') . ':');
         $element->setDateAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
         $element->setTimeAttribs(array('css-width'=>'43.75px;','maxlength'=>'5'));
         $element->addValidators(array());
@@ -97,7 +97,7 @@ class Profile_Form_Job_Crud_Elements
     public function getDhUltExec(){
 
         $element = new ZendT_Form_Element_DateTime('dh_ult_exec');
-        $element->setLabel($this->_translate->_('profile_job.dh_ult_exec') . ':');
+        $element->setLabel($this->_translate->_('pf_job.dh_ult_exec') . ':');
         $element->setDateAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
         $element->setTimeAttribs(array('css-width'=>'43.75px;','maxlength'=>'5'));
         $element->addValidators(array());
@@ -113,7 +113,7 @@ class Profile_Form_Job_Crud_Elements
     public function getTipo(){
 
         $element = new ZendT_Form_Element_Select('tipo');
-        $element->setLabel($this->_translate->_('profile_job.tipo') . ':');
+        $element->setLabel($this->_translate->_('pf_job.tipo') . ':');
         $element->addMultiOption('1', 'Minuto');
         $element->addMultiOption('2', 'Hora');
         $element->addMultiOption('3', 'Dia');
@@ -129,7 +129,7 @@ class Profile_Form_Job_Crud_Elements
     public function getFrequencia(){
 
         $element = new ZendT_Form_Element_Numeric('frequencia');
-        $element->setLabel($this->_translate->_('profile_job.frequencia') . ':');
+        $element->setLabel($this->_translate->_('pf_job.frequencia') . ':');
         $element->setAttribs(array());
         $element->setJQueryParam('numDecimal','');
         $element->setJQueryParam('numInteger','4');
@@ -145,7 +145,7 @@ class Profile_Form_Job_Crud_Elements
     public function getDtFimExec(){
 
         $element = new ZendT_Form_Element_Date('dt_fim_exec');
-        $element->setLabel($this->_translate->_('profile_job.dt_fim_exec') . ':');
+        $element->setLabel($this->_translate->_('pf_job.dt_fim_exec') . ':');
         $element->setAttribs(array('css-width'=>'87.5px','maxlength'=>'10'));
         $element->addValidators(array());
                 

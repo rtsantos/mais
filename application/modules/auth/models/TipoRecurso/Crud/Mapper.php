@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento do registro da tabela tipo_recurso
+ * Classe de mapeamento do registro da tabela at_tipo_recurso
  */
 class Auth_Model_TipoRecurso_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','nome','descricao');
     protected $_model = 'Auth_Model_TipoRecurso_Table';
-    public static $table = 'prouser.tipo_recurso';
+    public static $table = 'mais.at_tipo_recurso';
     /**
      *
      * @var Auth_Model_TipoRecurso_Mapper

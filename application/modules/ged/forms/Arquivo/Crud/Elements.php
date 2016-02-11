@@ -88,7 +88,7 @@ class Ged_Form_Arquivo_Crud_Elements
     public function getIdPropDocto(){
 
         $element = new ZendT_Form_Element_Seeker('id_prop_docto');
-        $element->setSufix('prop_docto');
+        $element->setSuffix('prop_docto');
         $element->setLabel($this->_translate->_('img_arquivo.id_prop_docto') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());

@@ -307,5 +307,92 @@
        public function nextSequenceTable($tableName, $columnName) {
            return 0;
        }
+
+       /**
+        * Updates table rows with specified data based on a WHERE clause.
+        *
+        * @param  mixed        $table The table to update.
+        * @param  array        $bind  Column-value pairs.
+        * @param  mixed        $where UPDATE WHERE clause(s).
+        * @return int          The number of affected rows.
+        * @throws Zend_Db_Adapter_Exception
+        */
+       public function update($table, array $bind, $where = '') {
+           /**
+            * Build "col = ?" pairs for the statement,
+            * except for Zend_Db_Expr which is treated literally.
+            */
+           $set = array();
+           $i = 0;
+           foreach ($bind as $col => $val) {
+               if ($val instanceof Zend_Db_Expr) {
+                   $val = $val->__toString();
+                   unset($bind[$col]);
+               } else {
+                   if ($this->supportsParameters('positional')) {
+                       $val = '?';
+                   } else {
+                       if ($this->supportsParameters('named')) {
+                           unset($bind[$col]);
+                           $bind[':col' . $i] = $val;
+                           $val = ':col' . $i;
+                           $i++;
+                       } else {
+                           /** @see Zend_Db_Adapter_Exception */
+                           require_once 'Zend/Db/Adapter/Exception.php';
+                           throw new Zend_Db_Adapter_Exception(get_class($this) . " doesn't support positional or named binding");
+                       }
+                   }
+               }
+               $set[] = $this->quoteIdentifier($col, true) . ' = ' . $val;
+           }
+
+           $where = $this->_whereExpr($where);
+
+           /**
+            * Build the UPDATE statement
+            */
+           $sql = "UPDATE "
+                 . $table
+                 . ' SET ' . implode(', ', $set)
+                 . (($where) ? " WHERE $where" : '');
+
+           /**
+            * Execute the statement and return the number of affected rows
+            */
+           if ($this->supportsParameters('positional')) {
+               $stmt = $this->query($sql, array_values($bind));
+           } else {
+               $stmt = $this->query($sql, $bind);
+           }
+           $result = $stmt->rowCount();
+           return true;
+       }
+
+       /**
+        * Deletes table rows based on a WHERE clause.
+        *
+        * @param  mixed        $table The table to update.
+        * @param  mixed        $where DELETE WHERE clause(s).
+        * @return int          The number of affected rows.
+        */
+       public function delete($table, $where = '') {
+           $where = $this->_whereExpr($where);
+
+           /**
+            * Build the DELETE statement
+            */
+           $sql = "DELETE FROM "
+                 . $table
+                 . (($where) ? " WHERE $where" : '');
+
+           /**
+            * Execute the statement and return the number of affected rows
+            */
+           $stmt = $this->query($sql);
+           $result = $stmt->rowCount();
+           return true;
+       }
+
    }
    

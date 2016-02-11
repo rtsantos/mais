@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela papel_rel
+ * Classe de mapeamento dos pontos de entrada da tabela at_papel_rel
  */
 class Auth_Form_ContaRel_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Auth_Form_ContaRel_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('papel_rel.id') . ':');
+        $element->setLabel($this->_translate->_('at_papel_rel.id') . ':');
         $element->setAttribs(array('css-width'=>'100px'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -44,7 +44,7 @@ class Auth_Form_ContaRel_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_papel');
         $element->setSuffix('papel');
-        $element->setLabel($this->_translate->_('papel_rel.id_papel') . ':');
+        $element->setLabel($this->_translate->_('at_papel_rel.id_papel') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('hierarquia');
@@ -68,7 +68,7 @@ class Auth_Form_ContaRel_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_papel_rel');
         $element->setSuffix('papel_rel');
-        $element->setLabel($this->_translate->_('papel_rel.id_papel_rel') . ':');
+        $element->setLabel($this->_translate->_('at_papel_rel.id_papel_rel') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('hierarquia');
@@ -91,7 +91,7 @@ class Auth_Form_ContaRel_Crud_Elements
     public function getStatus(){
 
         $element = new ZendT_Form_Element_Select('status');
-        $element->setLabel($this->_translate->_('papel_rel.status') . ':');
+        $element->setLabel($this->_translate->_('at_papel_rel.status') . ':');
         $element->addMultiOption('A', 'Ativo');
         $element->addMultiOption('I', 'Inativo');        
                 

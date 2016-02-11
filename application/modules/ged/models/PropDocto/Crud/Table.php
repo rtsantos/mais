@@ -4,15 +4,15 @@
  */
 class Ged_Model_PropDocto_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'IMG_PROP_DOCTO';
-    protected $_sequence = 'SID_IMG_PROP_DOCTO';
-    protected $_required = array('ID','ID_APLICACAO','NOME');
-    protected $_primary = array('ID');
+    protected $_name = 'img_prop_docto';
+    protected $_sequence = 'sid_img_prop_docto';
+    protected $_required = array('id','id_aplicacao','nome');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_APLICACAO','NOME','TABELA','SQL','CONFIG');
+    protected $_cols = array('id','id_aplicacao','nome','tabela','sql','config');
     protected $_search = 'nome';
-    protected $_schema  = 'IMAGE';
-    protected $_adapter = 'db.image';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Ged_Model_ImgPropGeral_Table',
                 'Ged_Model_ImgPropSeeker_Table',

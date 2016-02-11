@@ -1,18 +1,19 @@
 <?php
 /**
- * Classe de mapeamento da tabela profile_object_view
+ * Classe de mapeamento da tabela pf_object_view
  */
 class Profile_Model_ObjectView_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'profile_object_view';
-    protected $_sequence = 'sid_profile_object_view';
+    protected $_name = 'pf_object_view';
+    protected $_alias = 'profile_object_view';
+    protected $_sequence = 'sid_pf_object_view';
     protected $_required = array('id','tipo','padrao','nome','objeto','id_usuario');
     protected $_primary = array('id');
     protected $_unique = array('objeto','id_usuario','nome');
     protected $_cols = array('id','tipo','padrao','nome','objeto','observacao','config','id_usuario','uri','chave');
     protected $_search = 'nome';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Profile_Model_Job_Table',
                 'Profile_Model_ObjectViewPriv_Table');

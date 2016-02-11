@@ -4,15 +4,15 @@
  */
 class Ged_Model_Docto_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'IMG_DOCTO';
-    protected $_sequence = 'SID_IMG_DOCTO';
-    protected $_required = array('ID','ID_TIPO_DOCTO','ID_PROP_RELAC','DH_INCLUSAO');
-    protected $_primary = array('ID');
+    protected $_name = 'img_docto';
+    protected $_sequence = 'sid_img_docto';
+    protected $_required = array('id','id_tipo_docto','id_prop_relac','dh_inclusao');
+    protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('ID','ID_TIPO_DOCTO','ID_PROP_RELAC','DH_INCLUSAO','ID_USU_INCL','DESCRICAO','ID_ARQUIVO');
+    protected $_cols = array('id','id_tipo_docto','id_prop_relac','dh_inclusao','id_usu_incl','descricao','id_arquivo');
     protected $_search = 'descricao';
-    protected $_schema  = 'IMAGE';
-    protected $_adapter = 'db.image';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(
                 'IdTipoDocto' => array(

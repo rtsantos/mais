@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela recurso
+ * Classe de mapeamento dos pontos de entrada da tabela at_recurso
  */
 class Auth_Form_Recurso_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('recurso.id') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.id') . ':');
         $element->setAttribs(array('css-width'=>'100px'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -44,7 +44,7 @@ class Auth_Form_Recurso_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_tipo_recurso');
         $element->setSuffix('tipo_recurso');
-        $element->setLabel($this->_translate->_('recurso.id_tipo_recurso') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.id_tipo_recurso') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');
@@ -68,7 +68,7 @@ class Auth_Form_Recurso_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_aplicacao');
         $element->setSuffix('aplicacao');
-        $element->setLabel($this->_translate->_('recurso.id_aplicacao') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.id_aplicacao') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('sigla');
@@ -94,7 +94,7 @@ class Auth_Form_Recurso_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_recurso_pai');
         $element->setSuffix('recurso_pai');
-        $element->setLabel($this->_translate->_('recurso.id_recurso_pai') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.id_recurso_pai') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('hierarquia');
@@ -117,7 +117,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getNome(){
 
         $element = new ZendT_Form_Element_Text('nome');
-        $element->setLabel($this->_translate->_('recurso.nome') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.nome') . ':');
         $element->setAttribs(array('maxlength'=>'80','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");
@@ -131,7 +131,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getHierarquia(){
 
         $element = new ZendT_Form_Element_Text('hierarquia');
-        $element->setLabel($this->_translate->_('recurso.hierarquia') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.hierarquia') . ':');
         $element->setAttribs(array('maxlength'=>'100','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtolower(this.value);this.value=removeAccent(this.value);");
@@ -145,7 +145,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getDescricao(){
 
         $element = new ZendT_Form_Element_Text('descricao');
-        $element->setLabel($this->_translate->_('recurso.descricao') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.descricao') . ':');
         $element->setAttribs(array('maxlength'=>'50','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");
@@ -159,7 +159,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getStatus(){
 
         $element = new ZendT_Form_Element_Select('status');
-        $element->setLabel($this->_translate->_('recurso.status') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.status') . ':');
         $element->addMultiOption('A', 'Ativo');
         $element->addMultiOption('I', 'Inativo');        
                 
@@ -173,7 +173,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getIcone(){
 
         $element = new ZendT_Form_Element_Text('icone');
-        $element->setLabel($this->_translate->_('recurso.icone') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.icone') . ':');
         $element->setAttribs(array('maxlength'=>'30','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -187,7 +187,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getObservacao(){
 
         $element = new ZendT_Form_Element_Text('observacao');
-        $element->setLabel($this->_translate->_('recurso.observacao') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.observacao') . ':');
         $element->setAttribs(array('maxlength'=>'4000','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");
@@ -201,7 +201,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getOrdem(){
 
         $element = new ZendT_Form_Element_Text('observacao');
-        $element->setLabel($this->_translate->_('recurso.observacao') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.observacao') . ':');
         $element->setAttribs(array('maxlength'=>'4000','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");
@@ -215,7 +215,7 @@ class Auth_Form_Recurso_Crud_Elements
     public function getNivel(){
 
         $element = new ZendT_Form_Element_Text('observacao');
-        $element->setLabel($this->_translate->_('recurso.observacao') . ':');
+        $element->setLabel($this->_translate->_('at_recurso.observacao') . ':');
         $element->setAttribs(array('maxlength'=>'4000','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");

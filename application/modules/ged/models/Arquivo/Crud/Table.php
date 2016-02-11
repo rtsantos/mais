@@ -4,15 +4,15 @@
  */
 class Ged_Model_Arquivo_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'IMG_ARQUIVO';
-    protected $_sequence = 'SID_IMG_ARQUIVO';
-    protected $_required = array('ID','CONTEUDO_NAME','CONTEUDO_TYPE','DH_INC');
-    protected $_primary = array('ID');
-    protected $_unique = array('HASHCODE');
-    protected $_cols = array('ID','CONTEUDO_NAME','CONTEUDO_TYPE','DH_INC','HASHCODE','CONTEUDO','ID_PROP_DOCTO','PATH_ARQ','DT_EXPIRA');
+    protected $_name = 'img_arquivo';
+    protected $_sequence = 'sid_img_arquivo';
+    protected $_required = array('id','conteudo_name','conteudo_type','dh_inc');
+    protected $_primary = array('id');
+    protected $_unique = array('hashcode');
+    protected $_cols = array('id','conteudo_name','conteudo_type','dh_inc','hashcode','conteudo','id_prop_docto','path_arq','dt_expira');
     protected $_search = 'conteudo_name';
-    protected $_schema  = 'IMAGE';
-    protected $_adapter = 'db.image';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Ged_Model_Docto_Table');
     protected $_referenceMap = array(

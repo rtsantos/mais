@@ -71,8 +71,13 @@
                    if (substr($column, 0, 2) == 'id' && substr($column, 0, 3) != 'id_') {
                        $columnAlias = 'id_' . substr($column, 2);
                    }
+                   
+                   $tableAlias = $config['table']['alias'];
+                   if (!$tableAlias){
+                       $tableAlias = $config['table']['name'];
+                   }
 
-                   $strLoadColumns.= "            \$this->_columns->add('{$columnAlias}', '{$config['table']['name']}', '{$column}', \$this->getModel()->getMapperName(), ZendT_Lib::translate('{$config['table']['name']}.{$column}'), null, '=');\n";
+                   $strLoadColumns.= "            \$this->_columns->add('{$columnAlias}', '{$tableAlias}', '{$column}', \$this->getModel()->getMapperName(), ZendT_Lib::translate('{$tableAlias}.{$column}'), null, '=');\n";
                    $strOrder.= ',' . "'" . $column . "'";
                    $strWidth.= ',' . "'{$column}'=>120";
                    $strAlign.= ',' . "'{$column}'=>'left'";
@@ -80,7 +85,7 @@
 
 
                    if ($strBase == '') {
-                       $strBase = "\$sql = \$this->getModel()->getTableName().' '.\$this->getModel()->getName() .\" ";
+                       $strBase = "\$sql = \$this->getModel()->getTableName().' '.\$this->getModel()->getAlias() .\" ";
                    }
 
                    $tableColumn = str_replace(array('_id'), '', strtolower($column));
@@ -130,7 +135,11 @@
                        $strBase.= ' LEFT ';
                    }
                    $strBase.= " JOIN \".\$this->{$funcMapperName}()->getModel()->getTableName().\" " . $tableColumn . " ON ( ";
-                   $strBase.= $config['table']['name'];
+                   if ($config['table']['alias']){
+                       $strBase.= $config['table']['alias'];
+                   }else{
+                       $strBase.= $config['table']['name'];
+                   }
                    $strBase.= ".";
                    $strBase.= strtolower($reference['columnName']);
                    $strBase.= " = ";
@@ -289,7 +298,11 @@
                        $_operation = '%?%';
                    }
 
-                   $strLoadColumns.= "            \$this->_columns->add('{$column}', '{$config['table']['name']}', '{$column}', \$this->getModel()->getMapperName(), ZendT_Lib::translate('{$config['table']['name']}.{$column}'),'{$_type}','{$_operation}');\n";
+                   $tableAlias = $config['table']['alias'];
+                   if (!$tableAlias){
+                       $tableAlias = $config['table']['name'];
+                   }
+                   $strLoadColumns.= "            \$this->_columns->add('{$column}', '{$tableAlias}', '{$column}', \$this->getModel()->getMapperName(), ZendT_Lib::translate('{$tableAlias}.{$column}'),'{$_type}','{$_operation}');\n";
                    $strOrder.= ',' . "'" . $column . "'";
 
                    if ($prop['object']['type'] == 'Select') {

@@ -1,18 +1,18 @@
 <?php
 /**
- * Classe de mapeamento da tabela papel
+ * Classe de mapeamento da tabela at_papel
  */
 class Auth_Model_Conta_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'papel';
-    protected $_sequence = 'sid_papel';
+    protected $_name = 'at_papel';
+    protected $_sequence = 'sid_at_papel';
     protected $_required = array('id','nome','descricao','hierarquia','tipo','status');
     protected $_primary = array('id');
     protected $_unique = array('hierarquia');
     protected $_cols = array('id','nome','descricao','hierarquia','id_papel_pai','tipo','status','senha','avatar','email','id_empresa');
     protected $_search = 'hierarquia';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Auth_Model_Conta_Table',
                 'Auth_Model_PapelEmpresa_Table',

@@ -1,6 +1,6 @@
 <?php
     /**
-    * Classe de visão da tabela profile_job_dest
+    * Classe de visão da tabela pf_job_dest
     */
     class Profile_DataView_JobDest_Crud_MapperView extends Profile_Model_JobDest_Mapper implements ZendT_Db_View
     {
@@ -53,9 +53,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','id_profile_job','descricao_profile_job','id_papel','nome_papel');
-           $profile['width'] = array('id'=>100,'id_profile_job'=>120,'descricao_profile_job'=>200,'id_papel'=>120,'nome_papel'=>200);
-           $profile['align'] = array('id'=>'left','id_profile_job'=>'left','descricao_profile_job'=>'left','id_papel'=>'left','nome_papel'=>'left');
+           $profile['order'] = array('id','id_profile_job','id_papel');
+           $profile['width'] = array('id'=>100,'id_profile_job'=>120,'id_papel'=>120);
+           $profile['align'] = array('id'=>'left','id_profile_job'=>'left','id_papel'=>'left');
            $profile['hidden'] = array('id_profile_job','id_papel');
            $profile['remove'] = array();
            $profile['listOptions'] = array();
@@ -69,16 +69,14 @@
             
             $this->_columns->add('id', 'profile_job_dest', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id'),'String','%?%');
             $this->_columns->add('id_profile_job', 'profile_job_dest', 'id_profile_job', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_profile_job'), null, '=');
-            $this->_columns->add('descricao_profile_job', 'profile_job', 'descricao', $this->_getJob()->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_profile_job.profile_job.descricao'),null,'?%');
             $this->_columns->add('id_papel', 'profile_job_dest', 'id_papel', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_papel'), null, '=');
-            $this->_columns->add('nome_papel', 'papel', 'nome', $this->_getPapel()->getModel()->getMapperName(), ZendT_Lib::translate('profile_job_dest.id_papel.papel.nome'),null,'?%');
 
         }
         /**
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     JOIN ".$this->_getJob()->getModel()->getTableName()." profile_job ON ( profile_job_dest.id_profile_job = profile_job.id ) 
                     JOIN ".$this->_getPapel()->getModel()->getTableName()." papel ON ( profile_job_dest.id_papel = papel.id )  "; 
             return $sql;

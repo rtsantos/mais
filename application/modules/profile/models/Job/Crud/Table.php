@@ -1,18 +1,19 @@
 <?php
 /**
- * Classe de mapeamento da tabela profile_job
+ * Classe de mapeamento da tabela pf_job
  */
 class Profile_Model_Job_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'profile_job';
-    protected $_sequence = 'sid_profile_job';
+    protected $_name = 'pf_job';
+    protected $_alias = 'profile_job';
+    protected $_sequence = 'sid_pf_job';
     protected $_required = array('id','id_profile_object_view','descricao','dh_ini_exec','tipo','frequencia');
     protected $_primary = array('id');
     protected $_unique = array('');
     protected $_cols = array('id','id_profile_object_view','descricao','dh_ini_exec','dh_ult_exec','tipo','frequencia','dt_fim_exec');
     protected $_search = 'descricao';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array(
                 'Profile_Model_JobDest_Table');
     protected $_referenceMap = array(

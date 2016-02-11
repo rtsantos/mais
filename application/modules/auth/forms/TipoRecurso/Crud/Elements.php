@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela tipo_recurso
+ * Classe de mapeamento dos pontos de entrada da tabela at_tipo_recurso
  */
 class Auth_Form_TipoRecurso_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Auth_Form_TipoRecurso_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('tipo_recurso.id') . ':');
+        $element->setLabel($this->_translate->_('at_tipo_recurso.id') . ':');
         $element->setAttribs(array('size'=>'15','maxlength'=>'10','css-width'=>'15'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);");
@@ -43,7 +43,7 @@ class Auth_Form_TipoRecurso_Crud_Elements
     public function getNome(){
 
         $element = new ZendT_Form_Element_Text('nome');
-        $element->setLabel($this->_translate->_('tipo_recurso.nome') . ':');
+        $element->setLabel($this->_translate->_('at_tipo_recurso.nome') . ':');
         $element->setAttribs(array('maxlength'=>'30','size'=>'35'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);");
@@ -57,7 +57,7 @@ class Auth_Form_TipoRecurso_Crud_Elements
     public function getDescricao(){
 
         $element = new ZendT_Form_Element_Text('descricao');
-        $element->setLabel($this->_translate->_('tipo_recurso.descricao') . ':');
+        $element->setLabel($this->_translate->_('at_tipo_recurso.descricao') . ':');
         $element->setAttribs(array('maxlength'=>'30','size'=>'35'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);");

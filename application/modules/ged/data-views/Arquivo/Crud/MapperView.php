@@ -33,9 +33,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','conteudo_name','conteudo_type','dh_inc','hashcode','conteudo','id_prop_docto','nome_prop_docto','path_arq','dt_expira');
-           $profile['width'] = array('id'=>100,'conteudo_name'=>200,'conteudo_type'=>200,'dh_inc'=>150,'hashcode'=>200,'conteudo'=>200,'id_prop_docto'=>120,'nome_prop_docto'=>200,'path_arq'=>200,'dt_expira'=>100);
-           $profile['align'] = array('id'=>'left','conteudo_name'=>'left','conteudo_type'=>'left','dh_inc'=>'center','hashcode'=>'left','conteudo'=>'left','id_prop_docto'=>'left','nome_prop_docto'=>'left','path_arq'=>'left','dt_expira'=>'center');
+           $profile['order'] = array('id','conteudo_name','conteudo_type','dh_inc','hashcode','conteudo','id_prop_docto','path_arq','dt_expira');
+           $profile['width'] = array('id'=>100,'conteudo_name'=>200,'conteudo_type'=>200,'dh_inc'=>150,'hashcode'=>200,'conteudo'=>200,'id_prop_docto'=>120,'path_arq'=>200,'dt_expira'=>100);
+           $profile['align'] = array('id'=>'left','conteudo_name'=>'left','conteudo_type'=>'left','dh_inc'=>'center','hashcode'=>'left','conteudo'=>'left','id_prop_docto'=>'left','path_arq'=>'left','dt_expira'=>'center');
            $profile['hidden'] = array('id_prop_docto');
            $profile['remove'] = array('conteudo_type','conteudo');
            $profile['listOptions'] = array();
@@ -54,7 +54,6 @@
             $this->_columns->add('hashcode', 'img_arquivo', 'hashcode', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_arquivo.hashcode'),'String','%?%');
             $this->_columns->add('conteudo', 'img_arquivo', 'conteudo', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_arquivo.conteudo'),'String','%?%');
             $this->_columns->add('id_prop_docto', 'img_arquivo', 'id_prop_docto', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_arquivo.id_prop_docto'), null, '=');
-            $this->_columns->add('nome_prop_docto', 'prop_docto', 'nome', $this->_getPropDocto()->getModel()->getMapperName(), ZendT_Lib::translate('img_arquivo.id_prop_docto.img_prop_docto.nome'),null,'?%');
             $this->_columns->add('path_arq', 'img_arquivo', 'path_arq', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_arquivo.path_arq'),'String','%?%');
             $this->_columns->add('dt_expira', 'img_arquivo', 'dt_expira', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_arquivo.dt_expira'),'Date','=');
 

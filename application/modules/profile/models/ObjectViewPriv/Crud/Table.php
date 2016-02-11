@@ -1,18 +1,19 @@
 <?php
 /**
- * Classe de mapeamento da tabela profile_object_view_priv
+ * Classe de mapeamento da tabela pf_object_view_priv
  */
 class Profile_Model_ObjectViewPriv_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'profile_object_view_priv';
-    protected $_sequence = 'sid_profile_object_view_priv';
+    protected $_name = 'pf_object_view_priv';
+    protected $_alias = 'profile_object_view_priv';
+    protected $_sequence = 'sid_pf_object_view_priv';
     protected $_required = array('id','id_profile_object_view','id_papel');
     protected $_primary = array('id');
     protected $_unique = array('id_profile_object_view','id_papel','tipo');
     protected $_cols = array('id','id_profile_object_view','id_papel','tipo');
     protected $_search = '';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(
                 'IdPapel' => array(

@@ -1,6 +1,6 @@
 <?php
     /**
-    * Classe de visão da tabela profile_object_view
+    * Classe de visão da tabela pf_object_view
     */
     class Profile_DataView_ObjectView_Crud_MapperView extends Profile_Model_ObjectView_Mapper implements ZendT_Db_View
     {
@@ -33,9 +33,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','tipo','padrao','nome','objeto','observacao','config','id_usuario','nome_usuario','uri','chave');
-           $profile['width'] = array('id'=>100,'tipo'=>150,'padrao'=>150,'nome'=>200,'objeto'=>200,'observacao'=>200,'config'=>200,'id_usuario'=>120,'nome_usuario'=>200,'uri'=>200,'chave'=>200);
-           $profile['align'] = array('id'=>'left','tipo'=>'center','padrao'=>'center','nome'=>'left','objeto'=>'left','observacao'=>'left','config'=>'left','id_usuario'=>'left','nome_usuario'=>'left','uri'=>'left','chave'=>'left');
+           $profile['order'] = array('id','tipo','padrao','nome','objeto','observacao','config','id_usuario','uri','chave');
+           $profile['width'] = array('id'=>100,'tipo'=>150,'padrao'=>150,'nome'=>200,'objeto'=>200,'observacao'=>200,'config'=>200,'id_usuario'=>120,'uri'=>200,'chave'=>200);
+           $profile['align'] = array('id'=>'left','tipo'=>'center','padrao'=>'center','nome'=>'left','objeto'=>'left','observacao'=>'left','config'=>'left','id_usuario'=>'left','uri'=>'left','chave'=>'left');
            $profile['hidden'] = array('id_usuario');
            $profile['remove'] = array();
            $profile['listOptions'] = array('tipo'=>$this->getModel()->getListOptions('tipo'),'padrao'=>$this->getModel()->getListOptions('padrao'));
@@ -55,7 +55,6 @@
             $this->_columns->add('observacao', 'profile_object_view', 'observacao', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view.observacao'),'String','%?%');
             $this->_columns->add('config', 'profile_object_view', 'config', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view.config'),'String','%?%');
             $this->_columns->add('id_usuario', 'profile_object_view', 'id_usuario', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view.id_usuario'), null, '=');
-            $this->_columns->add('nome_usuario', 'usuario', 'nome', $this->_getConta()->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view.id_usuario.papel.nome'),null,'?%');
             $this->_columns->add('uri', 'profile_object_view', 'uri', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view.uri'),'String','%?%');
             $this->_columns->add('chave', 'profile_object_view', 'chave', $this->getModel()->getMapperName(), ZendT_Lib::translate('profile_object_view.chave'),'String','%?%');
 
@@ -64,7 +63,7 @@
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     JOIN ".$this->_getConta()->getModel()->getTableName()." usuario ON ( profile_object_view.id_usuario = usuario.id )  "; 
             return $sql;
         }

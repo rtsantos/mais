@@ -1,6 +1,6 @@
 <?php
     /**
-    * Classe de visão da tabela aplicacao
+    * Classe de visão da tabela at_aplicacao
     */
     class Auth_DataView_Aplicacao_Crud_MapperView extends Auth_Model_Aplicacao_Mapper implements ZendT_Db_View
     {
@@ -27,14 +27,14 @@
         protected function _loadColumns(){
             $this->_columns = new ZendT_Db_Column_View('Auth_DataView_Aplicacao_MapperView',$this->_getSettingsDefault());
             
-            $this->_columns->add('id', 'aplicacao', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.id'),'String','%?%');
-            $this->_columns->add('sigla', 'aplicacao', 'sigla', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.sigla'),'String','%?%');
-            $this->_columns->add('nome', 'aplicacao', 'nome', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.nome'),'String','%?%');
-            $this->_columns->add('status', 'aplicacao', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.status'),'String','=');
-            $this->_columns->add('observacao', 'aplicacao', 'observacao', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.observacao'),'String','%?%');
-            $this->_columns->add('icone', 'aplicacao', 'icone', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.icone'),'String','%?%');
-            $this->_columns->add('url', 'aplicacao', 'url', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.url'),'String','%?%');
-            $this->_columns->add('dh_inc', 'aplicacao', 'dh_inc', $this->getModel()->getMapperName(), ZendT_Lib::translate('aplicacao.dh_inc'),'DateTime','=');
+            $this->_columns->add('id', 'at_aplicacao', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.id'),'String','%?%');
+            $this->_columns->add('sigla', 'at_aplicacao', 'sigla', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.sigla'),'String','%?%');
+            $this->_columns->add('nome', 'at_aplicacao', 'nome', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.nome'),'String','%?%');
+            $this->_columns->add('status', 'at_aplicacao', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.status'),'String','=');
+            $this->_columns->add('observacao', 'at_aplicacao', 'observacao', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.observacao'),'String','%?%');
+            $this->_columns->add('icone', 'at_aplicacao', 'icone', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.icone'),'String','%?%');
+            $this->_columns->add('url', 'at_aplicacao', 'url', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.url'),'String','%?%');
+            $this->_columns->add('dh_inc', 'at_aplicacao', 'dh_inc', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_aplicacao.dh_inc'),'DateTime','=');
 
         }
         /**

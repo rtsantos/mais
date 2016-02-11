@@ -14,7 +14,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
-            $this->setName('frm_aplicacao');
+            $this->setName('frm_at_aplicacao');
             
     
             $model = new Auth_Form_Aplicacao_Elements();

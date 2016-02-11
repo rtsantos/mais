@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe de mapeamento dos pontos de entrada da tabela profile_object_view_priv
+ * Classe de mapeamento dos pontos de entrada da tabela pf_object_view_priv
  */
 class Profile_Form_ObjectViewPriv_Crud_Elements
 {
@@ -29,7 +29,7 @@ class Profile_Form_ObjectViewPriv_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('profile_object_view_priv.id') . ':');
+        $element->setLabel($this->_translate->_('pf_object_view_priv.id') . ':');
         $element->setAttribs(array('css-width'=>'100px','maxlength'=>'10'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -44,7 +44,7 @@ class Profile_Form_ObjectViewPriv_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_profile_object_view');
         $element->setSuffix('profile_object_view');
-        $element->setLabel($this->_translate->_('profile_object_view_priv.id_profile_object_view') . ':');
+        $element->setLabel($this->_translate->_('pf_object_view_priv.id_profile_object_view') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');
@@ -68,7 +68,7 @@ class Profile_Form_ObjectViewPriv_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_papel');
         $element->setSuffix('papel');
-        $element->setLabel($this->_translate->_('profile_object_view_priv.id_papel') . ':');
+        $element->setLabel($this->_translate->_('pf_object_view_priv.id_papel') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('nome');
@@ -91,7 +91,7 @@ class Profile_Form_ObjectViewPriv_Crud_Elements
     public function getTipo(){
 
         $element = new ZendT_Form_Element_Select('tipo');
-        $element->setLabel($this->_translate->_('profile_object_view_priv.tipo') . ':');
+        $element->setLabel($this->_translate->_('pf_object_view_priv.tipo') . ':');
         $element->addMultiOption('O', 'Administração');
         $element->addMultiOption('S', 'Visualização');        
                 

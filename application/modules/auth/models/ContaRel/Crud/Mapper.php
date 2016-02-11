@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento do registro da tabela papel_rel
+ * Classe de mapeamento do registro da tabela at_papel_rel
  */
 class Auth_Model_ContaRel_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_papel','id_papel_rel','status');
     protected $_model = 'Auth_Model_ContaRel_Table';
-    public static $table = 'prouser.papel_rel';
+    public static $table = 'mais.at_papel_rel';
     /**
      *
      * @var Auth_Model_ContaRel_Mapper

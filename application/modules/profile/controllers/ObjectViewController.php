@@ -548,8 +548,8 @@
            $_whereSec->addFilter('profile_object_view.id_usuario', $idUsuario);
            $_whereSec->addFilter('acesso_liberado', new Zend_Db_Expr("(
                 SELECT 1
-                    FROM profile_object_view_priv po
-                    JOIN papel p ON (po.id_papel = p.id)
+                    FROM ". Profile_Model_ObjectViewPriv_Mapper::$table ." po
+                    JOIN ". Auth_Model_Conta_Mapper::$table ." p ON (po.id_papel = p.id)
                     WHERE po.id_profile_object_view = profile_object_view.id
                     AND po.tipo = 'O'
                     AND " . $this->getModel()->getAdapter()->quote($role) . " LIKE p.nome || '%'

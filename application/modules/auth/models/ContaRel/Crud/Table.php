@@ -1,18 +1,18 @@
 <?php
 /**
- * Classe de mapeamento da tabela papel_rel
+ * Classe de mapeamento da tabela at_papel_rel
  */
 class Auth_Model_ContaRel_Crud_Table extends ZendT_Db_Table_Abstract
 {
-    protected $_name = 'papel_rel';
-    protected $_sequence = 'sid_papel_rel';
+    protected $_name = 'at_papel_rel';
+    protected $_sequence = 'sid_at_papel_rel';
     protected $_required = array('id','id_papel','id_papel_rel','status');
     protected $_primary = array('id');
     protected $_unique = array('id_papel','id_papel_rel');
     protected $_cols = array('id','id_papel','id_papel_rel','status');
     protected $_search = 'status';
-    protected $_schema  = 'prouser';
-    protected $_adapter = 'db.prouser';
+    protected $_schema  = 'mais';
+    protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(
                 'IdPapel' => array(

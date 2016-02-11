@@ -33,9 +33,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','id_aplic_prouser','sigla_aplic_prouser','nome_aplic_prouser');
-           $profile['width'] = array('id'=>100,'id_aplic_prouser'=>120,'sigla_aplic_prouser'=>200,'nome_aplic_prouser'=>200);
-           $profile['align'] = array('id'=>'left','id_aplic_prouser'=>'left','sigla_aplic_prouser'=>'left','nome_aplic_prouser'=>'left');
+           $profile['order'] = array('id','id_aplic_prouser');
+           $profile['width'] = array('id'=>100,'id_aplic_prouser'=>120);
+           $profile['align'] = array('id'=>'left','id_aplic_prouser'=>'left');
            $profile['hidden'] = array('id_aplic_prouser');
            $profile['remove'] = array();
            $profile['listOptions'] = array();
@@ -48,9 +48,7 @@
             $this->_columns = new ZendT_Db_Column_View('Ged_DataView_Aplicacao_MapperView',$this->_getSettingsDefault());
             
             $this->_columns->add('id', 'img_aplicacao', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_aplicacao.id'),'String','%?%');
-            $this->_columns->add('id_aplic_prouser', 'img_aplicacao', 'id_aplic_prouser', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_aplicacao.id_aplic_prouser'), null, '?%');
-            $this->_columns->add('sigla_aplic_prouser', 'aplic_prouser', 'sigla', $this->_getAplicacao()->getModel()->getMapperName(), ZendT_Lib::translate('img_aplicacao.id_aplic_prouser.aplicacao.sigla'),null,'?%');
-            $this->_columns->add('nome_aplic_prouser', 'aplic_prouser', 'nome', $this->_getAplicacao()->getModel()->getMapperName(), ZendT_Lib::translate('img_aplicacao.id_aplic_prouser.aplicacao.nome'),null,'?%');
+            $this->_columns->add('id_aplic_prouser', 'img_aplicacao', 'id_aplic_prouser', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_aplicacao.id_aplic_prouser'), null, '=');
 
         }
         /**

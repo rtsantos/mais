@@ -14,7 +14,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
-            $this->setName('frm_profile_object_view');
+            $this->setName('frm_pf_object_view');
             
     
             $model = new Profile_Form_ObjectView_Elements();

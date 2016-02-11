@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento do registro da tabela aplicacao
+ * Classe de mapeamento do registro da tabela at_aplicacao
  */
 class Auth_Model_Aplicacao_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','sigla','nome','status');
     protected $_model = 'Auth_Model_Aplicacao_Table';
-    public static $table = 'prouser.aplicacao';
+    public static $table = 'mais.at_aplicacao';
     /**
      *
      * @var Auth_Model_Aplicacao_Mapper

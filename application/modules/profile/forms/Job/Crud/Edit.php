@@ -14,7 +14,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
-            $this->setName('frm_profile_job');
+            $this->setName('frm_pf_job');
             
     
             $model = new Profile_Form_Job_Elements();

@@ -14,7 +14,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
-            $this->setName('frm_profile_object_view_priv');
+            $this->setName('frm_pf_object_view_priv');
             
     
             $model = new Profile_Form_ObjectViewPriv_Elements();

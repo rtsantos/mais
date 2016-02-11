@@ -1,6 +1,6 @@
 <?php
     /**
-    * Classe de visão da tabela tipo_recurso
+    * Classe de visão da tabela at_tipo_recurso
     */
     class Auth_DataView_TipoRecurso_Crud_MapperView extends Auth_Model_TipoRecurso_Mapper implements ZendT_Db_View
     {
@@ -27,9 +27,9 @@
         protected function _loadColumns(){
             $this->_columns = new ZendT_Db_Column_View('Auth_DataView_TipoRecurso_MapperView',$this->_getSettingsDefault());
             
-            $this->_columns->add('id', 'tipo_recurso', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('tipo_recurso.id'),'String','%?%');
-            $this->_columns->add('nome', 'tipo_recurso', 'nome', $this->getModel()->getMapperName(), ZendT_Lib::translate('tipo_recurso.nome'),'String','%?%');
-            $this->_columns->add('descricao', 'tipo_recurso', 'descricao', $this->getModel()->getMapperName(), ZendT_Lib::translate('tipo_recurso.descricao'),'String','%?%');
+            $this->_columns->add('id', 'at_tipo_recurso', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_tipo_recurso.id'),'String','%?%');
+            $this->_columns->add('nome', 'at_tipo_recurso', 'nome', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_tipo_recurso.nome'),'String','%?%');
+            $this->_columns->add('descricao', 'at_tipo_recurso', 'descricao', $this->getModel()->getMapperName(), ZendT_Lib::translate('at_tipo_recurso.descricao'),'String','%?%');
 
         }
         /**

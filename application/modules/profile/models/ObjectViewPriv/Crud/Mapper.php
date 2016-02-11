@@ -1,12 +1,12 @@
 <?php
 /**
- * Classe de mapeamento do registro da tabela profile_object_view_priv
+ * Classe de mapeamento do registro da tabela pf_object_view_priv
  */
 class Profile_Model_ObjectViewPriv_Crud_Mapper extends ZendT_Db_Mapper
 {
     protected $_required = array('id','id_profile_object_view','id_papel');
     protected $_model = 'Profile_Model_ObjectViewPriv_Table';
-    public static $table = 'prouser.profile_object_view_priv';
+    public static $table = 'mais.pf_object_view_priv';
     /**
      *
      * @var Profile_Model_ObjectViewPriv_Mapper

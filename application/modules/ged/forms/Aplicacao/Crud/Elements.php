@@ -22,21 +22,28 @@ class Ged_Form_Aplicacao_Crud_Elements
     }
      
     
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
         $element->setLabel($this->_translate->_('img_aplicacao.id') . ':');
         $element->setAttribs(array('css-width'=>'100px','maxlength'=>'10'));        
         $element->addValidators(array());
-        $element->addAttr('onBlur',"this.value=strtoupper(this.value);");
-        $element->addAttr('onBlur',"this.value=removeAccent(this.value);");
+        $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
     public function getIdAplicProuser(){
 
         $element = new ZendT_Form_Element_Seeker('id_aplic_prouser');
-        $element->setSufix('aplic_prouser');
+        $element->setSuffix('aplic_prouser');
         $element->setLabel($this->_translate->_('img_aplicacao.id_aplic_prouser') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -46,8 +53,8 @@ class Ged_Form_Aplicacao_Crud_Elements
         $element->modal()->setHeight(400);
         $element->url()->setGrid('/auth/aplicacao/grid');
         $element->url()->setSearch('/auth/aplicacao/seeker-search');
-        $element->url()->setRetrive('/auth/aplicacao/retrive');
-        $element->enableAutoComplete();
+        $element->url()->setRetrieve('/auth/aplicacao/retrive');
+        $element->setMapperView('Auth_DataView_Aplicacao_MapperView');
         $element->addValidators(array());
                 
         $element->setDisplayField('nome');

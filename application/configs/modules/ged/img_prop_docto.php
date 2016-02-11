@@ -4,7 +4,7 @@ return array (
   array (
     'name' => 'img_prop_docto',
     'modelName' => 'prop_docto',
-    'schema' => 'image',
+    'schema' => 'mais',
     'sequenceName' => 'sid_img_prop_docto',
     'moduleName' => 'ged',
     'objectName' => 'Ged_Model_PropDocto',

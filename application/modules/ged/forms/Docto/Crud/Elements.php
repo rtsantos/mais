@@ -43,7 +43,7 @@ class Ged_Form_Docto_Crud_Elements
     public function getIdTipoDocto(){
 
         $element = new ZendT_Form_Element_Seeker('id_tipo_docto');
-        $element->setSufix('tipo_docto');
+        $element->setSuffix('tipo_docto');
         $element->setLabel($this->_translate->_('img_docto.id_tipo_docto') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -55,7 +55,6 @@ class Ged_Form_Docto_Crud_Elements
         $element->url()->setSearch('/ged/tipo-docto/seeker-search');
         $element->url()->setRetrieve('/ged/tipo-docto/retrive');
         $element->setMapperView('Ged_DataView_TipoDocto_MapperView');
-        $element->enableAutoComplete();
         $element->addValidators(array());
                 
         return $element;
@@ -100,7 +99,7 @@ class Ged_Form_Docto_Crud_Elements
     public function getIdUsuIncl(){
 
         $element = new ZendT_Form_Element_Seeker('id_usu_incl');
-        $element->setSufix('usu_incl');
+        $element->setSuffix('usu_incl');
         $element->setLabel($this->_translate->_('img_docto.id_usu_incl') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -112,7 +111,6 @@ class Ged_Form_Docto_Crud_Elements
         $element->url()->setSearch('/auth/usuario/seeker-search');
         $element->url()->setRetrieve('/auth/usuario/retrive');
         $element->setMapperView('Auth_DataView_Usuario_MapperView');
-        $element->enableAutoComplete();
         $element->addValidators(array());
                 
         $element->setDisplayField('nome');
@@ -141,7 +139,7 @@ class Ged_Form_Docto_Crud_Elements
     public function getIdArquivo(){
 
         $element = new ZendT_Form_Element_Seeker('id_arquivo');
-        $element->setSufix('arquivo');
+        $element->setSuffix('arquivo');
         $element->setLabel($this->_translate->_('img_docto.id_arquivo') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
@@ -153,7 +151,6 @@ class Ged_Form_Docto_Crud_Elements
         $element->url()->setSearch('/ged/arquivo/seeker-search');
         $element->url()->setRetrieve('/ged/arquivo/retrive');
         $element->setMapperView('Ged_DataView_Arquivo_MapperView');
-        $element->enableAutoComplete();
         $element->addValidators(array());
                 
         return $element;

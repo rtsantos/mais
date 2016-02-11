@@ -73,9 +73,9 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','id_tipo_docto','nome_tipo_docto','id_prop_relac','dh_inclusao','id_usu_incl','login_usu_incl','nome_usu_incl','descricao','id_arquivo','conteudo_name_arquivo');
-           $profile['width'] = array('id'=>100,'id_tipo_docto'=>120,'nome_tipo_docto'=>200,'id_prop_relac'=>150,'dh_inclusao'=>150,'id_usu_incl'=>120,'login_usu_incl'=>200,'nome_usu_incl'=>200,'descricao'=>200,'id_arquivo'=>120,'conteudo_name_arquivo'=>200);
-           $profile['align'] = array('id'=>'left','id_tipo_docto'=>'left','nome_tipo_docto'=>'left','id_prop_relac'=>'right','dh_inclusao'=>'center','id_usu_incl'=>'left','login_usu_incl'=>'left','nome_usu_incl'=>'left','descricao'=>'left','id_arquivo'=>'left','conteudo_name_arquivo'=>'left');
+           $profile['order'] = array('id','id_tipo_docto','id_prop_relac','dh_inclusao','id_usu_incl','descricao','id_arquivo');
+           $profile['width'] = array('id'=>100,'id_tipo_docto'=>120,'id_prop_relac'=>150,'dh_inclusao'=>150,'id_usu_incl'=>120,'descricao'=>200,'id_arquivo'=>120);
+           $profile['align'] = array('id'=>'left','id_tipo_docto'=>'left','id_prop_relac'=>'right','dh_inclusao'=>'center','id_usu_incl'=>'left','descricao'=>'left','id_arquivo'=>'left');
            $profile['hidden'] = array('id_tipo_docto','id_usu_incl','id_arquivo');
            $profile['remove'] = array();
            $profile['listOptions'] = array();
@@ -89,15 +89,11 @@
             
             $this->_columns->add('id', 'img_docto', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id'),'String','%?%');
             $this->_columns->add('id_tipo_docto', 'img_docto', 'id_tipo_docto', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_tipo_docto'), null, '=');
-            $this->_columns->add('nome_tipo_docto', 'tipo_docto', 'nome', $this->_getTipoDocto()->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_tipo_docto.img_tipo_docto.nome'),null,'?%');
             $this->_columns->add('id_prop_relac', 'img_docto', 'id_prop_relac', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_prop_relac'),'Numeric','=');
             $this->_columns->add('dh_inclusao', 'img_docto', 'dh_inclusao', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.dh_inclusao'),'DateTime','=');
             $this->_columns->add('id_usu_incl', 'img_docto', 'id_usu_incl', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_usu_incl'), null, '=');
-            $this->_columns->add('login_usu_incl', 'usu_incl', 'login', $this->_getUsuario()->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_usu_incl.usuario.login'),null,'?%');
-            $this->_columns->add('nome_usu_incl', 'usu_incl', 'nome', $this->_getUsuario()->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_usu_incl.usuario.nome'),null,'?%');
             $this->_columns->add('descricao', 'img_docto', 'descricao', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.descricao'),'String','%?%');
             $this->_columns->add('id_arquivo', 'img_docto', 'id_arquivo', $this->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_arquivo'), null, '=');
-            $this->_columns->add('conteudo_name_arquivo', 'arquivo', 'conteudo_name', $this->_getArquivo()->getModel()->getMapperName(), ZendT_Lib::translate('img_docto.id_arquivo.img_arquivo.conteudo_name'),null,'?%');
 
         }
         /**

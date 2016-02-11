@@ -40,8 +40,7 @@
                       FROM ".Auth_Model_Recurso_Mapper::$table." rsu
                       LEFT JOIN ".Auth_Model_Recurso_Mapper::$table." rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
                      WHERE rsu.Status = 'A'
-                       AND rsu.hierarquia LIKE '" . $moduleName . "%'
-                     ORDER BY rsu.hierarquia";
+                       AND rsu.hierarquia LIKE '" . $moduleName . "%' ";
 
             $result = $this->getAdapter()->fetchAll($sql);
             
@@ -71,9 +70,9 @@
                            rsuPai.hierarquia AS recurso_pai,
                            rsu.nivel,
                            rsu.observacao
-                      FROM recurso rsu
-                      JOIN tipo_recurso tpRsu ON (rsu.id_tipo_recurso = tpRsu.Id)
-                      LEFT JOIN recurso rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
+                      FROM ".Auth_Model_Recurso_Mapper::$table." rsu
+                      JOIN ".Auth_Model_TipoRecurso_Mapper::$table." tpRsu ON (rsu.id_tipo_recurso = tpRsu.Id)
+                      LEFT JOIN ".Auth_Model_Recurso_Mapper::$table." rsuPai ON (rsu.id_recurso_pai = rsuPai.Id)
                      WHERE tpRsu.Nome = 'MENU'
                        AND rsu.status = 'A'
                        AND rsuPai.hierarquia LIKE '" . $moduleName . "%'
@@ -82,6 +81,7 @@
             $rows = $this->getAdapter()->fetchAll($sql);
 
             $result = array();
+            $baseUrl = ZendT_Url::getBaseUrl();
             foreach ($rows as $row) {
                 if ($row['observacao'] == ''){
                     $row['observacao'] = $row['recurso'];
@@ -90,7 +90,7 @@
                 $menu
                         ->setDescription(($row['descricao']))
                         ->setParent($row['recurso'])
-                        ->setUrl(str_replace("{baseUrl}",  ZendT_Url::getBaseUrl(), $row['observacao']));
+                        ->setUrl(str_replace("{baseUrl}", $baseUrl, $row['observacao']));
 
                 $result[$row['recurso_pai']][] = $menu;
             }
@@ -111,7 +111,7 @@
                 $aplicacao = $_aplicacao
                         ->retrive(
                         array(
-                    'sigla' => strtoupper($recurso['module'])
+                             'sigla' => strtoupper($recurso['module'])
                         )
                         , null
                         , false
@@ -124,7 +124,7 @@
                 $recursoPai = $this
                         ->retrive(
                         array(
-                    'nome' => $recurso['parent']
+                            'hierarquia' => $recurso['parent']
                         )
                         , null
                         , false
@@ -132,12 +132,16 @@
 
                 $rowRecurso = $this->getResource(
                         array(
-                            'nome' => $recurso['name']
+                            'hierarquia' => $recurso['name']
                         )
                 );
+                
+                
+                $nome = explode('.',$recurso['name']);
+                $nome = end($nome);
 
                 $rowRecurso['id'] = $idRecurso;
-                $rowRecurso['nome'] = $recurso['name'];
+                $rowRecurso['nome'] = $nome;
                 $rowRecurso['hierarquia'] = $recurso['name'];
                 $rowRecurso['id_recurso_pai'] = $recursoPai['id'];
                 $rowRecurso['id_aplicacao'] = $idAplicacao;

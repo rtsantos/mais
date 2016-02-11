@@ -141,6 +141,10 @@ class ZendT_Tool_Crud_Table {
         $strRequired = ltrim($strRequired, ',');
 
         $upTableName = strtolower($config['table']['name']);
+        $upTableAlias = strtolower($config['table']['alias']);
+        if (!$upTableAlias){
+            $upTableAlias = strtolower($config['table']['name']);
+        }
         $upSchemaName = strtolower($config['table']['schema']);
         $upSequenceName = strtolower($config['table']['sequenceName']);
         if ($upSequenceName == ''){
@@ -157,6 +161,7 @@ class ZendT_Tool_Crud_Table {
 class {$ucModuleName}_Model_{$modelName}_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected \$_name = '{$upTableName}';
+    protected \$_alias = '{$upTableAlias}';
     {$upSequenceName}
     protected \$_required = array({$strRequired});
     protected \$_primary = array({$strPrimary});

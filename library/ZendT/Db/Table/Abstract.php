@@ -124,7 +124,7 @@
                 }
                 $binds = $wherePrimary->getBinds();
                 $binds+= $rowPrimary->getBinds();
-                $sql = 'SELECT 1 FROM ' . $this->getTableName() . ' WHERE ' . $rowPrimary->getSqlWhere();
+                $sql = 'SELECT 1 FROM ' . $this->getTableName() . ' ' . $this->getAlias()  . ' WHERE ' . $rowPrimary->getSqlWhere();
                 if ($event == 'update') {
                     $sql.= ' AND NOT ' . $wherePrimary->getSqlWhere();
                 }
@@ -220,7 +220,7 @@
             /**
              * @todo implementar se existe dependencia em tabelas 
              */
-            $tableSpec = ($this->_schema ? $this->_schema . '.' : '') . $this->_name;
+            $tableSpec = $this->getTableName(). ' ' . $this->getAlias();
             return $this->_db->delete($tableSpec, $cmdWhere);
 
             //return parent::delete($cmdWhere);
@@ -271,7 +271,9 @@
 
             $this->_setAdapter($this->_adapter);
             if ($data) {
-                $result = parent::update($data, $cmdWhere);
+                $tableSpec = $this->getTableName().' '.$this->getAlias();
+                $result = $this->_db->update($tableSpec, $data, $cmdWhere);
+                //$result = parent::update($data, $cmdWhere);
             }
             /*if (!$result) {
                 return false;
@@ -510,10 +512,20 @@
          * @return string
          */
         public function getName() {
-            if (isset($this->_alias)){
-                return $this->_alias;
-            }
             return strtolower($this->_name);
+        }
+        
+        /**
+         * Retorna o nome da tabela sem o schema
+         * 
+         * @return string
+         */
+        public function getAlias() {
+            if (isset($this->_alias)){
+                return strtolower($this->_alias);
+            }else{
+                return strtolower($this->_name);
+            }
         }
 
         /**

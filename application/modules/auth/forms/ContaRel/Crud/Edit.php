@@ -14,7 +14,7 @@
          * @return void
          */
         public function loadElements($action='insert') {
-            $this->setName('frm_papel_rel');
+            $this->setName('frm_at_papel_rel');
             
     
             $model = new Auth_Form_ContaRel_Elements();
