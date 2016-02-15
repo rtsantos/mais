@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Profile.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/profile/models/ObjectViewPriv/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/configs/application.ini</file>
-            <file>file:/C:/AppWeb/htdocs/mais/index.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Mapper.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Translate.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/Zend/Translate/Adapter.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/Recurso/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/application/modules/auth/models/PapelRecurso/Table.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Adapter/Oracle.php</file>
-            <file>file:/C:/AppWeb/htdocs/mais/library/ZendT/Db/Adapter/Mysqli.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -1,0 +1,193 @@
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Portal Salvados Prestador</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+		<meta http-equiv="Cache-Control" content="no-cache" />
+
+
+		<link rel="shortcut icon" href="/portal_static/portalSalvadosPrestador/resources/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/modulos.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/estrutura.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/dataTables.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/menu.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/buttons.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/gs.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/jquery-ui.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/base_salvados.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/chosen.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/libraries/calendar-j-ui/jquery-ui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/dialog-custom-min.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/jquery.qtip.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/libraries/dialog-j-ui/dialog-custom-min.css"/>
+		
+		
+		
+
+
+
+
+		<style type="text/css">
+			.titleSalvados {
+				font-family:arial;color:white ;size:bold;
+				font-weight:700;
+				background:#009999;
+				display:block;
+				padding:5px 0;border:0px solid
+			}
+			.displayInlineBlock {
+				display:inline-block;
+			}
+			label.error{
+			    display: block;
+			    margin: 0 0 10px 0;
+			    color : #aa2222;
+			}
+
+
+			#errorContainer {
+				display: none;
+				overflow: auto;
+				background-color: #ffeeee;
+				border: 1px solid #aa2222;
+				padding-top: 0;
+			}
+			#errorContainer label {
+				float: none;
+				width: auto;
+			}
+
+			.jumpLine5px{
+				clear: both; display: block; height: 5px; width: 100%
+			}
+			.jumpLine15px{
+				clear: both; display: block; height: 15px; width: 100%
+			}
+			#cell {
+			    display: table-cell;
+			}
+			#displayTable{
+				display: table;
+				width:98%;
+			    padding-left: 9px;
+			}
+		</style>
+	</head>
+	<body>
+	
+	
+		 <div id="container">
+
+			
+
+	<div id="container" style="font-size : 11px;">
+		<div class="content" style="width:850px;height:100%;" >
+
+				<div class="actions"></div>
+		       	
+		    		<p class="msg green"><strong>Transações efetivadas !</strong><br /></p>
+				
+				
+
+
+		        	
+	        	<div class="actionForm">
+		        	<form id="form_retorno"  method="get">
+			            <button id="btnRetornar" class="button tipsyT"  type="button" title="Retornar"><i class="ico arrowL"></i>Retornar</button>
+		            </form>
+
+	            </div>
+
+			</div>
+		</div>
+	</div>
+	
+
+
+			
+		<script type="text/javascript">
+		<!--
+			var contextPath = '/portal_static/portalSalvadosPrestador';
+		//-->
+		</script>
+
+			
+			<input type='hidden' name='serverName' id='serverName' value='srvprtapp002.tokiomarine.com.br'/>
+			<input type='hidden' name='localName' id='localName' value='srvprtapp002.tokiomarine.com.br'/>
+			<input type='hidden' name='isSecure' id='isSecure' value='http:'/>
+			<input type='hidden' name='dateVersion' id='dateVersion' value='11/05/2015'/>
+		</div>
+		<div class="clearBody"></div>
+		<a id="scroll-top" class="tag yellow" href="#top"><i class="ico arrowT"></i>Topo</a>
+
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validate.min.js"></script>
+		
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery-ui.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.autotab-1.1.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.number.min.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validationEngine-pt_BR.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validationEngine.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.meio.mask.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.blockUI.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.qtip.min.js"></script>
+	    <script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.maskMoney.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/jquery-ui/jquery-ui.min.js"></script>
+				
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/menu.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/menu.tabs.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/toolTip.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/scrolltop.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/chosen.jquery.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/functions.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/asn.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/dialog-j-ui/dialog-custom-min.js"></script>
+	    <script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/dataTables.min.js"></script>
+		
+	    <!--
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validate.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery-min.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/calendar-j-ui/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+		-->
+		
+	    <script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.salvados.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+		<script type="text/javascript" src="/portalSalvadosPrestador/js/portalSalvados.js"></script>
+
+		
+
+
+
+	<script type="text/javascript">
+
+		jQuery("html").css("overflow-x", "hidden");
+
+		jQuery('#btnRetornar').click(function() {
+			jQuery.blockUI({ message: 'Aguarde carregando . . . ' });
+			window.open('/portalSalvadosPrestador/vistoriador/consultar','_self');
+
+		});
+
+
+	</script>
+	
+	</body>
+</html>

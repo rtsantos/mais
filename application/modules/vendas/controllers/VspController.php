@@ -3,7 +3,8 @@
         
         public function indexAction(){
             $_interface = new Vendas_Context_Vsp_Tokio();
-            $_interface->login();
+            //$_interface->test();
+            $_interface->importXls();
             exit;
         }
     }
