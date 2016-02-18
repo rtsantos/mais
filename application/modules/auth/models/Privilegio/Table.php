@@ -21,7 +21,7 @@
                      JOIN " . Auth_Model_Recurso_Mapper::$table . " recurso ON (privilegio.Id_recurso = recurso.id)
                     WHERE recurso.hierarquia LIKE '" . $moduleName . "%'
                       AND recurso.status = 'A'
-                    ORDER BY conta.hierarquia DESC, recurso.hierarquia DESC ";
+                    ORDER BY recurso.hierarquia DESC, conta.hierarquia DESC ";
 
            $rows = $this->getAdapter()->fetchAll($sql);
            $result = array();

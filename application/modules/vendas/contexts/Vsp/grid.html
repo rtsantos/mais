@@ -1,0 +1,714 @@
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Portal Salvados Prestador</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+		<meta http-equiv="Cache-Control" content="no-cache" />
+
+
+		<link rel="shortcut icon" href="/portal_static/portalSalvadosPrestador/resources/images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/modulos.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/estrutura.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/dataTables.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/menu.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/buttons.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/gs.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/jquery-ui.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/base_salvados.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/chosen.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/libraries/calendar-j-ui/jquery-ui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/dialog-custom-min.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/css/jquery.qtip.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/portal_static/portalSalvadosPrestador/resources/libraries/dialog-j-ui/dialog-custom-min.css"/>
+		
+		
+		
+		<style type="text/css">
+			.titleSalvados {
+				font-family:arial;color:white ;size:bold;
+				font-weight:700;
+				background:#009999;
+				display:block;
+				padding:5px 0;border:0px solid
+			}
+			.displayInlineBlock {
+				display:inline-block;
+			}
+			label.error{
+			    display: block;
+			    margin: 0 0 10px 0;
+			    color : #aa2222;
+			}
+
+
+			#errorContainer {
+				display: none;
+				overflow: auto;
+				background-color: #ffeeee;
+				border: 1px solid #aa2222;
+				padding-top: 0;
+			}
+			#errorContainer label {
+				float: none;
+				width: auto;
+			}
+
+			.jumpLine5px{
+				clear: both; display: block; height: 5px; width: 100%
+			}
+			.jumpLine15px{
+				clear: both; display: block; height: 15px; width: 100%
+			}
+			#cell {
+			    display: table-cell;
+			}
+			#displayTable{
+				display: table;
+				width:98%;
+			    padding-left: 9px;
+			}
+		</style>
+	</head>
+	<body>
+	
+	
+		 <div id="container">
+
+			
+
+
+
+ 
+
+
+	<div id="container" style="font-size : 11px;">
+		<div class="content">
+  			<div class="bread"><a href="javascript:void(0);">Portal Salvados Prestador</a>/ <span>Vistoriador</span></div>
+
+
+   					<div class="textContent"  >
+
+   						<form id="parametros" class="form-geral" action="/portalSalvadosPrestador/vistoriador/pesquisa/grid;jsessionid=55E1E7CED7A8F9C82B8840F244C379ED" method="post">
+   	   						<input type="hidden" name="cd_status_alterado"  		id="cd_status_alterado"  			value="99-S"/>
+   							<input type="hidden" name="cd_sequencia_solicitacao" 	id="cd_sequencia_solicitacao"   	value=""/>
+							<input type="hidden" name="ds_veiculo" 					id="ds_veiculo" 					value=""/>
+							<input type="hidden" name="ds_status" 					id="ds_status" 						value=""/>
+						    <input type="hidden" name="cd_reclamante_sinistro" 		id="cd_reclamante_sinistro" 		value=""/>
+							<input type="hidden" name="cd_salvado_auto_sinistro" 	id="cd_salvado_auto_sinistro" 		value=""/>
+							<input type="hidden" name="cd_tipo_bem_segur" 			id="cd_tipo_bem_segur" 				value=""/>
+							<input type="hidden" name="cd_caracteristica_bem_segur" id="cd_caracteristica_bem_segur" 	value=""/>
+							<input type="hidden" name="ds_tipo_perda" 				id="ds_tipo_perda" 					value=""/>
+							<input type="hidden" name="cd_aviso" 					id="cd_aviso" 						value=""/>
+							<input type="hidden" name="dt_solicitacao" 				id="dt_solicitacao"  				value=""/>
+							<input type="hidden" name="ds_tipo_servico" 			id="ds_tipo_servico" 				value=""/>
+							<input type="hidden" name="cd_tipo_servico_retorno" 	id="cd_tipo_servico_retorno" 		value=""/>
+															
+
+							
+
+
+
+<fieldset>
+			 					<legend>Informe os parâmetros</legend>
+
+									<div class="space">
+
+										<div class="section group">
+
+											<div class="col span_1_of_2">
+												<label><strong>Período Inicial</strong></label>
+												<br/><input id="periodo_inicial" name="periodo_inicial" type="text" value="15/12/2015" size="10"/>
+												<br/><div id="errorbox1"></div>
+						    				</div>
+
+						    				<div class="col span_1_of_2">
+												<label><strong>Período Final</strong></label>
+												<br/><input id="periodo_final" name="periodo_final" type="text" value="15/02/2016" size="10"/>
+												<br/><div id="errorbox2"></div>
+						    				</div>
+					    				</div>
+
+											<div class="section group">
+										<div class="col span_1_of_2">
+											<label><strong>Tipo Serviço</strong></label>
+											<br/><select id="cd_tipo_servico" name="cd_tipo_servico" style="width:100%">
+											<option value="99" selected="selected">Todos Pendentes</option>
+											<option value="48">48 - VISTORIA ECV-EMPRESA CREDENCIADA DE VISTORIA</option><option value="49">49 - REPIQUE-VISTORIA ECV-EMPRESA CREDENCIADA DE VISTORIA</option>
+											</select>
+										</div>
+
+										<div class="col span_1_of_2">
+											<label><strong>Status Processo</strong></label>
+											<br/><select id="cd_status_processo" name="cd_status_processo" style="width:100%">
+											<option value="99-S" selected="selected">Todos Pendentes</option>
+											<option value="1-N">1 - SERVI&Ccedil;O SOLICITADO</option><option value="2-N">2 - SERVI&Ccedil;O REALIZADO</option><option value="3-S">3 - SERVI&Ccedil;O FRUSTRADO</option><option value="4-S">4 - SERVI&Ccedil;O CANCELADO</option><option value="5-S">5 - SERVI&Ccedil;O VALIDADO</option><option value="7-S">7 - DOCUMENTOS RETIRADOS</option><option value="8-N">8 - AGUARDANDO</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="section group">
+										<div class="col span_1_of_3">
+											<label><strong>Sinistro</strong></label>
+											<br/>
+											<input id="cd_letra_sinistro" name="cd_letra_sinistro" style="width:25px" type="text" value="" maxlength="1"/>
+											<input id="cd_local_contabil" name="cd_local_contabil" style="width:25px" type="text" value="" maxlength="2"/>
+											<input id="cd_ramo" name="cd_ramo" style="width:25px" type="text" value="" maxlength="2"/>
+											<input id="cd_sinistro" name="cd_sinistro" style="width:75px" type="text" value="" maxlength="5"/>
+						   				 </div>
+
+										<div class="col span_1_of_3">
+											<label><strong>Placa</strong></label>
+											<br/>
+											<input id="placa" name="placa" name="placa" type="text" value="ECI-5838" size="7"/>
+						    			</div>
+
+						    			<div class="col span_1_of_3">
+											<label><strong>Chassi</strong></label>
+											<br/>
+											<input id="chassi" name="chassi" name="chassi" type="text" value="" size="20"/>
+						    			</div>
+									</div>
+
+     								<div class="actionForm">
+     									<button onclick="javascript:limparCampos();"name='btnLimpar' id='btnLimpar'  class="button" type="button"><i class="ico refresh"></i>Limpar</button>&nbsp;&nbsp;
+										<button class="button tipsyT" title="Pesquisar" ><i class="ico grid"></i>Pesquisar</button>
+	 								</div>
+	 							</div>
+
+							</fieldset>
+
+							
+							
+								
+
+
+
+<fieldset>
+									<legend>Lista de Registros Cadastrados</legend>
+
+									<div id="divProcessos" style="width: 100%; align="center" >
+										<div class="jumpLine15px"></div>
+										<table id="dados_processos" class="display" style="width: 100%;">
+											<thead>
+												<tr>
+													<th>Data Solicitação</th>
+													<th>Sinistro</th>
+													<th>Veículo</th>
+													<th>Placa</th>
+													<th>Chassi</th>
+												    <th>R/I</th>
+													<th>Tipo Serviço</th>
+													<th>Status Processo</th>
+													<th>Detalhes</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+				  									<tr>
+													  	<td>29/01/2016</td>
+													    <td>E 10  53 10953</td>
+													    <td>CG 150 TITAN ES</td>
+													    <td>ECI5838</td>
+													    <td>9C2KC08108R287836</td>
+													    <td>Irrecuperável</td>
+													    <td>VISTORIA ECV-EMPRESA CREDENCIADA DE VISTORIA</td>
+													    <td>AGUARDANDO</td>
+														<td>
+																<a href="#" onClick="javascript:abrirDetalhes('89998');"  class="button btnIco" title="Clique Aqui"><i class="ico view"></i></a>
+																<input type="hidden" name="cd_sequencia_solicitacao_form_89998" 		id="cd_sequencia_solicitacao_form_89998"		value="89998"  />
+									 							<input type="hidden" name="cd_letra_sinistro_form_89998" 				id="cd_letra_sinistro_form_89998" 			value="E"  />
+																<input type="hidden" name="cd_local_contabil_form_89998" 				id="cd_local_contabil_form_89998" 			value="10"  />
+																<input type="hidden" name="cd_ramo_form_89998" 						id="cd_ramo_form_89998" 						value="53"  />
+																<input type="hidden" name="cd_sinistro_form_89998" 					id="cd_sinistro_form_89998"  					value="10953"  />
+																<input type="hidden" name="ds_veiculo_form_89998" 					id="ds_veiculo_form_89998" 					value="CG 150 TITAN ES"  />
+																<input type="hidden" name="placa_form_89998" 							id="placa_form_89998" 						value="ECI5838"  />
+																<input type="hidden" name="chassi_form_89998" 						id="chassi_form_89998" 						value="9C2KC08108R287836"  />
+																<input type="hidden" name="ds_status_form_89998" 						id="ds_status_form_89998" 					value="AGUARDANDO"  />
+															    <input type="hidden" name="cd_reclamante_sinistro_form_89998" 		id="cd_reclamante_sinistro_form_89998" 		value="1"  />
+																<input type="hidden" name="cd_salvado_auto_sinistro_form_89998" 		id="cd_salvado_auto_sinistro_form_89998" 		value="1"  />
+																<input type="hidden" name="cd_tipo_bem_segur_form_89998" 				id="cd_tipo_bem_segur_form_89998" 			value="1"  />
+																<input type="hidden" name="cd_caracteristica_bem_segur_form_89998"	id="cd_caracteristica_bem_segur_form_89998" 	value="2"  />
+																<input type="hidden" name="ds_tipo_perda_form_89998" 					id="ds_tipo_perda_form_89998" 				value="Irrecuperável"  />
+																<input type="hidden" name="dt_solicitacao_form_89998" 				id="dt_solicitacao_form_89998"  				value="29/01/2016"  />
+																<input type="hidden" name="cd_status_processo_form_89998" 			id="cd_status_processo_form_89998"  			value="8"  />
+																<input type="hidden" name="ds_tipo_servico_form_89998" 				id="ds_tipo_servico_form_89998" 				value="VISTORIA ECV-EMPRESA CREDENCIADA DE VISTORIA"  />
+																<input type="hidden" name="cd_tipo_servico_retorno_form_89998"        id="cd_tipo_servico_retorno_form_89998" 		value="48"  />
+															</td>
+				  									</tr>
+												
+											</tbody>
+										</table>
+									</div>
+									<div class="jumpLine15px"></div>
+									<div class="actionForm" id="act" style="display:block;">
+										<button id="back" class="button tipsyT" title='Exportar' type="button" onclick="javascript:exportar('back', 'leilaoHelper');"><i class="ico grid"></i>Exportar</button>
+									</div>
+								</fieldset>
+							
+							
+						</form>
+
+					</div>
+		</div>
+	</div>
+
+
+  
+
+			
+		<script type="text/javascript">
+		<!--
+			var contextPath = '/portal_static/portalSalvadosPrestador';
+		//-->
+		</script>
+
+			
+			<input type='hidden' name='serverName' id='serverName' value='srvprtapp002.tokiomarine.com.br'/>
+			<input type='hidden' name='localName' id='localName' value='srvprtapp002.tokiomarine.com.br'/>
+			<input type='hidden' name='isSecure' id='isSecure' value='http:'/>
+			<input type='hidden' name='dateVersion' id='dateVersion' value='11/05/2015'/>
+		</div>
+		<div class="clearBody"></div>
+		<a id="scroll-top" class="tag yellow" href="#top"><i class="ico arrowT"></i>Topo</a>
+
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validate.min.js"></script>
+		
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery-ui.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.autotab-1.1.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.number.min.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validationEngine-pt_BR.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validationEngine.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.meio.mask.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.blockUI.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.qtip.min.js"></script>
+	    <script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.maskMoney.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/jquery-ui/jquery-ui.min.js"></script>
+				
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/menu.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/menu.tabs.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/toolTip.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/scrolltop.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/chosen.jquery.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/functions.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/asn.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/dialog-j-ui/dialog-custom-min.js"></script>
+	    <script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/dataTables.min.js"></script>
+		
+	    <!--
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.validate.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery-min.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/calendar-j-ui/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+		-->
+		
+	    <script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/scripts/jquery.salvados.js"></script>
+		<script type="text/javascript" src="/portal_static/portalSalvadosPrestador/resources/libraries/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+		<script type="text/javascript" src="/portalSalvadosPrestador/js/portalSalvados.js;jsessionid=55E1E7CED7A8F9C82B8840F244C379ED"></script>
+
+		
+
+
+		<script type="text/javascript">
+
+		retornaDatasPreenchidas();
+
+		jQuery('#cd_letra_sinistro, #cd_local_contabil, #cd_ramo, #cd_sinistro').autotab_magic();
+	    jQuery('#cd_local_contabil, #cd_ramo, #cd_sinistro').autotab_filter('numeric');
+	  	jQuery("[id^=cd_letra_sinistro]:last").autotab_filter({
+			format: 'alpha',
+			uppercase: true
+		});
+
+	  	jQuery("[id^=placa]:last").autotab_filter({
+			uppercase: true
+		});
+
+	  	jQuery("[id^=chassi]:last").autotab_filter({
+			uppercase: true
+		});
+
+
+	  	jQuery("#periodo_inicial").change(function(){
+	  		document.forms[0].periodo_final.value =   retornarDataMaisSessenta();
+	  	});
+
+	  	jQuery("#periodo_inicial").blur(function(){
+	  		document.forms[0].periodo_final.value =   retornarDataMaisSessenta();
+	  	});
+
+
+		jQuery("#periodo_inicial").setMask('date');
+		jQuery("#periodo_final").setMask('date');
+
+		jQuery("#periodo_inicial").datepicker({
+			showOn: "button",
+			dateFormat: 'dd/mm/yy',
+			buttonImage: "/portal_static/portalSalvadosPrestador/resources/images/ico/calendar.gif",
+	        buttonImageOnly: true,
+	        regional:'pt-BR',
+	        buttonText: "Calendario"
+	        });
+
+		jQuery("#periodo_final").datepicker({
+			showOn: "button",
+			dateFormat: 'dd/mm/yy',
+			buttonImage: "/portal_static/portalSalvadosPrestador/resources/images/ico/calendar.gif",
+	        buttonImageOnly: true,
+	        regional:'pt-BR',
+	        buttonText: "Calendario"
+	        });
+
+
+			jQuery(function($){
+		        $.datepicker.regional['pt-BR'] = {
+		                closeText: 'Fechar',
+		                prevText: '&#x3c;Anterior',
+		                nextText: 'Pr&oacute;ximo&#x3e;',
+		                currentText: 'Hoje',
+		                monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho',
+		                'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+		                'Jul','Ago','Set','Out','Nov','Dez'],
+		                dayNames: ['Domingo','Segunda-feira','Ter&ccedil;a-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sabado'],
+		                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+		                dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+		                weekHeader: 'Sm',
+		                dateFormat: 'dd/mm/yy',
+		                firstDay: 0,
+		                isRTL: false,
+		                showMonthAfterYear: false,
+		                yearSuffix: ''};
+		        $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+			});
+
+			$(document).ready(function() {
+
+			 	jQuery('#dados_processos').dataTable({
+					"bJQueryUI": true,
+					"bDestroy": true,
+					"iDisplayLength": 9,
+			    	"sPaginationType": "full_numbers",
+					"sDom": '<"fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix header"Tfr>t<"F"ip>',
+					"aaSorting": [],
+			        "oLanguage": {
+						"sUrl": "/portal_static/portalSalvadosPrestador/resources/scripts/dataTables.pt-br.txt"
+					}
+			    });
+
+
+
+
+				jQuery(function($) {
+				$('#parametros').validate({
+					submitHandler : function(form) {
+						form.action = "/portalSalvadosPrestador/vistoriador/pesquisa/grid;jsessionid=55E1E7CED7A8F9C82B8840F244C379ED";
+						if (enviarform() == true && verificaPreenchimento() ==true && verificaPreenchimentoPeriodo() == true){
+							form.submit();
+						}
+					},
+					rules : {
+						periodo_inicial : {
+							required :  function() {
+						        return ($('#cd_status_processo').val() == "5-S");
+			            	}
+						},
+						periodo_final : {
+							required : function() {
+						        return ($('#cd_status_processo').val() == "5-S");
+			            	}
+						}
+					},
+					messages : {
+						periodo_inicial : {
+							required : 'Informe o conteudo do campo!'
+						},
+						periodo_final : {
+							required : 'Informe o conteudo do campo!'
+						}
+					},
+					errorPlacement: function(error, element)
+					{
+						 if(element.attr("name") == "periodo_inicial"){
+
+								error.appendTo($('#errorbox1'));
+						 }else{
+							 error.appendTo($('#errorbox2'));
+						 }
+					},
+					success: $.noop
+				});
+				  });
+			   });
+
+			function verificaPreenchimento(){
+
+				if(jQuery('#cd_letra_sinistro').val() != '' && ( jQuery('#cd_local_contabil').val() == '' || jQuery('#cd_ramo').val() == ''  || jQuery('#cd_sinistro').val() == '')){
+					alert("Digite o sinistro completo");
+					return false;
+				}else if(jQuery('#cd_local_contabil').val() != ''  && ( jQuery('#cd_letra_sinistro').val() == '' || jQuery('#cd_ramo').val() == ''  || jQuery('#cd_sinistro').val() == '')){
+					alert("Digite o sinistro completo");
+					return false;
+				}else if(jQuery('#cd_ramo').val() != '' && ( jQuery('#cd_letra_sinistro').val() == '' || jQuery('#cd_local_contabil').val() == ''  || jQuery('#cd_sinistro').val() == '')){
+					alert("Digite o sinistro completo");
+					return false;
+				}else if(jQuery('#cd_sinistro').val() != ''  && ( jQuery('#cd_letra_sinistro').val() == '' || jQuery('#cd_local_contabil').val() == ''  || jQuery('#cd_ramo').val() == '')){
+					alert("Digite o sinistro completo");
+					return false;
+				}else {
+					return true;
+				}
+
+		}
+
+			function verificaPreenchimentoPeriodo(){
+				if(jQuery('#periodo_inicial').val() != '' &&  jQuery('#periodo_final').val() == '' ){
+					alert("Digite o Periodo Inicial e o Periodo Final");
+					return false;
+				}else if(jQuery('#periodo_inicial').val() == '' &&  jQuery('#periodo_final').val() != '' ){
+					alert("Digite o Periodo Inicial e o Periodo Final");
+					return false;
+				}else {
+					return true;
+				}
+			}
+
+			function retornaDatasPreenchidas(){
+				if(jQuery('#periodo_inicial').val() == '' &&  jQuery('#periodo_final').val() == '' ){
+					document.forms[0].periodo_final.value = retornarDataFinal();
+					document.forms[0].periodo_inicial.value = retornarDataInicial();
+				}
+
+			}
+
+		  	function retornarDataFinal()
+		  	{
+		  			var DataFinal;
+		  			var now = new Date();
+
+
+		  	        if(now.getDate() < 10)
+		  	        {
+		  	            DataFinal = "0"+now.getDate().toString();
+		  	        }
+		  	        else
+		  	        {
+		  	            DataFinal = now.getDate().toString();
+		  	        }
+
+		
+		  	        if((now.getMonth()+1) < 10){
+		  	            DataFinal += "/0"+(now.getMonth()+1).toString()+"/"+now.getFullYear().toString();
+		  	        }
+		  	        else
+		  	        {
+		  	            DataFinal += "/"+((now.getMonth()+1).toString())+"/"+now.getFullYear().toString();
+		  	        }
+
+		  	      return DataFinal;
+		  	}
+
+
+		  	function retornarDataInicial()
+		  	{
+
+		  	        var txtData = jQuery('#periodo_final').val();
+		  	        var DiasAdd = 60;
+		  	        var d = new Date();
+		  	      	var DataInicial;
+
+		  	        d.setTime(Date.parse(txtData.split("/").reverse().join("/"))-(86400000*(DiasAdd)));
+
+		  	        if(d.getDate() < 10)
+		  	        {
+		  	        	DataInicial = "0"+d.getDate().toString();
+		  	        }
+		  	        else
+		  	        {
+		  	        	DataInicial = d.getDate().toString();
+		  	        }
+
+
+		  	        if((d.getMonth()+1) < 10){
+		  	        	DataInicial += "/0"+(d.getMonth()+1).toString()+"/"+d.getFullYear().toString();
+		  	        }
+		  	        else
+		  	        {
+		  	        	DataInicial += "/"+((d.getMonth()+1).toString())+"/"+d.getFullYear().toString();
+		  	        }
+
+		  	      return DataInicial;
+		  	}
+
+		  	function retornarDataMaisSessenta()
+		  	{
+
+		  	        var txtData = jQuery('#periodo_inicial').val();
+		  	        var DiasAdd = 60;
+		  	        var d = new Date();
+		  	      	var DataFinal = d;
+
+		  	        d.setTime(Date.parse(txtData.split("/").reverse().join("/"))+(86400000*(DiasAdd)));
+
+		  	        if(d.getDate() < 10)
+		  	        {
+		  	        	DataFinal = "0"+d.getDate().toString();
+		  	        }
+		  	        else
+		  	        {
+		  	        	DataFinal = d.getDate().toString();
+		  	        }
+
+
+		  	        if((d.getMonth()+1) < 10){
+		  	        	DataFinal += "/0"+(d.getMonth()+1).toString()+"/"+d.getFullYear().toString();
+		  	        }
+		  	        else
+		  	        {
+		  	        	DataFinal += "/"+((d.getMonth()+1).toString())+"/"+d.getFullYear().toString();
+		  	        }
+
+		  	      return DataFinal;
+		  	}
+
+
+
+
+			function enviarform(){
+					document.forms[0].cd_status_alterado.value = jQuery("#cd_status_processo").val();
+
+					var	dt_inicio_pesquisa_param = document.getElementById('periodo_inicial');
+					var	dt_final_pesquisa_param = document.getElementById('periodo_final');
+					var status = jQuery("#cd_status_processo").val();
+
+					var flagPeriodo ="N";
+
+					if(status!= null){
+						status = status.split("-");
+						cd_status = status[0];
+						flagPeriodo = status[1];
+
+					}else{
+						alert("Selecione o Status do processo");
+						return false;
+
+					}
+
+					var datex = new Date(dt_inicio_pesquisa_param.value.substr(3, 2) + "/" + dt_inicio_pesquisa_param.value.substr(0, 2) + "/" + dt_inicio_pesquisa_param.value.substr(6, 4));
+					var datey = new Date(dt_final_pesquisa_param.value.substr(3, 2) + "/" + dt_final_pesquisa_param.value.substr(0, 2) + "/" + dt_final_pesquisa_param.value.substr(6, 4));
+
+					var t2 = datey.getTime();
+					var t1 = datex.getTime();
+					var dif = (t2-t1)/(24*3600*1000);
+
+					if (t1 > t2 )
+					{
+						alert("Periodo final deve ser maior ou igual a Periodo Inicial");
+						return false;
+
+					}else if(flagPeriodo =="S"  &&  parseInt(dif) >60){
+						alert("A consulta devera ser feita no maximo 60 dias corridos");
+						return false;
+
+					}else{
+						return true;
+					}
+			}
+
+			function abrirDetalhes(var_index) {
+
+				var ds_veiculo = document.getElementById('ds_veiculo_form_'+ var_index);
+				var cd_sequencia_solicitacao 	= document.getElementById('cd_sequencia_solicitacao_form_'+ var_index);
+				var cd_letra_sinistro 			= document.getElementById('cd_letra_sinistro_form_'+ var_index);
+				var cd_local_contabil 			= document.getElementById('cd_local_contabil_form_'+ var_index);
+				var cd_tipo_bem_segur 			= document.getElementById('cd_tipo_bem_segur_form_'+ var_index);
+				var cd_caracteristica_bem_segur = document.getElementById('cd_caracteristica_bem_segur_form_'+ var_index);
+				var cd_ramo 					= document.getElementById('cd_ramo_form_'+ var_index);
+				var cd_sinistro 				= document.getElementById('cd_sinistro_form_'+ var_index);
+				var cd_reclamante_sinistro 		= document.getElementById('cd_reclamante_sinistro_form_'+ var_index);
+				var cd_salvado_auto_sinistro 	= document.getElementById('cd_salvado_auto_sinistro_form_'+ var_index);
+				var ds_tipo_perda	 			= document.getElementById('ds_tipo_perda_form_'+ var_index);
+				var ds_tipo_servico 			= document.getElementById('ds_tipo_servico_form_'+ var_index);
+				var dt_solicitacao 				= document.getElementById('dt_solicitacao_form_'+ var_index);
+				var placa 						= document.getElementById('placa_form_'+ var_index);
+				var chassi 						= document.getElementById('chassi_form_'+ var_index);
+				var ds_status 					= document.getElementById('ds_status_form_'+ var_index);
+				var cd_tipo_servico_retorno 	= document.getElementById('cd_tipo_servico_retorno_form_'+ var_index);
+				var cd_status_processo 			= document.getElementById('cd_status_processo_form_'+ var_index);
+										
+				
+				document.forms[0].cd_status_alterado.value = jQuery("#cd_status_processo").val();
+				document.forms[0].cd_status_processo.value = jQuery("#cd_status_processo").val();
+				
+				
+
+				document.forms[0].cd_sequencia_solicitacao.value 	= cd_sequencia_solicitacao.value;
+				document.forms[0].cd_letra_sinistro.value 			= cd_letra_sinistro.value;
+				document.forms[0].cd_local_contabil.value 			= cd_local_contabil.value;
+				document.forms[0].cd_ramo.value 					= cd_ramo.value;
+				document.forms[0].cd_sinistro.value 				= cd_sinistro.value;
+				document.forms[0].ds_veiculo.value 					= ds_veiculo.value;
+				document.forms[0].placa.value 						= placa.value;
+				document.forms[0].chassi.value 						= chassi.value;
+				document.forms[0].ds_status.value 					= ds_status.value;
+				document.forms[0].cd_reclamante_sinistro.value 		= cd_reclamante_sinistro.value;
+				document.forms[0].cd_salvado_auto_sinistro.value 	= cd_salvado_auto_sinistro.value;
+				document.forms[0].cd_tipo_bem_segur.value 			= cd_tipo_bem_segur.value;
+				document.forms[0].cd_caracteristica_bem_segur.value = cd_caracteristica_bem_segur.value;
+				document.forms[0].ds_tipo_perda.value 				= ds_tipo_perda.value;
+				document.forms[0].dt_solicitacao.value 				= dt_solicitacao.value;
+				document.forms[0].ds_tipo_servico.value 			= ds_tipo_servico.value;
+				document.forms[0].cd_tipo_servico_retorno.value 	= cd_tipo_servico_retorno.value;
+				
+				var tipoServico = cd_tipo_servico_retorno.value;
+
+				document.forms[0].action = "/portalSalvadosPrestador/vistoriador/consultarDetalhes";
+				document.forms[0].submit();
+
+		}
+
+			function limparCampos(){
+				document.forms[0].cd_letra_sinistro.value = '';
+				document.forms[0].cd_local_contabil.value = '';
+				document.forms[0].cd_ramo.value ='';
+				document.forms[0].cd_sinistro.value = '';
+				document.forms[0].ds_veiculo.value = '';
+				document.forms[0].placa.value = '';
+				document.forms[0].chassi.value = '';
+				document.forms[0].cd_tipo_servico.value = "99";
+				document.forms[0].cd_status_processo.value = "99-S";
+				document.forms[0].periodo_final.value = '';
+				document.forms[0].periodo_inicial.value = '';
+			}
+
+
+			// ------------------------------------------------------------------------------------------------------------------------------------------
+			function exportar(){
+				var url = "/portalSalvadosPrestador/despachante/exportarExcel;jsessionid=55E1E7CED7A8F9C82B8840F244C379ED";
+				document.forms[0].action = url;
+				document.forms[0].submit();
+			}
+			// ------------------------------------------------------------------------------------------------------------------------------------------
+
+
+		</script>
+	 
+	</body>
+</html>

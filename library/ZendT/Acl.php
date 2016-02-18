@@ -433,12 +433,12 @@
        protected function _isAllowed($role, $resource) {
            $allowed = false;
            foreach ($this->_privileges as $privilege) {
-               $isRole = strpos($role, $privilege['role']);
-               if ($isRole !== false) {
-                   $isResource = strpos($resource, $privilege['resource']);
-                   if ($isResource !== false) {
+               $isResource = strpos($resource, $privilege['resource']);
+               if ($isResource !== false){
+                   $isRole = strpos($role, $privilege['role']);
+                   if ($isRole !== false) {
                        $allowed = $privilege['allowed'];
-                       break;
+                       break;                       
                    }
                }
                $privilege = false;
