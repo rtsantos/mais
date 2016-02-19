@@ -90,11 +90,11 @@
                    $value = $value[0];
                }
            }
-           
-           /*$post = Zend_Controller_Front::getInstance()->getRequest()->getParams();
-           var_dump($post);
-           var_dump($value);*/
-           
+
+           /* $post = Zend_Controller_Front::getInstance()->getRequest()->getParams();
+             var_dump($post);
+             var_dump($value); */
+
            $params = array();
            $params['elements'] = array();
            /**
@@ -124,15 +124,15 @@
            if (isset($attribs['belongsTo'])) {
                $attribs['propSearch']->setBelongsTo($attribs['belongsTo']);
            }
-           
-           if (isset($attribs['style'])){
-               $attribs['propSearch']->setAttrib('style',$attribs['style']);
+
+           if (isset($attribs['style'])) {
+               $attribs['propSearch']->setAttrib('style', $attribs['style']);
            }
-           
-           if (isset($attribs['readonly'])){
-               $attribs['propSearch']->setAttrib('readonly',$attribs['readonly']);
+
+           if (isset($attribs['readonly'])) {
+               $attribs['propSearch']->setAttrib('readonly', $attribs['readonly']);
            }
-           
+
            $xhtmlElements.= $this->_renderElement($attribs['propSearch'], $value, $suffix, $prefix);
            unset($attribs['fields'][$field]);
            $searchId = $attribs['propSearch']->getId();
@@ -178,6 +178,40 @@
                unset($attribs[$key]);
            }
 
+           if (isset($attribs['btn_add'])) {
+               $attribs['btn_add']->addClass('ui-button item ui-state-default');
+               if ($suffix) {
+                   $nameButton = $attribs['btn_add']->getName();
+                   $nameButton.= '_' . $suffix;
+                   $attribs['btn_add']->setName($nameButton);
+               }
+               if ($prefix) {
+                   $nameButton = $prefix . '_' . $attribs['btn_add']->getName();
+                   $attribs['btn_add']->setName($nameButton);
+               }
+               $attribs['btn_add']->setAttrib('searchId', $searchId);
+               $xhtmlElements.= $attribs['btn_add']->render();
+
+               $params['elements']['btn_add'] = $attribs['btn_add']->getId();
+           }
+
+           if (isset($attribs['btn_edit'])) {
+               $attribs['btn_edit']->addClass('ui-button item ui-state-default');
+               if ($suffix) {
+                   $nameButton = $attribs['btn_edit']->getName();
+                   $nameButton.= '_' . $suffix;
+                   $attribs['btn_edit']->setName($nameButton);
+               }
+               if ($prefix) {
+                   $nameButton = $prefix . '_' . $attribs['btn_edit']->getName();
+                   $attribs['btn_edit']->setName($nameButton);
+               }
+               $attribs['btn_edit']->setAttrib('searchId', $searchId);
+               $xhtmlElements.= $attribs['btn_edit']->render();
+
+               $params['elements']['btn_edit'] = $attribs['btn_edit']->getId();
+           }
+
            $attribs['button']->addClass('ui-button item ui-state-default last');
            if ($suffix) {
                $nameButton = $attribs['button']->getName();
@@ -196,7 +230,7 @@
            $xhtmlElements.= '<label class="error" for="' . $searchId . '" generated="true" style="display:none"></label>';
            if ($attribs['multiple']) {
                $xhtmlElements.= '<input type="hidden" name="' . $nameId . '-multiple" id="' . $nameId . '-multiple" />';
-               
+
                $tableTitles = '<tr id="table-title-' . $attribs['id'] . '-multiple" class="ui-corner-all ui-state-default" style="display:none;">';
                foreach ($labels as $label) {
                    $tableTitles.= '<th>';

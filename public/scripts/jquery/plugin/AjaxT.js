@@ -79,12 +79,10 @@
             var ajaxT = this;
 
             if (!options.url) {
-                jQuery.DialogT.alert('É necessário informar o parâmetro "options.url"!');
-                return false;
+                alert('É necessário informar o parâmetro "options.url"!');
             }
             if (!options.data) {
-                jQuery.DialogT.alert('É necessário informar o parâmetro "options.data" que representa os dados a serem postados!');
-                return false;
+                alert('É necessário informar o parâmetro "options.data" que representa os dados a serem postados!');
             }
             if (options.abort) {
                 options.mode = 'abort';
@@ -140,54 +138,72 @@
             if (!options.selector) {
                 options.selector = 'form';
             }
+            if (typeof options.async == 'undefined') {
+                options.async = true;
+            }
             var form = jQuery(options.selector);
 
+            if (options.async) {
+                if (options.success) {
+                    ajaxT.options.success = options.success;
+                }
 
-            if (options.success) {
-                ajaxT.options.success = options.success;
-            }
+                ajaxT.options.complete = null;
+                if (options.complete) {
+                    ajaxT.options.complete = options.complete;
+                };
+                ajaxT.options.beforeSubmit = null;
+                if (options.beforeSubmit) {
+                    ajaxT.options.beforeSubmit = options.beforeSubmit;
+                };
 
-            ajaxT.options.complete = null;
-            if (options.complete) {
-                ajaxT.options.complete = options.complete;
-            }
-            ajaxT.options.beforeSubmit = null;
-            if (options.beforeSubmit) {
-                ajaxT.options.beforeSubmit = options.beforeSubmit;
-            }
+                var onBeforeSubmit = function () {
+                    if (ajaxT.options.beforeSubmit != null) {
+                        ajaxT.options.beforeSubmit();
+                    }
+                };
 
-            var onBeforeSubmit = function () {
-                if (ajaxT.options.beforeSubmit != null) {
-                    ajaxT.options.beforeSubmit();
+                var onSuccess = function (result) {
+                    ajaxT.successJson(result, null, null, '#form_confirm');
+                };
+
+                var onComplete = function () {
+                    if (ajaxT.options.complete != null) {
+                        ajaxT.options.complete();
+                    }
+                };
+
+                var validadeFormSave = {
+                    submitHandler: function (form) {
+                        jQuery(form).ajaxSubmit({
+                            beforeSubmit: onBeforeSubmit,
+                            success: onSuccess,
+                            complete: onComplete
+                        });
+                    }
+                };
+                /**
+                 * habilita a validação do formulário
+                 */
+                form.validate(validadeFormSave);
+                jQuery(form).find(':disabled').attr('desativado', true).removeAttr('disabled');
+                form.submit();
+                jQuery(form).find('[desativado]').attr('disabled', 'disabled').removeAttr('desativado');
+            } else {
+                var isValid = form.validate();                
+                if (isValid.form()) {
+                    var params = form.formSerialize();
+                    var result = $.ajax({
+                        type: form.attr('method'),
+                        async: false,
+                        url: form.attr('action'),
+                        data: params
+                    }).responseText;
+                    return decodeJson(result);
+                } else {
+                    return false;
                 }
             }
-
-            var onSuccess = function (result) {
-                ajaxT.successJson(result, null, null, '#form_confirm');
-            }
-
-            var onComplete = function () {
-                if (ajaxT.options.complete != null) {
-                    ajaxT.options.complete();
-                }
-            }
-
-            var validadeFormSave = {
-                submitHandler: function (form) {
-                    jQuery(form).ajaxSubmit({
-                        beforeSubmit: onBeforeSubmit,
-                        success: onSuccess,
-                        complete: onComplete
-                    });
-                }
-            };
-            /**
-             * habilita a validação do formulário
-             */
-            form.validate(validadeFormSave);
-            jQuery(form).find(':disabled').attr('desativado', true).removeAttr('disabled');
-            form.submit();
-            jQuery(form).find('[desativado]').attr('disabled', 'disabled').removeAttr('desativado');
         },
         submitJqGrid: function (options) {
             var vPostData = jQuery('#' + options.idGrid).getGridParam('postData');

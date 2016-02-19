@@ -386,6 +386,34 @@
            $this->setAttrib('autoComplete', $autoComplete);
            return $this;
        }
+       
+       public function enableEdit($url) {
+           list($module, $controller) = explode('/', substr($url,1));
+           if (!ZendT_Acl::getInstance()->isAllowed('update', $module . '.' . $controller)) {
+               return $this;
+           }
+
+           $button = new ZendT_Form_Element_Button('btn_edit');
+           //$button->setTitle(_i18n('Editar'));
+           $button->setIcon('ui-icon-pencil');
+           $button->setAttrib('url', ZendT_Url::getBaseUrl() . $url);
+           $this->setAttrib('btn_edit', $button);
+           return $this;
+       }
+
+       public function enableAdd($url) {
+           list($module, $controller) = explode('/', substr($url,1));
+           if (!ZendT_Acl::getInstance()->isAllowed('insert', $module . '.' . $controller)) {
+               return $this;
+           }
+
+           $button = new ZendT_Form_Element_Button('btn_add');
+           //$button->setTitle(_i18n('Adicionar'));
+           $button->setIcon('ui-icon-plus');
+           $button->setAttrib('url', ZendT_Url::getBaseUrl() . $url);
+           $this->setAttrib('btn_add', $button);
+           return $this;
+       }
 
        /**
         * Muda o Helper para usar o AutoSelect/AutoComplete apenas.

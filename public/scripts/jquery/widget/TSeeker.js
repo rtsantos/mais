@@ -65,6 +65,8 @@
             filterRefer: []
         },
         _create: function () {
+            var self = this;
+            
             if (this.options.name == null) {
                 this.options.name = this.element.attr('id');
             }
@@ -89,6 +91,24 @@
             if (typeof this.options.elements.button == 'string') {
                 this.options.elements.button = $('#' + this.options.elements.button);
             }
+            
+            //console.log(this.options.elements);
+            
+            if (this.options.elements.btn_edit) {
+                this.options.elements.btn_edit = $('#' + this.options.elements.btn_edit);
+                this.options.elements.btn_edit.click(function(){
+                    self.btnEditOnClick(self,jQuery(this));
+                });
+            }
+            
+            if (this.options.elements.btn_add) {
+                this.options.elements.btn_add = $('#' + this.options.elements.btn_add);
+                this.options.elements.btn_add.click(function(){
+                    self.btnAddOnClick(self,jQuery(this));
+                });
+            }
+            
+            
             if (typeof this.options.elements.div == 'string') {
                 this.options.elements.div = $('#' + this.options.elements.div);
             }
@@ -617,6 +637,7 @@
 //              this.options.name = this.options.name.replace(/^.*\-/ig,"");
 //            }
 
+            var windowSize = self._windowSize();
 
             $.WindowT.open({
                 id: 'win-seeker-' + this.options.name,
@@ -629,6 +650,60 @@
                 width: this.options.modal.width
             });
         },
+        
+        btnAddOnClick: function(self,button){
+            var searchId = self.element.attr('id');
+            var url = button.attr('url');
+            var windowSize = self._windowSize();
+            var callback = 'function(data){top.opener.jQuery("#'+ searchId +'").TSeeker("retrieve",{value: data.id});window.close();}';
+            callback = encodeURIComponent('base64:' + Base64.encode(callback));
+            
+            jQuery.WindowT.open({
+                type: 'WINDOW',
+                id: 'btn_edit_' + searchId,
+                url: url + '/action/add',
+                width: windowSize.width,
+                height: windowSize.height,
+                param: 'callback=' + callback
+            });
+        },
+        
+        _windowSize: function(){
+            var size = {
+                width: jQuery(window).width() - 150,
+                height: jQuery(window).height() - 150
+            };
+            
+            if (size.height < 520){
+                size.height = 520;
+            }
+            
+            if (size.width < 860){
+                size.width = 860;
+            }
+            
+            return size;
+        },
+        
+        btnEditOnClick: function(self,button){
+            var searchId = self.element.attr('id');
+            var url = button.attr('url');
+            var idSel = self.options.elements.id.val();
+            var windowSize = self._windowSize();
+            var callback = 'function(data){top.opener.jQuery("#'+ searchId +'").TSeeker("retrieve",{value: data.id});window.close();}';
+            callback = encodeURIComponent('base64:' + Base64.encode(callback));
+            
+            
+            jQuery.WindowT.open({
+                type: 'WINDOW',
+                id: 'btn_edit_' + searchId,
+                url: url + '/action/edit',
+                width: windowSize.width,
+                height: windowSize.height,
+                param: 'callback=' + callback + '&id=' + idSel
+            });
+        },
+        
         buttonOnClick: function () {
             var self = $('#' + $(this).attr('searchId'));
             if (self.TSeeker('option', 'modal').type == 'DIV') {

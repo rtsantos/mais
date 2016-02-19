@@ -1,29 +1,35 @@
 <?php
 
-   if (count($this->tabs) > 0 && $this->typeModal != 'AJAX' ) {
-       $_tab = new ZendT_View_Tabs('tab_' . $this->form->getName());
-       $_tab->addTab($this->screenName, $this->form);
+    if (count($this->tabs) > 0 && $this->typeModal != 'AJAX') {
+        $_tab = new ZendT_View_Tabs('tab_' . $this->form->getName());
+        $_tab->addTab($this->screenName, $this->form);
 
-       foreach ($this->tabs as $name => $tab) {
-           $_tab->addTabUrl($tab['description']
-                 , new ZendT_JS_Command("function(){ "
-                 . "  var value = $('#" . $this->form->getName() . " #id'); "
-                 . "  if (value){"
-                 . "      value = value.val(); "
-                 . "  }"
-                 . "  if (!value){"
-                 . "      alert('" . $tab['message'] . "');"
-                 . "      return false;"
-                 . "  }"
-                 . "  var url = '" . ZendT_Url::getBaseUrl() . $tab['url'] . "'; "
-                 . "  url = url + '?" . $tab['column'] . "=' + value; "
-                 . "  url = url + '&typeModal=AJAX'; "
-                 . "  return url; "
-                 . "}"));
-       }
+        foreach ($this->tabs as $name => $tab) {
+            $_tab->addTabUrl($tab['description']
+                    , new ZendT_JS_Command("function(){ "
+                    . "  var value = $('#" . $this->form->getName() . " #id'); "
+                    . "  if (value){"
+                    . "      value = value.val(); "
+                    . "  }"
+                    . "  if (!value){"
+                    . "     var result = $('#" . $this->form->getName() . "').TForm('save',{async: false});   "
+                    . "     if (result.id){ "
+                    . "         value = result.id "
+                    . "     } "
+                    . "  } "
+                    . "  if (!value){"
+                    . "      alert('" . $tab['message'] . "');"
+                    . "      return false;"
+                    . "  }"
+                    . "  var url = '" . ZendT_Url::getBaseUrl() . $tab['url'] . "'; "
+                    . "  url = url + '?" . $tab['column'] . "=' + value; "
+                    . "  url = url + '&typeModal=AJAX'; "
+                    . "  return url; "
+                    . "}"));
+        }
 
-       echo $_tab->render();
-   } else {
-       echo $this->form;       
-       echo $this->grid;
-   }
+        echo $_tab->render();
+    } else {
+        echo $this->form;
+        echo $this->grid;
+    }

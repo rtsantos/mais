@@ -110,6 +110,12 @@
            if ($actionForm) {
                $event = $actionForm;
            }
+           
+           $this->getForm()->loadElements($event);
+           if ($params['id']) {
+               $row = $this->_retrieve();
+               $this->getForm()->populate($row);
+           }
 
            $_buttons = array();
            $first = true;
@@ -125,6 +131,27 @@
                    }
                    $_buttons[] = $_button;
                }
+           } else if (!$params['grid']) {
+               $formParams = array();
+               if ($params['callback']) {
+				   $params['callback'] = urldecode($params['callback']);
+                   if (substr($params['callback'], 0, 7) == 'base64:') {
+                       $params['callback'] = base64_decode(substr($params['callback'], 7));
+                   }
+                   if ($params['callback']) {
+                       $formParams['success'] = new ZendT_JS_Command($params['callback']);
+                   }                   
+               }
+               $formParams = ZendT_JS_Json::encode($formParams);
+               $_button = array();
+               $_button['caption'] = _i18n('Salvar');
+               $_button['icon'] = 'ui-icon-disk';
+               $_button['onClick'] = "function(){"
+                     . "   var form = jQuery('#" . $this->getForm()->getName() . "'); "
+                     . "   form.TForm('save'," . $formParams . ");"
+                     . "}";
+               $_button['class'] = 'btn primary';
+               $_buttons[] = $_button;
            }
            $this->getForm()->loadElements($event);
 

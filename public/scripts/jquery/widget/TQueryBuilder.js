@@ -28,10 +28,16 @@
          * 
          */
         _create: function () {
-
-            this._createTree();
-
             var self = this;
+            //console.log(self.options.columns);
+            //console.log(self.element.val());
+            if (self.element.val() != '') {
+                self.loadData(self.element.val());
+            } else {
+                this._createTree();
+            }
+
+
             var hidden = this.element;
 
             self.options.valueQuote = [];
@@ -379,22 +385,22 @@
             var relacionais = ['>=', '<=', '>', '<'];
             var logicosString = ['IN', 'NOT IN', 'LIKE', 'NOT LIKE'];
             var logicosContidos = ['IN', 'NOT IN'];
-            var opTranslate = 
-            ({
-                "=": 'Igual a'
-                , ">=": 'Maior Igual a'
-                , "<=": 'Menor Igual a'
-                , "<>": 'Diferente de'
-                , ">": 'Maior que'
-                , "<": 'Menor que '
-                , "!=": 'Diferente de'
-                , "IS NULL": 'Está Vazio'
-                , "IS NOT NULL": 'Não Está Vazio'
-                , "IN": 'Está contido em'
-                , "NOT IN": 'Não está contido em'
-                , "LIKE": 'Contém'
-                , "NOT LIKE": 'Não Contém'
-            });
+            var opTranslate =
+                    ({
+                        "=": 'Igual a'
+                        , ">=": 'Maior Igual a'
+                        , "<=": 'Menor Igual a'
+                        , "<>": 'Diferente de'
+                        , ">": 'Maior que'
+                        , "<": 'Menor que '
+                        , "!=": 'Diferente de'
+                        , "IS NULL": 'Está Vazio'
+                        , "IS NOT NULL": 'Não Está Vazio'
+                        , "IN": 'Está contido em'
+                        , "NOT IN": 'Não está contido em'
+                        , "LIKE": 'Contém'
+                        , "NOT LIKE": 'Não Contém'
+                    });
 
             if (type === 'Number') {
                 operadores = operadores.concat(relacionais);
@@ -403,7 +409,7 @@
             } else {
                 operadores = operadores.concat(logicosString);
             }
-            
+
             for (var i = 0; i < operadores.length; i++) {
                 var op = operadores[i];
                 var selected = (op === operator ? "selected" : '');
@@ -437,6 +443,13 @@
             }
 
             var column = this.options.columns[field];
+            if (!column) {
+                column = {
+                    listOptions: false,
+                    type: 'Char',
+                    operation: '='
+                };
+            }
             operator = (operator !== null ? operator : column.operation);
             var isObject = (typeof column.listOptions === 'object');
             var type = (isObject ? 'Char' : column.type);
@@ -470,6 +483,13 @@
             }
             field = field !== null ? field.toLowerCase() : "";
             var column = this.options.columns[field];
+            if (!column) {
+                column = {
+                    listOptions: false,
+                    type: 'Char',
+                    operation: '='
+                };
+            }
             var isNull = (operator === 'IS NULL' || operator === 'IS NOT NULL');
 
             if (isObject && !isNull) {
@@ -532,6 +552,13 @@
             var obj = '';
             for (var listField in this.options.columns) {
                 var column = this.options.columns[listField];
+                if (!column) {
+                    column = {
+                        listOptions: false,
+                        type: 'Char',
+                        operation: '='
+                    };
+                }
                 var isField = false;
 
                 if (field !== null) {
