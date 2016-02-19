@@ -266,6 +266,27 @@
            return true;
        }
 
+       public function integ() {
+           $_pedido = new Vendas_DataView_Pedido_MapperView();
+           $_where = new ZendT_Db_Where();
+           $_where->addFilter('cv_pedido.status_edi', 'N');
+           $_where->addFilter('cliente.cofigo', '33164021000100');
+           $_pedido->findAll($_where, '*');
+
+           while ($row = $_pedido->fetch()) {
+               try {
+                   $_vistoria->setIdPedido($_pedido->getId())->retrieve();
+                   $pdf = $_vistoria->getLaudo()->getFilename();
+
+                   $this->postPdf($row['placa_veiculo'], $row['sinistro'], $pdf);
+                   $_pedido->setStatusEdi('T')->update();
+               } catch (Exception $ex) {
+                   $_pedido->setStatusEdi('E')
+                           ->update();
+               }
+           }
+       }
+
        public function test() {
            $this->postPdf('QBH-9686'
                  , 'D 10 31 52505'
@@ -274,11 +295,11 @@
 
        public function importXls($fileName = '') {
            $cnpj = '';
-           
+
            $_pessoa = new Ca_Model_Pessoa_Mapper();
            $_pessoa->setCodigo($cnpj)->retrieve();
            $idCliente = $_pessoa->getId();
-           
+
            if (!$fileName) {
                $fileName = APPLICATION_PATH . '/modules/vendas/contexts/Vsp/tokio.xls';
            }
@@ -293,29 +314,29 @@
                unset($data[0]);
                foreach ($data as $row) {
                    $_veiculo->newRow()
-                            ->setPlaca($row['D']);
-                   
-                   if ($_veiculo->exists()){
+                         ->setPlaca($row['D']);
+
+                   if ($_veiculo->exists()) {
                        $_veiculo->setDescricao($row['C'])
-                                ->setChassi($row['E'])
-                                ->setChassi()
-                                ->update();
-                   }else{
+                             ->setChassi($row['E'])
+                             ->setChassi()
+                             ->update();
+                   } else {
                        $_veiculo->setDescricao($row['C'])
-                                ->setChassi($row['E'])
-                                ->setChassi()
-                                ->insert();
+                             ->setChassi($row['E'])
+                             ->setChassi()
+                             ->insert();
                    }
-                   
+
                    $_pedido->newRow()
-                           ->setIdCliente($idCliente)
-                           ->setDtEmis($row['A'])
-                           ->setSinistro($row['B'])
-                           ->setIdVeiculo($_veiculo->getId());
-                   
-                   if (!$_pedido->exists()){
+                         ->setIdCliente($idCliente)
+                         ->setDtEmis($row['A'])
+                         ->setSinistro($row['B'])
+                         ->setIdVeiculo($_veiculo->getId());
+
+                   if (!$_pedido->exists()) {
                        $_pedido->insert();
-                   }                         
+                   }
                }
            }
            echo '<pre>';

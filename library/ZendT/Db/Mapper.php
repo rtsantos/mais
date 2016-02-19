@@ -1438,7 +1438,7 @@
                if ($retrieve) {
                    $this->retrieve();
                }
-               return true;
+               return $row;
            } else {
                $this->_rows = false;
                return false;
