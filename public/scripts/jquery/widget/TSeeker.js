@@ -637,7 +637,7 @@
 //              this.options.name = this.options.name.replace(/^.*\-/ig,"");
 //            }
 
-            var windowSize = self._windowSize();
+            //var windowSize = self._windowSize();
 
             $.WindowT.open({
                 id: 'win-seeker-' + this.options.name,

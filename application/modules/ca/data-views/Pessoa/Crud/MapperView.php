@@ -110,7 +110,7 @@
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     LEFT  JOIN ".$this->_getPessoa()->getModel()->getTableName()." pessoa_resp ON ( ca_pessoa.id_pessoa_resp = pessoa_resp.id ) 
                     LEFT  JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( ca_pessoa.id_empresa = empresa.id ) 
                     LEFT  JOIN ".$this->_getCargo()->getModel()->getTableName()." cargo ON ( ca_pessoa.id_cargo = cargo.id )  "; 

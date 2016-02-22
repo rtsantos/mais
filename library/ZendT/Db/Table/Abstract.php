@@ -362,7 +362,7 @@
                 $binds = array();
             }
 
-            $sql = 'SELECT ' . implode(',', $columns) . ' FROM ' . $this->getTableName() . ' ' . $this->getName() . ' WHERE ' . $cmdwhere;
+            $sql = 'SELECT ' . implode(',', $columns) . ' FROM ' . $this->getTableName() . ' ' . $this->getAlias() . ' WHERE ' . $cmdwhere;
             $sql.= ' ORDER BY ' . implode(',', $orderBy);
 
             if ($lock) {

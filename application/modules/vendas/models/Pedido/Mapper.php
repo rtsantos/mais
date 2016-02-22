@@ -47,13 +47,6 @@
        public function _beforeSave() {
            parent::_beforeSave();
 
-           if ($this->_action == 'insert' && !$this->getNumero(true)->toPhp()) {
-               $_numeracao = new Ca_Model_Numeracao_Mapper();
-               $numero = $_numeracao->proximo(self::$table . '.numero'
-                     , $this->getIdEmpresa()->toPhp());
-               $this->setNumero($numero);
-           }
-
            if ($this->_action != 'delete') {
 
                if ($this->getIdEmpresa(true)->toPhp() == '') {
@@ -73,6 +66,14 @@
 
                if ($this->getIdUsuInc(true)->toPhp() == '') {
                    $this->setIdUsuInc(Auth_Session_User::getInstance()->getId());
+               }
+               
+               if ($this->getTipo(true)->toPhp() == '') {
+                   $this->setTipo('V');
+               }
+               
+               if ($this->getStatus(true)->toPhp() == '') {
+                   $this->setStatus('A');
                }
 
                if ($this->getDtEmis(true)->toPhp() == '') {
@@ -105,6 +106,13 @@
                        }
                    }
                }
+           }
+           
+           if ($this->_action == 'insert' && !$this->getNumero(true)->toPhp()) {
+               $_numeracao = new Ca_Model_Numeracao_Mapper();
+               $numero = $_numeracao->proximo(self::$table . '.numero'
+                     , $this->getIdEmpresa()->toPhp());
+               $this->setNumero($numero);
            }
        }
 

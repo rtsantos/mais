@@ -5,11 +5,12 @@
 class Ged_Model_PropDocto_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'img_prop_docto';
+    protected $_alias = 'img_prop_docto';
     protected $_sequence = 'sid_img_prop_docto';
-    protected $_required = array('id','id_aplicacao','nome');
+    protected $_required = array('id','nome');
     protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('id','id_aplicacao','nome','tabela','sql','config');
+    protected $_cols = array('id','nome','config');
     protected $_search = 'nome';
     protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';

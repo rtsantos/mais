@@ -5,10 +5,11 @@
 class Ca_Model_Pessoa_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'ca_pessoa';
+    protected $_alias = 'ca_pessoa';
     protected $_sequence = 'sid_ca_pessoa';
     protected $_required = array('id','nome');
     protected $_primary = array('id');
-    protected $_unique = array('id_empresa','nome','apelido');
+    protected $_unique = array('id_empresa','nome','codigo');
     protected $_cols = array('id','nome','apelido','codigo','email','id_pessoa_resp','telefone','celular','fax','ed_logr','ed_numero','ed_compl','ed_bairro','ed_cidade','ed_estado','ed_cep','ed_cob_logr','ed_cob_numero','ed_cob_compl','ed_cob_bairro','ed_cob_cidade','ed_cob_estado','ed_cob_cep','papel_cliente','papel_funcionario','papel_usuario','papel_empresa','registro','id_empresa','email_cob','hierarquia','papel_contato','id_cargo','papel_fornecedor');
     protected $_search = 'nome';
     protected $_schema  = 'mais';

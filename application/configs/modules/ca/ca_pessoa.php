@@ -1638,7 +1638,7 @@ return array (
     array (
       0 => 'id_empresa',
       1 => 'nome',
-      2 => 'apelido',
+      2 => 'codigo',
     ),
     'description' => 'Pessoa',
   ),

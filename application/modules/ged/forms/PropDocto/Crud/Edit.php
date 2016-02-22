@@ -27,21 +27,8 @@
             $this->addElement($element);
 
             
-            $element = $model->getElement('id_aplicacao');
-            $element->setRequired(true);
-            $this->addElement($element);
-
-            
             $element = $model->getElement('nome');
             $element->setRequired(true);
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('tabela');
-            $this->addElement($element);
-
-            
-            $element = $model->getElement('sql');
             $this->addElement($element);
 
             
