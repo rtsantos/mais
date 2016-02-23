@@ -5,6 +5,7 @@
 class Vendas_Model_Produto_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'cv_produto';
+    protected $_alias = 'cv_produto';
     protected $_sequence = 'sid_cv_produto';
     protected $_required = array('id','codigo','nome','tipo','vlr_venda','id_empresa');
     protected $_primary = array('id');

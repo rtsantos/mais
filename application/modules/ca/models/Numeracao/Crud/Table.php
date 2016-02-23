@@ -5,6 +5,7 @@
 class Ca_Model_Numeracao_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'ca_numeracao';
+    protected $_alias = 'ca_numeracao';
     protected $_sequence = 'sid_ca_numeracao';
     protected $_required = array('id','nome','numero','tamanho','id_empresa');
     protected $_primary = array('id');

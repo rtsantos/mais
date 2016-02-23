@@ -266,20 +266,36 @@
            return true;
        }
 
-       public function integ() {
+       public function run() {
+           Auth_Session_User::refresh('JOB_VSP');
+           
            $_pedido = new Vendas_DataView_Pedido_MapperView();
+           $_vistoria = new Vendas_DataView_Vistoria_MapperView();
+           
            $_where = new ZendT_Db_Where();
-           $_where->addFilter('cv_pedido.status_edi', 'N');
-           $_where->addFilter('cliente.cofigo', '33164021000100');
+           $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());
+           $_where->addFilter('pedido.status_edi', 'N');
+           $_where->addFilter('cliente.codigo', '33164021000100');           
+           $sql = "(SELECT 1"
+                 . "  FROM ".Vendas_DataView_Vistoria_MapperView::$table . " as vistoria "
+                 . " WHERE vistoria.id_pedido = pedido.id"
+                 . "   AND vistoria.laudo IS NOT NULL)";                 
+           $_where->addFilterExists($sql);
+           
            $_pedido->findAll($_where, '*');
 
            while ($row = $_pedido->fetch()) {
                try {
-                   $_vistoria->setIdPedido($_pedido->getId())->retrieve();
-                   $pdf = $_vistoria->getLaudo()->getFilename();
+                   $_vistoria->newRow()->setIdPedido($_pedido->getId())->retrieve();
+                   $pdf = $_vistoria->getLaudo()->getFile();
+                   $fileName = $pdf->getFilename();
+                   
+                   /*var_dump($fileName);
+                   exit;*/
 
-                   $this->postPdf($row['placa_veiculo'], $row['sinistro'], $pdf);
+                   $this->postPdf($row['placa_veiculo'], $row['sinistro'], $fileName);
                    $_pedido->setStatusEdi('T')->update();
+                   exit;
                } catch (Exception $ex) {
                    $_pedido->setStatusEdi('E')
                            ->update();

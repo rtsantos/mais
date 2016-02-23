@@ -59,7 +59,7 @@
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( ca_numeracao.id_empresa = empresa.id )  "; 
             return $sql;
         }

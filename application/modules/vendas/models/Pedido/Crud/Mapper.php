@@ -65,6 +65,10 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
                 'id_veiculo' => array(
                     'mapper' => 'Frota_DataView_Veiculo_MapperView',
                     'column' => 'id'
+                ),
+                'id_endereco' => array(
+                    'mapper' => 'Ca_DataView_Endereco_MapperView',
+                    'column' => 'id'
                 ));
     }
     /**
@@ -84,6 +88,13 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
     'description' => 'Pagamento',
     'url' => '/vendas/pagamento/form/grid/1',
     'column' => 'id_pedido',
+    'message' => 'Necessário seleção Pedido',
+  ),
+  'cv_vistoria' => 
+  array (
+    'description' => 'Vistorias',
+    'url' => '/vendas/vistoria/form/grid/1',
+    'column' => '',
     'message' => 'Necessário seleção Pedido',
   ),
 );
@@ -611,6 +622,117 @@ class Vendas_Model_Pedido_Crud_Mapper extends ZendT_Db_Mapper
                     
         if (!$options['db']){
             
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_endereco
+     *
+     * @return string
+     */
+    public function getIdEndereco($instance=false){
+        if ($instance && !is_object($this->_data['id_endereco'])){
+            $this->setIdEndereco('',array('required'=>false));
+        }
+        return $this->_data['id_endereco'];
+    }
+    /**
+     * Seta o valor da coluna id_endereco
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setIdEndereco($value,$options=array('required'=>true)){        
+        $this->_data['id_endereco'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_endereco']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna telefone
+     *
+     * @return string
+     */
+    public function getTelefone($instance=false){
+        if ($instance && !is_object($this->_data['telefone'])){
+            $this->setTelefone('',array('required'=>false));
+        }
+        return $this->_data['telefone'];
+    }
+    /**
+     * Seta o valor da coluna telefone
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setTelefone($value,$options=array('required'=>true)){        
+        $this->_data['telefone'] = new ZendT_Type_String($value,array('mask'=>array (
+  0 => '99 9.9999-9999',
+  1 => '99 9999-9999',
+  2 => '9999-9999',
+  3 => '9.9999-9999',
+)
+                                                                   ,'charMask'=>'9'
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['telefone']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 45, ) );
+            $valueValid = $this->_data['telefone']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna status_edi
+     *
+     * @return string
+     */
+    public function getStatusEdi($instance=false){
+        if ($instance && !is_object($this->_data['status_edi'])){
+            $this->setStatusEdi('',array('required'=>false));
+        }
+        return $this->_data['status_edi'];
+    }
+    /**
+     * Seta o valor da coluna status_edi
+     *
+     * @param string $value
+     * @return Vendas_Model_Pedido_Crud_Mapper
+     */
+    public function setStatusEdi($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('N'=>'Não transmitido','T'=>'Transmitido','E'=>'Erro na transmissão');
+        $this->_data['status_edi'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['status_edi']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
+            $valueValid = $this->_data['status_edi']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
         }
         return $this;
     }

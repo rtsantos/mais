@@ -30,12 +30,12 @@ class Vendas_Model_Vistoria_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getReferenceMap(){
         return array(
-                'id_pedido' => array(
-                    'mapper' => 'Vendas_DataView_Pedido_MapperView',
-                    'column' => 'id'
-                ),
                 'id_veiculo' => array(
                     'mapper' => 'Frota_DataView_Veiculo_MapperView',
+                    'column' => 'id'
+                ),
+                'id_pedido' => array(
+                    'mapper' => 'Vendas_DataView_Pedido_MapperView',
                     'column' => 'id'
                 ));
     }

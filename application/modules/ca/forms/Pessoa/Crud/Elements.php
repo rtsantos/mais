@@ -554,5 +554,147 @@ class Ca_Form_Pessoa_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdEndereco(){
+
+        $element = new ZendT_Form_Element_Seeker('id_endereco');
+        $element->setSuffix('endereco');
+        $element->setLabel($this->_translate->_('ca_pessoa.id_endereco') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('logradouro');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/ca/endereco/grid');
+        $element->url()->setSearch('/ca/endereco/seeker-search');
+        $element->url()->setRetrieve('/ca/endereco/retrieve');
+        $element->setMapperView('Ca_DataView_Endereco_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdEnderecoCob(){
+
+        $element = new ZendT_Form_Element_Seeker('id_endereco_cob');
+        $element->setSuffix('endereco_cob');
+        $element->setLabel($this->_translate->_('ca_pessoa.id_endereco_cob') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('logradouro');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/ca/endereco/grid');
+        $element->url()->setSearch('/ca/endereco/seeker-search');
+        $element->url()->setRetrieve('/ca/endereco/retrieve');
+        $element->setMapperView('Ca_DataView_Endereco_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Seeker
+     */
+    public function getIdBanco(){
+
+        $element = new ZendT_Form_Element_Seeker('id_banco');
+        $element->setSuffix('banco');
+        $element->setLabel($this->_translate->_('ca_pessoa.id_banco') . ':');
+        $element->setIdField('id');
+        $element->setIdAttribs(array());
+        $element->setSearchField('nome');
+        $element->setSearchAttribs(array('css-width'=>'270px'));
+        $element->modal()->setWidth(800);
+        $element->modal()->setHeight(450);
+        $element->url()->setGrid('/financeiro/banco/grid');
+        $element->url()->setSearch('/financeiro/banco/seeker-search');
+        $element->url()->setRetrieve('/financeiro/banco/retrieve');
+        $element->setMapperView('Financeiro_DataView_Banco_MapperView');
+        $element->addValidators(array());
+                
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getAgBanco(){
+
+        $element = new ZendT_Form_Element_Text('ag_banco');
+        $element->setLabel($this->_translate->_('ca_pessoa.ag_banco') . ':');
+        $element->setAttribs(array('maxlength'=>'10','css-width'=>'100px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getAgDigBanco(){
+
+        $element = new ZendT_Form_Element_Text('ag_dig_banco');
+        $element->setLabel($this->_translate->_('ca_pessoa.ag_dig_banco') . ':');
+        $element->setAttribs(array('maxlength'=>'2','css-width'=>'100px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getContaBanco(){
+
+        $element = new ZendT_Form_Element_Text('conta_banco');
+        $element->setLabel($this->_translate->_('ca_pessoa.conta_banco') . ':');
+        $element->setAttribs(array('maxlength'=>'20','css-width'=>'175px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getContaDigBanco(){
+
+        $element = new ZendT_Form_Element_Text('conta_dig_banco');
+        $element->setLabel($this->_translate->_('ca_pessoa.conta_dig_banco') . ':');
+        $element->setAttribs(array('maxlength'=>'2','css-width'=>'100px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
+    /**
+     *
+     * @return \ZendT_Form_Element_Text
+     */
+    public function getCodTitBanco(){
+
+        $element = new ZendT_Form_Element_Text('cod_tit_banco');
+        $element->setLabel($this->_translate->_('ca_pessoa.cod_tit_banco') . ':');
+        $element->setAttribs(array('maxlength'=>'20','css-width'=>'175px'));        
+        $element->addValidators(array('Zend_Validate_StringLength'));
+        $element->addAttr('onBlur',"this.value=trim(this.value);this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
+        return $element;
+    }
+            
 }
 ?>

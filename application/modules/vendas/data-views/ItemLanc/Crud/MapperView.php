@@ -78,7 +78,7 @@
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     JOIN ".$this->_getItemPedido()->getModel()->getTableName()." item_pedido ON ( cv_item_lanc.id_item_pedido = item_pedido.id ) 
                     JOIN ".$this->_getLancamento()->getModel()->getTableName()." lancamento ON ( cv_item_lanc.id_lancamento = lancamento.id )  "; 
             return $sql;

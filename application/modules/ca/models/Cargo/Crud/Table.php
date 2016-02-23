@@ -5,6 +5,7 @@
 class Ca_Model_Cargo_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'ca_cargo';
+    protected $_alias = 'ca_cargo';
     protected $_sequence = 'sid_ca_cargo';
     protected $_required = array('id');
     protected $_primary = array('id');

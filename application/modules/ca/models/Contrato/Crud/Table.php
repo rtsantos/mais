@@ -5,6 +5,7 @@
 class Ca_Model_Contrato_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'ca_contrato';
+    protected $_alias = 'ca_contrato';
     protected $_sequence = 'sid_ca_contrato';
     protected $_required = array('id','descricao','numero','status','id_empresa','id_cliente','dt_vig_ini');
     protected $_primary = array('id');

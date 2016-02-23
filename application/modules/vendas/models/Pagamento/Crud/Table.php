@@ -5,6 +5,7 @@
 class Vendas_Model_Pagamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'cv_pagto_pedido';
+    protected $_alias = 'cv_pagto_pedido';
     protected $_sequence = 'sid_cv_pagto_pedido';
     protected $_required = array('id','id_pedido','vlr_total');
     protected $_primary = array('id');

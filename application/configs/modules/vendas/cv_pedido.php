@@ -3,6 +3,7 @@ return array (
   'table' => 
   array (
     'name' => 'cv_pedido',
+    'alias' => 'pedido',
     'modelName' => 'pedido',
     'schema' => 'mais',
     'sequenceName' => 'sid_cv_pedido',
@@ -853,7 +854,7 @@ return array (
       array (
         'label' => 'Data de Emissão',
         'multiple' => 0,
-        'type' => 'Date',
+        'type' => 'date',
         'object' => 
         array (
           'mask' => NULL,
@@ -886,11 +887,165 @@ return array (
         'length' => NULL,
         'nullable' => true,
       ),
+      'id_endereco' => 
+      array (
+        'label' => 'ID_ENDERECO',
+        'referenceMap' => true,
+        'multiple' => 0,
+        'type' => 'Integer',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Seeker',
+          'seeker' => 
+          array (
+            'field' => 
+            array (
+              'search' => 'logradouro',
+              'display' => '',
+              'id' => 'id',
+            ),
+            'search' => 
+            array (
+              'css-width' => '270px',
+            ),
+            'display' => 
+            array (
+              'css-width' => '0px',
+            ),
+            'url' => 
+            array (
+              'grid' => '/ca/endereco/grid',
+              'search' => '/ca/endereco/seeker-search',
+              'retrieve' => '/ca/endereco/retrieve',
+            ),
+            'modal' => 
+            array (
+              'width' => 800,
+              'height' => 450,
+            ),
+          ),
+          'required' => false,
+        ),
+        'length' => NULL,
+        'nullable' => true,
+      ),
+      'telefone' => 
+      array (
+        'label' => 'Telefone de Contato',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => array('99 9.9999-9999','99 9999-9999','9999-9999','9.9999-9999'),
+          'charMask' => '9',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 45,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+          ),
+          'type' => 'Text',
+          'text' => 
+          array (
+            'maxlength' => '45',
+            'css-width' => '200px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '45',
+        'nullable' => true,
+      ),
+      'status_edi' => 
+      array (
+        'label' => 'EDI',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 1,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+             'N' => 'Não transmitido',
+             'T' => 'Transmitido',
+             'E' => 'Erro na transmissão'
+          ),
+          'type' => 'Select',
+          'text' => 
+          array (
+            'maxlength' => '1',
+            'css-width' => '100px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '1',
+        'nullable' => true,
+      ),
     ),
     'dependentTables' => 
     array (
       0 => 'Vendas_Model_ItemPedido',
       1 => 'Vendas_Model_Pagamento',
+      2 => 'Vendas_Model_Vistoria',
     ),
     'tabs' => 
     array (
@@ -908,6 +1063,13 @@ return array (
         'column' => 'id_pedido',
         'message' => 'Necessário seleção Pedido',
       ),
+      'cv_vistoria' => 
+      array (
+        'description' => 'Vistorias',
+        'url' => '/vendas/vistoria/form/grid/1',
+        'column' => '',
+        'message' => 'Necessário seleção Pedido',
+      ),
     ),
     'referenceMaps' => 
     array (
@@ -915,16 +1077,16 @@ return array (
       array (
         'columnName' => 'id_usu_inc',
         'objectNameReference' => 'Auth_Model_Conta',
-        'tableNameReference' => 'papel',
-        'schemaNameReference' => 'prouser',
+        'tableNameReference' => 'at_papel',
+        'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
       1 => 
       array (
         'columnName' => 'id_usu_alt',
         'objectNameReference' => 'Auth_Model_Conta',
-        'tableNameReference' => 'papel',
-        'schemaNameReference' => 'prouser',
+        'tableNameReference' => 'at_papel',
+        'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
       2 => 
@@ -980,6 +1142,14 @@ return array (
         'columnName' => 'id_veiculo',
         'objectNameReference' => 'Frota_Model_Veiculo',
         'tableNameReference' => 'fr_veiculo',
+        'schemaNameReference' => 'mais',
+        'columnReference' => 'id',
+      ),
+      9 => 
+      array (
+        'columnName' => 'id_endereco',
+        'objectNameReference' => 'Ca_Model_Endereco',
+        'tableNameReference' => 'ca_endereco',
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),

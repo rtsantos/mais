@@ -32,5 +32,13 @@ array (
   'fc_lancamento.id_usu_inc.papel.descricao' => 'Descrição Usuário Inclusão',
   'fc_lancamento.id_lancamento_orig' => 'Lançamento de Origem',
   'fc_lancamento.id_lancamento_orig.fc_lancamento.tipo' => 'Tipo Lançamento de Origem',
+  'financeiro.banco.form' => 'Cadastro de Banco',
+  'financeiro.banco.grid' => 'Listagem de Banco',
+  'fc_banco' => 'Banco',
+  'fc_banco.id' => 'Id.',
+  'fc_banco.nome' => 'Nome',
+  'fc_banco.codigo' => 'Código',
+  'fc_banco.id_empresa' => 'Empresa',
+  'fc_banco.id_empresa.ca_pessoa.nome' => 'Nome Empresa',
 )
 ?>

@@ -16,14 +16,14 @@ class Vendas_Model_Vistoria_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_adapter = 'db.mais';
     protected $_dependentTables = array();
     protected $_referenceMap = array(
-                'IdPedido' => array(
-                    'columns' => 'id_pedido',
-                    'refTableClass' => 'Vendas_Model_Pedido_Table',
-                    'refColumns' => 'id'
-                ),
                 'IdVeiculo' => array(
                     'columns' => 'id_veiculo',
                     'refTableClass' => 'Frota_Model_Veiculo_Table',
+                    'refColumns' => 'id'
+                ),
+                'IdPedido' => array(
+                    'columns' => 'id_pedido',
+                    'refTableClass' => 'Vendas_Model_Pedido_Table',
                     'refColumns' => 'id'
                 ));
     protected $_listOptions = array();

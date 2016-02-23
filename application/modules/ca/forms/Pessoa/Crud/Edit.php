@@ -8,7 +8,12 @@
         /**
          * @var array
          */
-        protected $_url = array();
+        protected $_url = array (
+  'retrieve' => '/ca/pessoa/retrieve',
+  'insert' => '/ca/pessoa/insert',
+  'update' => '/ca/pessoa/update',
+  'delete' => '/ca/pessoa/delete',
+);
         /**
          * Carrega os elementos no formulário para serem renderizado
          * @return void
@@ -157,6 +162,38 @@
 
             
             $element = $model->getElement('papel_fornecedor');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_endereco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_endereco_cob');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('id_banco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('ag_banco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('ag_dig_banco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('conta_banco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('conta_dig_banco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('cod_tit_banco');
             $this->addElement($element);
 
             

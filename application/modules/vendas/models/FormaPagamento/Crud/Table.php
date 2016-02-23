@@ -5,6 +5,7 @@
 class Vendas_Model_FormaPagamento_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'cv_forma_pagto';
+    protected $_alias = 'forma_pagamento';
     protected $_sequence = 'sid_cv_forma_pagto';
     protected $_required = array('id','descricao','parcela','status','id_empresa');
     protected $_primary = array('id');

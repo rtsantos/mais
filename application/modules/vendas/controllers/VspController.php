@@ -11,4 +11,22 @@
             $_interface->importXls();*/
             exit;
         }
+        
+        public function iceAction(){
+            $_ice = new Vendas_Context_Vsp_Ice();
+            $_ice->run();
+            /*$_interface = new Vendas_Context_Vsp_Tokio();
+            //$_interface->test();
+            $_interface->importXls();*/
+            exit;
+        }
+        
+        public function tokioAction(){
+            $_ice = new Vendas_Context_Vsp_Tokio();
+            $_ice->run();
+            /*$_interface = new Vendas_Context_Vsp_Tokio();
+            //$_interface->test();
+            $_interface->importXls();*/
+            exit;
+        }
     }

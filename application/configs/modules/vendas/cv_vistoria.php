@@ -381,7 +381,7 @@ return array (
       array (
         'label' => 'Data de Emissão',
         'multiple' => 0,
-        'type' => 'Date',
+        'type' => 'date',
         'object' => 
         array (
           'mask' => NULL,
@@ -504,17 +504,17 @@ return array (
     array (
       0 => 
       array (
-        'columnName' => 'id_pedido',
-        'objectNameReference' => 'Vendas_Model_Pedido',
-        'tableNameReference' => 'cv_pedido',
+        'columnName' => 'id_veiculo',
+        'objectNameReference' => 'Frota_Model_Veiculo',
+        'tableNameReference' => 'fr_veiculo',
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
       1 => 
       array (
-        'columnName' => 'id_veiculo',
-        'objectNameReference' => 'Frota_Model_Veiculo',
-        'tableNameReference' => 'fr_veiculo',
+        'columnName' => 'id_pedido',
+        'objectNameReference' => 'Vendas_Model_Pedido',
+        'tableNameReference' => 'cv_pedido',
         'schemaNameReference' => 'mais',
         'columnReference' => 'id',
       ),
@@ -535,7 +535,7 @@ return array (
     ),
     'unique' => 
     array (
-       'id_pedido'
+      0 => 'id_pedido',
     ),
     'description' => 'Vistorias',
   ),

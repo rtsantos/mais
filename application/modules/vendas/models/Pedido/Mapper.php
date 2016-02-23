@@ -67,13 +67,17 @@
                if ($this->getIdUsuInc(true)->toPhp() == '') {
                    $this->setIdUsuInc(Auth_Session_User::getInstance()->getId());
                }
-               
+
                if ($this->getTipo(true)->toPhp() == '') {
                    $this->setTipo('V');
                }
-               
+
                if ($this->getStatus(true)->toPhp() == '') {
                    $this->setStatus('A');
+               }
+               
+               if ($this->getStatusEdi(true)->toPhp() == '') {
+                   $this->setStatusEdi('N');
                }
 
                if ($this->getDtEmis(true)->toPhp() == '') {
@@ -107,7 +111,7 @@
                    }
                }
            }
-           
+
            if ($this->_action == 'insert' && !$this->getNumero(true)->toPhp()) {
                $_numeracao = new Ca_Model_Numeracao_Mapper();
                $numero = $_numeracao->proximo(self::$table . '.numero'
@@ -122,16 +126,20 @@
            if (count($this->_others['item_pedido']) > 0 && $this->_others['item_pedido']['id_produto']) {
                $_itemPedido = new Vendas_DataView_ItemPedido_MapperView();
                $_itemPedido->setIdPedido($this->getId())
-                     ->setIdProduto($this->_others['item_pedido']['id_produto'])
-                     ->setQtdItem($this->_others['item_pedido']['qtd_item'])
-                     ->insert();
+                           ->setIdProduto($this->_others['item_pedido']['id_produto'])
+                           ->setQtdItem($this->_others['item_pedido']['qtd_item']);
+               if (!$_itemPedido->exists()) {
+                   $_itemPedido->insert();
+               }
            }
 
            if (count($this->_others['pagamento']) > 0 && $this->_others['pagamento']['id_forma_pagto']) {
                $_pagamento = new Vendas_DataView_Pagamento_MapperView();
                $_pagamento->setIdPedido($this->getId())
-                     ->setIdFormaPagto($this->_others['pagamento']['id_forma_pagto'])
-                     ->insert();
+                          ->setIdFormaPagto($this->_others['pagamento']['id_forma_pagto']);
+               if (!$_pagamento->exists()) {
+                   $_pagamento->insert();
+               }
            }
 
            if ($this->getStatus(true)->toPhp() == 'E') {
@@ -145,7 +153,7 @@
                    $this->_pagamento->efetivar($this->getId());
                }
            }
-           
+
            if ($this->getStatus(true)->toPhp() == 'C') {
                $_pagtoLanc = new Vendas_DataView_PagtoLanc_MapperView();
 
@@ -170,8 +178,8 @@
            $this->setStatus('E')->update();
            return true;
        }
-       
-       public function cancelar(){
+
+       public function cancelar() {
            if ($this->getId()->toPhp() == '') {
                throw new ZendT_Exception_Alert(_i18n('Necessário informar um Pedido!'));
            } else {

@@ -38,8 +38,16 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
                     'mapper' => 'Ca_DataView_Cargo_MapperView',
                     'column' => 'id'
                 ),
-                'id_empresa' => array(
-                    'mapper' => 'Ca_DataView_Pessoa_MapperView',
+                'id_endereco' => array(
+                    'mapper' => 'Ca_DataView_Endereco_MapperView',
+                    'column' => 'id'
+                ),
+                'id_endereco_cob' => array(
+                    'mapper' => 'Ca_DataView_Endereco_MapperView',
+                    'column' => 'id'
+                ),
+                'id_banco' => array(
+                    'mapper' => 'Financeiro_DataView_Banco_MapperView',
                     'column' => 'id'
                 ));
     }
@@ -48,6 +56,125 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function getTabs(){
         return array (
+  'at_papel' => 
+  array (
+    'description' => 'Conta',
+    'url' => '/auth/conta/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'at_papel_empresa' => 
+  array (
+    'description' => 'Empresas do Usuário',
+    'url' => '/auth/conta-empresa/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'ca_cargo' => 
+  array (
+    'description' => 'ca_cargo',
+    'url' => '/ca/cargo/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'ca_contrato' => 
+  array (
+    'description' => 'Contrato',
+    'url' => '/ca/contrato/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'ca_endereco' => 
+  array (
+    'description' => 'Endereço',
+    'url' => '/ca/endereco/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'ca_numeracao' => 
+  array (
+    'description' => 'Numeração',
+    'url' => '/ca/numeracao/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'ca_pessoa' => 
+  array (
+    'description' => 'Pessoa',
+    'url' => '/ca/pessoa/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'ca_regra_contrato' => 
+  array (
+    'description' => 'Regras do Contrato',
+    'url' => '/ca/regra-contrato/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'cv_forma_pagto' => 
+  array (
+    'description' => 'Forma de Pagamento',
+    'url' => '/vendas/forma-pagamento/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'cv_parcela' => 
+  array (
+    'description' => 'Parcelas',
+    'url' => '/vendas/parcela/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'cv_pedido' => 
+  array (
+    'description' => 'Pedido',
+    'url' => '/vendas/pedido/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'cv_produto' => 
+  array (
+    'description' => 'Produto/Serviço',
+    'url' => '/vendas/produto/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'fc_banco' => 
+  array (
+    'description' => 'Banco',
+    'url' => '/financeiro/banco/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'fc_lancamento' => 
+  array (
+    'description' => 'Lançamento',
+    'url' => '/financeiro/lancamento/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'fr_marca' => 
+  array (
+    'description' => 'Marca',
+    'url' => '/frota/marca/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'fr_modelo' => 
+  array (
+    'description' => 'Modelo',
+    'url' => '/frota/modelo/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
+  'fr_veiculo' => 
+  array (
+    'description' => 'Veículo',
+    'url' => '/frota/veiculo/form/grid/1',
+    'column' => '',
+    'message' => 'Necessário seleção Pessoa',
+  ),
 );
     }
     
@@ -1353,6 +1480,293 @@ class Ca_Model_Pessoa_Crud_Mapper extends ZendT_Db_Mapper
             
             $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
             $valueValid = $this->_data['papel_fornecedor']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_endereco
+     *
+     * @return string
+     */
+    public function getIdEndereco($instance=false){
+        if ($instance && !is_object($this->_data['id_endereco'])){
+            $this->setIdEndereco('',array('required'=>false));
+        }
+        return $this->_data['id_endereco'];
+    }
+    /**
+     * Seta o valor da coluna id_endereco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setIdEndereco($value,$options=array('required'=>true)){        
+        $this->_data['id_endereco'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_endereco']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_endereco_cob
+     *
+     * @return string
+     */
+    public function getIdEnderecoCob($instance=false){
+        if ($instance && !is_object($this->_data['id_endereco_cob'])){
+            $this->setIdEnderecoCob('',array('required'=>false));
+        }
+        return $this->_data['id_endereco_cob'];
+    }
+    /**
+     * Seta o valor da coluna id_endereco_cob
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setIdEnderecoCob($value,$options=array('required'=>true)){        
+        $this->_data['id_endereco_cob'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_endereco_cob']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna id_banco
+     *
+     * @return string
+     */
+    public function getIdBanco($instance=false){
+        if ($instance && !is_object($this->_data['id_banco'])){
+            $this->setIdBanco('',array('required'=>false));
+        }
+        return $this->_data['id_banco'];
+    }
+    /**
+     * Seta o valor da coluna id_banco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setIdBanco($value,$options=array('required'=>true)){        
+        $this->_data['id_banco'] = new ZendT_Type_Number($value,array('numDecimal'=>null));
+         if ($options['db'])
+            $this->_data['id_banco']->setValueFromDb($value);
+                    
+        if (!$options['db']){
+            
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna ag_banco
+     *
+     * @return string
+     */
+    public function getAgBanco($instance=false){
+        if ($instance && !is_object($this->_data['ag_banco'])){
+            $this->setAgBanco('',array('required'=>false));
+        }
+        return $this->_data['ag_banco'];
+    }
+    /**
+     * Seta o valor da coluna ag_banco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setAgBanco($value,$options=array('required'=>true)){        
+        $this->_data['ag_banco'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['ag_banco']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 10, ) );
+            $valueValid = $this->_data['ag_banco']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna ag_dig_banco
+     *
+     * @return string
+     */
+    public function getAgDigBanco($instance=false){
+        if ($instance && !is_object($this->_data['ag_dig_banco'])){
+            $this->setAgDigBanco('',array('required'=>false));
+        }
+        return $this->_data['ag_dig_banco'];
+    }
+    /**
+     * Seta o valor da coluna ag_dig_banco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setAgDigBanco($value,$options=array('required'=>true)){        
+        $this->_data['ag_dig_banco'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['ag_dig_banco']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 2, ) );
+            $valueValid = $this->_data['ag_dig_banco']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna conta_banco
+     *
+     * @return string
+     */
+    public function getContaBanco($instance=false){
+        if ($instance && !is_object($this->_data['conta_banco'])){
+            $this->setContaBanco('',array('required'=>false));
+        }
+        return $this->_data['conta_banco'];
+    }
+    /**
+     * Seta o valor da coluna conta_banco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setContaBanco($value,$options=array('required'=>true)){        
+        $this->_data['conta_banco'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['conta_banco']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 20, ) );
+            $valueValid = $this->_data['conta_banco']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna conta_dig_banco
+     *
+     * @return string
+     */
+    public function getContaDigBanco($instance=false){
+        if ($instance && !is_object($this->_data['conta_dig_banco'])){
+            $this->setContaDigBanco('',array('required'=>false));
+        }
+        return $this->_data['conta_dig_banco'];
+    }
+    /**
+     * Seta o valor da coluna conta_dig_banco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setContaDigBanco($value,$options=array('required'=>true)){        
+        $this->_data['conta_dig_banco'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['conta_dig_banco']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 2, ) );
+            $valueValid = $this->_data['conta_dig_banco']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna cod_tit_banco
+     *
+     * @return string
+     */
+    public function getCodTitBanco($instance=false){
+        if ($instance && !is_object($this->_data['cod_tit_banco'])){
+            $this->setCodTitBanco('',array('required'=>false));
+        }
+        return $this->_data['cod_tit_banco'];
+    }
+    /**
+     * Seta o valor da coluna cod_tit_banco
+     *
+     * @param string $value
+     * @return Ca_Model_Pessoa_Crud_Mapper
+     */
+    public function setCodTitBanco($value,$options=array('required'=>true)){        
+        $this->_data['cod_tit_banco'] = new ZendT_Type_String($value,array('mask'=>''
+                                                                   ,'charMask'=>''
+                                                                   ,'filterDb'=>array (
+  0 => '',
+)
+                                                                   ,'filter'=>array('trim', 'strtoupper', 'removeAccent', )));
+        if ($options['db'])
+            $this->_data['cod_tit_banco']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 20, ) );
+            $valueValid = $this->_data['cod_tit_banco']->getValueToDb();
             if ($valueValid && !$valid->isValid($valueValid)){
                 throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
             }

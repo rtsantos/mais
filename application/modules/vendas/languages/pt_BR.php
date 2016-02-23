@@ -152,6 +152,12 @@ array (
   'cv_vistoria.observacao' => 'Observação',
   'cv_vistoria.dt_emis' => 'Data de Emissão',
   'cv_vistoria.local' => 'Local',
-  'cv_vistoria.laudo' => 'LAUDO',
+  'cv_vistoria.laudo' => 'Laudo',
+  'cv_pedido.id_usu_inc.at_papel.nome' => 'Nome Usuário Inclusão',
+  'cv_pedido.id_usu_alt.at_papel.nome' => 'Nome Usuário Alteração',
+  'cv_pedido.id_endereco' => 'Endereço',
+  'cv_pedido.id_endereco.ca_endereco.logradouro' => 'Logradouro Endereço',
+  'cv_pedido.telefone' => 'Telefone',
+  'cv_pedido.status_edi' => 'EDI',
 )
 ?>

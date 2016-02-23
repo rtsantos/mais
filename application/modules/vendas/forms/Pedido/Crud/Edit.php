@@ -99,6 +99,18 @@
             $this->addElement($element);
 
             
+            $element = $model->getElement('id_endereco');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('telefone');
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('status_edi');
+            $this->addElement($element);
+
+            
         }
         /**
          * Configura uma coluna para ser multipla, ou seja,

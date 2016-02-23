@@ -3,6 +3,7 @@ return array (
   'table' => 
   array (
     'name' => 'cv_forma_pagto',
+    'alias' => 'forma_pagamento',
     'modelName' => 'forma_pagamento',
     'schema' => 'mais',
     'sequenceName' => 'sid_cv_forma_pagto',

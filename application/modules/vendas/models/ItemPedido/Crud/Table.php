@@ -5,6 +5,7 @@
 class Vendas_Model_ItemPedido_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'cv_item_pedido';
+    protected $_alias = 'cv_item_pedido';
     protected $_sequence = 'sid_item_pedido';
     protected $_required = array('id','id_pedido','id_produto','id_usu_inc','id_usu_alt');
     protected $_primary = array('id');

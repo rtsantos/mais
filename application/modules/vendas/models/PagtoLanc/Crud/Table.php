@@ -5,6 +5,7 @@
 class Vendas_Model_PagtoLanc_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'cv_pagto_lanc';
+    protected $_alias = 'cv_pagto_lanc';
     protected $_sequence = 'sid_cv_pagto_lanc';
     protected $_required = array('id');
     protected $_primary = array('id');

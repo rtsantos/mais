@@ -5,6 +5,7 @@
 class Vendas_Model_Parcela_Crud_Table extends ZendT_Db_Table_Abstract
 {
     protected $_name = 'cv_parcela';
+    protected $_alias = 'cv_parcela';
     protected $_sequence = 'sid_cv_parcela';
     protected $_required = array('id','descricao','status','qtd','id_empresa');
     protected $_primary = array('id');

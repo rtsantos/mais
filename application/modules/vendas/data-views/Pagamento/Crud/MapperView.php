@@ -108,7 +108,7 @@
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     JOIN ".$this->_getPedido()->getModel()->getTableName()." pedido ON ( cv_pagto_pedido.id_pedido = pedido.id ) 
                     LEFT  JOIN ".$this->_getFormaPagamento()->getModel()->getTableName()." forma_pagto ON ( cv_pagto_pedido.id_forma_pagto = forma_pagto.id ) 
                     LEFT  JOIN ".$this->_getParcela()->getModel()->getTableName()." parcela ON ( cv_pagto_pedido.id_parcela = parcela.id )  "; 

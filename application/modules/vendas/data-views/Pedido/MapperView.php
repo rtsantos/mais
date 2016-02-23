@@ -16,6 +16,16 @@
            return $where;
        }
 
+       /*protected function _prepareSql(&$sql, &$binds, $type) {
+           parent::_prepareSql($sql, $binds, $type);
+           
+           echo '<pre>';
+           print_r($sql);
+           echo '<hr />';
+           print_r($binds);
+           echo '</pre>';
+       }*/
+
    }
 
 ?>

@@ -88,7 +88,7 @@
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
                     LEFT  JOIN ".$this->_getPessoa()->getModel()->getTableName()." cliente ON ( cv_produto.id_cliente = cliente.id ) 
                     LEFT  JOIN ".$this->_getProduto()->getModel()->getTableName()." produto_resp ON ( cv_produto.id_produto_resp = produto_resp.id ) 
                     JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( cv_produto.id_empresa = empresa.id )  "; 

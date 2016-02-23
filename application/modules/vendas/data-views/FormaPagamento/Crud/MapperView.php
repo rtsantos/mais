@@ -47,21 +47,21 @@
         protected function _loadColumns(){
             $this->_columns = new ZendT_Db_Column_View('Vendas_DataView_FormaPagamento_MapperView',$this->_getSettingsDefault());
             
-            $this->_columns->add('id', 'cv_forma_pagto', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.id'),'String','%?%');
-            $this->_columns->add('descricao', 'cv_forma_pagto', 'descricao', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.descricao'),'String','%?%');
-            $this->_columns->add('parcela', 'cv_forma_pagto', 'parcela', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.parcela'),'String','=');
-            $this->_columns->add('status', 'cv_forma_pagto', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.status'),'String','=');
-            $this->_columns->add('id_empresa', 'cv_forma_pagto', 'id_empresa', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.id_empresa'), null, '=');
+            $this->_columns->add('id', 'forma_pagamento', 'id', $this->getModel()->getMapperName(), ZendT_Lib::translate('forma_pagamento.id'),'String','%?%');
+            $this->_columns->add('descricao', 'forma_pagamento', 'descricao', $this->getModel()->getMapperName(), ZendT_Lib::translate('forma_pagamento.descricao'),'String','%?%');
+            $this->_columns->add('parcela', 'forma_pagamento', 'parcela', $this->getModel()->getMapperName(), ZendT_Lib::translate('forma_pagamento.parcela'),'String','=');
+            $this->_columns->add('status', 'forma_pagamento', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('forma_pagamento.status'),'String','=');
+            $this->_columns->add('id_empresa', 'forma_pagamento', 'id_empresa', $this->getModel()->getMapperName(), ZendT_Lib::translate('forma_pagamento.id_empresa'), null, '=');
             $this->_columns->add('nome_empresa', 'empresa', 'nome', $this->_getPessoa()->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.id_empresa.ca_pessoa.nome'),null,'?%');
-            $this->_columns->add('pago', 'cv_forma_pagto', 'pago', $this->getModel()->getMapperName(), ZendT_Lib::translate('cv_forma_pagto.pago'),'String','=');
+            $this->_columns->add('pago', 'forma_pagamento', 'pago', $this->getModel()->getMapperName(), ZendT_Lib::translate('forma_pagamento.pago'),'String','=');
 
         }
         /**
          * Retorna o SQL Base
          */
         protected function _getSqlBase() {
-            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getName() ." 
-                    JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( cv_forma_pagto.id_empresa = empresa.id )  "; 
+            $sql = $this->getModel()->getTableName().' '.$this->getModel()->getAlias() ." 
+                    JOIN ".$this->_getPessoa()->getModel()->getTableName()." empresa ON ( forma_pagamento.id_empresa = empresa.id )  "; 
             return $sql;
         }
     }
