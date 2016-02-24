@@ -14,7 +14,7 @@
         
         public function iceAction(){
             $_ice = new Vendas_Context_Vsp_Ice();
-            $_ice->run();
+            $_ice->run('EVS2603');
             /*$_interface = new Vendas_Context_Vsp_Tokio();
             //$_interface->test();
             $_interface->importXls();*/
@@ -23,7 +23,7 @@
         
         public function tokioAction(){
             $_ice = new Vendas_Context_Vsp_Tokio();
-            $_ice->run();
+            $_ice->run('EVS2603');
             /*$_interface = new Vendas_Context_Vsp_Tokio();
             //$_interface->test();
             $_interface->importXls();*/

@@ -174,7 +174,7 @@
             }
 
             $this->_request('https://portal.tokiomarine.com.br/acesso/prestador');
-
+            $documentDOM = new ZendT_HtmlDom_SimpleHtmlDom($html);
 
             /* enviar=Enviar
               idSistema=5
@@ -265,7 +265,6 @@
             $param['post']['periodo_inicial'] = '15/12/2015';
             $param['post']['placa'] = $placa;
             $result = $this->_request('https://portal.tokiomarine.com.br/portalSalvadosPrestador/vistoriador/pesquisa/grid', $param);
-            #echo $result;
             /**
              * Monta os parâmetros para exibir os detalhes do sinistro/veículo
              */
@@ -278,20 +277,28 @@
             $param = $this->_getParamDetail($result);
             $param['file']['file_comprovante_documento'] = $pdf;
             $param['post']['dt_conclusao'] = $dtConclusao;
+            //$param['post']['dt_conclusao'] = '25/02/2016';
             $result = $this->_request('https://portal.tokiomarine.com.br/portalSalvadosPrestador/vistoriador/salvarEntregaVistoriador', $param);
-            #echo $result;
+            //echo $result;
 
             $documentDOM = new ZendT_HtmlDom_SimpleHtmlDom($result);
-            $message = $documentDOM->find('div[id=container] div div p strong');
-            if (!$message) {
-                throw new ZendT_Exception_Error('Erro ao postar o arquivo no site da Tokio');
+            
+            $error = $documentDOM->find('strong[id=stackTrace]');
+            if (count($error) > 0){
+                throw new ZendT_Exception_Error('Erro ao postar o arquivo no site da Tokio. ' . $error[0]->innertext());
+            }else{
+                $message = $documentDOM->find('p[class=msg green] strong');
+                //$message = $message->innettext();
+                if (!$message) {
+                    throw new ZendT_Exception_Error('Erro ao postar o arquivo no site da Tokio. ' . $message);
+                }                
             }
             //var_dump($message);
 
             return true;
         }
 
-        public function run() {
+        public function run($placa='') {
             Auth_Session_User::refresh('JOB_VSP');
 
             $_pedido = new Vendas_DataView_Pedido_MapperView();
@@ -301,6 +308,9 @@
             $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());
             $_where->addFilter('pedido.status_edi', 'N');
             $_where->addFilter('cliente.codigo', '33164021000100');
+            if ($placa){
+                $_where->addFilter('veiculo.placa', $placa);
+            }
             $sql = "(SELECT 1"
                     . "  FROM " . Vendas_DataView_Vistoria_MapperView::$table . " as vistoria "
                     . " WHERE vistoria.id_pedido = pedido.id"
@@ -322,7 +332,7 @@
                     $this->postPdf($row['placa_veiculo'], $row['sinistro'], $fileName, $dtConclusao);
                     $_pedido->setStatusEdi('T');
                 } catch (Exception $ex) {
-                    echo $ex->getMessage();
+                    //echo $ex->getMessage();
                     $_pedido->setStatusEdi('E');
                 }
                 $_pedido->update();
