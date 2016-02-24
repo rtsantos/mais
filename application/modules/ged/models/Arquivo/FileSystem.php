@@ -504,7 +504,7 @@
             }
             $paths = explode("/", $filename);
             $qtd = 0;
-            while ($qtd < count($paths)) {
+            while ($qtd <= count($paths)) {
                 $result = "";
                 for ($i = 0; $i < $qtd; $i ++) {
                     if ($paths[$i]) {

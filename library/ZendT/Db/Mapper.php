@@ -2051,7 +2051,7 @@
                    $options['id'] = $value;
                    $value = array('file' => $value);
                } else {
-                   if (!$value['file'] && !is_array($value)) {
+                   if (!isset($value['file']) && !is_array($value)) {
                        $value['file'] = $value;
                    }
 
