@@ -159,5 +159,13 @@ array (
   'cv_pedido.id_endereco.ca_endereco.logradouro' => 'Logradouro Endereço',
   'cv_pedido.telefone' => 'Telefone',
   'cv_pedido.status_edi' => 'EDI',
+  'vendas.log-pedido.form' => 'Cadastro de Log de Processamento do Pedido',
+  'vendas.log-pedido.grid' => 'Listagem de Log de Processamento do Pedido',
+  'cv_log_pedido' => 'Log de Processamento do Pedido',
+  'cv_log_pedido.id' => 'Id.',
+  'cv_log_pedido.id_pedido' => 'Pedido',
+  'cv_log_pedido.id_pedido.cv_pedido.numero' => 'Número Pedido',
+  'cv_log_pedido.dh_log' => 'Inclusão',
+  'cv_log_pedido.mensagem' => 'Mensagem',
 )
 ?>

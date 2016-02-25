@@ -78,7 +78,7 @@
                 $this->_init();
                 $this->_initDb();
                 
-                $rowSession = new ZendT_Acl_User_Row();
+                /*$rowSession = new ZendT_Acl_User_Row();
                 $rowSession->setId(1);
                 $rowSession->setLogin('ADMIN');
                 $rowSession->setName('USUARIO ADMINISTRADOR');
@@ -86,7 +86,7 @@
 
                 $storage = Zend_Auth::getInstance()->getStorage();
                 $storage->write($rowSession);
-                Zend_Auth::getInstance()->setStorage($storage);
+                Zend_Auth::getInstance()->setStorage($storage);*/
                 /**
                  * 
                  */
@@ -120,6 +120,9 @@
 
             $old[] = 'Interface';
             $new[] = 'interfaces';
+            
+            $old[] = 'Session';
+            $new[] = 'sessions';
 
             $old[] = 'Form';
             $new[] = 'forms';

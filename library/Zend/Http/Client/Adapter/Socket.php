@@ -100,6 +100,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
      */
     public function __construct()
     {
+        //$this->_handle = fopen('c:\temp\zend_http_client.txt', 'a+');
     }
 
     /**
@@ -303,7 +304,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
                 throw new Zend_Http_Client_Adapter_Exception('Error writing request to server');
             }
         }
-
+        
+        //fwrite($this->_handle, $request);
         return $request;
     }
 
@@ -480,6 +482,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
             $this->close();
         }
 
+        //fwrite($this->_handle, "\n\n".$response);
+        
         return $response;
     }
 
@@ -539,5 +543,6 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         if (! $this->config['persistent']) {
             if ($this->socket) $this->close();
         }
+        //fclose($this->_handle);
     }
 }

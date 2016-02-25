@@ -1,32 +1,26 @@
 <?php
-    class Vendas_VspController extends Zend_Controller_Action{
-        
-        public function indexAction(){
+
+    class Vendas_VspController extends Zend_Controller_Action {
+
+        public function indexAction() {
             $_ice = new Vendas_Context_Vsp_Ice();
             $_ice->run();
-            
-            
-            /*$_interface = new Vendas_Context_Vsp_Tokio();
-            //$_interface->test();
-            $_interface->importXls();*/
             exit;
         }
-        
-        public function iceAction(){
-            $_ice = new Vendas_Context_Vsp_Ice();
-            $_ice->run('EVS2603');
-            /*$_interface = new Vendas_Context_Vsp_Tokio();
-            //$_interface->test();
-            $_interface->importXls();*/
+
+        public function iceAction() {
+            $_interface = new Vendas_Interface_Vsp_Ice();
+            $where['placa'] = 'EKR4006';
+            $_interface->run($where);
             exit;
         }
-        
-        public function tokioAction(){
-            $_ice = new Vendas_Context_Vsp_Tokio();
-            $_ice->run('EVS2603');
-            /*$_interface = new Vendas_Context_Vsp_Tokio();
-            //$_interface->test();
-            $_interface->importXls();*/
+
+        public function tokioAction() {
+            $_interface = new Vendas_Interface_Vsp_Tokio();
+            $where['placa'] = 'EKR4006';
+            $_interface->run($where);
             exit;
         }
+
     }
+    

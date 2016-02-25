@@ -6,6 +6,7 @@
       'profile' => 'Perfis de Visão',
       'vendas' => 'Vendas',
       'compras' => 'Compras',
+      'tools' => 'Ferramentas',
       'cms' => 'Site',
       'ged' => 'Gestão Eletrônica de Documentos',
       'frota' => 'Gestão de Veículos',

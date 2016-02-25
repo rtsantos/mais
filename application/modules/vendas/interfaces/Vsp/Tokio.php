@@ -1,6 +1,6 @@
 <?php
 
-    class Vendas_Context_Vsp_Tokio {
+    class Vendas_Interface_Vsp_Tokio {
 
         /**
          *
@@ -282,34 +282,35 @@
             //echo $result;
 
             $documentDOM = new ZendT_HtmlDom_SimpleHtmlDom($result);
-            
+
             $error = $documentDOM->find('strong[id=stackTrace]');
-            if (count($error) > 0){
+            if (count($error) > 0) {
                 throw new ZendT_Exception_Error('Erro ao postar o arquivo no site da Tokio. ' . $error[0]->innertext());
-            }else{
+            } else {
                 $message = $documentDOM->find('p[class=msg green] strong');
                 //$message = $message->innettext();
                 if (!$message) {
                     throw new ZendT_Exception_Error('Erro ao postar o arquivo no site da Tokio. ' . $message);
-                }                
+                }
             }
             //var_dump($message);
 
             return true;
         }
 
-        public function run($placa='') {
+        public function run($where = '') {
             Auth_Session_User::refresh('JOB_VSP');
 
             $_pedido = new Vendas_DataView_Pedido_MapperView();
             $_vistoria = new Vendas_DataView_Vistoria_MapperView();
 
             $_where = new ZendT_Db_Where();
-            $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());
-            $_where->addFilter('pedido.status_edi', 'N');
+            $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());            
             $_where->addFilter('cliente.codigo', '33164021000100');
-            if ($placa){
-                $_where->addFilter('veiculo.placa', $placa);
+            if (isset($where['placa'])) {
+                $_where->addFilter('veiculo.placa', $where['placa']);
+            }else{
+                $_where->addFilter('pedido.status_edi', 'N');
             }
             $sql = "(SELECT 1"
                     . "  FROM " . Vendas_DataView_Vistoria_MapperView::$table . " as vistoria "
@@ -332,8 +333,12 @@
                     $this->postPdf($row['placa_veiculo'], $row['sinistro'], $fileName, $dtConclusao);
                     $_pedido->setStatusEdi('T');
                 } catch (Exception $ex) {
-                    //echo $ex->getMessage();
+                    $message = 'Mensagem: ' . $ex->getMessage() . "\n";
+                    $message.= 'Erro: ' . $ex->getTraceAsString() . "\n";
+                    
                     $_pedido->setStatusEdi('E');
+                    Vendas_Model_LogPedido_Mapper::log($_pedido->getId(), $ex->getMessage());
+                    Tools_Model_LogErro_Mapper::log('Vendas_Interface_Vsp_Tokio', $message);
                 }
                 $_pedido->update();
             }

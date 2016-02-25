@@ -6,11 +6,15 @@
     $argv[2] = "C:/AppWeb/htdocs";
     $argv[3] = "production";
      */
-    $documentRoot = $argv[2];
+	if (!isset($argv[3])){
+	    $argv[3] = 'production';
+	}
+    $documentRoot = realpath('.');
+	echo 'Document Root: ' . $documentRoot;
     /**
      * Define o PATH da Aplicação
      */
-    define('APPLICATION_PATH', $documentRoot . '/Mais/application');
+    define('APPLICATION_PATH', $documentRoot . '/application');
     /**
      * Define o ambiente
      */
@@ -20,9 +24,9 @@
      */
     set_include_path(get_include_path() .
             PATH_SEPARATOR . $documentRoot .
-            PATH_SEPARATOR . $documentRoot . '/framework/library' .
-            PATH_SEPARATOR . $documentRoot . '/Mais/application' .
-            PATH_SEPARATOR . $documentRoot . '/Mais/application/modules');
+            PATH_SEPARATOR . $documentRoot . '/library' .
+            PATH_SEPARATOR . $documentRoot . '/application' .
+            PATH_SEPARATOR . $documentRoot . '/application/modules');
     
     /**
      * Include de bibliotecas
