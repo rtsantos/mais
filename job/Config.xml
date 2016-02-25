@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <Config>
+	<Path>c:\AppWeb\htdocs\sistemas\batch\data</Path>
+	<Filter>*.xml</Filter>
+	<OperationSystem>WINDOWS</OperationSystem>
+	<PathPhpExe>c:\AppWeb\php\php-cgi.exe</PathPhpExe>
+	<PathPhpIni>c:\AppWeb\php\php.ini</PathPhpIni>
+  </Config>
+</DocumentElement>

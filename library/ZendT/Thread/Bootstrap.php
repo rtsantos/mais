@@ -1,51 +1,60 @@
 <?php
 
    class ZendT_Thread_Bootstrap {
+
        /**
         *
         * @var array
         */
        private $_configs;
+
        /**
         *
         * @var string
         */
        private $_documentRoot;
+
        /**
         *
         * @var string
         */
        private $_processId;
+
        /**
         *
         * @var string
         */
        private $_configIni;
+
        /**
         *
         * @var string
         */
        private $_dirTmp;
+
        /**
         *
         * @var string
         */
        private $_fileNameIn;
+
        /**
         *
         * @var string
         */
-       private $_fileNameOut;       
+       private $_fileNameOut;
+
        /**
         *
         * @var string
         */
        private $_fileNameError;
+
        /**
         * 
         */
        public function __construct($options) {
-           ob_start();           
+           //ob_start();
            spl_autoload_register(array($this, 'loader'));
 
            $this->_documentRoot = $options['documentRoot'];
@@ -53,36 +62,39 @@
 
            if (!isset($options['dirTmp'])) {
                $this->_dirTmp = '/sistemas/batch/data';
-           }else{
+           } else {
                $this->_dirTmp = $options['dirTmp'];
            }
 
            if (!isset($options['configIni'])) {
                $this->_configIni = APPLICATION_PATH . '/configs/application.ini';
-           }else{
+           } else {
                $this->_configIni = $options['configIni'];
            }
        }
+
        /**
         * 
         * @throws ZendT_Exception
         */
-       private function _init(){
+       private function _init() {
            $_config = new Zend_Config_Ini($this->_configIni, APPLICATION_ENV);
            $this->_configs = $_config->toArray();
 
-           if ($this->_documentRoot == ''){
+           if ($this->_documentRoot == '') {
                throw new ZendT_Exception('"documentRoot" não configurado!');
            }
-           
-           if ($this->_processId == ''){
+
+           if ($this->_processId == '') {
                throw new ZendT_Exception('"processId" não informado!');
            }
-           
-           $path = $this->_documentRoot . $this->_dirTmp;
-           $this->_fileNameIn = $path . "/" . $this->_processId . ".in";
-           $this->_fileNameOut = $path . "/" . $this->_processId . ".out";
-           $this->_fileNameError = $path . "/" . $this->_processId . ".err";
+
+           //$path = $this->_documentRoot . $this->_dirTmp;
+           $this->_fileNameIn = $this->_dirTmp . "/" . $this->_processId . ".in";
+           $this->_fileNameXml = $this->_dirTmp . "/" . $this->_processId . ".xml";
+           $this->_fileNameOut = $this->_dirTmp . "/" . $this->_processId . ".out";
+           $this->_fileNameError = $this->_dirTmp . "/" . $this->_processId . ".err";
+
        }
 
        private function _initDb() {
@@ -101,7 +113,7 @@
        public function run() {
            try {
                $this->_init();
-               $this->_initDb();               
+               $this->_initDb();
                /**
                 * 
                 */
@@ -119,19 +131,20 @@
                foreach ($vars['object']['attr'] as $key => $value) {
                    $obj->$key = $value;
                }
-               
-               call_user_func_array(array($obj,$vars['object']['method']), $vars['object']['params']);
+
+               $result = call_user_func_array(array($obj, $vars['object']['method']), $vars['object']['params']);
                //$result = $obj->$vars['object']['method']();
                /**
                 * 
                 */
-               if ($result){
+               if ($result) {
                    file_put_contents($this->_fileNameOut, serialize($result));
                }
                /**
                 * 
                 */
                @unlink($this->_fileNameIn);
+               @unlink($this->_fileNameXml);
            } catch (Exception $ex) {
                echo $ex->getMessage();
            }
@@ -156,6 +169,9 @@
            $old[] = 'Interface';
            $new[] = 'interfaces';
 
+           $old[] = 'Session';
+           $new[] = 'sessions';
+
            $old[] = 'Form';
            $new[] = 'forms';
 
@@ -171,15 +187,16 @@
 
            require_once $filename . '.php';
        }
-       
+
        /**
         * 
         */
        public function __destruct() {
            $content = ob_get_contents();
-           if ($content){
+           if ($content) {
                file_put_contents($this->_fileNameError, $content);
            }
        }
+
    }
    

@@ -25,25 +25,45 @@
         * @var array
         */
        private $_config = array();
+
        /**
         *
         * @var stdClass
         */
        private $_object = null;
+
        /**
         * 
         */
-       public function __construct($object=null) {
+       public function __construct($object = null) {
            $this->_object = $object;
            $this->_documentRoot = str_replace("\\", "/", realpath('.'));
-           $this->_documentRoot = str_replace("/AppTA", "", $this->_documentRoot);
            /**
             * Busca as configurações do ambiente PHP
             */
-           $filenameConfig = $this->_documentRoot . "/sistemas/batch/ServicePHP/Config.xml";
-           $xml = file_get_contents($filenameConfig);
-           $config = new Zend_Config_Xml($xml);
-           $this->_config = $config->toArray();
+           $filenameConfig = $this->_documentRoot . "/job/Config.xml";
+           if (file_exists($filenameConfig)) {
+               $xml = file_get_contents($filenameConfig);
+               $config = new Zend_Config_Xml($xml);
+               $this->_config = $config->toArray();
+           }
+
+           if (!isset($this->_config['Config']['Path'])) {
+               $this->_config['Config']['Path'] = $this->_documentRoot . '/job/data';
+           }
+
+           if (!isset($this->_config['Config']['OperationSystem'])) {
+               $this->_config['Config']['OperationSystem'] = 'Linux';
+           }
+
+           if (!isset($this->_config['Config']['PathPhpExe'])) {
+               $this->_config['Config']['PathPhpExe'] = 'php';
+           }
+           
+           if (!isset($this->_config['Config']['PathPhpExe'])) {
+               $this->_config['Config']['PathPhpIni'] = '/etc/php.ini';
+           }
+
            $this->_path = $this->_config['Config']['Path'];
            $this->_path = str_replace('\\', '/', $this->_path) . '/';
            //$this->_clearFiles();
@@ -55,7 +75,7 @@
         * @param stdClass $object
         * @param string $methodName
         */
-       public function start($object, $methodName, $params=array()) {
+       public function start($object, $methodName, $params = array()) {
            $data = array();
            $data['object']['name'] = get_class($object);
            $data['object']['attr'] = array();
@@ -80,8 +100,8 @@
            /**
             * Prepa os dados de parâmetros
             */
-           $params = str_replace("\\", "/",realpath('.')) . '/job.php ';
-           $params.= $this->_processId . ' ' . $this->_documentRoot . ' ' . APPLICATION_ENV;
+           $params = $this->_documentRoot . '/job.php ';
+           $params.= $this->_processId . ' ' . $this->_documentRoot . ' ' . APPLICATION_ENV . ' ' . $this->_config['Config']['Path'];
            /**
             * Caso não seja windows será executado uma 
             * linha de comando do sistema operacional para 
@@ -95,6 +115,7 @@
 
            return $this->_processId;
        }
+
        /**
         * 
         * @param string $name
@@ -110,6 +131,8 @@
         * @param string $params
         */
        private function _runWindows($scriptname, $params) {
+           $cmd = $scriptname . ' ' . $params;
+           
            $xml = '<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
            <DocumentElement>
                <ParameterForExecute>
