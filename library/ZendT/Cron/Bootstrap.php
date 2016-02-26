@@ -34,6 +34,7 @@
             spl_autoload_register(array($this, 'loader'));
 
             $this->_documentRoot = $options['documentRoot'];
+            #echo $this->_documentRoot . "\n";
             $this->_object = $options['object'];
 
             if (!isset($options['configIni'])) {
@@ -77,16 +78,16 @@
             try {
                 $this->_init();
                 $this->_initDb();
-                
-                /*$rowSession = new ZendT_Acl_User_Row();
-                $rowSession->setId(1);
-                $rowSession->setLogin('ADMIN');
-                $rowSession->setName('USUARIO ADMINISTRADOR');
-                $rowSession->setRole('TA.INFORMATICA');
 
-                $storage = Zend_Auth::getInstance()->getStorage();
-                $storage->write($rowSession);
-                Zend_Auth::getInstance()->setStorage($storage);*/
+                /* $rowSession = new ZendT_Acl_User_Row();
+                  $rowSession->setId(1);
+                  $rowSession->setLogin('ADMIN');
+                  $rowSession->setName('USUARIO ADMINISTRADOR');
+                  $rowSession->setRole('TA.INFORMATICA');
+
+                  $storage = Zend_Auth::getInstance()->getStorage();
+                  $storage->write($rowSession);
+                  Zend_Auth::getInstance()->setStorage($storage); */
                 /**
                  * 
                  */
@@ -120,9 +121,14 @@
 
             $old[] = 'Interface';
             $new[] = 'interfaces';
-            
+
             $old[] = 'Session';
             $new[] = 'sessions';
+
+            if (!in_array($dirs[0], array('Zend', 'ZendX', 'ZendT'))) {
+                $old[] = 'Service';
+                $new[] = 'services';
+            }
 
             $old[] = 'Form';
             $new[] = 'forms';

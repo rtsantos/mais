@@ -9,7 +9,13 @@
    if (!isset($argv[3])) {
        $argv[3] = 'production';
    }
-   $documentRoot = realpath('.');
+   
+   if (file_exists('/var/www/html/MaisVenda/cron.php')){
+       $documentRoot = '/var/www/html/MaisVenda';
+   }else{
+       $documentRoot = realpath('.');
+   }
+   
    /**
     * Define o PATH da Aplicação
     */
