@@ -53,6 +53,9 @@
            if (!isset($attribs['name'])) {
                $attribs['name'] = $attribs['id'];
            }
+           
+           $params['url']['base'] = ZendT_Url::getBaseUrl();
+           $params['url']['public'] = ZendT_Url::getBaseDiretoryPublic();
 
            $id = $this->view->escape($id);
            $name = $this->view->escape($attribs['name']);

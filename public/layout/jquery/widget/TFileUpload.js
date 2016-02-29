@@ -28,7 +28,11 @@
             max_file_size: '100mb',
             uploader: null,
             filters: {},
-            onComplete: false
+            onComplete: false,
+            url: {
+                base: '/Mais/index.php',
+                public: '/Mais/public'
+            }
         },
         _create: function () {
 
@@ -53,10 +57,10 @@
                 filters: filters,
                 container: this.options.elements.container,
                 browse_button: this.options.elements.selectFiles,
-                url: '/Mais/index.php/file/plUpload?platform=1',
+                url: this.options.url.base + '/file/plUpload?platform=1',
                 runtimes: 'html5,flash,browserplus,silverlight,gears,html4',
-                flash_swf_url: '/Mais/public/scripts/plupload/plupload.flash.swf',
-                silverlight_xap_url: '/Mais/public/scripts/plupload/plupload.silverlight.xap',
+                flash_swf_url: this.options.url.public + '/scripts/plupload/plupload.flash.swf',
+                silverlight_xap_url: this.options.url.public + '/scripts/plupload/plupload.silverlight.xap',
                 init: {
                     FilesAdded: function (up, files) {
                         if (!$('#' + id).Tdata('TFileUpload').options.multiple) {
@@ -119,6 +123,9 @@
             } else {
                 $("#group-" + this.element.attr('id') + " *").removeAttr('disabled');
             }
+        },
+        getOptions: function(){
+            return this.options;
         },
         filesAdded: function (up, files) {
 
@@ -311,13 +318,14 @@
 
             var uploader = $('#' + idContainer).Tdata('TFileUpload');
             var cryptName = $("#" + idContainer + '_file').val();
+            var options = uploader.getOptions();
 
             if (substr(cryptName, 0, 1) === ',') {
                 cryptName = substr(cryptName, 1);
             }
 
             $.AjaxT.json({
-                url: '/Mais/index.php/file/delete',
+                url: options.url.base + '/file/delete',
                 data: 'filename=' + cryptName,
                 success: function (result) {
                     uploader.responseFilesClear(idContainer);
@@ -331,11 +339,13 @@
 
             var uploader = $('#' + idContainer).Tdata('TFileUpload');
             var cryptName = $('#' + idContainer + '_file').val();
+            var options = uploader.getOptions();
+            
             if (substr(cryptName, 0, 1) === ',') {
                 cryptName = substr(cryptName, 1);
             }
             $.AjaxT.json({
-                url: '/Mais/index.php/file/delete',
+                url: options.url.base + '/file/delete',
                 data: 'filename=' + cryptName,
                 success: function (result) {
                     uploader.responseDeleteFile(idContainer, idFile);
@@ -377,6 +387,9 @@
             }
         },
         downloadFile: function (idContainer, idFile) {
+            
+            var uploader = $('#' + idContainer).Tdata('TFileUpload');
+            var options = uploader.getOptions();
 
             if (!document.getElementById('iframe-download-' + idContainer)) {
                 $('#group-' + idContainer).append('<iframe id="iframe-download-'
@@ -388,7 +401,7 @@
             if (substr(cryptName, 0, 1) === ',') {
                 cryptName = substr(cryptName, 1);
             }
-            var action = '/Mais/index.php/file/download';
+            var action = options.url.base +  '/file/download';
             action = action + '?filename=' + cryptName;
             $('#iframe-download-' + idContainer).attr('src', action);
         },

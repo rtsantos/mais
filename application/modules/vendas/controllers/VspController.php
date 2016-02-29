@@ -14,6 +14,13 @@
             $_interface->run($params);
             exit;
         }
+        
+        public function iceLaudosAction(){
+            $params = $this->getRequest()->getParams();
+            $_interface = new Vendas_Interface_Vsp_Ice();
+            $_interface->runLaudos($params);
+            exit;
+        }
 
         public function tokioAction() {
             $params = $this->getRequest()->getParams();

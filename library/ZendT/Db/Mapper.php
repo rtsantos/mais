@@ -1410,6 +1410,15 @@
            $this->_iRows = -1;
            return $this;
        }
+       /**
+        * Retorna a quantidade de registros selecionado 
+        * pela função findAll
+        * 
+        * @return int
+        */
+       public function getCountRows() {
+           return count($this->_rows);
+       }
 
        /**
         * Retorna a próxima linha do recorset criado através do query
