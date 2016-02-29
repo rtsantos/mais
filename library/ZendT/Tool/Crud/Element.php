@@ -120,10 +120,14 @@ class ZendT_Tool_Crud_Element {
                     
                 }
                 
+                if (!$config['table']['alias']){
+                    $config['table']['alias'] = $config['table']['name'];
+                }
+                
                 $strElement = "
         \$element = new ZendT_Form_Element_Seeker('{$column}');
         {$namePrepare}
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setIdField('{$prop['object']['seeker']['field']['id']}');
         \$element->setIdAttribs({$strAttrId});
         \$element->setSearchField('{$prop['object']['seeker']['field']['search']}');
@@ -159,7 +163,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Select';
                 $strElement = "
         \$element = new ZendT_Form_Element_Select('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');{$strOptions}        
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');{$strOptions}        
                 ";
             } elseif ($prop['object']['type'] == 'Date') {
                 $strAttrbs = '';
@@ -171,7 +175,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Date';
                 $strElement = "
         \$element = new ZendT_Form_Element_Date('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});
         \$element->addValidators({$strValidators});
                 ";
@@ -195,7 +199,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_DateTime';
                 $strElement = "
         \$element = new ZendT_Form_Element_DateTime('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setDateAttribs({$strAttrbsDate});
         \$element->setTimeAttribs({$strAttrbsTime});
         \$element->addValidators({$strValidators});
@@ -213,7 +217,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Time';
                 $strElement = "
         \$element = new ZendT_Form_Element_Time('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});
         \$element->addValidators({$strValidators});
                 ";
@@ -237,7 +241,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Textarea';
                 $strElement = "
         \$element = new ZendT_Form_Element_Textarea('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->enableEditorHtml({$prop['object']['textare']['html']});
         \$element->setAttribs({$strAttrbs});        
         \$element->addValidators({$strValidators});
@@ -254,7 +258,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_FileUpload';
                 $strElement = "
         \$element = new ZendT_Form_Element_FileUpload('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});
         \$element->enableMultiple(false);
         \$element->addValidators({$strValidators});
@@ -271,7 +275,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Numeric';
                 $strElement = "
         \$element = new ZendT_Form_Element_Numeric('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});
         \$element->setJQueryParam('numDecimal','{$prop['object']['numeric']['numDecimal']}');
         \$element->setJQueryParam('numInteger','{$prop['object']['numeric']['numInteger']}');
@@ -287,7 +291,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Text';
                 $strElement = "
         \$element = new ZendT_Form_Element_Text('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});        
         \$element->addValidators({$strValidators});";
                 if (count($prop['object']['filter']) > 0) {
@@ -331,7 +335,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_CgcCpf';
                 $strElement = "
         \$element = new ZendT_Form_Element_CgcCpf('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});        
         \$element->addValidators({$strValidators});
                 ";
@@ -348,7 +352,7 @@ class ZendT_Tool_Crud_Element {
                 $commentElement = 'ZendT_Form_Element_Password';
                 $strElement = "
         \$element = new ZendT_Form_Element_Password('{$tableColumn}');
-        \$element->setLabel(\$this->_translate->_('{$config['table']['name']}.{$tableColumn}') . ':');
+        \$element->setLabel(\$this->_translate->_('{$config['table']['alias']}.{$tableColumn}') . ':');
         \$element->setAttribs({$strAttrbs});        
         \$element->addValidators({$strValidators});
                 ";

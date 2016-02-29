@@ -4,7 +4,7 @@
  */
 class Tools_Model_Job_Crud_Mapper extends ZendT_Db_Mapper
 {
-    protected $_required = array('id','descricao','dh_inc','dh_ini_exec','tp_frequencia','num_frequencia','forma_exec','procedimento');
+    protected $_required = array('id','descricao','dh_inc','dh_ini_exec','tp_frequencia','num_frequencia','forma_exec','procedimento','dh_pro_exec');
     protected $_model = 'Tools_Model_Job_Table';
     public static $table = 'mais.tl_job';
     /**
@@ -485,6 +485,46 @@ class Tools_Model_Job_Crud_Mapper extends ZendT_Db_Mapper
                     
         if (!$options['db']){
             
+         if ($options['required'])
+            $this->isRequired($value,'dh_pro_exec');
+                    
+        }
+        return $this;
+    }
+
+            
+    /**
+     * Retorna os dados da coluna status
+     *
+     * @return string
+     */
+    public function getStatus($instance=false){
+        if ($instance && !is_object($this->_data['status'])){
+            $this->setStatus('',array('required'=>false));
+        }
+        return $this->_data['status'];
+    }
+    /**
+     * Seta o valor da coluna status
+     *
+     * @param string $value
+     * @return Tools_Model_Job_Crud_Mapper
+     */
+    public function setStatus($value,$options=array('required'=>true)){        
+        
+        $options['listOptions']=array('A'=>'Aguardando','E'=>'Executando');
+        $this->_data['status'] = new ZendT_Type_String($value,$options);
+        if ($options['db'])
+            $this->_data['status']->setValueFromDb($value);
+                
+        if (!$options['db']){
+            
+            $valid = new Zend_Validate_StringLength(array (   'max' => 1, ) );
+            $valueValid = $this->_data['status']->getValueToDb();
+            if ($valueValid && !$valid->isValid($valueValid)){
+                throw new ZendT_Exception_Business(implode("\n",$valid->getMessages()));
+            }
+                    
         }
         return $this;
     }

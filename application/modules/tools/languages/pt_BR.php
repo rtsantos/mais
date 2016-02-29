@@ -95,5 +95,6 @@ array (
   'tl_job.parametro' => 'Parâmetros',
   'tl_job.tempo_ul_exec' => 'Tempo da Última Execução',
   'tl_job.dh_pro_exec' => 'Data da Próxima Execução',
+  'tl_job.status' => 'Situação',
 )
 ?>

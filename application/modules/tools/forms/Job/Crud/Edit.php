@@ -84,6 +84,11 @@
 
             
             $element = $model->getElement('dh_pro_exec');
+            $element->setRequired(true);
+            $this->addElement($element);
+
+            
+            $element = $model->getElement('status');
             $this->addElement($element);
 
             

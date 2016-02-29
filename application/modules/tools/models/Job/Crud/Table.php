@@ -7,10 +7,10 @@ class Tools_Model_Job_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_name = 'tl_job';
     protected $_alias = 'job';
     protected $_sequence = 'sid_tl_job';
-    protected $_required = array('id','descricao','dh_inc','dh_ini_exec','tp_frequencia','num_frequencia','forma_exec','procedimento');
+    protected $_required = array('id','descricao','dh_inc','dh_ini_exec','tp_frequencia','num_frequencia','forma_exec','procedimento','dh_pro_exec');
     protected $_primary = array('id');
     protected $_unique = array();
-    protected $_cols = array('id','descricao','dh_inc','dh_ini_exec','dh_ult_exec','dh_fim_exec','tp_frequencia','num_frequencia','forma_exec','procedimento','parametro','tempo_ul_exec','dh_pro_exec');
+    protected $_cols = array('id','descricao','dh_inc','dh_ini_exec','dh_ult_exec','dh_fim_exec','tp_frequencia','num_frequencia','forma_exec','procedimento','parametro','tempo_ul_exec','dh_pro_exec','status');
     protected $_search = 'descricao';
     protected $_schema  = 'mais';
     protected $_adapter = 'db.mais';
@@ -20,7 +20,9 @@ class Tools_Model_Job_Crud_Table extends ZendT_Db_Table_Abstract
                                                     ,'H'=>'Hora'
                                                     ,'D'=>'Dia')
                                     ,'forma_exec'=>array('C'=>'Classe'
-                                                    ,'U'=>'Url'));
+                                                    ,'U'=>'Url')
+                                    ,'status'=>array('A'=>'Aguardando'
+                                                    ,'E'=>'Executando'));
     protected $_mapper = 'Tools_Model_Job_Mapper';
     protected $_element = 'Tools_Form_Job_Elements';
     /**

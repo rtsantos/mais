@@ -72,13 +72,16 @@ class ZendT_Tool_Crud_Language {
         if (!isset($dataTranslate[$index])) {
             $dataTranslate[$index] = $config['table']['description'];
         }
+        if (!$config['table']['alias']){
+            $config['table']['alias'] = $config['table']['name'];
+        }
 
         foreach ($config['table']['columns'] as $column => $prop) {
-            if ($dataTranslate["{$config['table']['name']}.{$column}"] == $column){
-                unset($dataTranslate["{$config['table']['name']}.{$column}"]);
+            if ($dataTranslate["{$config['table']['alias']}.{$column}"] == $column){
+                unset($dataTranslate["{$config['table']['alias']}.{$column}"]);
             }
-            if (!isset($dataTranslate["{$config['table']['name']}.{$column}"])){
-                $dataTranslate["{$config['table']['name']}.{$column}"] = $prop['label'];
+            if (!isset($dataTranslate["{$config['table']['alias']}.{$column}"])){
+                $dataTranslate["{$config['table']['alias']}.{$column}"] = $prop['label'];
             }
             if ($prop['object']['type'] == 'Seeker'){
                 $reference = ZendT_Tool_Crud::getReference($config, $column);
@@ -128,11 +131,11 @@ class ZendT_Tool_Crud_Language {
                 /**
                  * fim da busca do label da tabela de referência
                  */
-                if (!isset($dataTranslate["{$config['table']['name']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['search']}"])){
-                    $dataTranslate["{$config['table']['name']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['search']}"] = $label['search']. ' ' . $prop['label'];
+                if (!isset($dataTranslate["{$config['table']['alias']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['search']}"])){
+                    $dataTranslate["{$config['table']['alias']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['search']}"] = $label['search']. ' ' . $prop['label'];
                 }
-                if ($prop['object']['seeker']['field']['display'] && !isset($dataTranslate["{$config['table']['name']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['display']}"])){
-                    $dataTranslate["{$config['table']['name']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['display']}"] = $label['display'] . ' ' . $prop['label'];
+                if ($prop['object']['seeker']['field']['display'] && !isset($dataTranslate["{$config['table']['alias']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['display']}"])){
+                    $dataTranslate["{$config['table']['alias']}.{$column}.{$reference['tableNameReference']}.{$prop['object']['seeker']['field']['display']}"] = $label['display'] . ' ' . $prop['label'];
                 }
             }
         };

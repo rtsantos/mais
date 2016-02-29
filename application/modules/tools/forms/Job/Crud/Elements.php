@@ -219,5 +219,19 @@ class Tools_Form_Job_Crud_Elements
         return $element;
     }
             
+    /**
+     *
+     * @return \ZendT_Form_Element_Select
+     */
+    public function getStatus(){
+
+        $element = new ZendT_Form_Element_Select('status');
+        $element->setLabel($this->_translate->_('tl_job.status') . ':');
+        $element->addMultiOption('A', 'Aguardando');
+        $element->addMultiOption('E', 'Executando');        
+                
+        return $element;
+    }
+            
 }
 ?>

@@ -602,9 +602,56 @@ return array (
             'maxlength' => 5,
             'id' => NULL,
           ),
-          'required' => false,
+          'required' => true,
         ),
         'length' => NULL,
+        'nullable' => false,
+      ),
+      'status' => 
+      array (
+        'label' => 'Situação',
+        'multiple' => 0,
+        'type' => 'String',
+        'object' => 
+        array (
+          'mask' => NULL,
+          'charMask' => '@',
+          'filter' => 
+          array (
+            0 => 'trim',
+            1 => 'strtoupper',
+            2 => 'removeAccent',
+          ),
+          'filterDb' => 
+          array (
+            0 => '',
+          ),
+          'validators' => 
+          array (
+            0 => 
+            array (
+              'name' => 'Zend_Validate_StringLength',
+              'param' => 
+              array (
+                'max' => 1,
+              ),
+            ),
+          ),
+          'listOptions' => 
+          array (
+              'A' => 'Aguardando',
+              'E' => 'Executando'
+          ),
+          'type' => 'Select',
+          'text' => 
+          array (
+            'maxlength' => '1',
+            'css-width' => '100px',
+            'id' => NULL,
+          ),
+          'required' => false,
+        ),
+        'length' => '1',
         'nullable' => true,
       ),
     ),

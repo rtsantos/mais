@@ -321,9 +321,9 @@
             $_propDocto->retrieve();
             return $_propDocto;
         }
-        
-        private function _toNum($value){
-            $value = str_replace(array('.',','), array('','.'), $value);
+
+        private function _toNum($value) {
+            $value = str_replace(array('.', ','), array('', '.'), $value);
             return ($value * 1);
         }
 
@@ -450,6 +450,7 @@
                 }
             }
             $idArquivo = $_arquivo->save(true);
+            //echo "Path: " . $path['full'] . "\n";
             if (!file_exists($path['full'])) {
                 if (!file_exists($path['pathBase'])) {
                     //mkdir($path['pathBase'], null, true);
@@ -459,9 +460,13 @@
                 if (!$result) {
                     throw new ZendT_Exception('Erro ao armazenar o arquivo no servidor "' . $path['full'] . '". Erro: "' . $php_errormsg . '" ');
                 }
-                $this->mkdirRecursive($path['full']);
+
                 if (!$result) {
                     throw new ZendT_Exception('Não foi possível salvar o arquivo "' . $path['full'] . '"');
+                } else {
+                    if ($this->_config['linux']) {
+                        $this->_execCmd("chmod 777 {$path['full']} -R");
+                    }
                 }
             }
 
@@ -515,8 +520,10 @@
                     $result = $before . $result;
                     if (!is_dir($result)) {
                         @mkdir($result);
+                        if ($this->_config['linux']) {
+                            $this->_execCmd("chmod {$mode} {$result} -R");
+                        }
                     }
-                    $this->_execCmd("chmod {$mode} {$result} -R");
                 }
                 $qtd ++;
             }

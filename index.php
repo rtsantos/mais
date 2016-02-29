@@ -6,6 +6,9 @@ define('APPLICATION_PATH', realpath('.') . '/application');
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
+
+define('DOCUMENT_ROOT', realpath('.'));
+
 // Ensure library/ is on include_path
 set_include_path('.' . PATH_SEPARATOR . 'library');
 

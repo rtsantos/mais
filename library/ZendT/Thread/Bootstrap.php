@@ -142,8 +142,8 @@
                 /**
                  * 
                  */
-                @unlink($this->_fileNameIn);
-                @unlink($this->_fileNameXml);
+                #@unlink($this->_fileNameIn);
+                #@unlink($this->_fileNameXml);
             } catch (Exception $ex) {
                 echo $ex->getMessage();
             }

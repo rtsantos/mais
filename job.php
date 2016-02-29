@@ -14,6 +14,10 @@
     */
    define('APPLICATION_PATH', $documentRoot . '/application');
    /**
+    * 
+    */
+   define('DOCUMENT_ROOT', $documentRoot);
+   /**
     * Define o ambiente
     */
    define('APPLICATION_ENV', $argv[3]);

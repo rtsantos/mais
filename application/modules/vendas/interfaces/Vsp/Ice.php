@@ -1,325 +1,429 @@
 <?php
 
-   class Vendas_Interface_Vsp_Ice {
+    class Vendas_Interface_Vsp_Ice {
 
-       /**
-        *
-        * @var Zend_Http_Client
-        */
-       protected $_client = null;
+        /**
+         *
+         * @var Zend_Http_Client
+         */
+        protected $_client = null;
 
-       /**
-        *
-        * @var \Vendas_DataView_Pedido_MapperView 
-        */
-       private $_pedido;
+        /**
+         *
+         * @var \Vendas_DataView_Pedido_MapperView 
+         */
+        private $_pedido;
 
-       /**
-        *
-        * @var \Vendas_DataView_Vistoria_MapperView 
-        */
-       private $_vistoria;
+        /**
+         *
+         * @var \Vendas_DataView_Vistoria_MapperView 
+         */
+        private $_vistoria;
 
-       /**
-        *
-        * @var \Ca_DataView_Pessoa_MapperView 
-        */
-       private $_pessoa;
+        /**
+         *
+         * @var \Ca_DataView_Pessoa_MapperView 
+         */
+        private $_pessoa;
 
-       /**
-        *
-        * @var \Frota_DataView_Veiculo_MapperView 
-        */
-       private $_veiculo;
+        /**
+         *
+         * @var \Frota_DataView_Veiculo_MapperView 
+         */
+        private $_veiculo;
 
-       /**
-        *
-        * @var \Vendas_DataView_Produto_MapperView
-        */
-       private $_produto;
+        /**
+         *
+         * @var \Vendas_DataView_Produto_MapperView
+         */
+        private $_produto;
 
-       /**
-        *
-        * @var \Vendas_DataView_FormaPagamento_MapperView
-        */
-       private $_formaPagto;
+        /**
+         *
+         * @var \Vendas_DataView_FormaPagamento_MapperView
+         */
+        private $_formaPagto;
 
-       /**
-        * 
-        */
-       public function __construct() {
-           $config = array('useragent' => 'Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/44.0',
-              'encodecookies' => false,
-              'timeout' => 180);
+        /**
+         * 
+         */
+        public function __construct() {
+            $config = array('useragent' => 'Mozilla/5.0 (Windows NT 6.1; rv:22.0) Gecko/20100101 Firefox/44.0',
+                'encodecookies' => false,
+                'timeout' => 180);
 
-           $this->_client = new Zend_Http_Client(null, $config);
-           $this->_pedido = new Vendas_DataView_Pedido_MapperView();
-           $this->_vistoria = new Vendas_DataView_Vistoria_MapperView();
-           $this->_pessoa = new Ca_DataView_Pessoa_MapperView();
-           $this->_veiculo = new Frota_DataView_Veiculo_MapperView();
-           $this->_produto = new Vendas_DataView_Produto_MapperView();
+            $this->_client = new Zend_Http_Client(null, $config);
+            $this->_pedido = new Vendas_DataView_Pedido_MapperView();
+            $this->_vistoria = new Vendas_DataView_Vistoria_MapperView();
+            $this->_pessoa = new Ca_DataView_Pessoa_MapperView();
+            $this->_veiculo = new Frota_DataView_Veiculo_MapperView();
+            $this->_produto = new Vendas_DataView_Produto_MapperView();
 
-           $this->_produto->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa())
-                 ->setCodigo('00001')
-                 ->retrieve();
+            $this->_produto->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa())
+                    ->setCodigo('00001')
+                    ->retrieve();
 
-           $this->_formaPagto = new Vendas_DataView_FormaPagamento_MapperView();
-           $this->_formaPagto->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa())
-                 ->setPago('N')
-                 ->retrieve();
-           //A FATURAR
-       }
+            $this->_formaPagto = new Vendas_DataView_FormaPagamento_MapperView();
+            $this->_formaPagto->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa())
+                    ->setPago('N')
+                    ->retrieve();
+            //A FATURAR
 
-       /**
-        * 
-        */
-       protected function _request($url, $params, $method = Zend_Http_Client::GET) {
-           $this->_client->setUri($url)
-                 ->resetParameters();
+            $this->_hlog = fopen(DOCUMENT_ROOT . '/job/logs/' . date('Y_m_d') . '_Vendas_Interface_Vsp_Ice.txt', 'a+');
+            set_time_limit(0);
+        }
 
-           if (count($params['header'])) {
-               foreach ($params['header'] as $name => $value) {
-                   $this->_client->setHeaders($name, $value);
-               }
-           }
+        public function __destruct() {
+            if ($this->_hlog) {
+                @fclose($this->_hlog);
+            }
+        }
 
-           if (count($params['post'])) {
-               foreach ($params['post'] as $name => $value) {
-                   $this->_client->setParameterPost($name, $value);
-               }
-           }
+        private function _log($message) {
+            echo $message . "<br />\n";
+            if ($this->_hlog) {
+                @fwrite($this->_hlog, $message . "\n");
+            }
+        }
 
-           if (count($params['get'])) {
-               foreach ($params['get'] as $name => $value) {
-                   $this->_client->setParameterGet($name, $value);
-               }
-           }
+        /**
+         * 
+         */
+        protected function _request($url, $params, $method = Zend_Http_Client::GET) {
+            $this->_client->setUri($url)
+                    ->resetParameters();
 
-           if (count($params['json'])) {
-               //$this->_client->setHeaders('Content-type','application/json');
-               $rawJson = json_encode($params['json']);
-               //$this->_client->setRawData($rawJson);
-               $this->_client->setRawData($rawJson, 'application/json');
-           }
+            if (count($params['header'])) {
+                foreach ($params['header'] as $name => $value) {
+                    $this->_client->setHeaders($name, $value);
+                }
+            }
 
-           $response = $this->_client->request($method);
-           $result = $response->getBody();
-           #echo $result . "\n\n <br>"; 
-           return json_decode($result);
-       }
+            if (count($params['post'])) {
+                foreach ($params['post'] as $name => $value) {
+                    $this->_client->setParameterPost($name, $value);
+                }
+            }
 
-       protected function _doLogin() {
-           $params = array();
-           $params['json']['Login'] = 'ecv.spvistoria';
-           $params['json']['Senha'] = 'dlkdl1';
-           $result = $this->_request('https://servicos.vistoriasp.com.br/ECVCommunicationService/api/usuario/login', $params, Zend_Http_Client::POST);
-           return $result->tokenAcesso;
-       }
+            if (count($params['get'])) {
+                foreach ($params['get'] as $name => $value) {
+                    $this->_client->setParameterGet($name, $value);
+                }
+            }
 
-       protected function _veiculo($data) {
-           $this->_veiculo->newRow();
-           $this->_veiculo->setPlaca($data->placa);
-           $this->_veiculo->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
-           $exists = $this->_veiculo->exists();
+            if (count($params['json'])) {
+                //$this->_client->setHeaders('Content-type','application/json');
+                $rawJson = json_encode($params['json']);
+                //$this->_client->setRawData($rawJson);
+                $this->_client->setRawData($rawJson, 'application/json');
+            }
 
-           $this->_veiculo->setRenavam($data->renavam)
-                 ->setChassi($data->numeroChassi)
-                 ->setDescricao($data->placa);
+            $response = $this->_client->request($method);
+            $result = $response->getBody();
+            #echo $result . "\n\n <br>"; 
+            return json_decode($result);
+        }
 
-           if (!$exists) {
-               $this->_veiculo->insert();
-           } else {
-               $this->_veiculo->update();
-           }
+        protected function _doLogin() {
+            $params = array();
+            $params['json']['Login'] = 'ecv.spvistoria';
+            $params['json']['Senha'] = 'dlkdl1';
+            $result = $this->_request('https://servicos.vistoriasp.com.br/ECVCommunicationService/api/usuario/login', $params, Zend_Http_Client::POST);
+            return $result->tokenAcesso;
+        }
 
-           return $this->_veiculo->getId();
-       }
+        protected function _veiculo($data) {
+            $this->_veiculo->newRow();
+            $this->_veiculo->setPlaca($data->placa);
+            $this->_veiculo->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
+            $exists = $this->_veiculo->exists();
 
-       protected function _funcionario($data) {
-           $this->_pessoa->newRow();
+            $this->_veiculo->setRenavam($data->renavam)
+                    ->setChassi($data->numeroChassi)
+                    ->setDescricao($data->placa);
 
-           $this->_pessoa->setNome($data->nomeVistoriador);
-           $this->_pessoa->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
-           if (!$this->_pessoa->exists()) {
-               $this->_pessoa->setNome($data->nomeVistoriador)
-                     ->setCodigo('11111111111')
-                     ->setPapelFuncionario('1')
-                     ->insert();
-           }
-           return $this->_pessoa->getId();
-       }
+            if (!$exists) {
+                $this->_veiculo->insert();
+            } else {
+                $this->_veiculo->update();
+            }
 
-       protected function _cliente($data) {
-           $this->_pessoa->newRow();
+            return $this->_veiculo->getId();
+        }
 
-           $this->_pessoa->setCodigo($data->cnpjCliente);
-           $this->_pessoa->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
-           if (!$this->_pessoa->exists()) {
-               $this->_pessoa->setNome($data->razaoSocialCliente)
-                     ->setPapelCliente('1')
-                     ->insert();
-           }
-           return $this->_pessoa->getId();
-       }
+        protected function _funcionario($data) {
+            $this->_pessoa->newRow();
 
-       private function _toDate($value) {
-           list($ano, $mes, $dia) = explode('-', $value);
-           $dia = substr($dia, 0, 2);
-           return new ZendT_Type_Date($dia . '/' . $mes . '/' . $ano);
-       }
+            $this->_pessoa->setNome($data->nomeVistoriador);
+            $this->_pessoa->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
+            if (!$this->_pessoa->exists()) {
+                $this->_pessoa->setNome($data->nomeVistoriador)
+                        ->setCodigo('11111111111')
+                        ->setPapelFuncionario('1')
+                        ->insert();
+            }
+            return $this->_pessoa->getId();
+        }
 
-       protected function _pedido($data) {
-           $idVeiculo = $this->_veiculo($data);
-           $idCliente = $this->_cliente($data);
-           $idFuncionario = $this->_funcionario($data);
-           $dtEmis = $this->_toDate($data->dataVistoria);
+        protected function _cliente($data) {
+            $this->_pessoa->newRow();
 
-           $this->_pedido->newRow();
+            $this->_pessoa->setCodigo($data->cnpjCliente);
+            $this->_pessoa->setIdEmpresa(Auth_Session_User::getInstance()->getIdEmpresa());
+            if (!$this->_pessoa->exists()) {
+                $this->_pessoa->setNome($data->razaoSocialCliente)
+                        ->setPapelCliente('1')
+                        ->insert();
+            }
+            return $this->_pessoa->getId();
+        }
 
-           $ini = clone $dtEmis;
-           $fim = clone $dtEmis;
-           $ini->addDay(-7);
-           $fim->addDay(+7);
+        private function _toDate($value) {
+            list($ano, $mes, $dia) = explode('-', $value);
+            $dia = substr($dia, 0, 2);
+            return new ZendT_Type_Date($dia . '/' . $mes . '/' . $ano);
+        }
 
-           $_where = new ZendT_Db_Where();
-           $_where->addFilter('pedido.id_veiculo', $idVeiculo);
-           $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());
-           $_where->addFilter('pedido.dt_emis', array($ini, $fim), 'BETWEEN');
+        protected function _pedido($data) {
+            $idPedido = 0;
+            try {
+                $idVeiculo = $this->_veiculo($data);
+                //$this->_log('Veiculo OK');
 
-           $exists = $this->_pedido->exists($_where);
-           $this->_pedido->setIdCliente($idCliente)
-                 ->setIdFuncionario($idFuncionario)
-                 ->setDtEmis($dtEmis)
-                 ->setIdVeiculo($idVeiculo);
+                $idCliente = $this->_cliente($data);
+                //$this->_log('Cliente OK');
 
-           $itemPedido = array();
-           $itemPedido['id_produto'] = $this->_produto->getId();
-           $itemPedido['qtd_item'] = 1;
-           $this->_pedido->setItemPedido($itemPedido);
+                $idFuncionario = $this->_funcionario($data);
+                //$this->_log('Funcionario OK');
 
-           $pagtoPedido = array();
-           $pagtoPedido['id_forma_pagto'] = $this->_formaPagto->getId();
-           $this->_pedido->setPagamento($pagtoPedido);
-
-           if (!$exists) {
-               $this->_pedido->insert();
-           } else {
-               //$this->_pedido->update();
-           }
+                $dtEmis = $this->_toDate($data->dataVistoria);
 
 
-           $data->id_pedido = $this->_pedido->getId();
-           $data->id_veiculo = $idVeiculo;
-           $this->_vistoria($data);
+                $this->_pedido->newRow();
 
-           return $this->_pedido->getId();
-       }
+                $ini = clone $dtEmis;
+                $fim = clone $dtEmis;
+                $ini->addDay(-7);
+                $fim->addDay(+7);
 
-       public function _vistoria($data) {
-           $this->_vistoria->newRow();
-           $this->_vistoria->setIdPedido($data->id_pedido);
-           $this->_vistoria->setIdVeiculo($data->id_veiculo);
-           $exists = $this->_vistoria->exists();
+                $_where = new ZendT_Db_Where();
+                $_where->addFilter('pedido.id_veiculo', $idVeiculo);
+                $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());
+                $_where->addFilter('pedido.dt_emis', array($ini, $fim), 'BETWEEN');
 
-           $this->_vistoria->setNumero($data->numeroVistoria)
-                 ->setDtEmis($data->dataVistoria)
-                 ->setStatus($data->resultadoVistoria)
-                 ->setObservacao($data->statusVistoria);
-           /*
-             ->setLocal($data->localVistoria)
-            */
+                $exists = $this->_pedido->exists($_where);
+                $this->_pedido->setIdCliente($idCliente)
+                        ->setIdFuncionario($idFuncionario)
+                        ->setDtEmis($dtEmis)
+                        ->setIdVeiculo($idVeiculo);
 
-           if ($this->_vistoria->getLaudo(true)->toPhp() == '') {
-               $laudo = $this->_laudo($data->numeroVistoria);
-               if ($laudo) {
-                   $_laudo = new ZendT_File(str_replace(array('-', '/'), '_', $data->numeroVistoria) . '.pdf'
-                         , $laudo
-                         , 'application/pdf');
-                   $dataLaudo = array();
-                   $dataLaudo['file'] = $_laudo;
-                   $this->_vistoria->setLaudo($dataLaudo);
-               }
-           }
 
-           if (!$exists) {
-               $this->_vistoria->insert();
-           } else {
-               $this->_vistoria->update();
-           }
+                if (!$exists) {
+                    $itemPedido = array();
+                    $itemPedido['id_produto'] = $this->_produto->getId();
+                    $itemPedido['qtd_item'] = 1;
+                    $this->_pedido->setItemPedido($itemPedido);
 
-           return true;
-       }
+                    $pagtoPedido = array();
+                    $pagtoPedido['id_forma_pagto'] = $this->_formaPagto->getId();
+                    $this->_pedido->setPagamento($pagtoPedido);
+                    //echo 'Inserindo' . "\n";
+                    $this->_pedido->insert();
+                    //echo 'Inserido' . "\n";
+                } else {
+                    //echo 'Atualizando' . "\n";
+                    $this->_pedido->update();
+                    //echo 'Atualizado' . "\n";
+                }
+                //$this->_log('Pedido OK');
 
-       protected function _laudo($numero) {
-           $params = array();
-           $params['header']['Authorization'] = 'bearer ' . $this->_token;
-           $result = $this->_request('https://servicos.vistoriasp.com.br/ECVCommunicationService/api/vistoria/consultaLaudo/' . $numero, $params, Zend_Http_Client::GET);
-           $laudo = base64_decode($result->laudo);
-           return $laudo;
-       }
+                $data->id_pedido = $this->_pedido->getId();
+                $data->id_veiculo = $idVeiculo;
 
-       protected function _consultorias($dtIni = '', $dtFim = '', $placa = '') {
-           if (!$dtIni) {
-               $dtIni = ZendT_Type_Date::nowDate()->addDay(-3)->getValueToDb();
-           }
+                //echo "Pedido: " . $data->id_pedido;
 
-           if (!$dtFim) {
-               $dtFim = ZendT_Type_Date::nowDate()->getValueToDb();
-           }
+                $this->_vistoria($data);
+                //$this->_log('Vistoria OK');
 
-           $params = array();
-           $params['header']['Authorization'] = 'bearer ' . $this->_token;
-           $params['get']['Placa'] = $placa;
-           $params['get']['DataInicio'] = $dtIni;
-           $params['get']['DataFim'] = $dtFim;
+                $idPedido = $this->_pedido->getId();
+            } catch (Exception $ex) {
+                $this->_log('Placa: ' . $data->placa . '. Erro: ' . $ex->getMessage());
+            }
 
-           #echo var_export($params, true);
-           #echo "\n <br>";
+            return $idPedido;
+        }
 
-           $result = $this->_request('https://servicos.vistoriasp.com.br/ECVCommunicationService/api/vistoria/consultaVistoria', $params, Zend_Http_Client::GET);
+        public function _vistoria($data) {
+            $this->_vistoria->newRow();
+            $this->_vistoria->setIdPedido($data->id_pedido);
+            $this->_vistoria->setIdVeiculo($data->id_veiculo);
+            $exists = $this->_vistoria->exists();
 
-           return $result;
-       }
+            $this->_vistoria->setNumero($data->numeroVistoria)
+                    ->setDtEmis($data->dataVistoria)
+                    ->setStatus($data->resultadoVistoria)
+                    ->setObservacao($data->statusVistoria);
+            /*
+              ->setLocal($data->localVistoria)
+             */
 
-       public function run($where = array()) {
-           Auth_Session_User::refresh('JOB_VSP');
-           $this->_token = $this->_doLogin();
+            if ($this->_vistoria->getLaudo(true)->toPhp() == '') {
+                $laudo = $this->_laudo($data->numeroVistoria);
+                if ($laudo) {
+                    $_laudo = new ZendT_File(str_replace(array('-', '/'), '_', $data->numeroVistoria) . '.pdf'
+                            , $laudo
+                            , 'application/pdf');
+                    $dataLaudo = array();
+                    $dataLaudo['file'] = $_laudo;
+                    $this->_vistoria->setLaudo($dataLaudo);
+                    //echo "Laudo disponivel\n";
+                } else {
+                    //echo "Laudo nao disponivel\n";
+                }
+            }
 
-           if (!isset($where['dtIni']))
-               $where['dtIni'] = '';
-           if (!isset($where['dtFim']))
-               $where['dtFim'] = '';
-           if (!isset($where['placa']))
-               $where['placa'] = '';
+            if (!$exists) {
+                $this->_vistoria->insert();
+            } else {
+                $this->_vistoria->update();
+            }
 
-           $result = $this->_consultorias($where['dtIni'], $where['dtFim'], $where['placa']);
+            return true;
+        }
 
-           if (isset($result->exceptionMessage)) {
-               $message = 'Data: ' . var_export($where, true) . "\n";
-               $message.= 'Erro: ' . $result->exceptionMessage;
-               Tools_Model_LogErro_Mapper::log('Vendas_Interface_Vsp_Ice', $message);
-               echo $message;
-           } else {
-               if (count($result) > 0) {
-                   #echo "Quantidade de Vistorias: " . count($result);
-                   #echo "\n\n<br>";
-                   foreach ($result as $data) {
-                       try {
-                           #echo var_export($data,true);
-                           #echo "\n\n<br>";
-                           $this->_pedido($data);
-                       } catch (Exception $ex) {
-                           $message = 'Data: ' . var_export($data, true) . "\n";
-                           $message.= 'Mensagem: ' . $ex->getMessage() . "\n";
-                           $message.= 'Erro: ' . $ex->getTraceAsString();
-                           Tools_Model_LogErro_Mapper::log('Vendas_Interface_Vsp_Ice', $message);
-                           echo $message . "\n <br/>";
-                       }
-                   }
-               }
-               echo "OK";
-           }
-       }
+        protected function _laudo($numero) {
+            $params = array();
+            $params['header']['Authorization'] = 'bearer ' . $this->_token;
+            $result = $this->_request('https://servicos.vistoriasp.com.br/ECVCommunicationService/api/vistoria/consultaLaudo/' . $numero, $params, Zend_Http_Client::GET);
+            $laudo = base64_decode($result->laudo);
+            return $laudo;
+        }
 
-   }
-   
+        protected function _consultorias($dtIni = '', $dtFim = '', $placa = '') {
+            if (!$dtIni) {
+                $dtIni = ZendT_Type_Date::nowDate()->addDay(-3)->getValueToDb();
+            }
+
+            if (!$dtFim) {
+                $dtFim = ZendT_Type_Date::nowDate()->getValueToDb();
+            }
+
+            $params = array();
+            $params['header']['Authorization'] = 'bearer ' . $this->_token;
+            $params['get']['Placa'] = $placa;
+            $params['get']['DataInicio'] = $dtIni;
+            $params['get']['DataFim'] = $dtFim;
+
+            #echo print_r($params);
+            #echo "\n <br>";
+
+            $result = $this->_request('https://servicos.vistoriasp.com.br/ECVCommunicationService/api/vistoria/consultaVistoria', $params, Zend_Http_Client::GET);
+
+            #print_r($result);
+
+            return $result;
+        }
+
+        public function run($where = array()) {
+            $this->_log('Iniciado: ' . date('d/m/Y H:s:i'));
+
+            Auth_Session_User::refresh('JOB_VSP');
+            $this->_token = $this->_doLogin();
+
+            if (!isset($where['dtIni']))
+                $where['dtIni'] = '';
+            if (!isset($where['dtFim']))
+                $where['dtFim'] = '';
+            if (!isset($where['placa']))
+                $where['placa'] = '';
+
+            $result = $this->_consultorias($where['dtIni'], $where['dtFim'], $where['placa']);
+
+            if (isset($result->exceptionMessage)) {
+                $message = 'Data: ' . var_export($where, true) . "\n";
+                $message.= 'Erro: ' . $result->exceptionMessage;
+                Tools_Model_LogErro_Mapper::log('Vendas_Interface_Vsp_Ice', $message);
+                $this->_log($message);
+            } else {
+                if (count($result) > 0) {
+                    $total = count($result);
+                    $this->_log("Quantidade de Vistorias: " . $total);
+                    foreach ($result as $seq => $data) {
+                        try {
+                            $this->_log("Processando " . ($seq + 1) . " de " . $total . ". Placa: " . $data->placa);
+                            $this->_pedido($data);
+                        } catch (Exception $ex) {
+                            $message = 'Data: ' . var_export($data, true) . "\n";
+                            $message.= 'Mensagem: ' . $ex->getMessage() . "\n";
+                            $message.= 'Erro: ' . $ex->getTraceAsString();
+                            $this->_log($message);
+                            Tools_Model_LogErro_Mapper::log('Vendas_Interface_Vsp_Ice', $message);
+                        }
+                    }
+                }
+                echo 'OK';
+            }
+            $this->_log('Finalizado: ' . date('d/m/Y H:s:i'));
+        }
+
+        public function runLaudos($where = array()) {
+            $this->_log('Iniciado: ' . date('d/m/Y H:s:i'));
+
+            Auth_Session_User::refresh('JOB_VSP');
+
+            $_pedido = new Vendas_DataView_Pedido_MapperView();
+            $_vistoria = new Vendas_DataView_Vistoria_MapperView();
+
+            $_where = new ZendT_Db_Where();
+            $_where->addFilter('pedido.id_empresa', Auth_Session_User::getInstance()->getIdEmpresa());            
+            if (isset($where['placa'])) {
+                $_where->addFilter('veiculo.placa', $where['placa']);
+            } else {
+                $_where->addFilter('pedido.status_edi', 'N');
+            }
+            $sql = "(SELECT 1"
+                    . "  FROM " . Vendas_DataView_Vistoria_MapperView::$table . " as vistoria "
+                    . " WHERE vistoria.id_pedido = pedido.id"
+                    . "   AND vistoria.laudo IS NULL)";
+            $_where->addFilterExists($sql);
+
+            $_pedido->findAll($_where, '*');
+
+            $seq = 1;
+            while ($row = $_pedido->fetch()) {
+                try {
+                    $_vistoria->newRow();
+                    $_vistoria->setIdPedido($row['id'])->retrieve();
+                    
+                    if ($_vistoria->getLaudo(true)->toPhp() == '' && $_vistoria->getNumero(true)->toPhp() != '') {
+                        $laudo = $this->_laudo($_vistoria->getNumero()->get());
+                        if ($laudo) {
+                            $_laudo = new ZendT_File(str_replace(array('-', '/'), '_', $_vistoria->getNumero()->get()) . '.pdf'
+                                    , $laudo
+                                    , 'application/pdf');
+                            $dataLaudo = array();
+                            $dataLaudo['file'] = $_laudo;
+                            $_vistoria->setLaudo($dataLaudo);
+                            $_vistoria->update();
+                        }
+                    }
+                    
+                    $this->_log("Processando " . $seq . ", Placa: " . $row['placa_veiculo']);
+
+
+                } catch (Exception $ex) {
+                    $message = 'Mensagem: ' . $ex->getMessage() . "\n";
+                    $message.= 'Erro: ' . $ex->getTraceAsString() . "\n";
+
+                    Vendas_Model_LogPedido_Mapper::log($_pedido->getId(), $ex->getMessage());
+                    Tools_Model_LogErro_Mapper::log('Vendas_Interface_Vsp_Tokio', $message);
+                    $this->_log('Placa: ' . $row['placa_veiculo'] . ', Erro: ' . $message);
+                }
+                $seq++;
+            }
+            echo "OK";
+            $this->_log('Finalizado: ' . date('d/m/Y H:s:i'));
+        }
+
+    }
+    

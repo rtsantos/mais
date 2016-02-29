@@ -9,16 +9,16 @@
         }
 
         public function iceAction() {
+            $params = $this->getRequest()->getParams();
             $_interface = new Vendas_Interface_Vsp_Ice();
-            $where['placa'] = 'EKR4006';
-            $_interface->run($where);
+            $_interface->run($params);
             exit;
         }
 
         public function tokioAction() {
+            $params = $this->getRequest()->getParams();
             $_interface = new Vendas_Interface_Vsp_Tokio();
-            $where['placa'] = 'EKR4006';
-            $_interface->run($where);
+            $_interface->run($params);
             exit;
         }
 

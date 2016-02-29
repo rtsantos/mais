@@ -377,7 +377,11 @@
                 $moduleName = Zend_Registry::get('module');
             }
             if ($moduleName == null) {
-                $moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+                @$moduleName = Zend_Controller_Front::getInstance()->getRequest()->getModuleName();
+            }
+            
+            if (!$moduleName){
+                $moduleName = 'vendas';
             }
 
             if (Zend_Registry::isRegistered('translate_' . $moduleName)) {

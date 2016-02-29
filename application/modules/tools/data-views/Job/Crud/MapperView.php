@@ -13,12 +13,12 @@
          */
         protected function _getSettingsDefault(){
            $profile = array();
-           $profile['order'] = array('id','descricao','dh_inc','dh_ini_exec','dh_ult_exec','dh_fim_exec','tp_frequencia','num_frequencia','forma_exec','procedimento','parametro','tempo_ul_exec','dh_pro_exec');
-           $profile['width'] = array('id'=>100,'descricao'=>200,'dh_inc'=>150,'dh_ini_exec'=>150,'dh_ult_exec'=>150,'dh_fim_exec'=>150,'tp_frequencia'=>150,'num_frequencia'=>150,'forma_exec'=>150,'procedimento'=>200,'parametro'=>200,'tempo_ul_exec'=>150,'dh_pro_exec'=>150);
-           $profile['align'] = array('id'=>'left','descricao'=>'left','dh_inc'=>'center','dh_ini_exec'=>'center','dh_ult_exec'=>'center','dh_fim_exec'=>'center','tp_frequencia'=>'center','num_frequencia'=>'right','forma_exec'=>'center','procedimento'=>'left','parametro'=>'left','tempo_ul_exec'=>'right','dh_pro_exec'=>'center');
+           $profile['order'] = array('id','descricao','dh_inc','dh_ini_exec','dh_ult_exec','dh_fim_exec','tp_frequencia','num_frequencia','forma_exec','procedimento','parametro','tempo_ul_exec','dh_pro_exec','status');
+           $profile['width'] = array('id'=>100,'descricao'=>200,'dh_inc'=>150,'dh_ini_exec'=>150,'dh_ult_exec'=>150,'dh_fim_exec'=>150,'tp_frequencia'=>150,'num_frequencia'=>150,'forma_exec'=>150,'procedimento'=>200,'parametro'=>200,'tempo_ul_exec'=>150,'dh_pro_exec'=>150,'status'=>150);
+           $profile['align'] = array('id'=>'left','descricao'=>'left','dh_inc'=>'center','dh_ini_exec'=>'center','dh_ult_exec'=>'center','dh_fim_exec'=>'center','tp_frequencia'=>'center','num_frequencia'=>'right','forma_exec'=>'center','procedimento'=>'left','parametro'=>'left','tempo_ul_exec'=>'right','dh_pro_exec'=>'center','status'=>'center');
            $profile['hidden'] = array();
            $profile['remove'] = array();
-           $profile['listOptions'] = array('tp_frequencia'=>$this->getModel()->getListOptions('tp_frequencia'),'forma_exec'=>$this->getModel()->getListOptions('forma_exec'));
+           $profile['listOptions'] = array('tp_frequencia'=>$this->getModel()->getListOptions('tp_frequencia'),'forma_exec'=>$this->getModel()->getListOptions('forma_exec'),'status'=>$this->getModel()->getListOptions('status'));
            return $profile;
         }
         /**
@@ -40,6 +40,7 @@
             $this->_columns->add('parametro', 'job', 'parametro', $this->getModel()->getMapperName(), ZendT_Lib::translate('job.parametro'),'String','%?%');
             $this->_columns->add('tempo_ul_exec', 'job', 'tempo_ul_exec', $this->getModel()->getMapperName(), ZendT_Lib::translate('job.tempo_ul_exec'),'Numeric','=');
             $this->_columns->add('dh_pro_exec', 'job', 'dh_pro_exec', $this->getModel()->getMapperName(), ZendT_Lib::translate('job.dh_pro_exec'),'DateTime','=');
+            $this->_columns->add('status', 'job', 'status', $this->getModel()->getMapperName(), ZendT_Lib::translate('job.status'),'String','=');
 
         }
         /**
