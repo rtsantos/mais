@@ -6,7 +6,7 @@
     //require_once('Layout/MenuTopUser.php');
 
     /**
-     * Classe criada para renderizar os layouts das aplicações TA
+     * Classe criada para renderizar os layouts das aplicaï¿½ï¿½es TA
      */
     class Layout {
 
@@ -54,7 +54,15 @@
             $this->_rendered = true;
             require_once('Templates/intranet.phtml');
         }
-
+        
+        /**
+         *
+         * @param stdClass $content 
+         */
+        private function _simple() {
+            $this->_rendered = true;
+            require_once('Templates/simple.phtml');
+        }
         /**
          *
          * @param stdClass $content 

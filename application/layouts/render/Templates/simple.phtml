@@ -1,0 +1,29 @@
+<?php
+   if (!($content instanceof Layout_Content)) {
+       $content = $this->_content;
+   }
+
+   $this->baseUrl = $this->getParam('baseUrl');
+   $this->baseUrlPublic = str_replace('/index.php', '', $this->baseUrl) . '/public';
+?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $content->getCharset(); ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <link rel="icon" type="image/ico" href="<?php echo $this->baseUrlPublic; ?>/images/favicon.ico" />
+        <?php
+           echo $content->getHeader();
+        ?>
+        <title>
+            <?php
+               echo $content->getTitle();
+            ?>
+        </title>
+    </head>
+    <body> 
+        <?php
+           echo $content->getBody();
+        ?>
+    </body>
+</html>
