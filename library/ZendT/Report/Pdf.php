@@ -134,8 +134,15 @@
                }
            }
 
+           /*echo '<pre>';
+           print_r($options);
+           echo '</pre>';
+           exit;*/
+
            $this->_driver->setFooter($this->_footer);
-           $this->_driver->setTitulo($this->_title);
+           if ($options['title']['print'] != 0) {
+               $this->_driver->setTitulo($this->_title);
+           }
            $this->_driver->setEmpresa($this->_empresa);
            $this->_driver->setOrientation($this->_orientation);
            $this->_driver->FPDF($this->_orientation);
@@ -278,7 +285,7 @@
         * Imprime as celulas do relatorio
         * @return ZendT_Report_Abstract
         */
-       public function printCells($zebra = false, $title=false) {
+       public function printCells($zebra = false, $title = false) {
            $options = array();
            if ($this->_zebra && $zebra) {
                if (!$this->_colorZebra) {
@@ -307,11 +314,11 @@
                        }
                        $celulaOk['url'] = $celulaOk['celula']->getUrl();
                        if ($celulaOk['url']) {
-                           if(strpos($celulaOk['url'], "typeModal") === false){
+                           if (strpos($celulaOk['url'], "typeModal") === false) {
                                $celulaOk['url'].= '&typeModal=PDF#zoom=120';
                            }
                        }
-                       
+
                        $cell = array();
                        $cell['width'] = $this->_pxToCm($celulaOk['celula']->getWidth());
                        $cell['height'] = $celulaOk['celula']->getHeight();
@@ -323,28 +330,22 @@
                        $cell['fontName'] = $celulaOk['celula']->getFontName();
                        $cell['style'] = $celulaOk['celula']->getStyle();
                        $cell['fontSize'] = $celulaOk['celula']->getFontSize();
-                       
-                       $this->_driver->Cell($cell['width'], 
-                                            $cell['height'], 
-                                            $cell['value'], 
-                                            $cell['border'], 
-                                            0, 
-                                            $cell['align'], 
-                                            $cell['color'], 
-                                            $cell['url']);
-                       if ($title){
+
+                       $this->_driver->Cell($cell['width'], $cell['height'], $cell['value'], $cell['border'], 0, $cell['align'], $cell['color'], $cell['url']);
+                       if ($title) {
                            $this->_driver->addCellTitle($cell);
                        }
                    }
                }
                $this->_driver->Ln();
-               if ($title){
+               if ($title) {
                    $this->_driver->addLineTitle();
                }
            }
            $this->_cells = array();
            return $this;
        }
+
        /**
         * Adiciona uma celula
         * 
@@ -352,13 +353,27 @@
         * @return ZendT_Report_Abstract
         */
        public function addCell(ZendT_Report_Cell $_cell) {
-           $this->_driver->SetFont($_cell->getFontName(), $_cell->getStyle(), $_cell->getFontSize());
+
            $value = $_cell->getValue();
-           if ($value instanceof ZendT_Type) {
+           if ($value instanceof ZendT_Type_FileSystem) {
+               
+               $pagecount = $this->_driver->setSourceFile($value->getFile()->getFilename());
+               for ($page = 1; $page <= $pagecount; $page++) {
+                   $this->_driver->AddPage();
+                   $tplidx = $this->_driver->importPage($page);
+                   $s = $this->_driver->getTemplatesize($tplidx);
+                   $this->_driver->useTemplate($tplidx, 0.5, 0.5, $s['w'], $s['h']);
+                   //$this->_driver->AddPage();
+               }
+
+               return $this;
+           } else if ($value instanceof ZendT_Type) {
                $value = utf8_decode($value->get());
            } else {
                $value = utf8_decode($value);
            }
+
+           $this->_driver->SetFont($_cell->getFontName(), $_cell->getStyle(), $_cell->getFontSize());
            if (strtoupper($value) == $value) {
                $width = $this->_driver->GetStringWidth('Z');
            } else {

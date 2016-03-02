@@ -14,11 +14,11 @@
            $this->newRow()->setNome($user)->retrieve();
 
            if (!$this->getId(true)->toPhp()) {
-               throw new ZendT_Exception_Alert(_i18n('Usuário "%user" não encontrado!', $user));
+               throw new ZendT_Exception_Alert(_i18n('Usuário "%s" não encontrado!', $user));
            }
 
            if ($this->getSenha(true)->toPhp() != $pass) {
-               throw new ZendT_Exception_Alert(_i18n('Senha do usuário "%user" não confere!', $user));
+               throw new ZendT_Exception_Alert(_i18n('Senha do usuário "%s" não confere!', $user));
            }
 
            Auth_Session_User::refresh($this->getNome()->get());
@@ -35,11 +35,11 @@
            $this->newRow()->setNome($user)->retrieve();
 
            if (!$this->getId(true)->toPhp()) {
-               throw new ZendT_Exception_Alert(_i18n('Usuário "%user" não encontrado!', $user));
+               throw new ZendT_Exception_Alert(_i18n('Usuário "%s" não encontrado!', $user));
            }
 
            if ($this->getSenha(true)->toPhp() != $pass) {
-               throw new ZendT_Exception_Alert(_i18n('Senha do usuário "%user" não confere!', $user));
+               throw new ZendT_Exception_Alert(_i18n('Senha do usuário "%s" não confere!', $user));
            }
 
            $this->setSenha($newPass)->update();
@@ -51,7 +51,7 @@
            $this->newRow()->setNome($user)->retrieve();
 
            if (!$this->getId(true)->toPhp()) {
-               throw new ZendT_Exception_Alert(_i18n('Usuário "%user" não encontrado!', $user));
+               throw new ZendT_Exception_Alert(_i18n('Usuário "%s" não encontrado!', $user));
            }
 
            if ($this->getEmail(true)->toPhp()) {
@@ -61,10 +61,10 @@
            $_mail = new ZendT_Mail();
            $_mail->addTo($this->getEmail(true)->get(), $this->getDescricao(true)->get());
            $_mail->setSubject(_i18n('Recuperação de Senha'));
-           $_mail->setBody(_i18n('Usuário: "%user"<br />Senha: "%pass"', $this->getNome()->get(), $this->getSenha()->get()));
+           $_mail->setBody(_i18n('Usuário: "%s"<br />Senha: "%s"', $this->getNome()->get(), $this->getSenha()->get()));
            $_mail->send();
 
-           return _i18n('Senha enviada para o e-mail "%email"!', $this->getEmail(true)->get());
+           return _i18n('Senha enviada para o e-mail "%s"!', $this->getEmail(true)->get());
        }
 
    }

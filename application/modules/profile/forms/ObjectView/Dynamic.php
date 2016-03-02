@@ -70,9 +70,9 @@
 
            $element = new ZendT_Form_Element_Select('empresa');
            $element->setLabel(ZendT_Lib::translate('Logo do Relatório:'));
-           $element->addMultiOption('', '');
-           $element->addMultiOption('TA', ZendT_Lib::translate('TA'));
-           $element->addMultiOption('TAL', ZendT_Lib::translate('TAL'));
+           $element->addMultiOption('MAIS', ZendT_Lib::translate('MAIS'));
+           $element->addMultiOption('CLIENTE', ZendT_Lib::translate('CLIENTE'));
+           $element->addMultiOption('NENHUM', ZendT_Lib::translate('NENHUM'));
            $this->addElement($element);
 
            $element = new ZendT_Form_Element_Select('zebra');

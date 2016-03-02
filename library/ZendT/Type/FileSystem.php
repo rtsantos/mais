@@ -92,7 +92,7 @@
        public function set($value, $options = null, $locale = null) {
            if ($value && is_numeric($value)) {
                $this->_valueDb = $value;
-           } else if ($value instanceof ZendT_File){
+           } else if ($value instanceof ZendT_File) {
                $this->_value = $value;
            } else if ($value !== null && $value) {
                $file = ZendT_File::fromFilenameCrypt($value);
@@ -166,6 +166,10 @@
 
        public function __toString() {
            return $this->_value;
+       }
+
+       public function getType() {
+           return 'Integer';
        }
 
    }

@@ -1,0 +1,85 @@
+<?php
+   $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/styles/login.css');
+   $this->headLink()->appendStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+   $urlPublic = ZendT_Url::getBaseDiretoryPublic();
+   $urlBase = ZendT_Url::getBaseUrl();
+?>
+
+<form id="frm_logon" name="frm_logon" id="frm_logon" action="<?php echo $urlBase; ?>/auth/user/authenticate" method="post">
+
+    <input type="hidden" name="success" value="<?php echo $urlBase; ?>/vendas/vistoria/filter">
+    <input type="hidden" name="error" value="<?php echo $urlBase; ?>/index/auth">
+
+    <div class="login-form">
+        <div id="marca">
+            <div id="logo">
+                <img src="<?php echo $urlPublic; ?>/images/mais-venda.gif">		
+            </div>
+        </div>	 
+
+        <?php if ($this->message): ?>
+                <div class="alert"><?php echo $this->message; ?></div>
+           <?php endif; ?>
+
+        <div class="form-group log-status" for="user">
+            <input type="text" value="<?php echo $this->user; ?>" class="form-control" placeholder="Usuário ou E-Mail" id="user" name="user">
+            <i class="fa fa-user"></i>
+        </div>
+
+        <div class="form-group log-status" for="pass">
+            <input type="password" class="form-control" placeholder="Senha" id="pass" name="pass">
+            <i class="fa fa-lock"></i>
+        </div>
+
+        <div class="actions">
+            <div id="submit">
+                <button type="button" class="log-btn" id="btn-entrar">
+                    Entrar        
+                </button>
+            </div>
+            
+            <div id="links">
+                <a class="link" href="#">Esqueceu sua senha?</a>
+                <br />
+                <a class="link" href="#">Trocar Minha Senha</a>
+            </div>
+        </div>
+
+    </div>
+
+</form>
+<script>
+    $(document).ready(function () {
+        $('#user').keypress(function () {
+            $('[for="user"].log-status').removeClass('wrong-entry');
+        });
+
+        $('#pass').keypress(function () {
+            $('[for="pass"].log-status').removeClass('wrong-entry');
+        });
+
+        $('#btn-entrar').click(function () {
+            var user = jQuery('#user');
+            var pass = jQuery('#pass');
+
+            if (user.val() == '') {
+                //$('[for="user"].alert').fadeIn(500);
+                $('[for="user"].log-status').addClass('wrong-entry');
+                //setTimeout("$('[for=\"user\"].alert').fadeOut(1500);", 3000);
+                user.focus();
+                return false;
+            }
+
+            if (pass.val() == '') {
+                //$('[for="pass"].alert').fadeIn(500);
+                $('[for="pass"].log-status').addClass('wrong-entry');
+                //setTimeout("$('[for=\"pass\"].alert').fadeOut(1500);", 3000);
+                pass.focus();
+                return false;
+            }
+
+            $('#frm_logon').submit();
+        });
+    });
+</script>

@@ -1,28 +1,44 @@
 <?php
    $this->headLink()->appendStylesheet(ZendT_Url::getBaseDiretoryPublic() . '/styles/login.css');
    $this->headLink()->appendStylesheet('http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+   $urlPublic = ZendT_Url::getBaseDiretoryPublic();
+   $urlBase = ZendT_Url::getBaseUrl();
 ?>
 
-<div class="login-form">
-    <div id="marca">
-        <div id="logo">
-            <img src="http://www.maisvistoria.com.br/public/images/mais-venda.gif">		
+<form name="frm_logon" id="frm_logon" action="<?php echo $urlBase; ?>/auth/user/authenticate" method="post">
+
+    <input type="hidden" name="success" value="<?php echo $urlBase; ?>/vendas/vistorias/filter">
+    <input type="hidden" name="error" value="<?php echo $urlBase; ?>">
+
+    <div class="login-form">
+        <div id="marca">
+            <div id="logo">
+                <img src="<?php echo $urlPublic; ?>/images/mais-venda.gif">		
+            </div>
+        </div>	 
+
+        <?php if ($this->error): ?>
+               <span class="alert"><?php echo $this->error; ?></span>
+        <?php endif; ?>
+
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Usuário ou E-Mail" id="user" name="user">
+            <i class="fa fa-user"></i>
         </div>
-    </div>	 
-    <div class="form-group ">
-        <input type="text" class="form-control" placeholder="Usuário ou E-Mail" id="usuario" name="usuario">
-        <i class="fa fa-user"></i>
-    </div>
-    <div class="form-group log-status">
-        <input type="password" class="form-control" placeholder="Senha" id="senha" name="senha">
-        <i class="fa fa-lock"></i>
-    </div>
-    <span class="alert">Senha inválida!</span>
-    <a class="link" href="#">Esqueceu sua senha?</a>
-    <button type="button" class="log-btn" >Entrar</button>
 
+        <div class="form-group log-status">
+            <input type="password" class="form-control" placeholder="Senha" id="pass" name="pass">
+            <i class="fa fa-lock"></i>
+        </div>
 
-</div>
+        <span class="alert">Senha inválida!</span>
+        <a class="link" href="#">Esqueceu sua senha?</a>
+        <button type="button" class="log-btn" >Entrar</button>
+
+    </div>
+
+</form>
 <script>
     $(document).ready(function () {
         $('.log-btn').click(function () {
