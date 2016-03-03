@@ -2061,7 +2061,7 @@
                    $value = array('file' => $value);
                } else {
                    if (!isset($value['file']) && !is_array($value)) {
-                       $value['file'] = $value;
+                       $value = array('file' => $value);
                    }
 
                    if (is_array($value) && $value['id']) {

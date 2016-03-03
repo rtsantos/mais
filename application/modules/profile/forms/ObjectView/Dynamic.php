@@ -42,9 +42,27 @@
            $element->addMultiOption('HTML', ZendT_Lib::translate('HTML'));
            #$element->addMultiOption('CSV', ZendT_Lib::translate('CSV'));
            $this->addElement($element);
+           
+           $element = new ZendT_Form_Element_Select('pageAdd');
+           $element->setLabel(ZendT_Lib::translate('Adiciona Página:'));
+           $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
+           $element->addMultiOption('0', ZendT_Lib::translate('Não'));
+           $this->addElement($element);
 
            $element = new ZendT_Form_Element_Select('printTitle');
            $element->setLabel(ZendT_Lib::translate('Imprime Título:'));
+           $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
+           $element->addMultiOption('0', ZendT_Lib::translate('Não'));
+           $this->addElement($element);
+           
+           $element = new ZendT_Form_Element_Select('printColumnsTitle');
+           $element->setLabel(ZendT_Lib::translate('Imprime Título das Colunas:'));
+           $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
+           $element->addMultiOption('0', ZendT_Lib::translate('Não'));
+           $this->addElement($element);
+           
+           $element = new ZendT_Form_Element_Select('printFooter');
+           $element->setLabel(ZendT_Lib::translate('Imprime Rodapé:'));
            $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
            $element->addMultiOption('0', ZendT_Lib::translate('Não'));
            $this->addElement($element);
@@ -139,7 +157,10 @@
            $this->addDisplayGroup(
                  array(
               'output',
+              'pageAdd',
               'printTitle',
+              'printColumnsTitle',
+              'printFooter',
               'printParams',
               'orientation',
               'empresa',

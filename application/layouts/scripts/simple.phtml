@@ -1,25 +1,25 @@
 <?php
 
-   $this->jQuery()->setLocalPath(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/jquery-1.10.2.js');
-   $this->jQuery()->setUiLocalPath(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/jquery-ui-1.10.4.custom.min.js');
-   $this->jQuery()->enable();
+    $this->jQuery()->setLocalPath(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/jquery-1.10.2.js');
+    $this->jQuery()->setUiLocalPath(ZendT_Url::getBaseDiretoryPublic() . '/layout/jquery/ui/js/jquery-ui-1.10.4.custom.min.js');
+    $this->jQuery()->enable();
 
-   require_once('../layout/Layout.php');
-   $filters = array();
-   $filters[] = 'utf8_encode';
-   $layout = new Layout('simple', false, $filters);
-   $layout->getContent()->setCharset('utf-8');
+    require_once(APPLICATION_PATH . '/layouts/render/Layout.php');
+    $filters = array();
+    $filters[] = 'utf8_encode';
+    $layout = new Layout('simple', false, $filters);
+    $layout->getContent()->setCharset('utf-8');
 
-   $header = $this->headLink()->__toString();
-   $header.= $this->jQuery()->__toString();
-   $header.= $this->headScript()->__toString();
+    $header = $this->headLink()->__toString();
+    $header.= $this->jQuery()->__toString();
+    $header.= $this->headScript()->__toString();
 
-   $layout->getContent()->setHeader($header);
-   $layout->getContent()->setTitle($this->headTitle()->__toString());
-   $layout->getContent()->setScreenName($this->placeholder('title')->__toString());
-   $layout->getContent()->setApplicationName($this->placeholder('application')->__toString());
-   $layout->getContent()->setModuleName($moduleName);
+    $layout->getContent()->setHeader($header);
+    $layout->getContent()->setTitle($this->headTitle()->__toString());
+    $layout->getContent()->setScreenName($this->placeholder('title')->__toString());
+    $layout->getContent()->setApplicationName($this->placeholder('application')->__toString());
+    $layout->getContent()->setModuleName($moduleName);
 
 
-   $layout->render($this->layout()->content);
+    $layout->render($this->layout()->content);
 ?>
