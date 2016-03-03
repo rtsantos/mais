@@ -9,7 +9,7 @@
    require_once 'Extra/Pdf/fpdf.php';
    require_once 'Extra/Pdf/fpdi/fpdi.php';
 
-   class ZendT_Report_Fpdf extends FPDI {
+   class ZendT_Report_Pdf_Fpdf extends FPDI {
 
        /**
         * Recebe a empresa
@@ -57,9 +57,9 @@
         * @return void
         */
        function Header() {
-           if ($this->_empresa == 'MAIS'){
+           if ($this->_empresa == 'MAIS') {
                $this->Image("public/images/mais-venda.gif", 8, 5, 15);
-           }else if ($this->_empresa == 'CLIENTE'){
+           } else if ($this->_empresa == 'CLIENTE') {
                #@todo codificar entrada do cliente
            }
            //$this->Image("public/images/mais-venda.gif", 8, 5, 15);

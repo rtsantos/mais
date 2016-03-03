@@ -73,7 +73,7 @@
        public function __construct($options = false) {
 
            $this->_decorators = array(new ZendT_Form_Decorator());
-           
+
            if ($options['orientation'] == 'P') {
                $_widthTitle = 195;
            } else {
@@ -354,12 +354,12 @@
            if ($url) {
                $input = $cell->getInput();
                if ($input) {
-                   if ($input instanceof ZendT_Form_Element){
+                   if ($input instanceof ZendT_Form_Element) {
                        $value = clone $input;
                        $value->addDecorators($this->_decorators);
                        $url = utf8_encode($url);
-                       $value = $value->setName($cell->getName())->setAttrib('class', $styleName)->setAttrib('action',$url)->setValue($cell->getValue())->render();
-                   }else{
+                       $value = $value->setName($cell->getName())->setAttrib('class', $styleName)->setAttrib('action', $url)->setValue($cell->getValue())->render();
+                   } else {
                        $value = '<input type="' . $input . '" name="' . $cell->getName() . '" class="' . $styleName . '" value="' . $cell->getValue() . '" action="' . $url . '" />';
                    }
                } else {
@@ -384,7 +384,7 @@
         * Imprime as celulas do relatorio
         * @return ZendT_Report_Abstract
         */
-       public function printCells($zebra = false,$title=false) {
+       public function printCells($zebra = false, $title = false) {
            $backgroundColor = '#FFFFFF';
            if ($this->_zebra && $zebra) {
                if (!$this->_colorZebra) {
@@ -417,7 +417,7 @@
         */
        public function addCell(ZendT_Report_Cell $_cell) {
            $this->_cells[] = $_cell;
-           if(substr($_cell->getName(), 0, 6) == 'title_'){
+           if (substr($_cell->getName(), 0, 6) == 'title_') {
                $this->_tableWidth += $_cell->getWidth();
            }
            return $this;
@@ -430,7 +430,7 @@
         * @param string $dest
         */
        public function output($name = '', $dest = 'S') {
-           if($this->_tableWidth){
+           if ($this->_tableWidth) {
                $this->_output = str_replace('width="100%"', 'width="' . $this->_tableWidth . '"', $this->_output);
            }
            $this->_output = '<style>.lf{} ' . implode(' ', $this->_styles) . '</style>' . $this->_output . '</table>';

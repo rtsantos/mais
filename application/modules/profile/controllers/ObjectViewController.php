@@ -458,7 +458,7 @@
                    $config = $this->_getConfigForm($row);
                } else if ($row['tipo']->toPhp() == 'G') {
                    $config = $this->_getConfigGrid($row);
-               } else if ($row['tipo']->toPhp() == 'P' || $row['tipo']->toPhp() == 'X') {
+               } else if ($row['tipo']->toPhp() == 'P' || $row['tipo']->toPhp() == 'X' || $row['tipo']->toPhp() == 'I') {
                    $config = $this->_getConfigReport($row);
                } else if ($row['tipo']->toPhp() == 'C') {
                    $config = $this->_getConfigChart($row);

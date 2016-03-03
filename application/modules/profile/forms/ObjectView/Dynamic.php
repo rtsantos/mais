@@ -40,27 +40,17 @@
            $element->addMultiOption('PDF', ZendT_Lib::translate('PDF'));
            $element->addMultiOption('XLS', ZendT_Lib::translate('XLS'));
            $element->addMultiOption('HTML', ZendT_Lib::translate('HTML'));
+           #$element->addMultiOption('ZendT_Report_Pdf_Form', ZendT_Lib::translate('Formulário PDF'));
            #$element->addMultiOption('CSV', ZendT_Lib::translate('CSV'));
            $this->addElement($element);
-           
-           $element = new ZendT_Form_Element_Select('pageAdd');
-           $element->setLabel(ZendT_Lib::translate('Adiciona Página:'));
-           $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
-           $element->addMultiOption('0', ZendT_Lib::translate('Não'));
-           $this->addElement($element);
+
 
            $element = new ZendT_Form_Element_Select('printTitle');
            $element->setLabel(ZendT_Lib::translate('Imprime Título:'));
            $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
            $element->addMultiOption('0', ZendT_Lib::translate('Não'));
            $this->addElement($element);
-           
-           $element = new ZendT_Form_Element_Select('printColumnsTitle');
-           $element->setLabel(ZendT_Lib::translate('Imprime Título das Colunas:'));
-           $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
-           $element->addMultiOption('0', ZendT_Lib::translate('Não'));
-           $this->addElement($element);
-           
+
            $element = new ZendT_Form_Element_Select('printFooter');
            $element->setLabel(ZendT_Lib::translate('Imprime Rodapé:'));
            $element->addMultiOption('1', ZendT_Lib::translate('Sim'));
@@ -73,12 +63,6 @@
            $element->addMultiOption('0', ZendT_Lib::translate('Não'));
            $this->addElement($element);
 
-
-           $element = new ZendT_Form_Element_Select('orientation');
-           $element->setLabel(ZendT_Lib::translate('Página em:'));
-           $element->addMultiOption('L', ZendT_Lib::translate('Paisagem'));
-           $element->addMultiOption('P', ZendT_Lib::translate('Retrato'));
-           $this->addElement($element);
 
            $element = new ZendT_Form_Element_Select('orientation');
            $element->setLabel(ZendT_Lib::translate('Página em:'));
@@ -184,7 +168,7 @@
               'legend' => 'Ordenação de Colunas'
                  )
            );
-           
+
            /**
             * Organização dos grupos
             */

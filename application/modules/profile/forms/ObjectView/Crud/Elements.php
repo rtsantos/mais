@@ -47,7 +47,8 @@ class Profile_Form_ObjectView_Crud_Elements
         $element->addMultiOption('F', 'Formulário');
         $element->addMultiOption('G', 'Tabela');
         $element->addMultiOption('C', 'Gráfico Dinâmico');
-        $element->addMultiOption('D', 'Tabela Dinâmica');        
+        $element->addMultiOption('D', 'Tabela Dinâmica');
+        $element->addMultiOption('I', 'Impressão Dinâmica');        
                 
         return $element;
     }

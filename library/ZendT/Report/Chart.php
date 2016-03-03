@@ -1,55 +1,55 @@
 <?php
 
-    /**
-     * ZendT_Report_Chart
-     * 
-     * @package ZendT
-     * @subpackage ZendT_Report 
-     * @author rsantos
-     *
-     */
-    class ZendT_Report_Chart extends ZendT_Report_Abstract {
-        
-        public function getTitle(){
-            return $this->_title;
-        }
+   /**
+    * ZendT_Report_Chart
+    * 
+    * @package ZendT
+    * @subpackage ZendT_Report 
+    * @author rsantos
+    *
+    */
+   class ZendT_Report_Chart extends ZendT_Report_Abstract {
 
-        protected function getDriver() {
-            
-        }
+       public function getTitle() {
+           return $this->_title;
+       }
 
-        protected function setCellDefault(array $defaults) {
-            
-        }
+       protected function getDriver() {
+           
+       }
 
-        public function addCell(ZendT_Report_Cell $cell) {
-            
-        }
+       protected function setCellDefault(array $defaults) {
+           
+       }
 
-        public function drawLine($start = null, $finish = null, $height = 3) {
-            
-        }
+       public function addCell(ZendT_Report_Cell $cell) {
+           
+       }
 
-        public function ln($height = 3) {
-            
-        }
+       public function drawLine($start = null, $finish = null, $height = 3) {
+           
+       }
 
-        public function output($name = '', $dest = 'I') {
-            
-        }
+       public function ln($height = 3) {
+           
+       }
 
-        public function printCells($zebra=true,$title=false) {
-            
-        }
+       public function output($name = '', $dest = 'I') {
+           
+       }
 
-        public function setEmpresa($value = false) {
-            
-        }
+       public function printCells($zebra = true, $title = false) {
+           
+       }
 
-        public function setOutputName($value) {
-            
-        }
+       public function setEmpresa($value = false) {
+           
+       }
 
-    }
+       public function setOutputName($value) {
+           
+       }
+
+   }
 
 ?>

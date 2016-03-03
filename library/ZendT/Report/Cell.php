@@ -5,7 +5,7 @@
     * 
     * @package ZendT
     * @subpackage ZendT_Report 
-    * @author ksantoja
+    * @author rsantos
     * @version 3
     *
     */
@@ -248,8 +248,8 @@
         * @return ZendT_Report_Cell
         */
        public function setWidth($value) {
-           if (strpos($value, ',') !== false){
-               $value = str_replace(array('.',','),array('','.'),$value);
+           if (strpos($value, ',') !== false) {
+               $value = str_replace(array('.', ','), array('', '.'), $value);
            }
            $this->_width = $value;
            $this->_addStyleName('width', $value);
@@ -626,8 +626,8 @@
         * @return \ZendT_Report_Cell 
         */
        public function setUrl($url) {
-           if(mb_detect_encoding($url, 'UTF-8', true) == 'UTF-8'){
-                $url = utf8_decode($url);
+           if (mb_detect_encoding($url, 'UTF-8', true) == 'UTF-8') {
+               $url = utf8_decode($url);
            }
            $this->_url = $url;
            return $this;

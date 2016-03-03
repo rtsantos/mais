@@ -111,6 +111,7 @@ return array (
             'G' => 'Tabela',
             'C' => 'Gráfico Dinâmico',
             'D' => 'Tabela Dinâmica',
+            'I' => 'Impressão Dinâmica'
           ),
           'type' => 'Select',
           'text' => 
