@@ -29,7 +29,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getId(){
 
         $element = new ZendT_Form_Element_Text('id');
-        $element->setLabel($this->_translate->_('pf_object_view.id') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.id') . ':');
         $element->setAttribs(array('css-width'=>'100px'));        
         $element->addValidators(array());
         $element->addAttr('onBlur',"this.value=strtoupper(this.value);this.value=removeAccent(this.value);");
@@ -43,7 +43,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getTipo(){
 
         $element = new ZendT_Form_Element_Select('tipo');
-        $element->setLabel($this->_translate->_('pf_object_view.tipo') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.tipo') . ':');
         $element->addMultiOption('F', 'Formulário');
         $element->addMultiOption('G', 'Tabela');
         $element->addMultiOption('C', 'Gráfico Dinâmico');
@@ -60,7 +60,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getPadrao(){
 
         $element = new ZendT_Form_Element_Select('padrao');
-        $element->setLabel($this->_translate->_('pf_object_view.padrao') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.padrao') . ':');
         $element->addMultiOption('S', 'Sim');
         $element->addMultiOption('N', 'Não');        
                 
@@ -74,7 +74,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getNome(){
 
         $element = new ZendT_Form_Element_Text('nome');
-        $element->setLabel($this->_translate->_('pf_object_view.nome') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.nome') . ':');
         $element->setAttribs(array('maxlength'=>'60','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         return $element;
@@ -87,7 +87,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getObjeto(){
 
         $element = new ZendT_Form_Element_Text('objeto');
-        $element->setLabel($this->_translate->_('pf_object_view.objeto') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.objeto') . ':');
         $element->setAttribs(array('maxlength'=>'60','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         return $element;
@@ -100,7 +100,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getObservacao(){
 
         $element = new ZendT_Form_Element_Text('observacao');
-        $element->setLabel($this->_translate->_('pf_object_view.observacao') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.observacao') . ':');
         $element->setAttribs(array('maxlength'=>'4000','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         return $element;
@@ -113,7 +113,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getConfig(){
 
         $element = new ZendT_Form_Element_Textarea('config');
-        $element->setLabel($this->_translate->_('pf_object_view.config') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.config') . ':');
         $element->enableEditorHtml(0);
         $element->setAttribs(array('cols'=>'50','rows'=>'10'));        
         $element->addValidators(array());
@@ -129,7 +129,7 @@ class Profile_Form_ObjectView_Crud_Elements
 
         $element = new ZendT_Form_Element_Seeker('id_usuario');
         $element->setSuffix('usuario');
-        $element->setLabel($this->_translate->_('pf_object_view.id_usuario') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.id_usuario') . ':');
         $element->setIdField('id');
         $element->setIdAttribs(array());
         $element->setSearchField('login');
@@ -154,7 +154,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getUri(){
 
         $element = new ZendT_Form_Element_Text('uri');
-        $element->setLabel($this->_translate->_('pf_object_view.uri') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.uri') . ':');
         $element->setAttribs(array('maxlength'=>'100','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");
@@ -168,7 +168,7 @@ class Profile_Form_ObjectView_Crud_Elements
     public function getChave(){
 
         $element = new ZendT_Form_Element_Text('chave');
-        $element->setLabel($this->_translate->_('pf_object_view.chave') . ':');
+        $element->setLabel($this->_translate->_('profile_object_view.chave') . ':');
         $element->setAttribs(array('maxlength'=>'40','css-width'=>'200px'));        
         $element->addValidators(array('Zend_Validate_StringLength'));
         $element->addAttr('onBlur',"this.value=trim(this.value);");

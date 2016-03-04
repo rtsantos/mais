@@ -46,7 +46,7 @@ input, textarea, select, button{
 
 #frmLogin input{
     margin-right: 3px;
-	}
+}
 
 #frmLogin button, #frmLogin button:active, #frmLogin button:hover{
     background-color: #ff6600;
@@ -59,12 +59,12 @@ input, textarea, select, button{
 
 #frmLogin .frmLoginResposta{
     display: none;
-        }
+}
 
 #frmLogin .label{
     font-size:10px;
     text-align: left;
-	}
+}
 
 .cpPesquisar {
     background-position: 0 -160px;
@@ -74,7 +74,7 @@ input, textarea, select, button{
     height: 13px;
     padding: 6px 10px 7px;
     width: 186px;
-	}
+}
 
 .btOk {
     background-position: -203px -38px;
@@ -84,7 +84,7 @@ input, textarea, select, button{
     height: 30px;
     text-transform: uppercase;
     width: 35px;
-	}
+}
 
 .btVoltar {
     background-position: -248px -156px;
@@ -93,7 +93,7 @@ input, textarea, select, button{
     cursor: pointer;
     height: 30px;
     width: 61px;
-	}
+}
 
 .btX {
     background-position: -211px -160px;
@@ -122,7 +122,7 @@ input, textarea, select, button{
     color:#fff;
     text-align:right;
     vertical-align:middle;
-            }
+}
 
 #toolBarTopoItens td{
     border-left:1px solid #294128;
@@ -132,14 +132,14 @@ input, textarea, select, button{
     cursor:pointer;
     color:#fff;
     border-top:2px solid #3d673c;
-            }
+}
 #toolBarTopoItens td:hover{
     border-top:2px solid #ff6600;
 }
 
 #toolBarTopoItens .menuSelected{
     border-top:2px solid #ff6600;
-            }
+}
 body#bodyWindow #toolBarTopo {
     position:absolute;
     background:#f9f9f9;
@@ -174,7 +174,7 @@ body#bodyWindow #toolBarTopo {
 body#bodyWindow #toolBarTopo a:link {
     color:#333;
     text-decoration:none;
-            }
+}
 body#bodyWindow #toolBarTopo a:visited {
     text-decoration:none;
     color:#333;
@@ -187,7 +187,7 @@ body#bodyWindow #toolBarTopo a:active {
     text-decoration:none;
     color: #333;
 }
-            
+
 /**
  * @section estrutura layout
 */	
@@ -202,7 +202,7 @@ table#tbEstrutura {
     right:0px;
     border:0px;
     vertical-align:bottom;
-            }
+}
 table#tbEstrutura td#lnTopo {
     height:114px;
 }
@@ -225,7 +225,7 @@ body#bodyWindow table#tbEstrutura td#lnConteudo {
 */	
 table#tbTopo {
     width:97%;
-            }
+}
 td#tbTopoEsquerda {
     width:206px;
 }
@@ -248,7 +248,7 @@ table#tbTitAplicacao {
 table#tbTitAplicacao img#logoAplicacao {
     margin: 0px;
 }
-        
+
 
 /**
  * @section menu layout
@@ -817,14 +817,14 @@ table#tbBrConteudo td#tbBrConteudoRodapeDireita {
 }
 
 .divPainel {
-	width:95%; 
-	height:446px; 
-	overflow:auto; 
-	margin:10px;
+    width:95%; 
+    height:446px; 
+    overflow:auto; 
+    margin:10px;
 }
 
 .t-ui-border-trbl{
-    
+
 }
 
 .t-ui-border-trb{
@@ -841,12 +841,32 @@ table#tbBrConteudo td#tbBrConteudoRodapeDireita {
 }
 
 .ui-icon-like-16{
-	background-image: url("/Mais/public/images/ui-like-16.png") !important;
-	margin-left: 3px;
-	cursor: pointer;
+    background-image: url("/Mais/public/images/ui-like-16.png") !important;
+    margin-left: 3px;
+    cursor: pointer;
 }
 .ui-icon-comment-16{
-	background-image: url("/Mais/public/images/ui-comment-16.png") !important;
-	margin-left: 3px;
-	cursor: pointer;
+    background-image: url("/Mais/public/images/ui-comment-16.png") !important;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.required{
+    background-color: #FFFFEA;
+}
+
+.required:focus{
+    border: 1px solid #FF6600;
+}
+
+.error{
+    color:#ff0000;
+}
+
+.error .popover{
+    position: absolute !important;
+}
+
+.error.focus .popover{    
+    display: block;
 }

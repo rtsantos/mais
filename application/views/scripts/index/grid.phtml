@@ -1,7 +1,8 @@
 <?php
 
    if (count($this->tabs) > 0 && $this->typeModal != 'AJAX' && Zend_Layout::getMvcInstance()->getLayout() != 'window') {
-
+       $profileKey = Zend_Controller_Front::getInstance()->getRequest()->getParam('profile_key');
+       
        $idGrid = $this->grid->getID();
        $_tab = new ZendT_View_Tabs('tab_' . $this->grid->getID());
        $_tab->addTab($this->screenName, $this->grid);
@@ -17,7 +18,7 @@
                  . "      alert('" . $tab['message'] . "');"
                  . "      return false;"
                  . "  }"
-                 . "  var url = '" . ZendT_Url::getBaseUrl() . $tab['url'] . "'; "
+                 . "  var url = '" . ZendT_Url::getBaseUrl() . $tab['url']. "/profile_key/".$profileKey."'; "
                  . "  url = url + '?" . $tab['column'] . "=' + value; "
                  . "  url = url + '&typeModal=AJAX'; "
                  . "  return url; "

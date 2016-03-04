@@ -48,24 +48,12 @@
                 self.onSelect(index);
                 var panel = $('#' + item.attr('role'));
 
-                var itens = self.getItens();
-                for (var i = 0; i < itens.length; i++) {
-                    itens.eq(i).removeClass('active');
-                    $("#" + itens.eq(i).attr('role')).removeClass('active');
-                }
-                item.addClass('active');
-                panel.addClass('active');
-
                 if (item.attr('url')) {
                     self.options[index] = {url: item.attr('url'), field: false, param: false, iframe: false};
                 }
-
+                
                 var id = item.attr('id');
                 if (self.options[index]['url']) {
-                    //var panel_0 = $('#' + itens.eq(0).attr('role'));
-                    //panel.width(panel_0.width());
-                    //panel.height(panel_0.height());
-
                     var idElement = this.element.attr('id');
                     var tabsParam = self.options;
                     var urlGrid = '';
@@ -81,6 +69,11 @@
                         } else {
                             valueParam = tabsParam[index].value;
                         }
+                        
+                        if (valueParam === false){
+                            return false;
+                        }
+                        
                         if (tabsParam[index].field) {
                             var where = new TWhere('AND');
                             where.addFilter({field: tabsParam[index].field, value: valueParam, operation: tabsParam[index].operation, mapper: tabsParam[index].mapper});
@@ -93,6 +86,11 @@
                         urlGrid = tabsParam[index].url + '?typeModal=' + typeModal + '&' + paramUrlGrid + '=' + valueUrlGrid;
                     } else if (typeof tabsParam[index].url == 'function') {
                         urlGrid = tabsParam[index].url();
+                        
+                        if (urlGrid === false){
+                            return false;
+                        }
+                        
                     } else if (self.options[index]['url']) {
                         urlGrid = self.options[index]['url'];
                     }
@@ -105,6 +103,14 @@
                         }
                     }
                 }
+
+                var itens = self.getItens();
+                for (var i = 0; i < itens.length; i++) {
+                    itens.eq(i).removeClass('active');
+                    $("#" + itens.eq(i).attr('role')).removeClass('active');
+                }
+                item.addClass('active');
+                panel.addClass('active');
             }
         },
         onSelect: function (index) {

@@ -4,7 +4,7 @@
  * Translator: Francisco Ernesto Teixeira <fco_ernesto@yahoo.com.br>
  */
 jQuery.extend(jQuery.validator.messages, {
-	required: "<br/>Este campo &eacute; obrigat&oacute;rio.",
+	required: '<div class="popover fade bottom in"><div style="left: 20px" class="arrow"></div><div class="popover-content">Este campo &eacute; obrigat&oacute;rio.</div></div>',
 	remote: "<br/>Por favor, corrija este campo.",
 	email: "<br/>Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
 	url: "<br/>Por favor, forne&ccedil;a uma URL v&aacute;lida.",

@@ -349,6 +349,23 @@
                 for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
                     this.check(elements[i]);
                 }
+
+                /*for (var i = 0; i < this.errorList.length; i++) {
+                 var id = this.errorList[i]['element']['id'];
+                 var element = jQuery('#' + id);
+                 console.log('error ID:' + id);
+                 
+                 element.focusin(function () {
+                 $('label[for="' + id + '"].error').addClass('focus');
+                 console.log('focus:  ' + $(this).attr('id') + ' class:' + $('label[for="' + id + '"].error').prop('class'));
+                 });
+                 
+                 element.focusout(function () {
+                 $('label[for="' + id + '"].error').removeClass('focus');
+                 console.log('focusOUT:  ' + $(this).attr('id') + ' class:' + $('label[for="' + id + '"].error').prop('class'));
+                 });
+                 }*/
+
                 return this.valid();
             },
             // http://docs.jquery.com/Plugins/Validation/Validator/element
@@ -448,8 +465,7 @@
                 var validator = this,
                         rulesCache = {};
 
-                // select all valid inputs inside the form (no submit or reset buttons)
-                return $(this.currentForm)
+                var elements = $(this.currentForm)
                         .find("input, select, textarea")
                         .not(":submit, :reset, :image, [disabled], [desativado], [readonly]")
                         .not(this.settings.ignore)
@@ -466,6 +482,22 @@
                             rulesCache[this.name] = true;
                             return true;
                         });
+
+                for (var index = 0; index <= elements.length; index++) {
+                    elements.eq(index).focusin(function () {
+                        var parent = jQuery(this);
+                        var position = parent.position();
+                        $('label[for="' + parent.attr('id') + '"].error').addClass('focus');
+                        var popover = $('label[for="' + parent.attr('id') + '"].error div.popover');
+                        popover.css('top', (position.top + 30) + 'px');
+                        popover.css('left', position.left + 'px');                        
+                    }).focusout(function () {
+                        var parent = jQuery(this);
+                        $('label[for="' + parent.attr('id') + '"].error').removeClass('focus');
+                    });
+                }
+                // select all valid inputs inside the form (no submit or reset buttons)
+                return elements;
             },
             clean: function (selector) {
                 return $(selector)[0];
@@ -1176,10 +1208,10 @@
             function handler(e) {
                 e = $.event.fix(e);
                 e.type = fix;
-				try{
-                   return $.event.handle.call(this, e);
-				}catch(e){
-				}
+                try {
+                    return $.event.handle.call(this, e);
+                } catch (e) {
+                }
             }
         });
     }

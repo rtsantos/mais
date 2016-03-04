@@ -130,8 +130,8 @@
              * 
              */
             this.options.elements.button.click(this.buttonOnClick)
-                    .addClass('ui-corner-right')
-                    .removeClass('ui-corner-all');
+            .addClass('ui-corner-right')
+            .removeClass('ui-corner-all');
             this.buttonNoFocus();
             /**
              * Habilita auto complete na seeker
@@ -191,7 +191,7 @@
             self.TSeeker('option', 'control', 'search');
             if (self.val() == '') {
                 self.TSeeker('clear');
-                /*if (self.hasClass('required')){
+            /*if (self.hasClass('required')){
                  self.TSeeker('search');
                  }*/
             } else {
@@ -515,14 +515,16 @@
                 if (access == 'seeker') {
                     this.element.focus();
                 }
-                if (this.options.onChange != null) {
-                    this.options.onChange(data);
-                }
+                
                 /**
                  * Objeto carregado não precisa dar o focus no botão para abrir janela.
                  **/
-                this.buttonNoFocus();
                 this.unBlock();
+                this.buttonNoFocus();
+                
+                if (this.options.onChange != null) {
+                    this.options.onChange(data);
+                }
             }
         },
         _multipleChangeId: function () {
@@ -531,7 +533,7 @@
             var newValue = '';
             for (var index = 0; index < values.length; index++) {
                 newValue = newValue + ';' + values.eq(index).html();
-                //alert(values.eq(index).html());
+            //alert(values.eq(index).html());
             }
             //this.elements.id.val(newValue.substr(1));
             newValue = newValue.substr(1);
@@ -568,14 +570,18 @@
             var grid = this.options.elements.div.find('#grid_' + this.options.elements.div.attr('searchId'));
             if (grid.length > 0) {
                 this.options.elements.div.show();
-                grid.jqGrid("setGridParam", {postData: decodeJson(paramPostData)}).trigger("reloadGrid", [{page: 1}]);
+                grid.jqGrid("setGridParam", {
+                    postData: decodeJson(paramPostData)
+                }).trigger("reloadGrid", [{
+                    page: 1
+                }]);
             } else {
                 this.options.elements.div.css('position', 'absolute')
-                        .css('z-index', '99999999')
-                        .css('-moz-box-shadow', '5px 5px 5px #cecece')
-                        .css('-webkit-box-shadow', '5px 5px 5px #cecece')
-                        .css('box-shadow', '5px 5px 5px #cecece')
-                        .show();
+                .css('z-index', '99999999')
+                .css('-moz-box-shadow', '5px 5px 5px #cecece')
+                .css('-webkit-box-shadow', '5px 5px 5px #cecece')
+                .css('box-shadow', '5px 5px 5px #cecece')
+                .show();
                 if (this.options.onSearchValid != null) {
                     var searchValid = this.options.onSearchValid();
                     if (searchValid == false) {
@@ -633,9 +639,9 @@
                 }
             }
 
-//            if(this.options.name){              
-//              this.options.name = this.options.name.replace(/^.*\-/ig,"");
-//            }
+            //            if(this.options.name){              
+            //              this.options.name = this.options.name.replace(/^.*\-/ig,"");
+            //            }
 
             //var windowSize = self._windowSize();
 
@@ -721,13 +727,23 @@
             return false;
         },
         buttonNoFocus: function () {
+            var self = this;
             //this.options.elements.button.attr('nofocus',true);
-            if (this.options.elements.id.val() != '') {
-                this.options.elements.button.attr('nofocus', true);
-            } else if (this.element.hasClass('required')) {
-                this.options.elements.button.attr('nofocus', false);
+            if (self.options.elements.id.val() != '') {
+                self.options.elements.button.attr('nofocus', true);
+            } else if (self.element.hasClass('required')) {
+                self.options.elements.button.attr('nofocus', false);
             } else {
-                this.options.elements.button.attr('nofocus', true);
+                self.options.elements.button.attr('nofocus', true);
+            }
+            
+            if (self.options.elements.button.attr('nofocus')){
+                var timer = setTimeout(function(){
+                    if (self.options.elements.button.is(':focus')) {
+                        nextFocus(self.options.elements.button);
+                    }
+                    clearTimeout(timer);
+                },300);
             }
         }
     })

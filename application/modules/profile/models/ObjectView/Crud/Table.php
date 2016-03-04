@@ -26,7 +26,8 @@ class Profile_Model_ObjectView_Crud_Table extends ZendT_Db_Table_Abstract
     protected $_listOptions = array('tipo'=>array('F'=>'Formulário'
                                                     ,'G'=>'Tabela'
                                                     ,'C'=>'Gráfico Dinâmico'
-                                                    ,'D'=>'Tabela Dinâmica')
+                                                    ,'D'=>'Tabela Dinâmica'
+                                                    ,'I'=>'Impressão Dinâmica')
                                     ,'padrao'=>array('S'=>'Sim'
                                                     ,'N'=>'Não'));
     protected $_mapper = 'Profile_Model_ObjectView_Mapper';

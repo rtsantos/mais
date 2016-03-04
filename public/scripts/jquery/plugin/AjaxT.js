@@ -191,7 +191,7 @@
                 jQuery(form).find('[desativado]').attr('disabled', 'disabled').removeAttr('desativado');
             } else {
                 var isValid = form.validate();                
-                if (isValid.form()) {
+                if (isValid.checkForm()) {
                     var params = form.formSerialize();
                     var result = $.ajax({
                         type: form.attr('method'),

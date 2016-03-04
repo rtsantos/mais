@@ -258,19 +258,6 @@ select {
 	background-color: #ffffff;
 }
 
-.required{
-	border: 1px solid #d3d3d3;
-	background-color: #FFFFEA;
-}
-
-.error{
-	color:#ff0000;
-}
-
-.required:focus{
-	border: 1px solid #FF6600;
-}
-
 fieldset{
 	border: 1px solid #cccccc;
 }

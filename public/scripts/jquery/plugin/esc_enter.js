@@ -140,10 +140,10 @@ function nextFocus(obj){
     var maxTabIndex = 1000;
     var nTabIndex = (obj.attr('tabIndex')*1) + 1;
     // get element type (text or select)
-    var myNode = obj.attr('nodeName');
-	if (myNode){
-	    myNode = myNode.toLowerCase();
-	}
+    var myNode = obj.prop('nodeName');
+    if (myNode){
+        myNode = myNode.toLowerCase();
+    }
     // allow enter/return key (only when in an input box or select)
     if(nTabIndex > 0 && nTabIndex <= maxTabIndex && ((myNode == "textarea") || (myNode == "input") || (myNode == "select") || (myNode == "a"))){
         for (var x=0; x<100; x++){

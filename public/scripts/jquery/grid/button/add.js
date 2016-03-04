@@ -64,6 +64,7 @@
 		               
         $.WindowT.open({
             id: 'win-add-' + options.idGrid,
+            name: 'win-' + options.idGrid,
             url: options.url,
             type: options.type,
             param: 'action_form=insert&id_parent=' + options.idRowParent + paramSearch,

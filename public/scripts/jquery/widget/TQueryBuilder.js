@@ -62,7 +62,7 @@
                 });
 
                 for (var index in json.values) {
-                    var value = json.values[index];
+                    var value = json.values[index] + '';
                     if (value != null && value.indexOf("|") >= 0) {
                         value = value.replace(/\|/g, '%');
                     }

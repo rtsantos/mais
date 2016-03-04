@@ -283,6 +283,10 @@
        public function loadElementsDColsFilter() {
            $this->loadElementsCColsFilter();
        }
+       
+       public function loadElementsIColsFilter() {
+           $this->loadElementsCColsFilter();
+       }       
 
        /**
         * Carrega os elementos no formulário para serem renderizado

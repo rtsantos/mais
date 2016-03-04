@@ -95,7 +95,7 @@ class Profile_Model_ObjectView_Crud_Mapper extends ZendT_Db_Mapper
      */
     public function setTipo($value,$options=array('required'=>true)){        
         
-        $options['listOptions']=array('F'=>'Formulário','G'=>'Tabela','C'=>'Gráfico Dinâmico','D'=>'Tabela Dinâmica');
+        $options['listOptions']=array('F'=>'Formulário','G'=>'Tabela','C'=>'Gráfico Dinâmico','D'=>'Tabela Dinâmica','I'=>'Impressão Dinâmica');
         $this->_data['tipo'] = new ZendT_Type_String($value,$options);
         if ($options['db'])
             $this->_data['tipo']->setValueFromDb($value);

@@ -76,6 +76,7 @@
         };
         $.WindowT.open({
             id: 'win-edit-' + options.idGrid,
+            name: 'win-' + options.idGrid,
             url: options.url,
             type: options.type,
             param: 'id=' + vIdSelRow + '&action_form=update',
@@ -102,24 +103,25 @@ function editRetriveSuccess(result) {
         var objField = null;
         for (var field in vJson) {
             try {
-                if (vJson[field] == null){
+                if (vJson[field] == null) {
                     vJson[field] = '';
                 }
-                
-                 if (jQuery('input[name="'+ field.toLowerCase() +'[]"]').eq(0).attr('type') == 'checkbox') {                    
-                    var vCheck = jQuery('input[name="'+ field.toLowerCase() +'[]"]');
+
+                var element = jQuery(vForm[0].elements[field.toLowerCase()]);
+                if (jQuery('input[name="' + field.toLowerCase() + '[]"]').eq(0).attr('type') == 'checkbox') {
+                    var vCheck = jQuery('input[name="' + field.toLowerCase() + '[]"]');
                     for (var vIndex = 0; vIndex < vCheck.length; vIndex++) {
                         vCheck.removeAttr('checked');
                     }
-                    
-                    for (var vIndex = 0; vIndex < vCheck.length; vIndex++) {                        
+
+                    for (var vIndex = 0; vIndex < vCheck.length; vIndex++) {
                         for (var vValue in vJson[field]) {
                             if (vCheck.eq(vIndex).val() == vJson[field][vValue]) {
-                                vCheck.eq(vIndex).prop('checked',"checked");                                
+                                vCheck.eq(vIndex).prop('checked', "checked");
                             }
                         }
                     }
-                } else if (jQuery(vForm[0].elements[field.toLowerCase()]).attr('type') == 'select' || jQuery(vForm[0].elements[field.toLowerCase()]).attr('type') == 'select-one' || jQuery(vForm[0].elements[field.toLowerCase()]).get(0).tagName.toLowerCase() == 'select') {
+                } else if (element.attr('type') == 'select' || element.attr('type') == 'select-one' || element.size() && element.get(0).tagName.toLowerCase() == 'select') {
                     var select = jQuery(vForm[0].elements[field.toLowerCase()]).find('option');
                     for (var index = 0; index < select.length; index++) {
                         if (vJson[field] == select.eq(index).html()) {
@@ -134,17 +136,17 @@ function editRetriveSuccess(result) {
                         $(vForm[0].elements[role.toLowerCase()]).TAutoSelect('select', vJson[field], vJson[role]);
                     }
                 } else if (vJson[field] != null) {
-                    if (typeof vJson[field] == 'object') {                        
-                        var searchField = jQuery(vForm[0].elements[field.toLowerCase()]).attr('searchid');
-                        if (searchField != '') {
-                            $('#' + searchField).TSeeker('loadData', vJson[field], 'edit');
-                        }
-                        var nameId = jQuery(vForm[0].elements[field.toLowerCase()]).attr('field');
-                        if (!nameId){
-                            nameId = 'id';
-                        }
-                        vJson[field] =  vJson[field][nameId];
-                    }
+                    /*if (typeof vJson[field] == 'object') {                        
+                     var searchField = jQuery(vForm[0].elements[field.toLowerCase()]).attr('searchid');
+                     if (searchField != '' && searchField != undefined) {
+                     $('#' + searchField).TSeeker('loadData', vJson[field], 'edit');
+                     }
+                     var nameId = jQuery(vForm[0].elements[field.toLowerCase()]).attr('field');
+                     if (!nameId){
+                     nameId = 'id';
+                     }
+                     vJson[field] =  vJson[field][nameId];
+                     }*/
                     objField = vForm[0].elements[field.toLowerCase()];
                     if (!objField) {
                         for (var index = 0; index < vForm[0].elements.length; index++) {
