@@ -491,6 +491,7 @@
            $iframeDownload = Zend_Controller_Front::getInstance()->getRequest()->getParam('iframeDownload');
            $iframeHeight = Zend_Controller_Front::getInstance()->getRequest()->getParam('iframeHeight');
 
+           if (!$driver) $driver = 'pdf';
            $file = new ZendT_File($name . '.' . $driver, $content, 'application/' . strtolower($driver));
            $fileUri = $file->toArrayJson();
 

@@ -507,8 +507,8 @@
                         }
 
                         $view = new ZendT_Report_View_Chart('Chart', $this->_mapper, $config);
-                    /*} else if ($config['tipo'] == 'I') {
-                        $view = new ZendT_Report_View_Dynamic_Form($driver, $this->_mapper, $config);*/
+                    } else if ($config['tipo'] == 'I') {
+                        $view = new ZendT_Report_View_Dynamic_Form($driver, $this->_mapper, $config);
                     } else {
                         $view = new ZendT_Report_View_Dynamic($driver, $this->_mapper, $config);
                     }
@@ -615,7 +615,7 @@
             $type = $this->getRequest()->getParam('type');
             $arquivo = $this->getRequest()->getParam('arquivo');
             if (!$type) {
-                $type = array('C', 'D', 'B');
+                $type = array('C', 'D', 'B','I');
             }
 
             if ($typeModal == 'AJAX') {
